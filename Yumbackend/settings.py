@@ -91,28 +91,28 @@ WSGI_APPLICATION = "Yumbackend.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
-
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'yum_db'),
-        'USER': os.getenv('DB_USER', 'cybergang'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'Kijangwani2003'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),  # use localhost for same-server DB
-        'PORT': os.getenv('DB_PORT', '5432'),
-        'OPTIONS': {
-            'sslmode': 'disable',
-        },
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DB_NAME', 'yum_db'),
+#         'USER': os.getenv('DB_USER', 'cybergang'),
+#         'PASSWORD': os.getenv('DB_PASSWORD', 'Kijangwani2003'),
+#         'HOST': os.getenv('DB_HOST', 'localhost'),  # use localhost for same-server DB
+#         'PORT': os.getenv('DB_PORT', '5432'),
+#         'OPTIONS': {
+#             'sslmode': 'disable',
+#         },
+#     }
+# }
 
 
 AUTH_USER_MODEL = 'authentication.User'
