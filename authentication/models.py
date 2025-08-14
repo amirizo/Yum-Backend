@@ -296,7 +296,7 @@ class Driver(models.Model):
 
     )
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='driver_profile')
     license_number = models.CharField(max_length=50)
     vehicle_type = models.CharField(max_length=20, choices=VEHICLE_TYPES)
     vehicle_number = models.CharField(max_length=20)

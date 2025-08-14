@@ -207,7 +207,7 @@ class DriverProfileAdmin(admin.ModelAdmin):
         }),
         ('Status & Location', {
             'fields': (
-                'is_available', 'current_location_lat', 'current_location_lng',
+                'is_available', 'current_latitude', 'current_longitude',
                 'last_location_update'
             )
         }),
@@ -218,12 +218,12 @@ class DriverProfileAdmin(admin.ModelAdmin):
             'fields': ('created_at',)
         }),
     )
-    
+   
     def get_location_display(self, obj):
-        if obj.current_location_lat and obj.current_location_lng:
+        if obj.current_location_lat and obj.current_longitude:
             return format_html(
                 '<a href="https://maps.google.com/?q={},{}" target="_blank">View on Map</a>',
-                obj.current_location_lat, obj.current_location_lng
+                obj.current_location_lat, obj.current_longitude
             )
         return "No location"
     get_location_display.short_description = "Current Location"

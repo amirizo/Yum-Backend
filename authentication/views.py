@@ -579,18 +579,26 @@ class DriverListView(generics.ListAPIView):
 def update_driver_location(request):
     if request.user.user_type != 'driver':
         return Response({'error': 'Only drivers can update location'}, 
-                       status=status.HTTP_403_FORBIDDEN)
+                        status=status.HTTP_403_FORBIDDEN)
     
     try:
         driver_profile = request.user.driver_profile
-        driver_profile.current_location_lat = request.data.get('latitude')
-        driver_profile.current_location_lng = request.data.get('longitude')
+        latitude = request.data.get('latitude')
+        longitude = request.data.get('longitude')
+
+        if not latitude or not longitude:
+            return Response({'error': 'Latitude and longitude are required'},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        driver_profile.current_latitude = latitude
+        driver_profile.current_longitude = longitude
+        driver_profile.last_location_update = timezone.now()
         driver_profile.save()
         
         return Response({'message': 'Location updated successfully'})
     except Driver.DoesNotExist:
         return Response({'error': 'Driver profile not found'}, 
-                       status=status.HTTP_404_NOT_FOUND)
+                        status=status.HTTP_404_NOT_FOUND)
 
 
 
