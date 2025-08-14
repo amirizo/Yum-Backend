@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Update - YumExpress</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #dc2626; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background: #f9f9f9; }
+        .order-details { background: white; padding: 15px; margin: 15px 0; border-radius: 5px; }
+        .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+        .refund-info { background: #fef3c7; padding: 15px; border-radius: 5px; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Order Update</h1>
+            <p>We're sorry, but your order cannot be fulfilled</p>
+        </div>
+        
+        <div class="content">
+            <p>Dear {{ customer_name }},</p>
+            
+            <p>We regret to inform you that your order #{{ order_number }} from {{ vendor_name }} cannot be fulfilled at this time.</p>
+            
+            {% if rejection_reason %}
+            <div class="order-details">
+                <h3>Reason:</h3>
+                <p>{{ rejection_reason }}</p>
+            </div>
+            {% endif %}
+            
+            <div class="refund-info">
+                <h3>Refund Information</h3>
+                <p><strong>Refund Amount:</strong> TZS {{ refund_amount }}</p>
+                <p><strong>Processing Time:</strong> {{ refund_timeline }}</p>
+                <p>Your refund will be processed automatically and credited back to your original payment method.</p>
+            </div>
+            
+            <p>We sincerely apologize for any inconvenience caused. Please feel free to browse other vendors and place a new order.</p>
+            
+            <p>If you have any questions about your refund, please don't hesitate to contact our support team.</p>
+        </div>
+        
+        <div class="footer">
+            <p>Thank you for your understanding.</p>
+            <p>YumExpress Customer Support: info@yum-express.com</p>
+        </div>
+    </div>
+</body>
+</html>

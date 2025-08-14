@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Order Needs Confirmation - YumExpress Admin</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #dc3545; color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+        .alert-icon { font-size: 48px; margin-bottom: 20px; }
+        .order-details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #dc3545; }
+        .customer-info { background: #e9ecef; padding: 15px; border-radius: 6px; margin: 15px 0; }
+        .buttons { text-align: center; margin: 30px 0; }
+        .button { display: inline-block; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 0 10px; }
+        .approve { background: #28a745; }
+        .reject { background: #dc3545; }
+        .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="alert-icon">⚠️</div>
+        <h1>Cash Order Needs Confirmation</h1>
+        <p>Admin Action Required</p>
+    </div>
+    
+    <div class="content">
+        <p>Dear Admin,</p>
+        
+        <p>A new cash on delivery order has been placed and requires your confirmation before it can be processed.</p>
+        
+        <div class="order-details">
+            <h3>Order Details</h3>
+            <p><strong>Order Number:</strong> #{{ order.order_number }}</p>
+            <p><strong>Total Amount:</strong> TZS {{ payment.amount|floatformat:0 }}</p>
+            <p><strong>Payment Method:</strong> Cash on Delivery</p>
+            <p><strong>Order Date:</strong> {{ order.created_at|date:"F d, Y H:i" }}</p>
+            <p><strong>Vendor:</strong> {{ order.vendor.vendorprofile.business_name }}</p>
+        </div>
+        
+        <div class="customer-info">
+            <h4>Customer Information</h4>
+            <p><strong>Name:</strong> {{ customer.first_name }} {{ customer.last_name }}</p>
+            <p><strong>Email:</strong> {{ customer.email }}</p>
+            <p><strong>Phone:</strong> {{ customer.phone_number }}</p>
+        </div>
+        
+        <p>Please review this order and take appropriate action:</p>
+        
+        <div class="buttons">
+            <a href="{{ site_url }}/admin/payments/confirm-cash-order/?order_id={{ order.id }}&action=approve" class="button approve">Approve Order</a>
+            <a href="{{ site_url }}/admin/payments/confirm-cash-order/?order_id={{ order.id }}&action=reject" class="button reject">Reject Order</a>
+        </div>
+        
+        <p>You can also manage this order through the admin dashboard.</p>
+        
+        <p>Best regards,<br>YumExpress System</p>
+    </div>
+    
+    <div class="footer">
+        <p>This is an automated notification from YumExpress Admin System</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+Payment Confirmed - YumExpress
+
+Dear {{ user.first_name }},
+
+Great news! Your payment has been successfully processed and your order is now confirmed.
+
+Order Details:
+- Order Number: #{{ order.order_number }}
+- Payment Amount: TZS {{ payment.amount|floatformat:0 }}
+- Payment Method: {{ payment.get_payment_type_display }}
+- Order Date: {{ order.created_at|date:"F d, Y" }}
+- Vendor: {{ order.vendor.vendorprofile.business_name }}
+
+We're now preparing your order and will notify you once it's ready for pickup or delivery.
+
+You can track your order status anytime by visiting: {{ site_url }}/orders/{{ order.id }}
+
+Thank you for choosing YumExpress!
+
+Best regards,
+The YumExpress Team
+
+If you have any questions, please contact us at info@yum-express.com
+© 2025 YumExpress. All rights reserved.

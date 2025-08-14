@@ -1,0 +1,26 @@
+Order Confirmed - YumExpress
+
+Dear {{ customer_name }},
+
+Great news! Your order has been confirmed and is now being prepared.
+
+Order Details:
+- Order Number: #{{ order_number }}
+- Vendor: {{ vendor_name }}
+- Total Amount: TZS {{ total_amount }}
+{% if estimated_time %}
+- Estimated Delivery: {{ estimated_time|date:"M d, Y H:i" }}
+{% endif %}
+
+Items Ordered:
+{% for item in order_items %}
+- {{ item.quantity }}x {{ item.product.name }} - TZS {{ item.total_price }}
+{% endfor %}
+
+Delivery Address:
+{{ delivery_address.street_address }}, {{ delivery_address.city }}
+
+We'll notify you when your order is ready for pickup and when it's on the way!
+
+Thank you for choosing YumExpress!
+For support, contact us at info@yum-express.com

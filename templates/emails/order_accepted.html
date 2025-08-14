@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - YumExpress</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #2563eb; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background: #f9f9f9; }
+        .order-details { background: white; padding: 15px; margin: 15px 0; border-radius: 5px; }
+        .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+        .btn { background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Order Confirmed!</h1>
+            <p>Your order has been accepted by the vendor</p>
+        </div>
+        
+        <div class="content">
+            <p>Dear {{ customer_name }},</p>
+            
+            <p>Great news! Your order has been confirmed and is now being prepared.</p>
+            
+            <div class="order-details">
+                <h3>Order Details</h3>
+                <p><strong>Order Number:</strong> #{{ order_number }}</p>
+                <p><strong>Vendor:</strong> {{ vendor_name }}</p>
+                <p><strong>Total Amount:</strong> TZS {{ total_amount }}</p>
+                {% if estimated_time %}
+                <p><strong>Estimated Delivery:</strong> {{ estimated_time|date:"M d, Y H:i" }}</p>
+                {% endif %}
+                
+                <h4>Items Ordered:</h4>
+                <ul>
+                {% for item in order_items %}
+                    <li>{{ item.quantity }}x {{ item.product.name }} - TZS {{ item.total_price }}</li>
+                {% endfor %}
+                </ul>
+                
+                <h4>Delivery Address:</h4>
+                <p>{{ delivery_address.street_address }}, {{ delivery_address.city }}</p>
+            </div>
+            
+            <p>We'll notify you when your order is ready for pickup and when it's on the way!</p>
+        </div>
+        
+        <div class="footer">
+            <p>Thank you for choosing YumExpress!</p>
+            <p>For support, contact us at info@yum-express.com</p>
+        </div>
+    </div>
+</body>
+</html>

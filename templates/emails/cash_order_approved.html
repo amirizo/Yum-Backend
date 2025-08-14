@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Approved - YumExpress</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+        .success-icon { font-size: 48px; margin-bottom: 20px; }
+        .order-details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #28a745; }
+        .amount { font-size: 24px; font-weight: bold; color: #28a745; }
+        .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+        .button { display: inline-block; background: #28a745; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="success-icon">✅</div>
+        <h1>Order Approved!</h1>
+        <p>Your cash on delivery order has been confirmed</p>
+    </div>
+    
+    <div class="content">
+        <p>Dear {{ user.first_name }},</p>
+        
+        <p>Great news! Your cash on delivery order has been approved and we're now preparing it for you.</p>
+        
+        <div class="order-details">
+            <h3>Order Details</h3>
+            <p><strong>Order Number:</strong> #{{ order.order_number }}</p>
+            <p><strong>Total Amount:</strong> <span class="amount">TZS {{ payment.amount|floatformat:0 }}</span></p>
+            <p><strong>Payment Method:</strong> Cash on Delivery</p>
+            <p><strong>Vendor:</strong> {{ order.vendor.vendorprofile.business_name }}</p>
+        </div>
+        
+        <p><strong>Important:</strong> Please have the exact amount ready when your order is delivered. Our delivery person will collect TZS {{ payment.amount|floatformat:0 }} upon delivery.</p>
+        
+        <p>We'll notify you once your order is ready for delivery and provide tracking information.</p>
+        
+        <a href="{{ site_url }}/orders/{{ order.id }}" class="button">Track Your Order</a>
+        
+        <p>Thank you for choosing YumExpress!</p>
+        
+        <p>Best regards,<br>The YumExpress Team</p>
+    </div>
+    
+    <div class="footer">
+        <p>If you have any questions, please contact us at info@yum-express.com</p>
+        <p>© 2025 YumExpress. All rights reserved.</p>
+    </div>
+</body>
+</html>

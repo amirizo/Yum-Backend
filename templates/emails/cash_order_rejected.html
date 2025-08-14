@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Update - YumExpress</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #dc3545; color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+        .alert-icon { font-size: 48px; margin-bottom: 20px; }
+        .order-details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #dc3545; }
+        .reason-box { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 15px; border-radius: 6px; margin: 20px 0; }
+        .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+        .button { display: inline-block; background: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="alert-icon">❌</div>
+        <h1>Order Update</h1>
+        <p>Important information about your order</p>
+    </div>
+    
+    <div class="content">
+        <p>Dear {{ user.first_name }},</p>
+        
+        <p>We regret to inform you that your cash on delivery order could not be approved at this time.</p>
+        
+        <div class="order-details">
+            <h3>Order Details</h3>
+            <p><strong>Order Number:</strong> #{{ order.order_number }}</p>
+            <p><strong>Total Amount:</strong> TZS {{ payment.amount|floatformat:0 }}</p>
+            <p><strong>Payment Method:</strong> Cash on Delivery</p>
+            <p><strong>Vendor:</strong> {{ order.vendor.vendorprofile.business_name }}</p>
+        </div>
+        
+        <div class="reason-box">
+            <h4>Reason for Rejection:</h4>
+            <p>{{ reason }}</p>
+        </div>
+        
+        <p>We apologize for any inconvenience this may cause. You can:</p>
+        <ul>
+            <li>Try placing a new order with a different payment method</li>
+            <li>Contact our customer support for assistance</li>
+            <li>Check if there are any issues with your delivery address</li>
+        </ul>
+        
+        <a href="{{ site_url }}/orders" class="button">Browse Menu Again</a>
+        
+        <p>If you have any questions or need assistance, please don't hesitate to contact our support team.</p>
+        
+        <p>Best regards,<br>The YumExpress Team</p>
+    </div>
+    
+    <div class="footer">
+        <p>Contact us: info@yum-express.com | Support: +255 XXX XXX XXX</p>
+        <p>© 2025 YumExpress. All rights reserved.</p>
+    </div>
+</body>
+</html>

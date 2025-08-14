@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Picked Up - YumExpress</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #16a34a; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background: #f9f9f9; }
+        .order-details { background: white; padding: 15px; margin: 15px 0; border-radius: 5px; }
+        .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+        .driver-info { background: #e0f2fe; padding: 15px; border-radius: 5px; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Order On The Way!</h1>
+            <p>Your order has been picked up by our driver</p>
+        </div>
+        
+        <div class="content">
+            <p>Dear {{ customer_name }},</p>
+            
+            <p>Your order is now on its way to you!</p>
+            
+            <div class="order-details">
+                <h3>Order Details</h3>
+                <p><strong>Order Number:</strong> #{{ order_number }}</p>
+                {% if estimated_delivery %}
+                <p><strong>Estimated Delivery:</strong> {{ estimated_delivery|date:"M d, Y H:i" }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="driver-info">
+                <h3>Driver Information</h3>
+                <p><strong>Driver:</strong> {{ driver_name }}</p>
+                {% if driver_phone %}
+                <p><strong>Phone:</strong> {{ driver_phone }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="order-details">
+                <h4>Delivery Address:</h4>
+                <p>{{ delivery_address.street_address }}, {{ delivery_address.city }}</p>
+            </div>
+            
+            <p>Please be available to receive your order. The driver will contact you when they arrive.</p>
+        </div>
+        
+        <div class="footer">
+            <p>Thank you for choosing YumExpress!</p>
+            <p>For support, contact us at info@yum-express.com</p>
+        </div>
+    </div>
+</body>
+</html>
