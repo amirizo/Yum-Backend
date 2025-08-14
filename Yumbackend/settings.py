@@ -242,10 +242,25 @@ EMAIL_HOST_PASSWORD = "@yumexpress2025"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
-
 STATIC_URL = '/static/'
+
+# Folder where `collectstatic` will collect all static files for production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Additional static directories for development
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # your app-level static folder
+]
+
+# -------------------
+# Media files (User uploads)
+# -------------------
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
