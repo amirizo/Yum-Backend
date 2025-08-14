@@ -28,7 +28,7 @@ SECRET_KEY = "django-insecure-6^+_byj)@3m*k(_nn4+3h2d46ob6#%=(pb0!+nc)wzv4k@(id-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.api.yum-express.com', 'api.yum-express.com', 'localhost' ]
 
 
 # Application definition
@@ -103,11 +103,14 @@ WSGI_APPLICATION = "Yumbackend.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='delivery_db'),
-        'USER': config('DB_USER', default='postgres'),
-        'PASSWORD': config('DB_PASSWORD', default='password'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
+        'NAME': os.getenv('DB_NAME', 'yum_db'),
+        'USER': os.getenv('DB_USER', 'cybergang'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'Kijangwani2003'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),  # use localhost for same-server DB
+        'PORT': os.getenv('DB_PORT', '5432'),
+        'OPTIONS': {
+            'sslmode': 'disable',
+        },
     }
 }
 
@@ -183,6 +186,9 @@ USE_TZ = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+
+    "https://yum-express.com",
+    "https://www.yum-express.com",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
