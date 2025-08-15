@@ -329,3 +329,6 @@ WARNING 2025-08-15 10:41:37,711 log 4435 6183546880 Bad Request: /api/auth/verif
 WARNING 2025-08-15 10:41:41,154 log 4435 6183546880 Bad Request: /api/auth/verify-otp
 INFO 2025-08-15 10:42:40,542 autoreload 4435 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
 INFO 2025-08-15 10:42:41,074 autoreload 4514 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:56:21,221 autoreload 4755 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:56:44,886 services 4755 6177239040 OTP email sent to salvatorelingo2022@gmail.com
+ERROR 2025-08-15 10:57:19,340 views 4755 6177239040 Welcome email sending failed: [Errno 8] nodename nor servname provided, or not known
