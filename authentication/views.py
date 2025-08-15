@@ -10,6 +10,7 @@ from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
+from django.utils.html import strip_tags
 from .models import PasswordResetToken, LoginAttempt, TemporaryPassword
 from .serializers import (
     UserRegistrationSerializer, AdminVendorCreationSerializer, 
@@ -19,6 +20,8 @@ from .serializers import (
     DriverProfileSerializer, BusinessHoursSerializer, VendorLocationSerializer,
     VendorCategorySerializer
 )
+import logging
+logger = logging.getLogger(__name__)
 from .services import SMSService, EmailService
 from .models import *
 
@@ -79,23 +82,25 @@ class UserRegistrationView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         
+        # Create OTP record
         otp_verification = OTPVerification.objects.create(
             user=user,
-            phone_number=user.phone_number
+            email=user.email
         )
-        
-        # Send OTP via SMS
-        sms_service = SMSService()
-        message = f"Your YumExpress verification code is: {otp_verification.otp_code}. Valid for 10 minutes."
-        
+
+        # Send OTP via Email
         try:
-            sms_service.send_sms(user.phone_number, message)
+            EmailService.send_otp_email(user, otp_verification.otp_code, expiry_minutes=10)
         except Exception as e:
-            print(f"SMS sending failed: {e}")
-        
+            logger.error(f"OTP email sending failed: {e}")
+            return Response(
+                {'error': 'Failed to send OTP email'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
         return Response({
-            'message': 'Registration successful. Please verify your phone number with the OTP sent via SMS.',
-            'phone_number': user.phone_number
+            'message': 'Registration successful. Please verify your account with the OTP sent to your email.',
+            'email': user.email
         }, status=status.HTTP_201_CREATED)
     
 
@@ -338,12 +343,12 @@ def logout(request):
 def verify_otp(request):
     serializer = OTPVerificationSerializer(data=request.data)
     if serializer.is_valid():
-        phone_number = serializer.validated_data['phone_number']
+        email = serializer.validated_data['email']
         otp_code = serializer.validated_data['otp_code']
         
         try:
             otp_verification = OTPVerification.objects.filter(
-                phone_number=phone_number,
+                email=email,
                 is_verified=False
             ).latest('created_at')
             
@@ -376,37 +381,27 @@ def verify_otp(request):
             
             # Send welcome email
             try:
+                html_content = render_to_string('emails/welcome.html', {
+                    'first_name': user.first_name
+                })
+                plain_message = strip_tags(html_content)
+
                 send_mail(
-                    'Welcome to YumExpress!',
-                    f'Dear {user.first_name},\n\n'
-                    f'Welcome to YumExpress! Your account has been successfully verified.\n\n'
-                    f'You can now enjoy our delivery services.\n\n'
-                    f'Best regards,\n'
-                    f'YumExpress Team',
-                    settings.EMAIL_HOST_USER,
-                    [user.email],
-                    fail_silently=False,
-                    html_message=f'''
-                    <html>
-                    <body>
-                        <h2>Welcome to YumExpress!</h2>
-                        <p>Dear {user.first_name},</p>
-                        <p>Welcome to YumExpress! Your account has been successfully verified.</p>
-                        <p>You can now enjoy our delivery services.</p>
-                        <br>
-                        <p>Best regards,<br>YumExpress Team</p>
-                    </body>
-                    </html>
-                    '''
+                    subject='Welcome to YumExpress!',
+                    message=plain_message,
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[user.email],
+                    html_message=html_content,
+                    fail_silently=False
                 )
             except Exception as e:
-                print(f"Welcome email sending failed: {e}")
+                logger.error(f"Welcome email sending failed: {e}")
             
             # Generate tokens for immediate login
             refresh = RefreshToken.for_user(user)
             
             return Response({
-                'message': 'Phone number verified successfully! Welcome to YumExpress.',
+                'message': 'Email verified successfully! Welcome to YumExpress.',
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
                 'user': UserSerializer(user).data
@@ -414,43 +409,57 @@ def verify_otp(request):
             
         except OTPVerification.DoesNotExist:
             return Response({
-                'error': 'No OTP found for this phone number.'
+                'error': 'No OTP found for this email.'
             }, status=status.HTTP_400_BAD_REQUEST)
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def resend_otp(request):
     serializer = ResendOTPSerializer(data=request.data)
     if serializer.is_valid():
-        phone_number = serializer.validated_data['phone_number']
+        email = serializer.validated_data['email']
         
         try:
-            user = User.objects.get(phone_number=phone_number, is_verified=False)
+            user = User.objects.get(email=email, is_verified=False)
             
             # Create new OTP verification
             otp_verification = OTPVerification.objects.create(
                 user=user,
-                phone_number=phone_number
+                email=email
             )
             
-            # Send OTP via SMS
-            sms_service = SMSService()
-            message = f"Your YumExpress verification code is: {otp_verification.otp_code}. Valid for 10 minutes."
-            
+            # Send OTP via Email
             try:
-                sms_service.send_sms(phone_number, message)
+                html_content = render_to_string('emails/otp_verification.html', {
+                    'first_name': user.first_name,
+                    'otp_code': otp_verification.otp_code
+                })
+                plain_message = strip_tags(html_content)
+
+                send_mail(
+                    subject='Your YumExpress Verification Code',
+                    message=plain_message,
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[user.email],
+                    html_message=html_content,
+                    fail_silently=False
+                )
             except Exception as e:
-                print(f"SMS sending failed: {e}")
+                logger.error(f"OTP email sending failed: {e}")
+                return Response({
+                    'error': 'Failed to send OTP email.'
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
             return Response({
-                'message': 'New OTP sent successfully.'
+                'message': 'New OTP sent successfully to your email.'
             })
             
         except User.DoesNotExist:
             return Response({
-                'error': 'No unverified user found with this phone number.'
+                'error': 'No unverified user found with this email.'
             }, status=status.HTTP_400_BAD_REQUEST)
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

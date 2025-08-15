@@ -271,3 +271,61 @@ INFO 2025-08-15 02:37:15,452 services 15057 6167244800 ClickPesa auth token gene
 ERROR 2025-08-15 02:37:21,246 services 15057 6167244800 ClickPesa card payment error: 400 Client Error: Bad Request for url: https://api.clickpesa.com/third-parties/payments/initiate-card-payment
 ERROR 2025-08-15 02:37:21,247 views 15057 6167244800 Payment creation error: 'NoneType' object is not subscriptable
 WARNING 2025-08-15 02:37:21,248 log 15057 6167244800 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 09:41:40,284 autoreload 2307 8653693120 Watching for file changes with StatReloader
+WARNING 2025-08-15 09:41:43,530 log 2307 6194278400 Unauthorized: /api/payments/dashboard/
+WARNING 2025-08-15 09:42:14,643 log 2307 6194278400 Method Not Allowed: /api/payments/dashboard/
+ERROR 2025-08-15 09:53:54,141 services 2307 6211104768 Failed to send SMS to +255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":486137853090044037,"smsCount":1,"message":"Your YumExpress verification code is: 368868. Valid for 10 minutes.","sendReference":26802199325358636}]}
+INFO 2025-08-15 09:59:09,506 autoreload 2307 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 09:59:10,074 autoreload 2639 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 09:59:15,531 autoreload 2639 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 09:59:15,896 autoreload 2648 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 09:59:29,703 autoreload 2648 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 09:59:30,157 autoreload 2683 8653693120 Watching for file changes with StatReloader
+ERROR 2025-08-15 10:00:53,561 services 2683 6155137024 Failed to send SMS to +255684106419: Message sent to next instance
+INFO 2025-08-15 10:02:53,110 autoreload 2683 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 10:02:53,691 autoreload 2754 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:05:08,847 autoreload 2754 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 10:05:09,334 autoreload 2811 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:05:35,547 autoreload 2838 8653693120 Watching for file changes with StatReloader
+ERROR 2025-08-15 10:05:40,862 services 2838 6194016256 Failed to send SMS to 255684106419: Message sent to next instance
+INFO 2025-08-15 10:06:35,265 autoreload 2838 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 10:06:35,718 autoreload 2857 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:06:52,627 autoreload 2857 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 10:06:53,065 autoreload 2871 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:08:02,317 autoreload 2871 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 10:08:02,797 autoreload 2908 8653693120 Watching for file changes with StatReloader
+ERROR 2025-08-15 10:08:27,748 services 2908 6206418944 Failed to send SMS to 255684106419: {"messages":[{"to":"255684106419","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":365632573159183054,"smsCount":1,"message":"Your YumExpress verification code is: 487066. Valid for 10 minutes.","sendReference":345682872699078424}]}
+INFO 2025-08-15 10:14:55,286 autoreload 2908 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 10:14:55,846 autoreload 3058 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:15:24,287 autoreload 3058 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 10:15:24,825 autoreload 3107 8653693120 Watching for file changes with StatReloader
+WARNING 2025-08-15 10:15:47,521 log 3107 6200700928 Bad Request: /api/auth/register
+ERROR 2025-08-15 10:16:20,276 services 3107 6200700928 SMS send failed to 255772236727 - Failed to send SMS: Message sent to next instance
+INFO 2025-08-15 10:17:46,213 autoreload 3107 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 10:17:46,703 autoreload 3167 8653693120 Watching for file changes with StatReloader
+ERROR 2025-08-15 10:19:03,858 services 3167 6170112000 Failed to send SMS to 255772236727: {"messages":[{"to":"255772236727","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":103097656227845170,"smsCount":1,"message":"Your YumExpress verification code is: 288720. Valid for 10 minutes.","sendReference":907240931567640545}]}
+INFO 2025-08-15 10:23:41,784 autoreload 3167 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-15 10:23:42,299 autoreload 3571 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:23:47,811 autoreload 3571 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-15 10:23:48,191 autoreload 3585 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:28:38,773 autoreload 3585 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 10:28:39,347 autoreload 3823 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:33:27,705 autoreload 3823 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/models.py changed, reloading.
+INFO 2025-08-15 10:33:28,252 autoreload 4211 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:34:14,376 autoreload 4211 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/admin.py changed, reloading.
+INFO 2025-08-15 10:34:14,897 autoreload 4280 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:35:34,437 autoreload 4315 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:36:14,270 autoreload 4315 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-15 10:36:14,780 autoreload 4354 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:37:54,972 autoreload 4354 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-15 10:37:55,507 autoreload 4395 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:38:32,219 autoreload 4395 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-15 10:38:32,785 autoreload 4414 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:39:15,707 autoreload 4414 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-15 10:39:16,271 autoreload 4435 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 10:40:21,552 services 4435 6166720512 OTP email sent to salvatorelingo2022@gmail.com
+WARNING 2025-08-15 10:41:32,420 log 4435 6183546880 Not Found: /api/auth/verify-otp/
+WARNING 2025-08-15 10:41:37,711 log 4435 6183546880 Bad Request: /api/auth/verify-otp
+WARNING 2025-08-15 10:41:41,154 log 4435 6183546880 Bad Request: /api/auth/verify-otp
+INFO 2025-08-15 10:42:40,542 autoreload 4435 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
+INFO 2025-08-15 10:42:41,074 autoreload 4514 8653693120 Watching for file changes with StatReloader

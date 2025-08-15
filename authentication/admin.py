@@ -275,8 +275,8 @@ class UserActivityAdmin(admin.ModelAdmin):
 
 @admin.register(OTPVerification)
 class OTPVerificationAdmin(admin.ModelAdmin):
-    list_display = ('user', 'phone_number', 'otp_code', 'is_verified', 'attempts', 'max_attempts', 'created_at', 'expires_at')
+    list_display = ('user', 'email', 'otp_code', 'is_verified', 'attempts', 'max_attempts', 'created_at', 'expires_at')
     list_filter = ('is_verified', 'created_at', 'expires_at')
-    search_fields = ('user__email', 'phone_number', 'otp_code')
+    search_fields = ('user__email', 'email', 'otp_code')
     readonly_fields = ('otp_code', 'created_at', 'expires_at')
     ordering = ('-created_at',)

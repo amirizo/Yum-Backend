@@ -13,6 +13,27 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+
+NEXT_SMS_STATUS_MESSAGES = {
+    53: "Network not covered or not set up for your account. Contact your account manager.",
+    54: "Invalid number prefix or length. Please check the number format.",
+    55: "Recipient is subscribed to DND (Do Not Disturb) services.",
+    56: "Sender ID not registered on your account.",
+    57: "Not enough credits to send message. Please top up.",
+    58: "Sender ID has been blacklisted.",
+    59: "Destination number has been blacklisted.",
+    60: "Prepaid package expired. Please top up to extend validity.",
+    61: "Account is limited to a single test number. Contact your account manager.",
+    62: "No SMS routes available on your account.",
+    63: "Anti-flooding limit reached. Wait before sending more messages.",
+    64: "System error occurred. Please try again later.",
+    65: "Duplicate message ID. Use a unique ID for each message.",
+    66: "Invalid UDH format in the message.",
+    67: "Message too long (max 25 parts or 4000 bytes).",
+    68: "Missing 'to' parameter. Provide a valid phone number.",
+    69: "Invalid destination. Check number prefix and length."
+}
+
 class SMSService:
     @staticmethod
     def generate_temporary_password(length=8):
@@ -24,9 +45,13 @@ class SMSService:
     def send_sms(phone_number, message):
         """Send SMS using Next SMS API"""
         try:
-            # Ensure phone number is in correct format
-            if not phone_number.startswith('+'):
-                phone_number = '+255' + phone_number.lstrip('0')
+            # Remove spaces, plus sign, and non-digit characters
+            phone_number = ''.join(filter(str.isdigit, phone_number))
+
+            # Basic validation: must be at least country code + subscriber number
+            if len(phone_number) < 9:
+                logger.warning(f"Invalid phone number: {phone_number}")
+                return False, "Invalid phone number format"
 
             # Basic Auth
             credentials = f"{settings.NEXT_SMS_USERNAME}:{settings.NEXT_SMS_PASSWORD}"
@@ -39,12 +64,13 @@ class SMSService:
 
             payload = {
                 'from': settings.SENDER_ID,
-                'to': phone_number,
+                'to': phone_number,  # No '+' sign
                 'text': message
             }
 
             url = settings.NEXT_SMS_TEST_URL if settings.IS_TEST_MODE else settings.NEXT_SMS_URL
             response = requests.post(url, headers=headers, json=payload)
+            resp_json = response.json()
 
             if response.status_code == 200 and response.json().get('success', False):
                 logger.info(f"SMS sent successfully to {phone_number}")
@@ -121,6 +147,37 @@ class EmailService:
         except Exception as e:
             logger.error(f"Email sending error: {str(e)}")
             return False, f"Email sending error: {str(e)}"
+
+
+    
+    @staticmethod
+    def send_otp_email(user, otp_code, expiry_minutes=5):
+        """Send OTP email for account verification or login"""
+        try:
+            subject = "Your OTP Code - Yum Express"
+
+            html_message = render_to_string('emails/send_otp.html', {
+                'user': user,
+                'otp_code': otp_code,
+                'expiry_minutes': expiry_minutes
+            })
+            plain_message = strip_tags(html_message)
+
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+
+            logger.info(f"OTP email sent to {user.email}")
+            return True, "OTP email sent successfully"
+
+        except Exception as e:
+            logger.error(f"Failed to send OTP email: {str(e)}")
+            return False, f"Failed to send OTP email: {str(e)}"
         
 
     @staticmethod

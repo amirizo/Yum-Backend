@@ -127,7 +127,7 @@ class TemporaryPassword(models.Model):
 
 class OTPVerification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=15)
+    email = models.EmailField(null=True, blank=True)
     otp_code = models.CharField(max_length=6)
     created_at = models.DateTimeField(auto_now_add=True)
     expires_at = models.DateTimeField()
@@ -149,7 +149,7 @@ class OTPVerification(models.Model):
         return self.attempts < self.max_attempts
 
     def __str__(self):
-        return f"OTP for {self.phone_number} - {self.otp_code}"
+        return f"OTP for {self.email} - {self.otp_code}"
 
     class Meta:
         ordering = ['-created_at']

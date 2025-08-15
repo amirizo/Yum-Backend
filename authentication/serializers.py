@@ -165,26 +165,17 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
 
 
 class OTPVerificationSerializer(serializers.Serializer):
-    phone_number = serializers.CharField(max_length=15)
+    email = serializers.EmailField()
     otp_code = serializers.CharField(max_length=6)
-
-    def validate_phone_number(self, value):
-        if not re.match(r'^(\+255|0)[67]\d{8}$', value):
-            raise serializers.ValidationError("Invalid Tanzanian phone number format")
-        return value
 
     def validate_otp_code(self, value):
         if not value.isdigit() or len(value) != 6:
-            raise serializers.ValidationError("OTP must be 6 digits")
+            raise serializers.ValidationError("OTP must be exactly 6 digits")
         return value
+
 
 class ResendOTPSerializer(serializers.Serializer):
-    phone_number = serializers.CharField(max_length=15)
-
-    def validate_phone_number(self, value):
-        if not re.match(r'^(\+255|0)[67]\d{8}$', value):
-            raise serializers.ValidationError("Invalid Tanzanian phone number format")
-        return value
+    email = serializers.EmailField()
 
 
 
