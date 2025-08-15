@@ -266,7 +266,7 @@ SENDER_ID = config('SENDER_ID', default='')
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "yum-express.com"
 EMAIL_PORT = 465
-EMAIL_USE_SSL = True  # Port 465 typically requires SSL
+EMAIL_USE_SSL = True 
 EMAIL_HOST_USER = "info@yum-express.com"
 EMAIL_HOST_PASSWORD = "@yumexpress2025"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

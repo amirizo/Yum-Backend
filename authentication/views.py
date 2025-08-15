@@ -389,7 +389,7 @@ def verify_otp(request):
                 send_mail(
                     subject='Welcome to YumExpress!',
                     message=plain_message,
-                    from_email=settings.EMAIL_HOST_USER,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[user.email],
                     html_message=html_content,
                     fail_silently=False
@@ -442,7 +442,7 @@ def resend_otp(request):
                 send_mail(
                     subject='Your YumExpress Verification Code',
                     message=plain_message,
-                    from_email=settings.EMAIL_HOST_USER,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[user.email],
                     html_message=html_content,
                     fail_silently=False

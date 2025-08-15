@@ -332,3 +332,15 @@ INFO 2025-08-15 10:42:41,074 autoreload 4514 8653693120 Watching for file change
 INFO 2025-08-15 10:56:21,221 autoreload 4755 8653693120 Watching for file changes with StatReloader
 INFO 2025-08-15 10:56:44,886 services 4755 6177239040 OTP email sent to salvatorelingo2022@gmail.com
 ERROR 2025-08-15 10:57:19,340 views 4755 6177239040 Welcome email sending failed: [Errno 8] nodename nor servname provided, or not known
+INFO 2025-08-15 11:02:04,517 autoreload 4926 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 11:02:24,429 services 4926 6196473856 OTP email sent to salvatorelingo2022@gmail.com
+INFO 2025-08-15 11:12:46,538 autoreload 4926 8653693120 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-15 11:12:47,131 autoreload 5197 8653693120 Watching for file changes with StatReloader
+INFO 2025-08-15 11:21:38,216 autoreload 5197 8653693120 /Users/macbookair/Desktop/Yumbackend/Yumbackend/settings.py changed, reloading.
+INFO 2025-08-15 11:21:38,784 autoreload 5394 8653693120 Watching for file changes with StatReloader
+WARNING 2025-08-15 11:32:50,004 log 5394 6128840704 Not Found: /api/auth/resend-otp/
+WARNING 2025-08-15 11:33:02,716 log 5394 6128840704 Bad Request: /api/auth/resend-otp
+INFO 2025-08-15 11:34:14,023 services 5394 6145667072 OTP email sent to salvatorelingo2022@gmail.com
+ERROR 2025-08-15 11:34:34,498 views 5394 6145667072 OTP email sending failed: emails/otp_verification.html
+ERROR 2025-08-15 11:34:34,498 log 5394 6145667072 Internal Server Error: /api/auth/resend-otp
+INFO 2025-08-15 11:36:58,763 autoreload 6846 8653693120 Watching for file changes with StatReloader
