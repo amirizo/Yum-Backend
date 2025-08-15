@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+from corsheaders.defaults import default_headers
 import os
 from datetime import timedelta
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,7 +74,7 @@ ROOT_URLCONF = "Yumbackend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / 'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -211,6 +212,15 @@ CORS_ALLOW_METHODS = [
 CORS_ALLOW_HEADERS = ["*"]
 CORS_ALLOW_CREDENTIALS = True
 
+
+# Also allow common headers (like Content-Type, Authorization)
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'content-type',
+    'authorization',
+]
+# Avoid redirects on trailing slash
+APPEND_SLASH = False
+
 # Channels configuration for WebSocket
 ASGI_APPLICATION = 'Yumbackend.asgi.application'
 
@@ -233,6 +243,8 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CLICKPESA_CLIENT_ID = config('CLICKPESA_CLIENT_ID', default='')
 CLICKPESA_API_KEY = config('CLICKPESA_API_KEY', default='')
 CLICKPESA_BASE_URL = 'https://api.clickpesa.com/third-parties'
+
+
 
 
 # Google Maps API for tracking
@@ -258,6 +270,7 @@ EMAIL_USE_SSL = True  # Port 465 typically requires SSL
 EMAIL_HOST_USER = "info@yum-express.com"
 EMAIL_HOST_PASSWORD = "@yumexpress2025"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+ADMIN_EMAIL_DEFAULT = "amirmussa2003@gmail.com"
 
 
 STATIC_URL = '/static/'
@@ -317,3 +330,42 @@ JAZZMIN_SETTINGS = {
     # Hide these models when generating side menu (e.g auth.user)
     "hide_models": [],
 }
+
+
+
+# Logging Configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs' / 'django.log',
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'INFO',
+    },
+  
+}
+
+# Create logs directory
+os.makedirs(BASE_DIR / 'logs', exist_ok=True)

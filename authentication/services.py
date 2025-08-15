@@ -5,7 +5,10 @@ import base64
 import logging
 from django.conf import settings
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -61,6 +64,19 @@ class SMSService:
         return SMSService.send_sms(user.phone_number, message)
     
 
+    def send_payment_success_sms(self, phone_number, order_reference, amount):
+        """Send payment success SMS to customer"""
+        message = f"Payment successful! Your order {order_reference} for TZS {amount:,.0f} has been confirmed. Thank you for choosing YumExpress!"
+        
+        return self._send_sms(phone_number, message)
+    
+    # def send_cash_order_sms(self, phone_number, order_reference):
+    #     """Send cash order confirmation SMS"""
+    #     message = f"Your cash order {order_reference} has been received and is pending admin approval. You'll be notified once approved."
+        
+    #     return self._send_sms(phone_number, message)
+    
+
 
 
 class EmailService:
@@ -105,3 +121,100 @@ class EmailService:
         except Exception as e:
             logger.error(f"Email sending error: {str(e)}")
             return False, f"Email sending error: {str(e)}"
+        
+
+    @staticmethod
+    def send_payment_success_email(user, order, payment):
+        """Send payment success email to customer"""
+        try:
+            subject = f"Payment Confirmed - Order #{order.order_number}"
+            
+            html_message = render_to_string('emails/payment_success.html', {
+                'user': user,
+                'order': order,
+                'payment': payment,
+            })
+            plain_message = strip_tags(html_message)
+            
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+            logger.info(f"Payment success email sent to {user.email}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to send payment success email: {str(e)}")
+            return False
+    
+    @staticmethod
+    def send_admin_cash_order_notification(order, payment):
+        """Send email notification to admin about cash order - FIXED METHOD SIGNATURE"""
+        try:
+            subject = f'New Cash Order Requires Approval - Order #{order.id}'
+            
+            html_message = render_to_string('emails/admin_cash_order_confirmation.html', {
+                'order': order,
+                'payment': payment,
+                'customer': order.customer,
+                'total_amount': order.total_amount,
+                'order_items': order.items.all(),
+            })
+            
+            plain_message = strip_tags(html_message)
+            
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.ADMIN_EMAIL_DEFAULT],  # Send to admin email
+                html_message=html_message,
+                fail_silently=False,
+            )
+            
+            logger.info(f"Admin cash order notification sent for order {order.id}")
+            return {'success': True, 'message': 'Admin notification sent'}
+            
+        except Exception as e:
+            logger.error(f"Failed to send admin cash order notification: {str(e)}")
+            return {'success': False, 'error': str(e)}
+    
+    @staticmethod
+    def send_cash_order_approved_email(user, order):
+        """Send cash order approval email to customer"""
+        try:
+            subject = f'Order Approved - Order #{order.id}'
+            
+            html_message = render_to_string('emails/cash_order_approved.html', {
+                'user': user,
+                'order': order,
+                'order_items': order.items.all(),
+            })
+            
+            plain_message = strip_tags(html_message)
+            
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+            
+            logger.info(f"Cash order approval email sent to {user.email}")
+            return {'success': True, 'message': 'Cash order approval email sent'}
+            
+        except Exception as e:
+            logger.error(f"Failed to send cash order approval email: {str(e)}")
+            return {'success': False, 'error': str(e)}
+
+        
+        
+        
+
+    

@@ -41,9 +41,9 @@
         
         <div class="customer-info">
             <h4>Customer Information</h4>
-            <p><strong>Name:</strong> {{ customer.first_name }} {{ customer.last_name }}</p>
-            <p><strong>Email:</strong> {{ customer.email }}</p>
-            <p><strong>Phone:</strong> {{ customer.phone_number }}</p>
+            <p><strong>Name:</strong> {{ order.customer.first_name }} {{ order.customer.last_name }}</p>
+            <p><strong>Email:</strong> {{ order.customer.email }}</p>
+            <p><strong>Phone:</strong> {{ order.customer.phone_number }}</p>
         </div>
         
         <p>Please review this order and take appropriate action:</p>

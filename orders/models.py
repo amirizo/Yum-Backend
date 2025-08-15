@@ -1,170 +1,112 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.mail import send_mail
 from django.utils import timezone
 import uuid
+from django.conf import settings
 
 User = get_user_model()
 
 
 class Category(models.Model):
     CATEGORY_TYPES = [
-        ('groceries', 'Groceries'),
-        ('foods', 'Foods'),
+        ('food', 'Food'),
+        ('grocery', 'Grocery'),
     ]
     
     name = models.CharField(max_length=100, unique=True)
+    category_type = models.CharField(max_length=20, choices=CATEGORY_TYPES, default='food')
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='categories/', blank=True, null=True, help_text="High-quality category image")
-    category_type = models.CharField(max_length=20, choices=CATEGORY_TYPES, default='foods')
+    image = models.ImageField(upload_to='categories/', blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = "Categories"
-        ordering = ['name']
 
     def __str__(self):
-        return f"{self.name} ({self.get_category_type_display()})"
-
-    def get_full_path(self):
-        """Get full category path for nested categories"""
-        if self.parent:
-            return f"{self.parent.get_full_path()} > {self.name}"
         return self.name
 
 
 class Product(models.Model):
-    PRODUCT_STATUS_CHOICES = [
+    STATUS_CHOICES = [
         ('active', 'Active'),
         ('inactive', 'Inactive'),
-        ('out_of_stock', 'Out of Stock'),
-        ('discontinued', 'Discontinued'),
+        ('archived', 'Archived'),
     ]
-    
-    UNIT_CHOICES = [
-        ('piece', 'Piece'),
-        ('kg', 'Kilogram'),
-        ('gram', 'Gram'),
-        ('liter', 'Liter'),
-        ('ml', 'Milliliter'),
-        ('pack', 'Pack'),
-        ('box', 'Box'),
-        ('bottle', 'Bottle'),
-        ('can', 'Can'),
-    ]
-
     vendor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
-    
-    # Basic product information
     name = models.CharField(max_length=200)
     description = models.TextField()
-    short_description = models.CharField(max_length=500, blank=True)
-    sku = models.CharField(max_length=100, blank=True, help_text="Stock Keeping Unit")
-    barcode = models.CharField(max_length=100, blank=True)
-    
-    # Pricing
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
-    compare_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, help_text="Original price for discount display")
-    cost_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, help_text="Cost price for profit calculation")
-    
-    # Inventory management
-    track_inventory = models.BooleanField(default=True)
-    inventory_quantity = models.PositiveIntegerField(default=0)
-    low_stock_threshold = models.PositiveIntegerField(default=5)
-    allow_backorder = models.BooleanField(default=False)
-    
-    # Product specifications
-    weight = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, help_text="Weight in grams")
-    unit = models.CharField(max_length=50, blank=True, help_text="Unit of measurement (e.g., kg, pieces, liters)")
-    unit_size = models.CharField(max_length=50, blank=True, help_text="e.g., 500ml, 1kg, Large")
-    
-    # Images
-    image = models.ImageField(
-        upload_to='products/', 
-        blank=True, 
-        null=True, 
-        help_text="High-quality product image (recommended: 800x800px or higher)"
-    )
-    
-    # Status and availability
-    status = models.CharField(max_length=20, choices=PRODUCT_STATUS_CHOICES, default='active')
+    image = models.ImageField(upload_to='products/', blank=True, null=True, 
+                             help_text="Upload a high-quality image of your product")
+    stock_quantity = models.PositiveIntegerField(default=0, help_text="Available stock quantity")
+    unit = models.CharField(max_length=20, default='piece', 
+                           help_text="Unit of measurement (kg, piece, liter, etc.)")
     is_available = models.BooleanField(default=True)
-    is_featured = models.BooleanField(default=False)
-    
-    # Restaurant specific fields
-    preparation_time = models.PositiveIntegerField(
-        null=True, 
-        blank=True, 
-        help_text="Preparation time in minutes (for food items)"
-    )
-    is_vegetarian = models.BooleanField(default=False)
-    is_vegan = models.BooleanField(default=False)
-    is_gluten_free = models.BooleanField(default=False)
-    spice_level = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)], help_text="Spice level 0-5")
-    
-    # Grocery specific fields
-    stock_quantity = models.PositiveIntegerField(
-        default=0, 
-        help_text="Available stock quantity (for grocery items)"
-    )
-    
-    # SEO and metadata
-    meta_title = models.CharField(max_length=200, blank=True)
-    meta_description = models.TextField(blank=True)
-    tags = models.CharField(max_length=500, blank=True, help_text="Comma-separated tags")
-    
-    # Timestamps
+    preparation_time = models.PositiveIntegerField(null=True, blank=True, 
+                                                  help_text="Preparation time in minutes (for food items)")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
 
     def __str__(self):
         return f"{self.name} - {self.vendor.first_name} {self.vendor.last_name}"
 
+    @property
+    def is_low_stock(self):
+        return self.stock_quantity < 5
+
+    @property
+    def is_in_stock(self):
+        return self.stock_quantity > 0
+
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None
+        old_stock = 0
+        
+        if not is_new:
+            old_product = Product.objects.get(pk=self.pk)
+            old_stock = old_product.stock_quantity
+        
+        super().save(*args, **kwargs)
+        
+        if not is_new and old_stock >= 5 and self.stock_quantity < 5:
+            self.send_low_stock_email()
+
+    def send_low_stock_email(self):
+        """Send low stock alert email to vendor"""
+        try:
+            subject = f'Low Stock Alert - {self.name}'
+            message = f"""
+            Dear {self.vendor.first_name} {self.vendor.last_name},
+
+            Your product "{self.name}" is running low on stock.
+
+            Current Stock: {self.stock_quantity} {self.unit}
+            Product Category: {self.category.name}
+
+            Please restock this item to avoid running out of inventory.
+
+            Best regards,
+            YumExpress Team
+            """
+            
+            send_mail(
+                subject=subject,
+                message=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[self.vendor.email],
+                fail_silently=False,
+            )
+        except Exception as e:
+            print(f"Failed to send low stock email: {e}")
+
     class Meta:
         ordering = ['-created_at']
-        unique_together = ['vendor', 'sku']
-    
-    def is_in_stock(self):
-        """Check if product is in stock"""
-        if not self.track_inventory:
-            return self.is_available
-        return self.inventory_quantity > 0 or self.allow_backorder
-    
-    def is_low_stock(self):
-        """Check if product is low in stock"""
-        if not self.track_inventory:
-            return False
-        return self.inventory_quantity <= self.low_stock_threshold
-    
-    def get_discount_percentage(self):
-        """Calculate discount percentage if compare_price is set"""
-        if self.compare_price and self.compare_price > self.price:
-            return round(((self.compare_price - self.price) / self.compare_price) * 100, 2)
-        return 0
-    
-    @property
-    def is_food_item(self):
-        return self.category.category_type == 'foods'
-    
-    @property
-    def is_grocery_item(self):
-        return self.category.category_type == 'groceries'
-
-
-class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='products/gallery/')
-    alt_text = models.CharField(max_length=200, blank=True)
-    sort_order = models.PositiveIntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    
-    class Meta:
-        ordering = ['sort_order', 'created_at']
-    
-    def __str__(self):
-        return f"Image for {self.product.name}"
 
 
 class ProductVariant(models.Model):
@@ -195,28 +137,6 @@ class ProductVariant(models.Model):
         return self.product.price + self.price_adjustment
 
 
-class ProductReview(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_reviews')
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='product_reviews')
-    order_item = models.ForeignKey('OrderItem', on_delete=models.CASCADE, null=True, blank=True)
-    
-    rating = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
-    title = models.CharField(max_length=200, blank=True)
-    comment = models.TextField(blank=True)
-    
-    # Review status
-    is_verified_purchase = models.BooleanField(default=False)
-    is_approved = models.BooleanField(default=True)
-    
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        unique_together = ['product', 'customer', 'order_item']
-        ordering = ['-created_at']
-    
-    def __str__(self):
-        return f"Review for {self.product.name} by {self.customer.username}"
 
 
 class DeliveryAddress(models.Model):

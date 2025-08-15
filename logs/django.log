@@ -1,0 +1,273 @@
+INFO 2025-08-15 00:00:42,275 autoreload 10282 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:00:49,769 autoreload 10282 8383455424 /Users/macbookair/Desktop/Yumbackend/Yumbackend/settings.py changed, reloading.
+INFO 2025-08-15 00:00:50,249 autoreload 10283 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:00:55,027 services 10283 6124990464 Admin cash order notification sent for order e129dfd6-47bc-4d6e-95af-39c5f0c03584
+INFO 2025-08-15 00:04:34,064 autoreload 10283 8383455424 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 00:04:34,576 autoreload 10400 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:12:41,910 autoreload 10400 8383455424 /Users/macbookair/Desktop/Yumbackend/authentication/models.py changed, reloading.
+INFO 2025-08-15 00:12:42,458 autoreload 10496 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:14:12,884 autoreload 10496 8383455424 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-15 00:14:13,449 autoreload 10507 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:16:24,462 services 10507 6167867392 Admin cash order notification sent for order e129dfd6-47bc-4d6e-95af-39c5f0c03584
+INFO 2025-08-15 00:20:54,220 services 10507 6341865472 Admin cash order notification sent for order e129dfd6-47bc-4d6e-95af-39c5f0c03584
+WARNING 2025-08-15 00:21:22,125 log 10507 6341865472 Bad Request: /api/payments/create-intent/
+WARNING 2025-08-15 00:22:15,883 log 10507 6341865472 Bad Request: /api/payments/create-intent/
+WARNING 2025-08-15 00:22:24,293 log 10507 6341865472 Bad Request: /api/payments/create-intent/
+WARNING 2025-08-15 00:23:20,025 log 10507 6341865472 Bad Request: /api/payments/create-intent/
+WARNING 2025-08-15 00:23:24,042 log 10507 6341865472 Method Not Allowed: /api/payments/create-intent/
+WARNING 2025-08-15 00:23:27,889 log 10507 6341865472 Bad Request: /api/payments/create-intent/
+WARNING 2025-08-15 00:24:07,863 log 10507 6341865472 Bad Request: /api/payments/create-intent/
+WARNING 2025-08-15 00:24:08,948 log 10507 6341865472 Bad Request: /api/payments/create-intent/
+WARNING 2025-08-15 00:24:09,796 log 10507 6341865472 Bad Request: /api/payments/create-intent/
+WARNING 2025-08-15 00:24:39,532 log 10507 6341865472 Bad Request: /api/payments/create-intent/
+WARNING 2025-08-15 00:24:57,689 log 10507 6341865472 Bad Request: /api/payments/create-intent/
+ERROR 2025-08-15 00:25:05,660 views 10507 6341865472 Payment creation error: Payment() got unexpected keyword arguments: 'mobile_money_phone', 'mobile_money_provider'
+WARNING 2025-08-15 00:25:05,660 log 10507 6341865472 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 00:29:26,683 autoreload 10507 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/serializers.py changed, reloading.
+INFO 2025-08-15 00:29:27,278 autoreload 11211 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:29:51,602 autoreload 11211 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/serializers.py changed, reloading.
+INFO 2025-08-15 00:29:52,032 autoreload 11226 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:30:43,498 autoreload 11226 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 00:30:43,992 autoreload 11276 8383455424 Watching for file changes with StatReloader
+WARNING 2025-08-15 00:31:31,833 log 11276 6166228992 Unauthorized: /api/payments/create-intent/
+WARNING 2025-08-15 00:32:03,857 log 11276 6166228992 Bad Request: /api/payments/create-intent/
+ERROR 2025-08-15 00:32:19,426 views 11276 6166228992 Payment creation error: ClickPesaService.create_mobile_money_payment() got an unexpected keyword argument 'customer_name'
+WARNING 2025-08-15 00:32:19,426 log 11276 6166228992 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 00:36:28,036 autoreload 11276 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 00:36:28,560 autoreload 11389 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:36:59,885 autoreload 11389 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 00:37:00,404 autoreload 11396 8383455424 Watching for file changes with StatReloader
+ERROR 2025-08-15 00:37:01,045 views 11396 6129446912 Payment creation error: ClickPesaService.create_mobile_money_payment() got an unexpected keyword argument 'customer_name'
+WARNING 2025-08-15 00:37:01,046 log 11396 6129446912 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 00:37:08,981 autoreload 11396 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 00:37:09,491 autoreload 11407 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:37:15,988 autoreload 11407 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 00:37:16,551 autoreload 11408 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:37:42,837 services 11408 6126776320 ClickPesa auth token generated successfully
+ERROR 2025-08-15 00:37:42,838 services 11408 6126776320 Mobile money payment error: name 'customer_name' is not defined
+ERROR 2025-08-15 00:37:42,838 views 11408 6126776320 Payment creation error: 'NoneType' object is not subscriptable
+WARNING 2025-08-15 00:37:42,839 log 11408 6126776320 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 00:38:56,431 autoreload 11408 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 00:38:56,985 autoreload 11458 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:39:52,130 autoreload 11458 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 00:39:52,892 autoreload 11470 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:40:06,618 services 11470 6164721664 ClickPesa auth token generated successfully
+ERROR 2025-08-15 00:40:06,777 services 11470 6164721664 ClickPesa preview failed: Unauthorized
+ERROR 2025-08-15 00:40:06,778 views 11470 6164721664 Payment creation error: 'NoneType' object is not subscriptable
+WARNING 2025-08-15 00:40:06,780 log 11470 6164721664 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 00:42:20,240 autoreload 11470 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 00:42:20,773 autoreload 11528 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:44:25,196 autoreload 11528 8383455424 /Users/macbookair/Desktop/Yumbackend/Yumbackend/settings.py changed, reloading.
+INFO 2025-08-15 00:44:25,879 autoreload 11683 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:45:53,402 autoreload 11683 8383455424 /Users/macbookair/Desktop/Yumbackend/Yumbackend/settings.py changed, reloading.
+INFO 2025-08-15 00:45:53,971 autoreload 12121 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:46:06,658 autoreload 12121 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 00:46:07,034 autoreload 12123 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:47:28,068 services 12123 6124859392 ClickPesa auth token generated successfully
+ERROR 2025-08-15 00:47:28,227 services 12123 6124859392 ClickPesa preview failed: Unauthorized
+ERROR 2025-08-15 00:47:28,228 views 12123 6124859392 Payment creation error: 'NoneType' object is not subscriptable
+WARNING 2025-08-15 00:47:28,229 log 12123 6124859392 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 00:55:04,867 autoreload 12123 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 00:55:05,514 autoreload 12371 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:55:20,424 autoreload 12371 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 00:55:21,072 autoreload 12392 8383455424 Watching for file changes with StatReloader
+ERROR 2025-08-15 00:55:22,376 views 12392 6132887552 Payment creation error: 'ClickPesaService' object has no attribute 'create_mobile_money_payment'
+WARNING 2025-08-15 00:55:22,376 log 12392 6132887552 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 00:58:18,149 autoreload 12392 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 00:58:18,675 autoreload 12475 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 00:58:27,234 autoreload 12475 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 00:58:27,687 autoreload 12482 8383455424 Watching for file changes with StatReloader
+ERROR 2025-08-15 00:58:36,653 views 12482 6135607296 Payment creation error: ClickPesaService.create_mobile_money_payment() got an unexpected keyword argument 'provider'
+WARNING 2025-08-15 00:58:36,654 log 12482 6135607296 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 01:03:26,372 autoreload 12482 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 01:03:27,444 autoreload 12579 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:03:31,267 services 12579 6205304832 ClickPesa auth token generated successfully
+INFO 2025-08-15 01:03:47,829 autoreload 12579 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 01:03:48,421 autoreload 12592 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:04:35,283 services 12592 6165540864 ClickPesa auth token generated successfully
+ERROR 2025-08-15 01:04:51,881 views 12592 6165540864 Payment creation error: NOT NULL constraint failed: payments_payment.clickpesa_payment_reference
+WARNING 2025-08-15 01:04:51,883 log 12592 6165540864 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 01:05:41,635 autoreload 12592 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 01:05:42,106 autoreload 12632 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:07:51,819 autoreload 12632 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:07:52,345 autoreload 12674 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:08:08,147 autoreload 12674 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:08:09,004 autoreload 12699 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:08:11,864 services 12699 6122434560 ClickPesa auth token generated successfully
+WARNING 2025-08-15 01:11:58,932 log 12699 6173487104 Bad Request: /api/orders/create/
+WARNING 2025-08-15 01:16:04,384 log 12699 6156660736 Unsupported Media Type: /api/payments/confirm/
+WARNING 2025-08-15 01:16:11,066 log 12699 6156660736 Bad Request: /api/payments/confirm/
+INFO 2025-08-15 01:16:48,609 services 12699 6156660736 ClickPesa payment status checked for order YUM220426LSKXSR
+ERROR 2025-08-15 01:16:48,610 views 12699 6156660736 Payment confirmation error: list indices must be integers or slices, not str
+WARNING 2025-08-15 01:16:48,611 log 12699 6156660736 Bad Request: /api/payments/confirm/
+INFO 2025-08-15 01:26:06,591 autoreload 12699 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:26:07,205 autoreload 13040 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:26:42,716 autoreload 13040 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:26:43,323 autoreload 13048 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:27:09,448 autoreload 13048 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:27:09,955 autoreload 13052 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:27:48,629 autoreload 13052 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:27:49,154 autoreload 13100 8383455424 Watching for file changes with StatReloader
+WARNING 2025-08-15 01:28:28,162 log 13100 6162640896 Not Found: /api/payments/confirm/
+WARNING 2025-08-15 01:28:35,548 log 13100 6162640896 Not Found: /api/payments/confirm/
+WARNING 2025-08-15 01:28:47,544 log 13100 6162640896 Not Found: /api/payments/confirm/
+WARNING 2025-08-15 01:28:48,733 log 13100 6162640896 Not Found: /api/payments/confirm/
+INFO 2025-08-15 01:29:11,877 services 13100 6162640896 ClickPesa auth token generated successfully
+INFO 2025-08-15 01:29:13,923 services 13100 6162640896 ClickPesa payment status checked for order YUM220938ODQ453
+ERROR 2025-08-15 01:29:13,924 views 13100 6162640896 Payment confirmation error: list indices must be integers or slices, not str
+WARNING 2025-08-15 01:29:13,925 log 13100 6162640896 Bad Request: /api/payments/confirm/
+INFO 2025-08-15 01:30:05,451 autoreload 13100 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:30:05,960 autoreload 13142 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:30:14,512 autoreload 13142 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:30:15,056 autoreload 13145 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:30:22,000 services 13145 6129463296 ClickPesa auth token generated successfully
+INFO 2025-08-15 01:30:23,960 services 13145 6129463296 ClickPesa payment status checked for order YUM220938ODQ453
+WARNING 2025-08-15 01:32:02,680 log 13145 6146863104 Unauthorized: /api/payments/
+WARNING 2025-08-15 01:32:31,307 log 13145 6146863104 Unauthorized: /api/payments/
+WARNING 2025-08-15 01:32:35,207 log 13145 6146863104 Unauthorized: /api/payments/
+WARNING 2025-08-15 01:33:40,180 log 13145 6146863104 Method Not Allowed: /api/payments/
+WARNING 2025-08-15 01:34:32,445 log 13145 6146863104 Not Found: /api/payments/eb4e9a68-9a3b-4c14-8411-e45ebe55e3c7
+WARNING 2025-08-15 01:34:44,853 log 13145 6146863104 Method Not Allowed: /api/payments/eb4e9a68-9a3b-4c14-8411-e45ebe55e3c7/
+ERROR 2025-08-15 01:36:05,314 log 13145 6163689472 Internal Server Error: /api/payments/webhook/clickpesa/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+TypeError: View.as_view.<locals>.view() missing 1 required positional argument: 'request'
+INFO 2025-08-15 01:36:25,736 autoreload 13145 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:36:26,320 autoreload 13334 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:39:21,582 autoreload 13334 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:39:22,348 autoreload 13406 8383455424 Watching for file changes with StatReloader
+WARNING 2025-08-15 01:39:22,833 log 13406 6190804992 Method Not Allowed: /api/payments/webhook/clickpesa/
+ERROR 2025-08-15 01:39:27,323 views 13406 6190804992 Webhook processing error: NOT NULL constraint failed: payments_paymentwebhookevent.event_type
+WARNING 2025-08-15 01:39:27,324 log 13406 6190804992 Bad Request: /api/payments/webhook/clickpesa/
+INFO 2025-08-15 01:41:05,811 autoreload 13406 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:41:06,561 autoreload 13446 8383455424 Watching for file changes with StatReloader
+ERROR 2025-08-15 01:41:08,304 views 13446 6133952512 Webhook processing error: NOT NULL constraint failed: payments_paymentwebhookevent.event_type
+WARNING 2025-08-15 01:41:08,305 log 13446 6133952512 Bad Request: /api/payments/webhook/clickpesa/
+INFO 2025-08-15 01:43:09,067 autoreload 13446 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:43:09,620 autoreload 13467 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:43:38,978 autoreload 13467 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:43:39,642 autoreload 13475 8383455424 Watching for file changes with StatReloader
+ERROR 2025-08-15 01:43:40,380 views 13475 6161575936 Missing event type in webhook payload: {'payment_id': 'eb4e9a68-9a3b-4c14-8411-e45ebe55e3c7', 'payment_type': 'mobile_money', 'mobile_provider': 'tigo', 'phone_number': '255772276727'}
+WARNING 2025-08-15 01:43:40,381 log 13475 6161575936 Bad Request: /api/payments/webhook/clickpesa/
+INFO 2025-08-15 01:44:47,080 autoreload 13475 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:44:47,639 autoreload 13522 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:44:51,003 autoreload 13522 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:44:51,366 autoreload 13527 8383455424 Watching for file changes with StatReloader
+ERROR 2025-08-15 01:44:59,045 views 13527 6167064576 Invalid webhook payload (no event): {'payment_id': 'eb4e9a68-9a3b-4c14-8411-e45ebe55e3c7', 'payment_type': 'mobile_money', 'mobile_provider': 'tigo', 'phone_number': '255772276727'}
+WARNING 2025-08-15 01:44:59,047 log 13527 6167064576 Bad Request: /api/payments/webhook/clickpesa/
+ERROR 2025-08-15 01:45:57,822 views 13527 6167064576 Payment not found for order reference: None
+ERROR 2025-08-15 01:46:57,787 views 13527 6167064576 Payment not found for order reference: None
+WARNING 2025-08-15 01:50:00,307 log 13527 6217543680 Not Found: /api/payments/c
+INFO 2025-08-15 01:50:22,570 services 13527 6217543680 ClickPesa auth token generated successfully
+ERROR 2025-08-15 01:50:39,248 views 13527 6217543680 Payment creation error: NOT NULL constraint failed: payments_payment.clickpesa_payment_reference
+WARNING 2025-08-15 01:50:39,250 log 13527 6217543680 Bad Request: /api/payments/create-intent/
+ERROR 2025-08-15 01:51:15,000 views 13527 6217543680 Payment creation error: NOT NULL constraint failed: payments_payment.clickpesa_payment_reference
+WARNING 2025-08-15 01:51:15,002 log 13527 6217543680 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 01:52:38,885 autoreload 13527 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:52:39,410 autoreload 13650 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:53:08,891 autoreload 13650 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:53:09,315 autoreload 13685 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:53:30,330 autoreload 13685 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 01:53:30,903 autoreload 13694 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:53:41,386 services 13694 6157791232 ClickPesa auth token generated successfully
+ERROR 2025-08-15 01:53:58,033 views 13694 6157791232 Payment creation error: NOT NULL constraint failed: payments_payment.clickpesa_payment_reference
+WARNING 2025-08-15 01:53:58,035 log 13694 6157791232 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 01:55:28,132 autoreload 13694 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/models.py changed, reloading.
+INFO 2025-08-15 01:55:28,715 autoreload 13704 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:55:42,584 autoreload 13712 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 01:55:51,449 services 13712 6171570176 ClickPesa auth token generated successfully
+INFO 2025-08-15 01:56:32,545 autoreload 13712 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/models.py changed, reloading.
+INFO 2025-08-15 01:56:33,134 autoreload 13717 8383455424 Watching for file changes with StatReloader
+ERROR 2025-08-15 01:58:40,912 views 13717 6193786880 Payment creation error: 'ClickPesaService' object has no attribute 'create_card_payment'
+WARNING 2025-08-15 01:58:40,913 log 13717 6193786880 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:00:40,357 autoreload 13717 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:00:40,988 autoreload 13782 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:06:05,193 autoreload 13782 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:06:05,868 autoreload 13960 8383455424 Watching for file changes with StatReloader
+ERROR 2025-08-15 02:06:44,669 views 13960 6128087040 Payment creation error: ClickPesaService.create_card_payment() got an unexpected keyword argument 'customer_name'. Did you mean 'customer_data'?
+WARNING 2025-08-15 02:06:44,670 log 13960 6128087040 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:07:12,623 autoreload 13960 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:07:13,906 autoreload 14032 8383455424 Watching for file changes with StatReloader
+ERROR 2025-08-15 02:07:15,983 views 14032 6201962496 Payment creation error: ClickPesaService.create_card_payment() got an unexpected keyword argument 'customer_email'. Did you mean 'customer_name'?
+WARNING 2025-08-15 02:07:15,983 log 14032 6201962496 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:11:45,385 autoreload 14032 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:11:46,154 autoreload 14136 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:12:37,408 autoreload 14136 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:12:37,981 autoreload 14146 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:12:51,315 services 14146 6190428160 ClickPesa auth token generated successfully
+ERROR 2025-08-15 02:12:56,850 services 14146 6190428160 ClickPesa card payment initiation failed: 400 Client Error: Bad Request for url: https://api.clickpesa.com/third-parties/payments/initiate-card-payment
+WARNING 2025-08-15 02:12:56,864 log 14146 6190428160 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:15:02,570 autoreload 14146 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:15:03,233 autoreload 14197 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:15:29,401 services 14197 6127333376 ClickPesa auth token generated successfully
+ERROR 2025-08-15 02:15:34,958 services 14197 6127333376 ClickPesa card payment initiation failed: 400 Client Error: Bad Request for url: https://api.clickpesa.com/third-parties/payments/initiate-card-payment
+WARNING 2025-08-15 02:15:34,962 log 14197 6127333376 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:18:00,184 autoreload 14197 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:18:00,790 autoreload 14276 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:18:09,669 services 14276 6167621632 ClickPesa auth token generated successfully
+WARNING 2025-08-15 02:18:15,260 log 14276 6167621632 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:19:58,985 autoreload 14276 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:19:59,587 autoreload 14330 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:20:04,992 autoreload 14330 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:20:05,432 autoreload 14336 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:20:11,626 services 14336 6130298880 ClickPesa auth token generated successfully
+ERROR 2025-08-15 02:20:15,272 views 14336 6130298880 Payment creation error: name 'customer_phone' is not defined
+WARNING 2025-08-15 02:20:15,274 log 14336 6130298880 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:20:38,826 autoreload 14336 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:20:39,442 autoreload 14369 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:20:44,843 autoreload 14369 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:20:45,328 autoreload 14373 8383455424 Watching for file changes with StatReloader
+ERROR 2025-08-15 02:20:46,971 views 14373 6192738304 Payment creation error: ClickPesaService.create_card_payment() missing 1 required positional argument: 'customer_phone'
+WARNING 2025-08-15 02:20:46,972 log 14373 6192738304 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:21:20,186 autoreload 14373 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:21:20,963 autoreload 14386 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:21:25,046 services 14386 6132559872 ClickPesa auth token generated successfully
+ERROR 2025-08-15 02:21:28,832 views 14386 6132559872 Payment creation error: name 'customer_phone' is not defined
+WARNING 2025-08-15 02:21:28,835 log 14386 6132559872 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:22:50,803 autoreload 14386 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 02:22:51,447 autoreload 14582 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:22:54,802 autoreload 14582 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 02:22:55,108 autoreload 14586 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:23:28,544 autoreload 14586 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 02:23:29,072 autoreload 14600 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:23:35,535 autoreload 14600 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:23:36,034 autoreload 14601 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:23:42,484 autoreload 14601 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:23:43,193 autoreload 14603 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:23:47,709 services 14603 6128365568 ClickPesa auth token generated successfully
+WARNING 2025-08-15 02:23:53,318 log 14603 6128365568 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:26:09,860 autoreload 14603 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:26:10,436 autoreload 14615 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:26:46,064 autoreload 14615 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-15 02:26:46,636 autoreload 14660 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:26:51,787 services 14660 6129364992 ClickPesa auth token generated successfully
+ERROR 2025-08-15 02:26:53,627 services 14660 6129364992 ClickPesa card payment error: 400 Client Error: Bad Request for url: https://api.clickpesa.com/third-parties/payments/initiate-card-payment
+WARNING 2025-08-15 02:26:53,631 log 14660 6129364992 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:30:59,228 autoreload 14660 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:30:59,954 autoreload 14862 8383455424 Watching for file changes with StatReloader
+ERROR 2025-08-15 02:31:01,101 views 14862 6136967168 Payment creation error: ClickPesaService.create_card_payment() got an unexpected keyword argument 'customer_email'. Did you mean 'customer_name'?
+WARNING 2025-08-15 02:31:01,101 log 14862 6136967168 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:32:56,314 autoreload 14862 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:32:57,117 autoreload 15001 8383455424 Watching for file changes with StatReloader
+WARNING 2025-08-15 02:33:03,162 log 15001 6162690048 Unauthorized: /api/payments/create-intent/
+INFO 2025-08-15 02:33:53,024 services 15001 6162690048 ClickPesa auth token generated successfully
+ERROR 2025-08-15 02:33:58,859 services 15001 6162690048 ClickPesa card payment error: 400 Client Error: Bad Request for url: https://api.clickpesa.com/third-parties/payments/initiate-card-payment
+ERROR 2025-08-15 02:33:58,860 views 15001 6162690048 Payment creation error: 'NoneType' object is not subscriptable
+WARNING 2025-08-15 02:33:58,861 log 15001 6162690048 Bad Request: /api/payments/create-intent/
+INFO 2025-08-15 02:35:55,918 autoreload 15001 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:35:56,599 autoreload 15036 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:36:38,194 autoreload 15036 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:36:38,712 autoreload 15041 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:36:48,287 autoreload 15041 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:36:49,015 autoreload 15046 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:37:08,855 autoreload 15046 8383455424 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-15 02:37:09,350 autoreload 15057 8383455424 Watching for file changes with StatReloader
+INFO 2025-08-15 02:37:15,452 services 15057 6167244800 ClickPesa auth token generated successfully
+ERROR 2025-08-15 02:37:21,246 services 15057 6167244800 ClickPesa card payment error: 400 Client Error: Bad Request for url: https://api.clickpesa.com/third-parties/payments/initiate-card-payment
+ERROR 2025-08-15 02:37:21,247 views 15057 6167244800 Payment creation error: 'NoneType' object is not subscriptable
+WARNING 2025-08-15 02:37:21,248 log 15057 6167244800 Bad Request: /api/payments/create-intent/

@@ -8,7 +8,7 @@ urlpatterns = [
     # Payment Processing
     path('create-intent/', views.create_payment_intent, name='create-payment-intent'),
     path('confirm/', views.confirm_payment, name='confirm-payment'),
-    path('mobile-money/', views.mobile_money_payment, name='mobile-money-payment'),
+    # path('mobile-money/', views.mobile_money_payment, name='mobile-money-payment'),
     path('', views.PaymentListView.as_view(), name='payment-list'),
     path('<uuid:pk>/', views.PaymentDetailView.as_view(), name='payment-detail'),
     

@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 import uuid
-
+import secrets
+import string
 User = get_user_model()
 
 class PaymentMethod(models.Model):
@@ -49,12 +50,12 @@ class Payment(models.Model):
     PAYMENT_STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('processing', 'Processing'),
-        ('success', 'Success'),
-        ('settled', 'Settled'),
+        ('succeeded', 'Succeeded'),
         ('failed', 'Failed'),
         ('canceled', 'Canceled'),
         ('refunded', 'Refunded'),
         ('partially_refunded', 'Partially Refunded'),
+        ('pending_admin_approval', 'Pending Admin Approval'),
     ]
 
     PAYMENT_TYPES = [
@@ -69,36 +70,53 @@ class Payment(models.Model):
     payment_method = models.ForeignKey(PaymentMethod, on_delete=models.SET_NULL, null=True, blank=True)
     
     # ClickPesa integration
-    clickpesa_transaction_id = models.CharField(max_length=200, blank=True)
-    clickpesa_order_reference = models.CharField(max_length=200, unique=True)
-    clickpesa_payment_reference = models.CharField(max_length=200, blank=True)
+    clickpesa_order_reference = models.CharField(max_length=100, unique=True, blank=True)
+    clickpesa_payment_reference = models.CharField(max_length=100, blank=True, null=True)
+    clickpesa_payment_link = models.URLField(blank=True)
     
     # Payment details
-    payment_type = models.CharField(max_length=20, choices=PAYMENT_TYPES)
+    payment_type = models.CharField(max_length=20, choices=PAYMENT_TYPES, default='card')
     amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
-    currency = models.CharField(max_length=3, default='TZS')  # Changed default to TZS for mobile money
-    status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='pending')
+    currency = models.CharField(max_length=3, default='TZS')
+    status = models.CharField(max_length=30, choices=PAYMENT_STATUS_CHOICES, default='pending')
     
-    # Mobile money specific fields
-    phone_number = models.CharField(max_length=15, blank=True)
-    mobile_provider = models.CharField(max_length=50, blank=True)
-    
-    # Card payment specific fields
-    card_payment_link = models.URLField(blank=True)  # Added for ClickPesa card payment link
+    # Mobile Money specific fields
+    mobile_number = models.CharField(max_length=15, blank=True)
+    mobile_provider = models.CharField(max_length=20, blank=True)
     
     # Transaction details
     transaction_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     net_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    collected_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # Added for ClickPesa
     
     # Metadata
     failure_reason = models.TextField(blank=True)
-    clickpesa_message = models.TextField(blank=True)  # Added for ClickPesa response messages
+    receipt_url = models.URLField(blank=True)
     
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     processed_at = models.DateTimeField(null=True, blank=True)
+
+    def generate_unique_order_reference(self):
+        """Generate a unique order reference for ClickPesa"""
+        while True:
+            # Generate a random string with timestamp
+            timestamp = str(int(self.created_at.timestamp())) if self.created_at else str(int(uuid.uuid4().time))
+            random_part = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(6))
+            reference = f"YUM{timestamp[-6:]}{random_part}"
+            
+            # Check if this reference already exists
+            if not Payment.objects.filter(clickpesa_order_reference=reference).exists():
+                return reference
+
+    def save(self, *args, **kwargs):
+        if not self.clickpesa_order_reference:
+            # Set created_at if not set (for new objects)
+            if not self.created_at:
+                from django.utils import timezone
+                self.created_at = timezone.now()
+            self.clickpesa_order_reference = self.generate_unique_order_reference()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Payment {self.id} - {self.order.order_number} - {self.amount} {self.currency}"
