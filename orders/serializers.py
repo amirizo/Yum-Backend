@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from .models import Category, Product, DeliveryAddress, Order, OrderItem, OrderItem, OrderStatusHistory, Review, CartItem, Cart
-from authentication.serializers import UserSerializer, VendorProfileSerializer
-from decimal import Decimal
-from authentication.models import Vendor
+from .models import Category, Product,ProductVariant, DeliveryAddress, Order, OrderItem, OrderItem, OrderStatusHistory, Review, CartItem, Cart
+from authentication.serializers import UserSerializer, VendorProfileSerializer, VendorLocationSerializer
+from decimal import Decimal, ROUND_HALF_UP
+from authentication.models import Vendor, Driver
+from rest_framework.exceptions import PermissionDenied
 User = get_user_model()
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -21,7 +22,13 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 
+class ProductVariantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductVariant
+        fields = ['id', 'name', 'value', 'price_adjustment', 'sku', 'inventory_quantity', 'is_active']
+
 class ProductSerializer(serializers.ModelSerializer):
+    variants = ProductVariantSerializer(many=True, required=False)
     vendor = VendorProfileSerializer
     category = CategorySerializer(read_only=True)
     category_id = serializers.IntegerField(write_only=True)
@@ -36,7 +43,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'id', 'vendor', 'category', 'category_id', 'name', 'description', 
             'price', 'stock_quantity', 'unit', 'image', 'is_available', 
             'preparation_time', 'is_in_stock', 'is_low_stock',
-            'created_at', 'updated_at'
+            'created_at', 'updated_at', 'variants'
         ]
         read_only_fields = ['vendor', 'created_at', 'updated_at']
 
@@ -46,9 +53,31 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_is_low_stock(self, obj):
         return obj.stock_quantity <= 10  # Low stock threshold
 
+    # def create(self, validated_data):
+    #     validated_data['vendor'] = self.context['request'].user.vendor_profile
+    #     return super().create(validated_data)
+
     def create(self, validated_data):
+        # Extract variants if provided
+        variants_data = validated_data.pop('variants', [])
         validated_data['vendor'] = self.context['request'].user.vendor_profile
-        return super().create(validated_data)
+        product = Product.objects.create(**validated_data)
+
+        # Create variants
+        for variant in variants_data:
+            ProductVariant.objects.create(product=product, **variant)
+        return product
+
+    def update(self, instance, validated_data):
+        # Handle variants on update
+        variants_data = validated_data.pop('variants', [])
+        instance = super().update(instance, validated_data)
+
+        if variants_data:
+            instance.variants.all().delete()  # Replace all
+            for variant in variants_data:
+                ProductVariant.objects.create(product=instance, **variant)
+        return instance
 
 class DeliveryAddressSerializer(serializers.ModelSerializer):
     class Meta:
@@ -184,13 +213,15 @@ class OrderCreateSerializer(serializers.ModelSerializer):
         fields = ['items', 'delivery_address_id', 'delivery_address', 'delivery_instructions']
 
     def validate(self, data):
-        # Ensure either delivery_address_id or delivery_address is provided
+        user = self.context['request'].user
+        if user.user_type != 'customer':
+            raise PermissionDenied("Only customers can create orders.")
+
+        # Either delivery_address_id or delivery_address required
         if not data.get('delivery_address_id') and not data.get('delivery_address'):
             raise serializers.ValidationError("Either delivery_address_id or delivery_address is required")
-        
         if data.get('delivery_address_id') and data.get('delivery_address'):
             raise serializers.ValidationError("Provide either delivery_address_id or delivery_address, not both")
-        
         return data
 
     def validate_delivery_address_id(self, value):
@@ -210,49 +241,45 @@ class OrderCreateSerializer(serializers.ModelSerializer):
         items_data = validated_data.pop('items')
         delivery_address_id = validated_data.pop('delivery_address_id', None)
         delivery_address_data = validated_data.pop('delivery_address', None)
-        
+
         # Get or create delivery address
         if delivery_address_id:
             delivery_address = DeliveryAddress.objects.get(id=delivery_address_id)
         else:
-            delivery_address_serializer = DeliveryAddressSerializer(
-                data=delivery_address_data,
-                context=self.context
-            )
-            delivery_address_serializer.is_valid(raise_exception=True)
-            delivery_address = delivery_address_serializer.save()
-        
-        # Calculate totals
-        subtotal = 0
+            serializer = DeliveryAddressSerializer(data=delivery_address_data, context=self.context)
+            serializer.is_valid(raise_exception=True)
+            delivery_address = serializer.save(user=self.context['request'].user)
+
+        # Calculate subtotal
+        subtotal = Decimal('0.00')
         vendor = None
-        
+
         for item_data in items_data:
             product = Product.objects.get(id=item_data['product_id'])
             if vendor is None:
                 vendor = product.vendor
             elif vendor != product.vendor:
                 raise serializers.ValidationError("All items must be from the same vendor")
-            
-            item_total = product.price * item_data['quantity']
+
+            item_total = product.price * Decimal(item_data['quantity'])
             subtotal += item_total
 
-        # Calculate delivery fee using distance-based pricing
-        from .models import calculate_delivery_fee
-        delivery_fee = 2000  # Default fee
-        
+        # Calculate delivery fee (use distance-based function if available)
+        delivery_fee = Decimal('2000.00')
         vendor_profile = getattr(vendor, 'vendor_profile', None)
         if (vendor_profile and delivery_address.latitude and delivery_address.longitude and
             vendor_profile.business_latitude and vendor_profile.business_longitude):
-            delivery_fee = calculate_delivery_fee(
+            from .models import calculate_delivery_fee
+            delivery_fee = Decimal(calculate_delivery_fee(
                 delivery_address.latitude,
                 delivery_address.longitude,
                 vendor_profile.business_latitude,
                 vendor_profile.business_longitude
-            )
+            )).quantize(Decimal("0.00"))
 
-        # Calculate taxes
-        tax_rate = 0.0  # 8% tax
-        tax_amount = subtotal * tax_rate
+        # Taxes
+        tax_rate = Decimal('0.00')  # Replace with TZS tax rate if any
+        tax_amount = (subtotal * tax_rate).quantize(Decimal("0.00"))
         total_amount = subtotal + delivery_fee + tax_amount
 
         # Create order
@@ -277,7 +304,7 @@ class OrderCreateSerializer(serializers.ModelSerializer):
                 unit_price=product.price,
                 special_instructions=item_data.get('special_instructions', '')
             )
-            
+
             if product.stock_quantity >= item_data['quantity']:
                 product.stock_quantity -= item_data['quantity']
                 product.save()
@@ -291,13 +318,27 @@ class OrderCreateSerializer(serializers.ModelSerializer):
         )
 
         return order
+
     
+
+
+
+class VendorSerializer(serializers.ModelSerializer):
+    location = VendorLocationSerializer(source='primary_location', read_only=True)
+    class Meta:
+        model = Vendor
+        fields = ['id', 'business_name', 'business_phone', 'business_email', 'location']  # add fields you need
+
+class DriverSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Driver
+        fields = ['id', 'first_name', 'last_name', 'phone']
 
 
 class OrderSerializer(serializers.ModelSerializer):
     customer = UserSerializer(read_only=True)
-    vendor = UserSerializer(read_only=True)
-    driver = UserSerializer(read_only=True)
+    vendor = VendorSerializer(read_only=True)
+    driver = DriverSerializer(read_only=True)
     delivery_address = DeliveryAddressSerializer(read_only=True)
     items = OrderItemSerializer(many=True, read_only=True)
 

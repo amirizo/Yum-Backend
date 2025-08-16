@@ -1,0 +1,25 @@
+Dear {{ user.first_name }},
+
+We regret to inform you that your order has been cancelled by the vendor.
+
+Order Details:
+- Order Number: #{{ order.order_number }}
+- Vendor: {{ order.vendor.vendorprofile.business_name }}
+- Order Date: {{ order.created_at|date:"F d, Y" }}
+- Cancellation Reason: {{ rejection_reason }}
+- Refund Amount: TZS {{ order.total_amount|floatformat:0 }}
+- Refund Timeline: Within 1 business day
+
+If you have already made a payment, your refund will be processed automatically to your original payment method.
+
+You can view your order history anytime by visiting: {{ site_url }}/orders/{{ order.id }}
+
+We apologize for any inconvenience caused and appreciate your understanding.
+
+Thank you for choosing YumExpress!
+
+Best regards,  
+The YumExpress Team
+
+If you have any questions, please contact us at info@yum-express.com  
+© 2025 YumExpress. All rights reserved.

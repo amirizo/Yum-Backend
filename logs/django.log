@@ -5533,3 +5533,1038 @@ INFO 2025-08-16 16:41:30,911 autoreload 19510 8405360832 /Users/macbookair/Deskt
 INFO 2025-08-16 16:41:31,056 autoreload 19512 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
 INFO 2025-08-16 16:41:31,473 autoreload 19533 8405360832 Watching for file changes with StatReloader
 INFO 2025-08-16 16:41:31,473 autoreload 19532 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:11:44,208 autoreload 20885 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:19:54,407 autoreload 19532 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:19:54,601 autoreload 20885 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:19:55,112 autoreload 21175 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:19:55,112 autoreload 21174 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:20:29,912 autoreload 21174 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:20:30,489 autoreload 21196 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:20:30,629 autoreload 21175 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:20:31,029 autoreload 21199 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:23:35,138 autoreload 21199 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:23:35,226 autoreload 21196 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:23:35,698 autoreload 21334 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:23:35,698 autoreload 21335 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:23:39,122 autoreload 21335 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:23:39,142 autoreload 21334 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:23:39,706 autoreload 21346 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:23:39,707 autoreload 21345 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:24:22,791 autoreload 21345 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:24:23,368 autoreload 21362 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:24:23,566 autoreload 21346 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:24:23,910 autoreload 21365 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:25:49,868 autoreload 21362 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:25:50,138 autoreload 21365 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:25:50,443 autoreload 21394 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:25:50,528 autoreload 21395 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:26:08,985 autoreload 21394 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:26:09,380 autoreload 21395 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:26:09,459 autoreload 21405 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:26:09,750 autoreload 21406 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:28:13,366 autoreload 21405 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:28:13,783 autoreload 21406 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:28:13,911 autoreload 21485 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:28:14,187 autoreload 21486 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:28:17,226 autoreload 21485 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:28:17,561 autoreload 21486 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:28:17,647 autoreload 21494 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:28:18,100 autoreload 21495 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:29:08,026 autoreload 21494 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:29:08,320 autoreload 21495 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:29:08,719 autoreload 21536 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:29:08,817 autoreload 21537 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:30:02,915 autoreload 21537 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:30:03,088 autoreload 21536 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:30:03,819 autoreload 21588 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:30:04,098 autoreload 21590 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:30:20,671 autoreload 21590 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:30:20,886 autoreload 21588 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:30:21,231 autoreload 21599 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:30:21,326 autoreload 21600 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 20:30:44,113 log 21600 6156382208 Internal Server Error: /api/orders/vendor/products/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 243, in get
+    return self.list(request, *args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 43, in list
+    return self.get_paginated_response(serializer.data)
+                                       ^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 797, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 251, in data
+    self._data = self.to_representation(self.instance)
+                 ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 716, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 525, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 386, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 374, in fields
+    for key, value in self.get_fields().items():
+                      ~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 1081, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 1177, in get_field_names
+    assert field_name in fields, (
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: The field 'variants' was declared on serializer ProductSerializer, but has not been included in the 'fields' option.
+INFO 2025-08-16 20:31:33,053 autoreload 21600 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:31:33,132 autoreload 21599 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:31:33,646 autoreload 21661 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:31:33,646 autoreload 21662 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 20:32:06,572 log 21661 6129922048 Unauthorized: /api/orders/vendor/products/
+WARNING 2025-08-16 20:32:58,594 log 21661 6129922048 Bad Request: /api/orders/vendor/products/
+WARNING 2025-08-16 20:33:05,690 log 21661 6129922048 Bad Request: /api/orders/vendor/products/
+WARNING 2025-08-16 20:33:20,208 log 21661 6129922048 Bad Request: /api/orders/vendor/products/
+INFO 2025-08-16 20:36:34,296 autoreload 21662 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:36:34,563 autoreload 21661 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:36:34,926 autoreload 21811 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:36:35,039 autoreload 21812 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 20:38:53,248 log 21812 6188691456 Unauthorized: /api/orders/vendor/products/2/
+WARNING 2025-08-16 20:39:13,203 log 21812 6188691456 Bad Request: /api/orders/vendor/products/2/
+WARNING 2025-08-16 20:41:19,722 log 21812 6205517824 Unauthorized: /api/orders/
+WARNING 2025-08-16 20:41:22,986 log 21812 6205517824 Unauthorized: /api/orders/
+WARNING 2025-08-16 20:42:10,648 log 21812 6205517824 Bad Request: /api/orders/create/
+ERROR 2025-08-16 20:42:21,328 log 21812 6205517824 Internal Server Error: /api/orders/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 203, in get
+    return self.list(request, *args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ~~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 153, in get_queryset
+    return Order.objects.filter(vendor=user)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "amirimussa2003@gmail.com (vendor)": Must be "Vendor" instance.
+INFO 2025-08-16 20:45:15,868 autoreload 21812 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:45:16,058 autoreload 21811 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:45:16,406 autoreload 22061 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:45:16,416 autoreload 22062 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 20:45:19,795 log 22061 6137868288 Internal Server Error: /api/orders/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 203, in get
+    return self.list(request, *args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ~~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 153, in get_queryset
+    return Order.objects.filter(vendor=vendor)
+                                       ^^^^^^
+NameError: name 'vendor' is not defined. Did you mean: 'Vendor'?
+INFO 2025-08-16 20:45:56,051 autoreload 22061 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:45:56,316 autoreload 22062 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:45:56,637 autoreload 22083 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:45:56,803 autoreload 22084 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:46:35,214 autoreload 22083 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:46:35,550 autoreload 22084 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:46:35,796 autoreload 22115 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:46:35,986 autoreload 22116 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:46:58,533 autoreload 22116 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:46:58,884 autoreload 22115 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 20:46:59,017 autoreload 22131 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:46:59,263 autoreload 22132 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 20:47:33,061 log 22132 6133182464 Bad Request: /api/orders/create/
+ERROR 2025-08-16 20:47:43,767 log 22132 6133182464 Internal Server Error: /api/orders/create/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 194, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 138, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/serializers.py", line 283, in create
+    tax_amount = subtotal * tax_rate
+                 ~~~~~~~~~^~~~~~~~~~
+TypeError: unsupported operand type(s) for *: 'decimal.Decimal' and 'float'
+INFO 2025-08-16 20:53:36,117 autoreload 22131 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:53:36,259 autoreload 22132 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:53:36,817 autoreload 22389 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:53:36,817 autoreload 22388 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:57:22,761 autoreload 22389 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:57:23,390 autoreload 22388 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:57:23,431 autoreload 22617 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:57:23,875 autoreload 22619 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 20:57:25,775 log 22617 6203682816 Internal Server Error: /api/orders/create/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 194, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 138, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/serializers.py", line 294, in create
+    delivery_fee=delivery_fee.quantize(Decimal("0.00")),
+                 ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'quantize'
+INFO 2025-08-16 20:58:36,441 autoreload 22617 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:58:36,632 autoreload 22619 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:58:37,130 autoreload 22718 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:58:37,130 autoreload 22719 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:58:40,530 autoreload 22719 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:58:40,578 autoreload 22718 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:58:40,928 autoreload 22724 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:58:40,988 autoreload 22725 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 20:58:47,954 log 22725 6135132160 Internal Server Error: /api/orders/create/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 194, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 138, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/serializers.py", line 295, in create
+    delivery_fee=delivery_fee.quantize(Decimal("0.00")),
+                 ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'quantize'
+INFO 2025-08-16 20:59:40,707 autoreload 22725 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:59:41,271 autoreload 22749 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 20:59:41,329 autoreload 22724 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 20:59:41,723 autoreload 22753 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:00:09,688 autoreload 22749 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:00:10,475 autoreload 22807 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:00:10,489 autoreload 22753 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:00:11,116 autoreload 22808 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 21:00:12,193 log 22807 6205501440 Internal Server Error: /api/orders/create/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 194, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 138, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/serializers.py", line 283, in create
+    delivery_fee = Decimal(str(fee))
+                               ^^^
+NameError: name 'fee' is not defined
+ERROR 2025-08-16 21:00:57,348 log 22807 6205501440 Internal Server Error: /api/orders/create/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 194, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 138, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/serializers.py", line 283, in create
+    delivery_fee = Decimal(str(fee))
+                               ^^^
+NameError: name 'fee' is not defined
+INFO 2025-08-16 21:00:57,623 autoreload 22807 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:00:57,744 autoreload 22808 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:00:58,885 autoreload 22838 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:00:58,885 autoreload 22839 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:04:57,542 autoreload 22839 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:04:57,779 autoreload 22838 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:04:58,212 autoreload 23045 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:04:58,320 autoreload 23046 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 21:05:14,104 log 23046 6195523584 Internal Server Error: /api/orders/create/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 194, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 18, in create
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/serializers.py", line 217, in validate
+    raise PermissionDenied("Only customers can create orders.")
+          ^^^^^^^^^^^^^^^^
+NameError: name 'PermissionDenied' is not defined. Did you mean: 'PermissionError'?
+ERROR 2025-08-16 21:05:35,101 log 23046 6195523584 Internal Server Error: /api/orders/create/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 194, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 18, in create
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/serializers.py", line 217, in validate
+    if user.user_type != 'customer':
+              ^^^^^^^^^^^^^^^^
+NameError: name 'PermissionDenied' is not defined. Did you mean: 'PermissionError'?
+INFO 2025-08-16 21:05:35,215 autoreload 23045 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:05:35,220 autoreload 23046 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:05:36,418 autoreload 23089 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:05:36,418 autoreload 23087 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 21:05:42,066 log 23087 6161412096 Forbidden: /api/orders/create/
+ERROR 2025-08-16 21:06:03,711 log 23087 6161412096 Internal Server Error: /api/orders/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 437, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 104, in get_attribute
+    instance = getattr(instance, attr)
+AttributeError: 'Vendor' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 203, in get
+    return self.list(request, *args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 43, in list
+    return self.get_paginated_response(serializer.data)
+                                       ^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 797, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 251, in data
+    self._data = self.to_representation(self.instance)
+                 ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 716, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 540, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 527, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 470, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `email` on serializer `UserSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `Vendor` instance.
+Original exception text was: 'Vendor' object has no attribute 'email'.
+WARNING 2025-08-16 21:06:27,787 log 23087 6161412096 Unauthorized: /api/orders/
+WARNING 2025-08-16 21:06:32,649 log 23087 6161412096 Unauthorized: /api/orders/
+ERROR 2025-08-16 21:06:41,336 log 23087 6161412096 Internal Server Error: /api/orders/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 437, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 104, in get_attribute
+    instance = getattr(instance, attr)
+AttributeError: 'Vendor' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 203, in get
+    return self.list(request, *args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 43, in list
+    return self.get_paginated_response(serializer.data)
+                                       ^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 797, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 251, in data
+    self._data = self.to_representation(self.instance)
+                 ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 716, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 540, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 527, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 470, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `email` on serializer `UserSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `Vendor` instance.
+Original exception text was: 'Vendor' object has no attribute 'email'.
+INFO 2025-08-16 21:07:30,708 autoreload 23087 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-16 21:07:31,012 autoreload 23089 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-16 21:07:31,297 autoreload 23175 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:07:31,445 autoreload 23177 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:08:46,082 autoreload 23177 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:08:46,371 autoreload 23175 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:08:46,567 autoreload 23290 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:08:46,692 autoreload 23291 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:11:20,423 autoreload 23290 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:11:20,457 autoreload 23291 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:11:21,067 autoreload 23519 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:11:21,068 autoreload 23518 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:11:32,684 autoreload 23519 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:11:33,227 autoreload 23531 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:11:33,491 autoreload 23518 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:11:33,847 autoreload 23532 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:11:58,380 autoreload 23531 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:11:58,448 autoreload 23532 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:11:58,913 autoreload 23545 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:11:58,913 autoreload 23546 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:12:04,289 autoreload 23546 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:12:04,381 autoreload 23545 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:12:04,614 autoreload 23552 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:12:04,730 autoreload 23555 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 21:14:48,589 log 23555 6220001280 Unauthorized: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/
+WARNING 2025-08-16 21:15:08,555 log 23555 6220001280 Unauthorized: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/
+WARNING 2025-08-16 21:15:10,220 log 23555 6220001280 Unauthorized: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/
+WARNING 2025-08-16 21:15:11,425 log 23555 6220001280 Unauthorized: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/
+WARNING 2025-08-16 21:15:25,849 log 23555 6220001280 Unauthorized: /api/orders/
+ERROR 2025-08-16 21:15:51,312 log 23555 6220001280 Internal Server Error: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 212, in get
+    return self.retrieve(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 54, in retrieve
+    instance = self.get_object()
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 87, in get_object
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ~~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 168, in get_queryset
+    return Order.objects.filter(vendor=user)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "amirimussa2003@gmail.com (vendor)": Must be "Vendor" instance.
+INFO 2025-08-16 21:16:51,084 autoreload 23552 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:16:51,508 autoreload 23555 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:16:51,689 autoreload 23745 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:16:51,991 autoreload 23748 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:17:10,903 autoreload 23748 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:17:11,368 autoreload 23745 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:17:11,488 autoreload 23784 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:17:11,857 autoreload 23787 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:17:28,386 autoreload 23787 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:17:28,453 autoreload 23784 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:17:29,253 autoreload 23819 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:17:29,253 autoreload 23820 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:19:25,159 autoreload 23820 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:19:25,709 autoreload 23963 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:19:26,050 autoreload 23819 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:19:26,390 autoreload 23967 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:19:49,233 autoreload 23963 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:19:49,294 autoreload 23967 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:19:49,857 autoreload 23991 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:19:49,858 autoreload 23990 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:20:06,444 autoreload 23990 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:20:06,736 autoreload 23991 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:20:07,186 autoreload 24005 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:20:07,595 autoreload 24006 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:21:14,116 autoreload 24005 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:21:14,571 autoreload 24006 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:21:14,704 autoreload 24062 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:21:15,076 autoreload 24063 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:21:23,510 autoreload 24072 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:21:29,926 autoreload 24072 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:21:30,303 autoreload 24062 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:21:30,351 autoreload 24079 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:21:30,800 autoreload 24080 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:23:01,910 autoreload 24079 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:23:02,519 autoreload 24142 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:23:02,582 autoreload 24080 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 21:23:03,239 autoreload 24143 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 21:24:45,666 log 24142 6142406656 Method Not Allowed: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/
+WARNING 2025-08-16 21:24:49,160 log 24142 6142406656 Method Not Allowed: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/
+WARNING 2025-08-16 21:25:06,236 log 24142 6142406656 Not Found: /api/orders/e129dfd6-47bc-4d6e-95af-39c5f0c03584/status/
+WARNING 2025-08-16 21:25:13,174 log 24142 6142406656 Method Not Allowed: /api/orders/e129dfd6-47bc-4d6e-95af-39c5f0c03584/status/
+WARNING 2025-08-16 21:25:34,273 log 24142 6142406656 Method Not Allowed: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/status/
+WARNING 2025-08-16 21:25:35,543 log 24142 6142406656 Method Not Allowed: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/status/
+WARNING 2025-08-16 21:25:38,758 log 24142 6142406656 Method Not Allowed: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/status/
+WARNING 2025-08-16 21:26:33,523 log 24142 6142406656 Method Not Allowed: /api/orders/e129dfd6-47bc-4d6e-95af-39c5f0c03584/history/
+WARNING 2025-08-16 21:26:37,234 log 24142 6142406656 Method Not Allowed: /api/orders/e129dfd6-47bc-4d6e-95af-39c5f0c03584/history/
+WARNING 2025-08-16 21:28:11,107 log 24142 6159233024 Forbidden: /api/orders/e129dfd6-47bc-4d6e-95af-39c5f0c03584/assign-driver/
+WARNING 2025-08-16 21:28:33,795 log 24142 6159233024 Not Found: /api/auth/drivers/
+WARNING 2025-08-16 21:28:38,514 log 24142 6159233024 Unauthorized: /api/auth/drivers
+WARNING 2025-08-16 21:28:51,894 log 24142 6159233024 Method Not Allowed: /api/auth/drivers
+WARNING 2025-08-16 21:28:55,684 log 24142 6159233024 Method Not Allowed: /api/auth/drivers
+WARNING 2025-08-16 21:29:23,231 log 24142 6159233024 Not Found: /api/auth/drivers/location/
+WARNING 2025-08-16 21:29:27,467 log 24142 6159233024 Forbidden: /api/auth/drivers/location
+WARNING 2025-08-16 21:29:41,259 log 24142 6159233024 Forbidden: /api/orders/dashboard/driver/
+WARNING 2025-08-16 21:29:57,757 log 24142 6159233024 Forbidden: /api/orders/dashboard/customer/
+ERROR 2025-08-16 21:30:08,666 log 24142 6159233024 Internal Server Error: /api/orders/dashboard/vendor/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 474, in vendor_dashboard
+    orders = Order.objects.filter(vendor=user)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "amirimussa2003@gmail.com (vendor)": Must be "Vendor" instance.
+INFO 2025-08-16 21:30:46,524 autoreload 24142 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:30:47,024 autoreload 24143 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:30:47,127 autoreload 24650 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:30:47,461 autoreload 24651 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:30:54,681 autoreload 24650 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:30:54,778 autoreload 24651 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:30:55,311 autoreload 24664 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:30:55,901 autoreload 24665 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:31:10,566 autoreload 24664 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:31:11,062 autoreload 24672 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:31:11,384 autoreload 24665 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:31:11,738 autoreload 24675 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 21:33:09,586 log 24672 12901707776 Not Found: /api/orders/<uuid:order_id>/accept/
+WARNING 2025-08-16 21:33:30,990 log 24672 12901707776 Unauthorized: /api/orders/
+ERROR 2025-08-16 21:34:00,429 log 24672 12901707776 Internal Server Error: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/accept/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 543, in vendor_accept_order
+    order = Order.objects.get(id=order_id, vendor=request.user, status='pending')
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "amirimussa2003@gmail.com (vendor)": Must be "Vendor" instance.
+INFO 2025-08-16 21:34:57,035 autoreload 24675 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:34:57,497 autoreload 24672 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:34:57,501 autoreload 24810 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:34:57,862 autoreload 24811 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:35:16,875 autoreload 24811 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:35:17,305 autoreload 24833 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:35:17,428 autoreload 24810 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:35:17,710 autoreload 24838 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 21:35:20,062 services 24833 6158626816 Failed to send order accepted email: 'Vendor' object has no attribute 'first_name'
+INFO 2025-08-16 21:39:58,151 autoreload 24833 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:39:58,280 autoreload 24838 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:39:58,806 autoreload 25041 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:39:58,807 autoreload 25042 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 21:41:44,006 log 25041 6129872896 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/accept/
+INFO 2025-08-16 21:48:39,591 autoreload 25042 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-16 21:48:39,816 autoreload 25041 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-16 21:48:40,230 autoreload 25557 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:48:40,230 autoreload 25554 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:50:48,636 autoreload 25554 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-16 21:50:48,757 autoreload 25557 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-16 21:50:49,193 autoreload 25610 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:50:49,193 autoreload 25609 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:52:02,090 autoreload 25610 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-16 21:52:02,634 autoreload 25609 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-16 21:52:02,667 autoreload 25680 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:52:03,176 autoreload 25681 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 21:52:59,202 log 25680 6165835776 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/accept/
+WARNING 2025-08-16 21:53:02,949 log 25680 6165835776 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/accept/
+WARNING 2025-08-16 21:53:04,208 log 25680 6165835776 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/accept/
+INFO 2025-08-16 21:53:41,127 services 25680 6165835776 Order accepted email sent to amirimussa2003@gmail.com for order 0T2IXXDH
+WARNING 2025-08-16 21:55:36,293 log 25680 6149009408 Not Found: /api/orders/<uuid:order_id>/reject/
+ERROR 2025-08-16 21:56:08,720 log 25680 6149009408 Internal Server Error: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/reject/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 576, in vendor_reject_order
+    order = Order.objects.get(id=order_id, vendor=request.user, status='pending')
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "amirimussa2003@gmail.com (vendor)": Must be "Vendor" instance.
+INFO 2025-08-16 21:56:37,372 autoreload 25680 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:56:37,685 autoreload 25681 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:56:38,074 autoreload 25917 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:56:38,126 autoreload 25918 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:57:19,876 autoreload 25917 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:57:20,070 autoreload 25918 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:57:20,458 autoreload 25981 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:57:20,487 autoreload 25982 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:57:44,166 autoreload 25982 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:57:44,615 autoreload 25981 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 21:57:44,845 autoreload 26047 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:57:45,160 autoreload 26051 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 21:57:47,140 log 26051 6132707328 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/reject/
+ERROR 2025-08-16 21:58:19,805 services 26051 6132707328 Failed to send order rejected email: emails/order_rejected.txt
+ERROR 2025-08-16 21:58:19,807 services 26051 6132707328 Failed to send order rejection email to admin: emails/order_rejected_admin.html
+INFO 2025-08-16 21:59:50,466 autoreload 26047 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-16 21:59:50,901 autoreload 26051 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-16 21:59:51,051 autoreload 26166 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 21:59:51,345 autoreload 26167 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:02:07,018 services 26167 6194737152 Order rejected email sent to amirimussa2003@gmail.com for order 0T2IXXDH
+ERROR 2025-08-16 22:02:07,026 services 26167 6194737152 Failed to send order rejection email to admin: emails/order_rejected_admin.html
+INFO 2025-08-16 22:06:33,229 services 26167 6245216256 Order rejected email sent to amirimussa2003@gmail.com for order 0T2IXXDH
+INFO 2025-08-16 22:06:37,552 services 26167 6245216256 Order rejection email sent to admin for order 0T2IXXDH
+WARNING 2025-08-16 22:07:15,858 log 26167 6245216256 Forbidden: /api/payments/admin/payments/confirm-cash-order/
+INFO 2025-08-16 22:10:22,093 autoreload 27281 8405360832 Watching for file changes with StatReloader

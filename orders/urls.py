@@ -31,7 +31,6 @@ urlpatterns = [
     path('geocode/', views.geocode_address, name='geocode-address'),
     path('reverse-geocode/', views.reverse_geocode, name='reverse-geocode'),
     
-
     # Orders
     path('create/', views.OrderCreateView.as_view(), name='order-create'),
     path('', views.OrderListView.as_view(), name='order-list'),

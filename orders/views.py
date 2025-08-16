@@ -6,9 +6,11 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q, Count, Sum, Avg
 from .models import Category, Product, DeliveryAddress, Order,  OrderItem, OrderStatusHistory, Cart, CartItem, calculate_delivery_fee
 from .serializers import (
-    CategorySerializer, ProductSerializer, DeliveryAddressSerializer,
+    CategorySerializer, ProductSerializer,ProductVariantSerializer,
+    DeliveryAddressSerializer,
     OrderCreateSerializer, OrderSerializer, OrderStatusHistorySerializer,
-    OrderStatusUpdateSerializer, CartSerializer, CartItemSerializer, VendorWithProductsSerializer,CheckoutSerializer
+    OrderStatusUpdateSerializer, CartSerializer, CartItemSerializer, 
+    VendorWithProductsSerializer,CheckoutSerializer
 )
 from rest_framework.exceptions import PermissionDenied
 from .services import OrderNotificationService
@@ -44,6 +46,10 @@ class ProductDetailView(generics.RetrieveAPIView):
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
 
+
+
+
+
 class VendorProductListView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -54,17 +60,16 @@ class VendorProductListView(generics.ListCreateAPIView):
     ordering = ['-created_at']
 
     def get_queryset(self):
-        # Only vendors can access this
         if self.request.user.user_type != 'vendor':
             raise PermissionDenied("Only vendors can access this endpoint")
-        # Use vendor_profile to filter products
         return Product.objects.filter(vendor=self.request.user.vendor_profile)
 
     def perform_create(self, serializer):
-        # Automatically assign vendor on product creation
         if self.request.user.user_type != 'vendor':
             raise PermissionDenied("Only vendors can create products")
         serializer.save(vendor=self.request.user.vendor_profile)
+
+
 
 class VendorProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
@@ -122,7 +127,7 @@ class DeliveryAddressDetailView(generics.RetrieveUpdateDestroyAPIView):
         kwargs['partial'] = True
         return super().update(request, *args, **kwargs)
 
-        
+
 
 # Order Views
 class OrderCreateView(generics.CreateAPIView):
@@ -145,9 +150,9 @@ class OrderListView(generics.ListAPIView):
         if user.user_type == 'customer':
             return Order.objects.filter(customer=user)
         elif user.user_type == 'vendor':
-            return Order.objects.filter(vendor=user)
+            return Order.objects.filter(vendor=user.vendor_profile)
         elif user.user_type == 'driver':
-            return Order.objects.filter(driver=user)
+            return Order.objects.filter(driver=user.driver_profile)
         else:
             return Order.objects.all()
 
@@ -160,9 +165,9 @@ class OrderDetailView(generics.RetrieveAPIView):
         if user.user_type == 'customer':
             return Order.objects.filter(customer=user)
         elif user.user_type == 'vendor':
-            return Order.objects.filter(vendor=user)
+            return Order.objects.filter(vendor=user.vendor_profile)
         elif user.user_type == 'driver':
-            return Order.objects.filter(driver=user)
+            return Order.objects.filter(driver=user.driver_profile)
         else:
             return Order.objects.all()
 
@@ -173,9 +178,9 @@ class OrderStatusUpdateView(generics.UpdateAPIView):
     def get_queryset(self):
         user = self.request.user
         if user.user_type == 'vendor':
-            return Order.objects.filter(vendor=user)
+            return Order.objects.filter(vendor=user.vendor_profile)
         elif user.user_type == 'driver':
-            return Order.objects.filter(driver=user)
+            return Order.objects.filter(driver=user.driver_profile)
         else:
             return Order.objects.all()
 
@@ -466,8 +471,8 @@ def vendor_dashboard(request):
         return Response({'error': 'Access denied'}, status=status.HTTP_403_FORBIDDEN)
     
     # Get vendor statistics
-    orders = Order.objects.filter(vendor=user)
-    products = Product.objects.filter(vendor=user)
+    orders = Order.objects.filter(vendor=user.vendor_profile)
+    products = Product.objects.filter(vendor=user.vendor_profile)
     
     total_orders = orders.count()
     pending_orders = orders.filter(status__in=['pending', 'confirmed']).count()
@@ -535,7 +540,12 @@ def vendor_accept_order(request, order_id):
         return Response({'error': 'Only vendors can accept orders'}, status=status.HTTP_403_FORBIDDEN)
     
     try:
-        order = Order.objects.get(id=order_id, vendor=request.user, status='pending')
+        order = Order.objects.get(
+            id=order_id, 
+            vendor=request.user.vendor_profile, 
+            status='pending',
+            payment_status='paid'
+        )
         order.status = 'confirmed'
         order.save()
         
@@ -563,7 +573,11 @@ def vendor_reject_order(request, order_id):
     rejection_reason = request.data.get('reason', 'No reason provided')
     
     try:
-        order = Order.objects.get(id=order_id, vendor=request.user, status='pending')
+        order = Order.objects.get(id=order_id, 
+            vendor=request.user.vendor_profile,
+            status='pending',
+            payment_status='paid'
+        )
         order.status = 'cancelled'
         order.save()
         

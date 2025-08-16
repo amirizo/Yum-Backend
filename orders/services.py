@@ -12,18 +12,18 @@ class OrderNotificationService:
     def send_order_accepted_email(order):
         """Send email to customer when vendor accepts order"""
         try:
-            subject = f"Order #{order.order_number} Confirmed - YumExpress"
-            
+            vendor_user = getattr(order.vendor, 'user', None)
             context = {
                 'customer_name': f"{order.customer.first_name} {order.customer.last_name}",
                 'order_number': order.order_number,
-                'vendor_name': f"{order.vendor.first_name} {order.vendor.last_name}",
+                'vendor_name': f"{vendor_user.first_name} {vendor_user.last_name}" if vendor_user else order.vendor.business_name,
                 'estimated_time': order.estimated_delivery_time,
                 'total_amount': order.total_amount,
                 'order_items': order.items.all(),
                 'delivery_address': order.delivery_address,
             }
             
+            subject = f"Order #{order.order_number} Confirmed - YumExpress"
             html_message = render_to_string('emails/order_accepted.html', context)
             plain_message = render_to_string('emails/order_accepted.txt', context)
             
@@ -35,9 +35,7 @@ class OrderNotificationService:
                 html_message=html_message,
                 fail_silently=False,
             )
-            
             logger.info(f"Order accepted email sent to {order.customer.email} for order {order.order_number}")
-            
         except Exception as e:
             logger.error(f"Failed to send order accepted email: {str(e)}")
 
@@ -45,17 +43,17 @@ class OrderNotificationService:
     def send_order_picked_up_email(order):
         """Send email to customer when driver picks up order"""
         try:
-            subject = f"Order #{order.order_number} Picked Up - YumExpress"
-            
+            driver_user = getattr(order.driver, 'user', None)
             context = {
                 'customer_name': f"{order.customer.first_name} {order.customer.last_name}",
                 'order_number': order.order_number,
-                'driver_name': f"{order.driver.first_name} {order.driver.last_name}" if order.driver else "Driver",
-                'driver_phone': order.driver.phone_number if order.driver else "",
+                'driver_name': f"{driver_user.first_name} {driver_user.last_name}" if driver_user else "Driver",
+                'driver_phone': driver_user.phone_number if driver_user else "",
                 'estimated_delivery': order.estimated_delivery_time,
                 'delivery_address': order.delivery_address,
             }
             
+            subject = f"Order #{order.order_number} Picked Up - YumExpress"
             html_message = render_to_string('emails/order_picked_up.html', context)
             plain_message = render_to_string('emails/order_picked_up.txt', context)
             
@@ -67,9 +65,7 @@ class OrderNotificationService:
                 html_message=html_message,
                 fail_silently=False,
             )
-            
             logger.info(f"Order picked up email sent to {order.customer.email} for order {order.order_number}")
-            
         except Exception as e:
             logger.error(f"Failed to send order picked up email: {str(e)}")
 
@@ -77,17 +73,17 @@ class OrderNotificationService:
     def send_order_rejected_email(order, rejection_reason=""):
         """Send email to customer when vendor rejects order"""
         try:
-            subject = f"Order #{order.order_number} Update - YumExpress"
-            
+            vendor_user = getattr(order.vendor, 'user', None)
             context = {
                 'customer_name': f"{order.customer.first_name} {order.customer.last_name}",
                 'order_number': order.order_number,
-                'vendor_name': f"{order.vendor.first_name} {order.vendor.last_name}",
+                'vendor_name': f"{vendor_user.first_name} {vendor_user.last_name}" if vendor_user else order.vendor.business_name,
                 'rejection_reason': rejection_reason,
                 'refund_amount': order.total_amount,
                 'refund_timeline': "1 business days",
             }
             
+            subject = f"Order #{order.order_number} Update - YumExpress"
             html_message = render_to_string('emails/order_rejected.html', context)
             plain_message = render_to_string('emails/order_rejected.txt', context)
             
@@ -99,22 +95,18 @@ class OrderNotificationService:
                 html_message=html_message,
                 fail_silently=False,
             )
-            
             logger.info(f"Order rejected email sent to {order.customer.email} for order {order.order_number}")
-            
         except Exception as e:
             logger.error(f"Failed to send order rejected email: {str(e)}")
 
-
     @staticmethod
     def send_order_rejection_admin_email(order, rejection_reason=""):
-        """Send email to admin when vendor rejects order, including customer contact info"""
+        """Send email to admin when vendor rejects order"""
         try:
-            subject = f"Order #{order.order_number} Rejected by Vendor - YumExpress"
-            
+            vendor_user = getattr(order.vendor, 'user', None)
             context = {
                 'order_number': order.order_number,
-                'vendor_name': f"{order.vendor.first_name} {order.vendor.last_name}",
+                'vendor_name': f"{vendor_user.first_name} {vendor_user.last_name}" if vendor_user else order.vendor.business_name,
                 'customer_name': f"{order.customer.first_name} {order.customer.last_name}",
                 'customer_email': order.customer.email,
                 'customer_phone': order.customer.phone_number,
@@ -123,6 +115,7 @@ class OrderNotificationService:
                 'total_amount': order.total_amount,
             }
             
+            subject = f"Order #{order.order_number} Rejected by Vendor - YumExpress"
             html_message = render_to_string('emails/order_rejected_admin.html', context)
             plain_message = render_to_string('emails/order_rejected_admin.txt', context)
             
@@ -134,12 +127,9 @@ class OrderNotificationService:
                 html_message=html_message,
                 fail_silently=False,
             )
-            
             logger.info(f"Order rejection email sent to admin for order {order.order_number}")
-            
         except Exception as e:
             logger.error(f"Failed to send order rejection email to admin: {str(e)}")
-
 
     @staticmethod
     def process_order_rejection(order, rejection_reason="", rejected_by=None):

@@ -1,0 +1,25 @@
+Order Update - YumExpress
+
+Dear Admin,
+
+The following order has been rejected by the vendor:
+
+Order Details:
+- Order Number: #{{ order_number }}
+- Vendor: {{ vendor_name }}
+- Customer: {{ customer_name }}
+- Customer Email: {{ customer_email }}
+- Customer Phone: {{ customer_phone }}
+- Delivery Address: {{ delivery_address }}
+- Total Amount: TZS {{ total_amount|floatformat:0 }}
+
+{% if rejection_reason %}
+Rejection Reason:
+{{ rejection_reason }}
+
+{% endif %}
+
+Please follow up with the vendor or customer if needed.
+
+Thank you,
+YumExpress System
