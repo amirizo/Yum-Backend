@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-6^+_byj)@3m*k(_nn4+3h2d46ob6#%=(pb0!+nc)wzv4k@(id-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.api.yum-express.com', 'api.yum-express.com', 'localhost',  "127.0.0.1",   ]
+ALLOWED_HOSTS = ['www.api.yum-express.com', 'api.yum-express.com', 'localhost',  "127.0.0.1", "5c3e3a7bea27.ngrok-free.app"  ]
 
 
 # Application definition
@@ -188,6 +188,7 @@ USE_TZ = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://5c3e3a7bea27.ngrok-free.app",
 
     "https://yum-express.com",
     "https://www.yum-express.com",
@@ -217,6 +218,9 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'content-type',
     'authorization',
+    'ngrok-skip-browser-warning'
+    
+   
 ]
 # Avoid redirects on trailing slash
 APPEND_SLASH = False
@@ -250,6 +254,14 @@ CLICKPESA_BASE_URL = 'https://api.clickpesa.com/third-parties'
 # Google Maps API for tracking
 GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
 
+# Google Maps API settings
+GOOGLE_MAPS_SETTINGS = {
+    'API_KEY': GOOGLE_MAPS_API_KEY,
+    'LANGUAGE': 'en',
+    'REGION': 'TZ',  # Tanzania region code
+}
+
+
 
 # Next SMS configuration
 NEXT_SMS_USERNAME = config('NEXT_SMS_USERNAME', default='')
@@ -271,6 +283,11 @@ EMAIL_HOST_USER = "info@yum-express.com"
 EMAIL_HOST_PASSWORD = "@yumexpress2025"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 ADMIN_EMAIL_DEFAULT = "amirmussa2003@gmail.com"
+
+ADMINS = [
+    ("Admin", "yumexpreess@gmail.com"),
+    ("Support", "support@yum-express.com"),
+]
 
 
 STATIC_URL = '/static/'

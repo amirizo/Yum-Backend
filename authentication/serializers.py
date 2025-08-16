@@ -3,8 +3,9 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 import re
-from .models import User, Vendor, Driver, EmailVerificationToken, PasswordResetToken, BusinessHours, VendorLocation, VendorCategory
+from .models import User, Vendor, Driver, EmailVerificationToken, PasswordResetToken, BusinessHours, VendorLocation, VendorCategory,ContactMessage
 
+from rest_framework import serializers
 
 
 
@@ -201,6 +202,8 @@ class VendorSerializer(serializers.ModelSerializer):
 
 
 
+
+
 class BusinessHoursSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessHours
@@ -317,3 +320,11 @@ class DriverProfileSerializer(serializers.ModelSerializer):
 class DriverLocationUpdateSerializer(serializers.Serializer):
     latitude = serializers.DecimalField(max_digits=10, decimal_places=8)
     longitude = serializers.DecimalField(max_digits=11, decimal_places=8)
+
+
+
+
+class ContactMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactMessage
+        fields = ['id', 'full_name', 'email', 'phone_number', 'subject', 'message', 'created_at']

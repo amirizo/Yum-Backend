@@ -271,6 +271,7 @@ def approve_cash_order(request):
             
             # Send approval notification
             EmailService.send_cash_order_approved_email(payment.user, order, payment)
+
             SMSService.send_sms(
                 phone_number=payment.user.phone_number,
                 message=f"Your cash order #{order.order_number} has been approved and is being processed."
@@ -294,12 +295,12 @@ def approve_cash_order(request):
             )
             
             return Response({'message': 'Cash order rejected'})
+        
         else:
             return Response({'error': 'Invalid action'}, status=status.HTTP_400_BAD_REQUEST)
             
     except Payment.DoesNotExist:
         return Response({'error': 'Cash payment not found'}, status=status.HTTP_404_NOT_FOUND)
-
 class PaymentListView(generics.ListAPIView):
     serializer_class = PaymentSerializer
     permission_classes = [permissions.IsAuthenticated]

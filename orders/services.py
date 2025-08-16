@@ -105,6 +105,42 @@ class OrderNotificationService:
         except Exception as e:
             logger.error(f"Failed to send order rejected email: {str(e)}")
 
+
+    @staticmethod
+    def send_order_rejection_admin_email(order, rejection_reason=""):
+        """Send email to admin when vendor rejects order, including customer contact info"""
+        try:
+            subject = f"Order #{order.order_number} Rejected by Vendor - YumExpress"
+            
+            context = {
+                'order_number': order.order_number,
+                'vendor_name': f"{order.vendor.first_name} {order.vendor.last_name}",
+                'customer_name': f"{order.customer.first_name} {order.customer.last_name}",
+                'customer_email': order.customer.email,
+                'customer_phone': order.customer.phone_number,
+                'delivery_address': order.delivery_address,
+                'rejection_reason': rejection_reason,
+                'total_amount': order.total_amount,
+            }
+            
+            html_message = render_to_string('emails/order_rejected_admin.html', context)
+            plain_message = render_to_string('emails/order_rejected_admin.txt', context)
+            
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.ADMIN_EMAIL_DEFAULT],
+                html_message=html_message,
+                fail_silently=False,
+            )
+            
+            logger.info(f"Order rejection email sent to admin for order {order.order_number}")
+            
+        except Exception as e:
+            logger.error(f"Failed to send order rejection email to admin: {str(e)}")
+
+
     @staticmethod
     def process_order_rejection(order, rejection_reason="", rejected_by=None):
         """Handle complete order rejection workflow"""

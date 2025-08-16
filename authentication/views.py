@@ -1,5 +1,6 @@
 from rest_framework import status, generics, permissions, filters
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 
 from django_filters.rest_framework import DjangoFilterBackend
@@ -18,12 +19,13 @@ from .serializers import (
     PasswordResetRequestSerializer, PasswordResetConfirmSerializer, UserSerializer, ResendOTPSerializer, OTPVerificationSerializer,
     VendorProfileSerializer, VendorProfileUpdateSerializer,
     DriverProfileSerializer, BusinessHoursSerializer, VendorLocationSerializer,
-    VendorCategorySerializer
+    VendorCategorySerializer, ContactMessageSerializer
 )
 import logging
 logger = logging.getLogger(__name__)
 from .services import SMSService, EmailService
 from .models import *
+from django.core.mail import EmailMultiAlternatives
 
 User = get_user_model()
 
@@ -296,11 +298,44 @@ def password_reset_confirm(request):
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])
+
+@api_view(['GET', 'PUT', 'PATCH'])
 @permission_classes([permissions.IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser, JSONParser])
 def user_profile(request):
-    serializer = UserSerializer(request.user)
-    return Response(serializer.data)
+    user = request.user
+
+    if request.method == 'GET':
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
+    # Always allow partial updates, even for PUT
+    serializer = UserSerializer(user, data=request.data, partial=True)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT', 'PATCH'])
+@permission_classes([permissions.IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser, JSONParser])  # Allows file upload & JSON
+def update_user_profile(request):
+    """
+    Update the authenticated user's profile.
+    - PUT: Update all fields (replace existing data)
+    - PATCH: Update only provided fields
+    """
+    user = request.user
+    serializer = UserSerializer(user, data=request.data, partial=(request.method == 'PATCH'))
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -662,3 +697,93 @@ def vendor_dashboard(request):
     except Vendor.DoesNotExist:
         return Response({'error': 'Vendor profile not found'}, 
                        status=status.HTTP_404_NOT_FOUND)
+
+
+
+
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def contact_us(request):
+    serializer = ContactMessageSerializer(data=request.data)
+    if serializer.is_valid():
+        contact = serializer.save()
+
+        # Subject for admin
+        subject = f"[Contact Us] 📩 Message from {contact.full_name}"
+
+        # Plain text fallback
+        text_content = f"""
+        You have received a new contact message:
+
+        Full Name: {contact.full_name}
+        Email: {contact.email}
+        Phone Number: {contact.phone_number}
+        Subject: {contact.subject}
+
+        Message:
+        {contact.message}
+        """
+
+        try:
+            # -------------------------
+            # Admin email
+            # -------------------------
+            html_content_admin = render_to_string("emails/contact_message_admin.html", {
+                "full_name": contact.full_name,
+                "email": contact.email,
+                "phone_number": contact.phone_number,
+                "subject": contact.subject,
+                "message": contact.message,
+            })
+
+            email = EmailMultiAlternatives(
+                subject,
+                text_content,
+                settings.DEFAULT_FROM_EMAIL,
+                [admin_email for _, admin_email in settings.ADMINS]
+            )
+            email.attach_alternative(html_content_admin, "text/html")
+            email.send()
+
+            # -------------------------
+            # User confirmation email
+            # -------------------------
+            confirmation_subject = "✅ We received your message"
+            confirmation_message = f"""
+            Hi {contact.full_name},
+
+            Thank you for contacting us. We’ve received your message:
+            "{contact.message}"
+
+            Our team will get back to you shortly.
+
+            Regards,
+            The Support Team
+            """
+
+            html_content_user = render_to_string("emails/contact_message_user.html", {
+                "full_name": contact.full_name,
+                "subject": contact.subject,
+                "message": contact.message,
+            })
+
+            confirmation_email = EmailMultiAlternatives(
+                confirmation_subject,
+                confirmation_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [contact.email]
+            )
+            confirmation_email.attach_alternative(html_content_user, "text/html")
+            confirmation_email.send()
+
+        except Exception as e:
+            return Response(
+                {"error": f"Message saved but failed to send email: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        return Response({"success": "Your message has been sent successfully!"}, status=status.HTTP_201_CREATED)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

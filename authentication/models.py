@@ -231,6 +231,12 @@ class Vendor(models.Model):
         except BusinessHours.DoesNotExist:
             return False
 
+    @property
+    def primary_location(self):
+        """Return the primary vendor location, or None if not set"""
+        return self.locations.filter(is_primary=True).first()
+
+
 
 
 class BusinessHours(models.Model):
@@ -297,6 +303,7 @@ class VendorLocation(models.Model):
     
     class Meta:
         ordering = ['-is_primary', 'name']
+   
 
 class VendorCategory(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='categories')
@@ -384,3 +391,16 @@ class UserActivity(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.activity_type} at {self.created_at}"
+
+
+
+class ContactMessage(models.Model):
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=20)
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.full_name} - {self.subject}"

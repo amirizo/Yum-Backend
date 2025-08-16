@@ -10,6 +10,8 @@ urlpatterns = [
 
     # Registration
     path('register', views.UserRegistrationView.as_view(), name='register'),
+    path('admin/create-vendor/', views.admin_create_vendor, name='admin-create-vendor'),
+    path('admin/create-driver/', views.admin_create_driver, name='admin-create-driver'),
 
     # OTP
     path('verify-otp', views.verify_otp, name='verify-otp'),
@@ -22,6 +24,7 @@ urlpatterns = [
 
     # Profile
     path('profile', views.user_profile, name='user-profile'),
+    path('contact-us/', views.contact_us, name='contact-us'),
 
     # Vendor Listings
     path('vendors', views.VendorListView.as_view(), name='vendor-list'),

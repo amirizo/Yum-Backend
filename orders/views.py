@@ -3,16 +3,23 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth import get_user_model
-from django.db.models import Q, Count, Sum
-from .models import Category, Product, DeliveryAddress, Order, OrderItem, OrderStatusHistory
+from django.db.models import Q, Count, Sum, Avg
+from .models import Category, Product, DeliveryAddress, Order,  OrderItem, OrderStatusHistory, Cart, CartItem, calculate_delivery_fee
 from .serializers import (
     CategorySerializer, ProductSerializer, DeliveryAddressSerializer,
     OrderCreateSerializer, OrderSerializer, OrderStatusHistorySerializer,
-    OrderStatusUpdateSerializer
+    OrderStatusUpdateSerializer, CartSerializer, CartItemSerializer, VendorWithProductsSerializer,CheckoutSerializer
 )
 
-User = get_user_model()
+from .services import OrderNotificationService
+from decimal import Decimal
 
+
+User = get_user_model()
+from django.shortcuts import get_object_or_404
+from django.conf import settings
+import googlemaps
+from .utils import add_item_to_cart, get_cart_for_request, remove_cart_item ,update_cart_item , clear_cart
 # Category Views
 class CategoryListView(generics.ListAPIView):
     queryset = Category.objects.filter(is_active=True)
@@ -55,6 +62,32 @@ class VendorProductDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Product.objects.filter(vendor=self.request.user)
+
+
+
+
+
+class VendorRestaurantView(generics.RetrieveAPIView):
+    """View for customers to see vendor restaurant page with business info and products"""
+    serializer_class = VendorWithProductsSerializer
+    permission_classes = [permissions.AllowAny]
+    lookup_field = 'id'
+    lookup_url_kwarg = 'vendor_id'
+    
+    def get_queryset(self):
+        return User.objects.filter(user_type='vendor', is_active=True)
+    
+    def get_object(self):
+        vendor_id = self.kwargs.get('vendor_id')
+        try:
+            vendor = User.objects.get(id=vendor_id, user_type='vendor', is_active=True)
+            return vendor
+        except User.DoesNotExist:
+            from rest_framework.exceptions import NotFound
+            raise NotFound("Vendor not found")
+
+
+
 
 # Delivery Address Views
 class DeliveryAddressListView(generics.ListCreateAPIView):
@@ -133,6 +166,245 @@ class OrderStatusHistoryView(generics.ListAPIView):
     def get_queryset(self):
         order_id = self.kwargs['order_id']
         return OrderStatusHistory.objects.filter(order_id=order_id)
+
+
+
+
+
+# Cart Management Views
+
+# Cart Management Views
+
+
+# class CartView(generics.RetrieveAPIView):
+#     """Get user's current cart"""
+#     serializer_class = CartSerializer
+#     permission_classes = [permissions.AllowAny]
+    
+#     def get_object(self):
+#         # For anonymous users, return empty cart data
+#         if not self.request.user.is_authenticated:
+#             return {'items': [], 'total_amount': 0, 'total_items': 0}
+#         cart, created = Cart.objects.get_or_create(user=self.request.user)
+#         return cart
+
+# class AddToCartView(generics.CreateAPIView):
+#     """Add item to cart"""
+#     serializer_class = CartItemSerializer
+#     permission_classes = [permissions.AllowAny]
+    
+#     def perform_create(self, serializer):
+#         # For anonymous users, store in session
+#         if not self.request.user.is_authenticated:
+#             # Store cart in session for anonymous users
+#             cart_data = self.request.session.get('cart', [])
+#             product_id = serializer.validated_data['product_id']
+#             quantity = serializer.validated_data.get('quantity', 1)
+            
+#             # Check if item already exists
+#             for item in cart_data:
+#                 if item['product_id'] == product_id:
+#                     item['quantity'] += quantity
+#                     break
+#             else:
+#                 cart_data.append({
+#                     'product_id': product_id,
+#                     'quantity': quantity,
+#                     'special_instructions': serializer.validated_data.get('special_instructions', '')
+#                 })
+            
+#             self.request.session['cart'] = cart_data
+#             return
+        
+#         cart, created = Cart.objects.get_or_create(user=self.request.user)
+        
+#         # Check if item already exists in cart
+#         product_id = serializer.validated_data['product_id']
+#         try:
+#             cart_item = CartItem.objects.get(cart=cart, product_id=product_id)
+#             # Update quantity if item exists
+#             cart_item.quantity += serializer.validated_data.get('quantity', 1)
+#             cart_item.special_instructions = serializer.validated_data.get('special_instructions', cart_item.special_instructions)
+#             cart_item.save()
+#             return cart_item
+#         except CartItem.DoesNotExist:
+#             # Create new cart item
+#             serializer.save(cart=cart)
+
+# class UpdateCartItemView(generics.UpdateAPIView):
+#     """Update cart item quantity or instructions"""
+#     serializer_class = CartItemSerializer
+#     permission_classes = [permissions.AllowAny]
+    
+#     def get_queryset(self):
+#         if not self.request.user.is_authenticated:
+#             return CartItem.objects.none()
+#         return CartItem.objects.filter(cart__user=self.request.user)
+
+# class RemoveFromCartView(generics.DestroyAPIView):
+#     """Remove item from cart"""
+#     permission_classes = [permissions.AllowAny]
+    
+#     def get_queryset(self):
+#         if not self.request.user.is_authenticated:
+#             return CartItem.objects.none()
+#         return CartItem.objects.filter(cart__user=self.request.user)
+
+# class ClearCartView(generics.GenericAPIView):
+#     """Clear all items from cart"""
+#     permission_classes = [permissions.AllowAny]
+    
+#     def delete(self, request):
+#         if not request.user.is_authenticated:
+#             request.session['cart'] = []
+#             return Response({'message': 'Cart cleared successfully'}, status=status.HTTP_200_OK)
+        
+#         try:
+#             cart = Cart.objects.get(user=request.user)
+#             cart.items.all().delete()
+#             cart.vendor = None
+#             cart.save()
+#             return Response({'message': 'Cart cleared successfully'}, status=status.HTTP_200_OK)
+#         except Cart.DoesNotExist:
+#             return Response({'message': 'Cart is already empty'}, status=status.HTTP_200_OK)
+
+
+
+class CartView(generics.RetrieveAPIView):
+    """Get current cart for user or guest"""
+    serializer_class = CartSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self):
+        cart, cart_data, is_auth = get_cart_for_request(self.request)
+        if is_auth:
+            return cart
+        return {
+            "items": cart_data,
+            "total_amount": sum(
+                item['quantity'] * item_price(item['product_id'])
+                for item in cart_data
+            ),
+            "total_items": sum(item['quantity'] for item in cart_data)
+        }
+
+
+def item_price(product_id):
+    """Get price of a product without importing inside function repeatedly"""
+    from .models import Product
+    return Product.objects.get(id=product_id).price
+
+
+class AddToCartView(generics.CreateAPIView):
+    """Add product to cart"""
+    serializer_class = CartItemSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def perform_create(self, serializer):
+        add_item_to_cart(
+            request=self.request,
+            product_id=serializer.validated_data['product_id'],
+            quantity=serializer.validated_data.get('quantity', 1),
+            special_instructions=serializer.validated_data.get('special_instructions', '')
+        )
+
+
+class UpdateCartItemView(generics.UpdateAPIView):
+    """Update quantity or instructions of a cart item"""
+    serializer_class = CartItemSerializer
+    permission_classes = [permissions.AllowAny]
+    queryset = CartItem.objects.all()
+
+    def update(self, request, *args, **kwargs):
+        product_id = int(kwargs.get('pk'))
+        update_cart_item(
+            request=request,
+            product_id=product_id,
+            quantity=request.data.get('quantity', 1),
+            special_instructions=request.data.get('special_instructions', '')
+        )
+        return Response({"message": "Cart item updated"})
+
+
+class RemoveFromCartView(generics.DestroyAPIView):
+    """Remove product from cart"""
+    permission_classes = [permissions.AllowAny]
+    queryset = CartItem.objects.all()
+
+    def destroy(self, request, *args, **kwargs):
+        product_id = int(kwargs.get('pk'))
+        remove_cart_item(request, product_id)
+        return Response({"message": "Cart item removed"})
+
+
+class ClearCartView(generics.GenericAPIView):
+    """Clear all cart items"""
+    permission_classes = [permissions.AllowAny]
+
+    def delete(self, request):
+        clear_cart(request)
+        return Response({"message": "Cart cleared"})
+
+class CheckoutView(generics.CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = CheckoutSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        vendor_id = serializer.validated_data["vendor_id"]
+        delivery_address = serializer.validated_data["delivery_address"]
+
+        vendor = get_object_or_404(Vendor, id=vendor_id)
+
+        # Ensure vendor has a primary location
+        if not vendor.primary_location:
+            return Response(
+                {"error": "Vendor does not have a primary location set"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Get cart
+        if request.user.is_authenticated:
+            cart = Cart.objects.filter(user=request.user, vendor=vendor).first()
+        else:
+            cart_id = serializer.validated_data.get("cart_id")
+            cart = Cart.objects.filter(id=cart_id, vendor=vendor).first()
+
+        if not cart or not cart.items.exists():
+            return Response(
+                {"error": "Cart is empty"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Calculate cart total
+        cart_total = cart.get_total_amount()  # Make sure your Cart model has this method
+
+        # Calculate delivery fee
+        vendor_coords = (
+            float(vendor.primary_location.latitude),
+            float(vendor.primary_location.longitude)
+        )
+        customer_coords = (
+            float(delivery_address["latitude"]),
+            float(delivery_address["longitude"])
+        )
+        distance_km = geodesic(vendor_coords, customer_coords).km
+        fee_per_km = Decimal("2000")  # 2000 TZS per km
+        delivery_fee = (Decimal(distance_km) * fee_per_km).quantize(Decimal("0.01"))
+
+        # Calculate grand total
+        grand_total = cart_total + delivery_fee
+
+        return Response({
+            "cart_total": f"{cart_total} TZS",
+            "delivery_fee": f"{delivery_fee} TZS",
+            "grand_total": f"{grand_total} TZS",
+            "distance_km": round(distance_km, 2)
+        })
+
+
 
 # Dashboard Views
 @api_view(['GET'])
@@ -245,6 +517,9 @@ def vendor_accept_order(request, order_id):
             changed_by=request.user,
             notes='Order accepted by vendor'
         )
+
+        # Send email notification to customer
+        OrderNotificationService.send_order_accepted_email(order)
         
         return Response({'message': 'Order accepted successfully'})
     except Order.DoesNotExist:
@@ -255,6 +530,8 @@ def vendor_accept_order(request, order_id):
 def vendor_reject_order(request, order_id):
     if request.user.user_type != 'vendor':
         return Response({'error': 'Only vendors can reject orders'}, status=status.HTTP_403_FORBIDDEN)
+
+    rejection_reason = request.data.get('reason', 'No reason provided')
     
     try:
         order = Order.objects.get(id=order_id, vendor=request.user, status='pending')
@@ -268,7 +545,147 @@ def vendor_reject_order(request, order_id):
             changed_by=request.user,
             notes='Order rejected by vendor'
         )
+
+        # Send customer refund notification
+        OrderNotificationService.send_order_rejected_email(order, rejection_reason)
+        
+        # Send admin notification with customer contact info
+        OrderNotificationService.send_order_rejection_admin_email(order, rejection_reason)
         
         return Response({'message': 'Order rejected successfully'})
     except Order.DoesNotExist:
         return Response({'error': 'Order not found or cannot be rejected'}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def calculate_delivery_fee_api(request):
+    """Calculate delivery fee based on customer and vendor coordinates"""
+    try:
+        customer_lat = request.data.get('customer_latitude')
+        customer_lng = request.data.get('customer_longitude')
+        vendor_id = request.data.get('vendor_id')
+
+        if not all([customer_lat, customer_lng, vendor_id]):
+            return Response(
+                {'error': 'Customer coordinates and vendor ID are required'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Get vendor
+        try:
+            vendor = User.objects.get(id=vendor_id, user_type='vendor').vendor_profile
+        except User.DoesNotExist:
+            return Response({'error': 'Vendor not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Get vendor's primary location
+        primary_location = vendor.locations.filter(is_primary=True).first()
+        if not primary_location:
+            return Response({'error': 'Vendor location not available'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Calculate delivery fee
+        delivery_fee = calculate_delivery_fee(
+            float(customer_lat),
+            float(customer_lng),
+            float(primary_location.latitude),
+            float(primary_location.longitude)
+        )
+
+        return Response({
+            'delivery_fee': delivery_fee,
+            'vendor_name': vendor.business_name,
+            'vendor_address': primary_location.address
+        })
+
+    except Exception as e:
+        return Response(
+            {'error': f'Error calculating delivery fee: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def geocode_address(request):
+    """Convert address to coordinates using Google Maps API"""
+    try:
+        address = request.data.get('address')
+        if not address:
+            return Response({
+                'error': 'Address is required'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not settings.GOOGLE_MAPS_API_KEY:
+            return Response({
+                'error': 'Google Maps API key not configured'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        # Initialize Google Maps client
+        gmaps = googlemaps.Client(key=settings.GOOGLE_MAPS_API_KEY)
+        
+        # Geocode the address
+        geocode_result = gmaps.geocode(address)
+        
+        if not geocode_result:
+            return Response({
+                'error': 'Address not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        
+        location = geocode_result[0]['geometry']['location']
+        formatted_address = geocode_result[0]['formatted_address']
+        
+        return Response({
+            'latitude': location['lat'],
+            'longitude': location['lng'],
+            'formatted_address': formatted_address,
+            'place_id': geocode_result[0].get('place_id', '')
+        })
+        
+    except Exception as e:
+        return Response({
+            'error': f'Error geocoding address: {str(e)}'
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def reverse_geocode(request):
+    """Convert coordinates to address using Google Maps API"""
+    try:
+        latitude = request.data.get('latitude')
+        longitude = request.data.get('longitude')
+        
+        if not latitude or not longitude:
+            return Response({
+                'error': 'Latitude and longitude are required'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not settings.GOOGLE_MAPS_API_KEY:
+            return Response({
+                'error': 'Google Maps API key not configured'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        # Initialize Google Maps client
+        gmaps = googlemaps.Client(key=settings.GOOGLE_MAPS_API_KEY)
+        
+        # Reverse geocode the coordinates
+        reverse_geocode_result = gmaps.reverse_geocode((latitude, longitude))
+        
+        if not reverse_geocode_result:
+            return Response({
+                'error': 'Location not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        
+        formatted_address = reverse_geocode_result[0]['formatted_address']
+        
+        return Response({
+            'formatted_address': formatted_address,
+            'place_id': reverse_geocode_result[0].get('place_id', ''),
+            'address_components': reverse_geocode_result[0].get('address_components', [])
+        })
+        
+    except Exception as e:
+        return Response({
+            'error': f'Error reverse geocoding: {str(e)}'
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

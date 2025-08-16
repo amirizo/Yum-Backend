@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.utils import timezone
 import uuid
 from django.conf import settings
-
+import math
 User = get_user_model()
 
 
@@ -221,7 +221,7 @@ class Order(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Order {self.order_number} - {self.customer.username}"
+        return f"Order {self.order_number} - {self.customer.first_name} {self.customer.last_name}"
 
     class Meta:
         ordering = ['-created_at']
@@ -238,11 +238,16 @@ class OrderItem(models.Model):
 
     def save(self, *args, **kwargs):
         self.total_price = self.quantity * self.unit_price
+        if not self.pk:  # Only on creation
+            if self.product.stock_quantity >= self.quantity:
+                self.product.stock_quantity -= self.quantity
+                self.product.save()
+            else:
+                raise ValueError(f"Insufficient stock for {self.product.name}")
         super().save(*args, **kwargs)
 
     def __str__(self):
-        variant_info = f" ({self.variant.name}: {self.variant.value})" if self.variant else ""
-        return f"{self.quantity}x {self.product.name}{variant_info}"
+        return f"{self.quantity}x {self.product.name}"
 
 
 class OrderStatusHistory(models.Model):
@@ -278,3 +283,85 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.order.order_number} - {self.overall_rating} stars"
+
+
+
+
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
+    vendor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='carts', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Cart for {self.user.username}"
+
+    @property
+    def total_amount(self):
+        return sum(item.total_price for item in self.items.all())
+
+    @property
+    def total_items(self):
+        return sum(item.quantity for item in self.items.all())
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)], default=1)
+    special_instructions = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ['cart', 'product']
+
+    def __str__(self):
+        return f"{self.quantity}x {self.product.name}"
+
+    @property
+    def total_price(self):
+        return self.quantity * self.product.price
+
+    def save(self, *args, **kwargs):
+        # Ensure cart vendor matches product vendor
+        if self.cart.vendor and self.cart.vendor != self.product.vendor:
+            # Clear cart if switching vendors
+            self.cart.items.all().delete()
+            self.cart.vendor = self.product.vendor
+            self.cart.save()
+        elif not self.cart.vendor:
+            self.cart.vendor = self.product.vendor
+            self.cart.save()
+        super().save(*args, **kwargs)
+
+
+
+def calculate_distance(lat1, lon1, lat2, lon2):
+    """Calculate distance between two points using Haversine formula"""
+    if not all([lat1, lon1, lat2, lon2]):
+        return 0
+    
+    # Convert latitude and longitude from degrees to radians
+    lat1, lon1, lat2, lon2 = map(math.radians, [float(lat1), float(lon1), float(lat2), float(lon2)])
+    
+    # Haversine formula
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+    c = 2 * math.asin(math.sqrt(a))
+    
+    # Radius of earth in kilometers
+    r = 6371
+    return c * r
+
+def calculate_delivery_fee(customer_lat, customer_lon, vendor_lat, vendor_lon):
+    """Calculate delivery fee based on distance"""
+    distance = calculate_distance(customer_lat, customer_lon, vendor_lat, vendor_lon)
+    
+    if distance <= 3:
+        return 2000  # 2000 TSh for distances <= 3km
+    else:
+        # 2000 TSh base + 700 TSh per km beyond 3km
+        extra_distance = distance - 3
+        return 2000 + (extra_distance * 700)

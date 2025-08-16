@@ -11,6 +11,8 @@ urlpatterns = [
     # path('mobile-money/', views.mobile_money_payment, name='mobile-money-payment'),
     path('', views.PaymentListView.as_view(), name='payment-list'),
     path('<uuid:pk>/', views.PaymentDetailView.as_view(), name='payment-detail'),
+
+    path('admin/payments/confirm-cash-order/', views.approve_cash_order, name='confirm-cash-order'),
     
     # Refunds
     path('refunds/', views.RefundListView.as_view(), name='refund-list'),

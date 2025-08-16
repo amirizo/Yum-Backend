@@ -49,9 +49,10 @@
         <p>Please review this order and take appropriate action:</p>
         
         <div class="buttons">
-            <a href="{{ site_url }}/admin/payments/confirm-cash-order/?order_id={{ order.id }}&action=approve" class="button approve">Approve Order</a>
-            <a href="{{ site_url }}/admin/payments/confirm-cash-order/?order_id={{ order.id }}&action=reject" class="button reject">Reject Order</a>
+            <a href="{{ site_url }}/api/payments/admin/payments/confirm-cash-order/?payment_id={{ payment.id }}&action=approve" class="button approve">Approve Order</a>
+            <a href="{{ site_url }}/api/payments/admin/payments/confirm-cash-order/?payment_id={{ payment.id }}&action=reject" class="button reject">Reject Order</a>
         </div>
+
         
         <p>You can also manage this order through the admin dashboard.</p>
         

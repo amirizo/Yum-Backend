@@ -208,40 +208,11 @@ class EmailService:
             logger.error(f"Failed to send payment success email: {str(e)}")
             return False
     
+   
+
+
     @staticmethod
-    def send_admin_cash_order_notification(order, payment):
-        """Send email notification to admin about cash order - FIXED METHOD SIGNATURE"""
-        try:
-            subject = f'New Cash Order Requires Approval - Order #{order.id}'
-            
-            html_message = render_to_string('emails/admin_cash_order_confirmation.html', {
-                'order': order,
-                'payment': payment,
-                'customer': order.customer,
-                'total_amount': order.total_amount,
-                'order_items': order.items.all(),
-            })
-            
-            plain_message = strip_tags(html_message)
-            
-            send_mail(
-                subject=subject,
-                message=plain_message,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.ADMIN_EMAIL_DEFAULT],  # Send to admin email
-                html_message=html_message,
-                fail_silently=False,
-            )
-            
-            logger.info(f"Admin cash order notification sent for order {order.id}")
-            return {'success': True, 'message': 'Admin notification sent'}
-            
-        except Exception as e:
-            logger.error(f"Failed to send admin cash order notification: {str(e)}")
-            return {'success': False, 'error': str(e)}
-    
-    @staticmethod
-    def send_cash_order_approved_email(user, order):
+    def send_cash_order_approved_email(user, order, payment):
         """Send cash order approval email to customer"""
         try:
             subject = f'Order Approved - Order #{order.id}'
@@ -249,6 +220,7 @@ class EmailService:
             html_message = render_to_string('emails/cash_order_approved.html', {
                 'user': user,
                 'order': order,
+                'payment': payment,
                 'order_items': order.items.all(),
             })
             
@@ -270,8 +242,38 @@ class EmailService:
             logger.error(f"Failed to send cash order approval email: {str(e)}")
             return {'success': False, 'error': str(e)}
 
-        
-        
+    @staticmethod
+    def send_cash_order_rejected_email(user, order, payment):
+        """Send cash order rejection email to customer"""
+        try:
+            subject = f'Order Rejected - Order #{order.id}'
+            
+            html_message = render_to_string('emails/cash_order_rejected.html', {
+                'user': user,
+                'order': order,
+                'payment': payment,
+                'order_items': order.items.all(),
+            })
+            
+            plain_message = strip_tags(html_message)
+            
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+            
+            logger.info(f"Cash order rejection email sent to {user.email}")
+            return {'success': True, 'message': 'Cash order rejection email sent'}
+            
+        except Exception as e:
+            logger.error(f"Failed to send cash order rejection email: {str(e)}")
+            return {'success': False, 'error': str(e)}
+            
+            
         
 
     

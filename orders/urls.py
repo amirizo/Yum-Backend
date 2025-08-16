@@ -10,10 +10,26 @@ urlpatterns = [
     path('products/<int:pk>/', views.ProductDetailView.as_view(), name='product-detail'),
     path('vendor/products/', views.VendorProductListView.as_view(), name='vendor-product-list'),
     path('vendor/products/<int:pk>/', views.VendorProductDetailView.as_view(), name='vendor-product-detail'),
+
+    path('vendor/<int:vendor_id>/restaurant/', views.VendorRestaurantView.as_view(), name='vendor-restaurant'),
     
     # Delivery Addresses
     path('addresses/', views.DeliveryAddressListView.as_view(), name='address-list'),
     path('addresses/<int:pk>/', views.DeliveryAddressDetailView.as_view(), name='address-detail'),
+
+
+
+    path('cart/', views.CartView.as_view(), name='cart-view'),
+    path('cart/add/', views.AddToCartView.as_view(), name='add-to-cart'),
+    path('cart/items/<int:pk>/', views.UpdateCartItemView.as_view(), name='update-cart-item'),
+    path('cart/items/<int:pk>/remove/', views.RemoveFromCartView.as_view(), name='remove-from-cart'),
+    path('cart/clear/', views.ClearCartView.as_view(), name='clear-cart'),
+
+
+    path('checkout/', views.CheckoutView.as_view(), name='checkout'),
+    path('calculate-delivery-fee/', views.calculate_delivery_fee_api, name='calculate-delivery-fee'),
+    path('geocode/', views.geocode_address, name='geocode-address'),
+    path('reverse-geocode/', views.reverse_geocode, name='reverse-geocode'),
     
 
     # Orders
@@ -23,6 +39,11 @@ urlpatterns = [
     path('<uuid:pk>/status/', views.OrderStatusUpdateView.as_view(), name='order-status-update'),
     path('<uuid:order_id>/history/', views.OrderStatusHistoryView.as_view(), name='order-status-history'),
     path('<uuid:order_id>/assign-driver/', views.assign_driver_to_order, name='assign-driver'),
+
+
+    # Vendor actions
+    path('<uuid:order_id>/accept/', views.vendor_accept_order, name='vendor-accept-order'),
+    path('<uuid:order_id>/reject/', views.vendor_reject_order, name='vendor-reject-order'),
     
     
     # Dashboards
