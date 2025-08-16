@@ -33,13 +33,15 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = [
         'name', 'vendor', 'category', 'price', 'is_available', 
-        'stock_quantity', 'created_at'
+        'stock_quantity', 'created_at', 'max_order_quantity'
     ]
     list_filter = [
         'is_available', 'category', 'vendor__business_type', 'created_at'
     ]
     search_fields = ['name', 'description', 'vendor__email', 'vendor__business_name']
     readonly_fields = ['created_at', 'updated_at']
+
+    list_editable = ['max_order_quantity']
     
     fieldsets = (
         ('Basic Information', {'fields': ('vendor', 'category', 'name', 'description')}),

@@ -6568,3 +6568,60 @@ INFO 2025-08-16 22:06:33,229 services 26167 6245216256 Order rejected email sent
 INFO 2025-08-16 22:06:37,552 services 26167 6245216256 Order rejection email sent to admin for order 0T2IXXDH
 WARNING 2025-08-16 22:07:15,858 log 26167 6245216256 Forbidden: /api/payments/admin/payments/confirm-cash-order/
 INFO 2025-08-16 22:10:22,093 autoreload 27281 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:13:03,663 autoreload 27407 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:17:16,819 autoreload 27407 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:17:16,875 autoreload 26166 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:17:17,472 autoreload 27633 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:17:17,473 autoreload 27634 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:17:52,438 autoreload 27634 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 22:17:52,996 autoreload 27684 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:17:53,151 autoreload 27633 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 22:17:53,533 autoreload 27685 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:18:17,555 autoreload 27708 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:19:27,446 autoreload 27684 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 22:19:27,593 autoreload 27708 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 22:19:27,988 autoreload 27772 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:19:28,010 autoreload 27774 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:20:10,794 autoreload 27774 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 22:20:10,996 autoreload 27772 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 22:20:11,402 autoreload 27795 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:20:11,476 autoreload 27796 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:20:31,401 autoreload 27795 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 22:20:31,923 autoreload 27811 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:20:32,050 autoreload 27796 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 22:20:32,509 autoreload 27812 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:20:59,136 autoreload 27812 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 22:20:59,226 autoreload 27811 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 22:20:59,663 autoreload 27840 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:20:59,663 autoreload 27839 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:22:15,265 autoreload 27839 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 22:22:15,742 autoreload 27840 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 22:22:15,854 autoreload 27910 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:22:16,186 autoreload 27913 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:22:52,767 autoreload 27913 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 22:22:52,893 autoreload 27910 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 22:22:53,773 autoreload 27939 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:22:53,863 autoreload 27940 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:26:11,904 autoreload 27939 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:26:12,019 autoreload 27940 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:26:12,708 autoreload 28137 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:26:12,709 autoreload 28138 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:27:22,539 autoreload 28137 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:27:23,161 autoreload 28193 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:27:23,256 autoreload 28138 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:27:23,680 autoreload 28194 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:28:55,719 autoreload 28194 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:28:55,755 autoreload 28193 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:28:56,397 autoreload 28246 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:28:56,397 autoreload 28247 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:31:07,738 models 28246 6135853056 Low stock email sent to amirimussa2003@gmail.com for product Beaf Chicken
+INFO 2025-08-16 22:32:02,490 autoreload 28247 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:32:02,558 autoreload 28246 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:32:03,171 autoreload 28350 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:32:03,172 autoreload 28349 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 22:34:54,690 models 28350 6186151936 Failed to send low stock email: 'Vendor' object has no attribute 'first_name'
+INFO 2025-08-16 22:35:27,547 autoreload 28349 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:35:28,004 autoreload 28350 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 22:35:28,335 autoreload 28525 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:35:28,495 autoreload 28526 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 22:36:09,321 models 28526 6221885440 Low stock email sent to amirimussa2003@gmail.com for product Beaf Chicken

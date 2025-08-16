@@ -1,0 +1,11 @@
+Dear {{ vendor_name }},
+
+Your product "{{ product_name }}" is running low on stock.
+
+Current Stock: {{ stock_quantity }} {{ unit }}
+Product Category: {{ category_name }}
+
+Please restock this item to avoid running out of inventory.
+
+Best regards,
+YumExpress Team

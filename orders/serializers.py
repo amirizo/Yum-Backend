@@ -113,94 +113,16 @@ class OrderItemSerializer(serializers.ModelSerializer):
             return value
         except Product.DoesNotExist:
             raise serializers.ValidationError("Product not found or not available")
-
-# class OrderCreateSerializer(serializers.ModelSerializer):
-#     items = OrderItemSerializer(many=True)
-#     delivery_address_id = serializers.IntegerField(write_only=True)
-
-#     class Meta:
-#         model = Order
-#         fields = ['items', 'delivery_address_id', 'delivery_instructions']
-
-#     def validate_delivery_address_id(self, value):
-#         user = self.context['request'].user
-#         try:
-#             address = DeliveryAddress.objects.get(id=value, user=user)
-#             return value
-#         except DeliveryAddress.DoesNotExist:
-#             raise serializers.ValidationError("Delivery address not found")
-
-#     def validate_items(self, value):
-#         if not value:
-#             raise serializers.ValidationError("Order must contain at least one item")
-#         return value
-
-#     def create(self, validated_data):
-#         items_data = validated_data.pop('items')
-#         delivery_address_id = validated_data.pop('delivery_address_id')
         
-#         # Get delivery address
-#         delivery_address = DeliveryAddress.objects.get(id=delivery_address_id)
-        
-#         # Calculate totals
-#         subtotal = 0
-#         vendor = None
-        
-#         for item_data in items_data:
-#             product = Product.objects.get(id=item_data['product_id'])
-#             if vendor is None:
-#                 vendor = product.vendor
-#             elif vendor != product.vendor:
-#                 raise serializers.ValidationError("All items must be from the same vendor")
-            
-#             item_total = product.price * item_data['quantity']
-#             subtotal += item_total
-
-#         # Calculate fees and taxes
-#         delivery_fee = Decimal('5.00')
-#         tax_rate = Decimal('0.08')
-#         tax_amount = subtotal * tax_rate
-#         total_amount = subtotal + delivery_fee + tax_amount
-
-#         # Create order
-#         order = Order.objects.create(
-#             customer=self.context['request'].user,
-#             vendor=vendor,
-#             delivery_address=delivery_address,
-#             subtotal=subtotal,
-#             delivery_fee=delivery_fee,
-#             tax_amount=tax_amount,
-#             total_amount=total_amount,
-#             **validated_data
-#         )
-
-#         # Create order items and update stock
-#         for item_data in items_data:
-#             product = Product.objects.get(id=item_data['product_id'])
-#             OrderItem.objects.create(
-#                 order=order,
-#                 product=product,
-#                 quantity=item_data['quantity'],
-#                 unit_price=product.price,
-#                 special_instructions=item_data.get('special_instructions', '')
-#             )
-            
-#             if product.stock_quantity >= item_data['quantity']:
-#                 product.stock_quantity -= item_data['quantity']
-#                 product.save()
-
-#         # Create initial status history
-#         OrderStatusHistory.objects.create(
-#             order=order,
-#             status='pending',
-#             changed_by=self.context['request'].user,
-#             notes='Order created'
-#         )
-
-#         return order
-
-
-
+    
+    def validate_quantity(self, value):
+        product = self.instance.product if self.instance else self.initial_data.get('product')
+        if isinstance(product, int):  # if product is passed as ID
+            from .models import Product
+            product = Product.objects.get(id=product, is_available=True)
+        if value > product.max_order_quantity:
+            raise serializers.ValidationError(f"Cannot order more than {product.max_order_quantity} units of {product.name}.")
+        return value
 
 
 class OrderCreateSerializer(serializers.ModelSerializer):
@@ -224,6 +146,9 @@ class OrderCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Provide either delivery_address_id or delivery_address, not both")
         return data
 
+    
+   
+
     def validate_delivery_address_id(self, value):
         user = self.context['request'].user
         try:
@@ -233,8 +158,16 @@ class OrderCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Delivery address not found")
 
     def validate_items(self, value):
+        for item in value:
+            product = item['product']
+            if item['quantity'] > product.max_order_quantity:
+                raise serializers.ValidationError(
+                    f"Quantity for {product.name} exceeds maximum allowed ({product.max_order_quantity})."
+                )
+
         if not value:
             raise serializers.ValidationError("Order must contain at least one item")
+
         return value
 
     def create(self, validated_data):

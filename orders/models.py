@@ -2,13 +2,16 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.utils import timezone
 import uuid
 from django.conf import settings
 import math
 User = get_user_model()
 from authentication.models import Vendor, Driver  # import your profile models
+import logging
 
+logger = logging.getLogger(__name__)
 class Category(models.Model):
     CATEGORY_TYPES = [
         ('food', 'Food'),
@@ -43,6 +46,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/', blank=True, null=True, 
                              help_text="Upload a high-quality image of your product")
     stock_quantity = models.PositiveIntegerField(default=0, help_text="Available stock quantity")
+    max_order_quantity = models.PositiveIntegerField(default=10, help_text="Maximum quantity a customer can order for this product")
     unit = models.CharField(max_length=20, default='piece', 
                            help_text="Unit of measurement (kg, piece, liter, etc.)")
     is_available = models.BooleanField(default=True)
@@ -77,33 +81,36 @@ class Product(models.Model):
         if not is_new and old_stock >= 5 and self.stock_quantity < 5:
             self.send_low_stock_email()
 
+
     def send_low_stock_email(self):
         """Send low stock alert email to vendor"""
         try:
-            subject = f'Low Stock Alert - {self.name}'
-            message = f"""
-            Dear {self.vendor.first_name} {self.vendor.last_name},
+            vendor_user = self.vendor.user
+            context = {
+                'vendor_name': f"{vendor_user.first_name} {vendor_user.last_name}",
+                'product_name': self.name,
+                'stock_quantity': self.stock_quantity,
+                'unit': self.unit,
+                'category_name': self.category.name if self.category else "N/A",
+            }
 
-            Your product "{self.name}" is running low on stock.
+            subject = f"Low Stock Alert - {self.name}"
+            html_message = render_to_string('emails/ low_stock_alert.html', context)
+            plain_message = render_to_string('emails/low_stock.txt', context)
 
-            Current Stock: {self.stock_quantity} {self.unit}
-            Product Category: {self.category.name}
-
-            Please restock this item to avoid running out of inventory.
-
-            Best regards,
-            YumExpress Team
-            """
-            
             send_mail(
                 subject=subject,
-                message=message,
+                message=plain_message,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[self.vendor.email],
+                recipient_list=[vendor_user.email],
+                html_message=html_message,
                 fail_silently=False,
             )
+
+            logger.info(f"Low stock email sent to {vendor_user.email} for product {self.name}")
+
         except Exception as e:
-            print(f"Failed to send low stock email: {e}")
+            logger.error(f"Failed to send low stock email: {e}")
 
     class Meta:
         ordering = ['-created_at']
