@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator
 import uuid
 import secrets
 import string
+from authentication.models import Vendor
 User = get_user_model()
 
 class PaymentMethod(models.Model):
@@ -187,7 +188,7 @@ class PayoutRequest(models.Model):
         ('canceled', 'Canceled'),
     ]
 
-    vendor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='payout_requests')
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='payout_requests')
     amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     currency = models.CharField(max_length=3, default='TZS')  # Changed default to TZS
     status = models.CharField(max_length=20, choices=PAYOUT_STATUS_CHOICES, default='pending')

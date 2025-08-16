@@ -2885,3 +2885,2520 @@ INFO 2025-08-16 06:24:19,801 autoreload 4639 8405360832 /Users/macbookair/Deskto
 INFO 2025-08-16 06:24:20,298 autoreload 4717 8405360832 Watching for file changes with StatReloader
 INFO 2025-08-16 06:24:20,426 autoreload 4634 8405360832 /Users/macbookair/Desktop/Yumbackend/Yumbackend/settings.py changed, reloading.
 INFO 2025-08-16 06:24:20,727 autoreload 4720 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 06:25:08,270 autoreload 4753 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 09:39:06,972 log 4753 6203666432 Unauthorized: /api/orders/checkout/
+ERROR 2025-08-16 09:44:20,966 log 4753 6220492800 Internal Server Error: /api/orders/checkout/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 359, in post
+    vendor = get_object_or_404(Vendor, id=vendor_id)
+                               ^^^^^^
+NameError: name 'Vendor' is not defined
+INFO 2025-08-16 09:48:07,498 autoreload 4753 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:48:07,626 autoreload 4720 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:48:08,172 autoreload 5799 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:48:08,173 autoreload 5801 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:48:13,441 autoreload 5801 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:48:13,504 autoreload 5799 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:48:13,781 autoreload 5806 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:48:13,848 autoreload 5807 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:49:03,686 autoreload 5806 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:49:03,755 autoreload 5807 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:49:04,243 autoreload 5842 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:49:04,244 autoreload 5841 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:49:15,619 autoreload 5841 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:49:15,765 autoreload 5842 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:49:16,143 autoreload 5854 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:49:16,152 autoreload 5855 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 09:49:20,656 log 5855 6204665856 Not Found: /api/orders/checkout/
+INFO 2025-08-16 09:52:19,940 autoreload 5855 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:52:20,364 autoreload 5854 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:52:20,517 autoreload 5958 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:52:20,819 autoreload 5959 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 09:52:22,366 log 5958 6124695552 Internal Server Error: /api/orders/checkout/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 363, in post
+    if not vendor.primary_location:
+           ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'primary_location'
+INFO 2025-08-16 09:55:36,099 autoreload 5959 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:55:36,516 autoreload 5958 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:55:36,595 autoreload 6100 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:55:36,926 autoreload 6102 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 09:55:47,114 log 6102 6160691200 Not Found: /api/orders/checkout/
+ERROR 2025-08-16 09:56:01,261 log 6102 6160691200 Internal Server Error: /api/orders/checkout/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 377, in post
+    cart = Cart.objects.filter(user=request.user, vendor=vendor).first()
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "Poa'z Grill": Must be "User" instance.
+INFO 2025-08-16 09:58:52,874 autoreload 6102 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:58:52,970 autoreload 6100 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 09:58:53,475 autoreload 6230 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:58:53,476 autoreload 6231 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:59:45,391 autoreload 6231 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 09:59:45,848 autoreload 6286 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 09:59:46,025 autoreload 6230 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 09:59:46,418 autoreload 6288 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:02:31,138 autoreload 6288 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:02:31,226 autoreload 6286 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:02:31,619 autoreload 6373 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:02:31,619 autoreload 6374 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:02:40,817 autoreload 6374 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:02:40,874 autoreload 6373 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:02:41,198 autoreload 6386 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:02:41,210 autoreload 6385 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:03:18,849 autoreload 6386 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:03:19,313 autoreload 6410 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:03:19,609 autoreload 6385 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:03:19,884 autoreload 6413 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:05:18,863 autoreload 6413 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:05:19,289 autoreload 6410 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:05:19,417 autoreload 6518 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:05:19,645 autoreload 6524 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 10:05:24,125 log 6524 6136131584 Internal Server Error: /api/orders/checkout/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 377, in post
+    cart = Cart.objects.filter(user=request.user, vendor=vendor).first()
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "Poa'z Grill": Must be "User" instance.
+ERROR 2025-08-16 10:05:31,827 log 6524 6136131584 Internal Server Error: /api/orders/checkout/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 377, in post
+    cart = Cart.objects.filter(user=request.user, vendor=vendor).first()
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "Poa'z Grill": Must be "User" instance.
+INFO 2025-08-16 10:05:52,998 autoreload 6524 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:05:53,165 autoreload 6518 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:05:53,566 autoreload 6546 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:05:53,567 autoreload 6547 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:06:08,071 autoreload 6547 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:06:08,336 autoreload 6546 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:06:08,591 autoreload 6561 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:06:08,751 autoreload 6562 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 10:06:18,230 log 6562 6126776320 Internal Server Error: /api/orders/checkout/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 377, in post
+    cart = Cart.objects.filter(user=request.user, vendor=vendor).first()
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "Poa'z Grill": Must be "User" instance.
+INFO 2025-08-16 10:07:44,410 autoreload 6562 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:07:44,475 autoreload 6561 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:07:44,955 autoreload 6652 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:07:44,955 autoreload 6653 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:08:24,443 autoreload 6653 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:08:24,671 autoreload 6652 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:08:24,850 autoreload 6698 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:08:24,928 autoreload 6699 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:09:49,107 autoreload 6698 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:09:49,403 autoreload 6699 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:09:49,495 autoreload 6764 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:09:49,644 autoreload 6765 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:11:06,534 autoreload 6764 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:11:06,915 autoreload 6765 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:11:06,959 autoreload 6824 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:11:07,221 autoreload 6825 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:11:31,246 autoreload 6824 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:11:31,643 autoreload 6825 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:11:31,680 autoreload 6836 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:11:32,053 autoreload 6837 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:13:07,431 autoreload 6837 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:13:07,485 autoreload 6836 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:13:08,211 autoreload 6898 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:13:08,213 autoreload 6899 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:14:01,210 autoreload 6898 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:14:01,389 autoreload 6899 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:14:01,766 autoreload 6982 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:14:01,766 autoreload 6984 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 10:14:05,138 log 6982 6171537408 Bad Request: /api/orders/checkout/
+INFO 2025-08-16 10:16:52,393 autoreload 6984 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:16:52,590 autoreload 6982 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:16:53,007 autoreload 7129 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:16:53,027 autoreload 7130 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:17:17,475 autoreload 7129 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:17:17,649 autoreload 7130 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:17:18,074 autoreload 7151 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:17:18,074 autoreload 7150 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:18:03,745 autoreload 7151 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:18:04,074 autoreload 7150 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:18:04,267 autoreload 7180 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:18:04,432 autoreload 7182 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 10:19:02,438 log 7180 6165884928 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:19:04,096 log 7180 6165884928 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:19:05,241 log 7180 6165884928 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:19:22,728 log 7180 6165884928 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:19:28,448 log 7180 6165884928 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:19:30,246 log 7180 6165884928 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:19:49,090 log 7180 6165884928 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:19:50,306 log 7180 6165884928 Bad Request: /api/orders/checkout/
+INFO 2025-08-16 10:22:27,895 autoreload 7182 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:22:28,447 autoreload 7364 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:22:28,666 autoreload 7180 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:22:29,072 autoreload 7365 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:24:25,825 autoreload 7364 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:24:26,121 autoreload 7365 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:24:26,310 autoreload 7451 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:24:26,450 autoreload 7452 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:24:47,421 autoreload 7452 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:24:47,887 autoreload 7471 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:24:48,066 autoreload 7451 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:24:48,362 autoreload 7474 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:25:30,722 autoreload 7474 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:25:30,819 autoreload 7471 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:25:31,262 autoreload 7521 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:25:31,262 autoreload 7520 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:26:39,964 autoreload 7520 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:26:40,059 autoreload 7521 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:26:40,503 autoreload 7551 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:26:40,503 autoreload 7548 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 10:26:44,809 log 7551 6123237376 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:26:45,824 log 7551 6123237376 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:28:59,985 log 7551 6156890112 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:29:05,902 log 7551 6156890112 Not Found: /api/orders/<uuid:order_id>/accept/
+WARNING 2025-08-16 10:29:28,094 log 7551 6156890112 Unauthorized: /api/orders/cart/add/
+WARNING 2025-08-16 10:29:32,235 log 7551 6156890112 Unauthorized: /api/orders/cart/
+WARNING 2025-08-16 10:31:35,639 log 7551 6173716480 Bad Request: /api/orders/checkout/
+INFO 2025-08-16 10:32:41,866 autoreload 7548 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:32:41,915 autoreload 7551 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:32:42,684 autoreload 7837 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:32:42,684 autoreload 7836 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:33:06,485 autoreload 7836 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:33:06,857 autoreload 7837 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 10:33:07,063 autoreload 7859 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:33:07,334 autoreload 7860 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:35:59,395 autoreload 7859 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:35:59,697 autoreload 7860 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:35:59,969 autoreload 7986 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:36:00,113 autoreload 7988 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:36:41,742 autoreload 7988 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:36:41,872 autoreload 7986 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-16 10:36:42,309 autoreload 8008 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 10:36:42,310 autoreload 8009 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 10:36:46,929 log 8008 6200864768 Bad Request: /api/orders/checkout/
+INFO 2025-08-16 10:40:23,809 autoreload 8150 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 10:40:53,559 log 8150 6195900416 Bad Request: /api/orders/checkout/
+INFO 2025-08-16 10:41:14,339 autoreload 8176 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 10:42:04,857 log 8176 6197161984 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:42:05,731 log 8176 6197161984 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:42:06,547 log 8176 6197161984 Bad Request: /api/orders/checkout/
+WARNING 2025-08-16 10:42:07,209 log 8176 6197161984 Bad Request: /api/orders/checkout/
+INFO 2025-08-16 12:26:30,029 autoreload 8686 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 12:34:48,945 log 8686 6200094720 Unauthorized: /api/orders/cart/add/
+WARNING 2025-08-16 12:34:53,369 log 8686 6200094720 Method Not Allowed: /api/orders/cart/add/
+ERROR 2025-08-16 12:40:08,675 log 8686 6233747456 Internal Server Error: /api/orders/geocode/
+ERROR 2025-08-16 12:40:11,667 log 8686 6233747456 Internal Server Error: /api/orders/geocode/
+INFO 2025-08-16 12:40:25,748 autoreload 9164 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 12:41:34,502 client 9164 6167834624 API queries_quota: 60
+INFO 2025-08-16 12:41:52,330 client 9164 6167834624 API queries_quota: 60
+INFO 2025-08-16 12:42:48,161 client 9164 6167834624 API queries_quota: 60
+INFO 2025-08-16 12:42:58,766 client 9164 6167834624 API queries_quota: 60
+INFO 2025-08-16 12:43:17,100 client 9164 6167834624 API queries_quota: 60
+WARNING 2025-08-16 12:44:06,096 log 9164 6167834624 Unauthorized: /api/orders/checkout/
+WARNING 2025-08-16 12:48:07,980 log 9164 6186381312 Not Found: /api/auth/password-reset/
+WARNING 2025-08-16 12:50:16,876 log 8009 6245314560 Not Found: /api/vendors
+WARNING 2025-08-16 12:50:23,272 log 8009 6228488192 Not Found: /api/auth/forgot-password
+WARNING 2025-08-16 12:51:54,453 log 9164 6203207680 Not Found: /api/auth/vendor/profile/
+WARNING 2025-08-16 12:51:58,596 log 9164 6203207680 Unauthorized: /api/auth/vendor/profile
+ERROR 2025-08-16 12:52:26,184 log 9164 6203207680 Internal Server Error: /api/auth/vendor/profile
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 256, in get
+    return self.retrieve(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 54, in retrieve
+    instance = self.get_object()
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 533, in get_object
+    raise permissions.PermissionDenied("Only vendors can access this endpoint")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'rest_framework.permissions' has no attribute 'PermissionDenied'
+WARNING 2025-08-16 12:53:23,060 log 9164 6203207680 Unauthorized: /api/orders/addresses/
+WARNING 2025-08-16 12:57:57,479 log 8009 6211661824 Not Found: /api/vendors
+ERROR 2025-08-16 13:09:59,299 log 9164 6220034048 Internal Server Error: /admin/orders/productvariant/add/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/fields/related_descriptors.py", line 239, in __get__
+    rel_obj = self.field.get_cached_value(instance)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/fields/mixins.py", line 37, in get_cached_value
+    return instance._state.fields_cache[self.cache_name]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'vendor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 210, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 173, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 210, in render
+    return template.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 173, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1073, in render
+    return render_value_in_context(output, context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1050, in render_value_in_context
+    value = str(value)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/forms/utils.py", line 79, in __str__
+    return self.as_widget()
+           ~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/forms/boundfield.py", line 108, in as_widget
+    return widget.render(
+           ~~~~~~~~~~~~~^
+        name=self.html_initial_name if only_initial else self.html_name,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        renderer=self.form.renderer,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/forms/widgets.py", line 278, in render
+    context = self.get_context(name, value, attrs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/widgets.py", line 329, in get_context
+    "rendered_widget": self.widget.render(name, value, attrs),
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/forms/widgets.py", line 278, in render
+    context = self.get_context(name, value, attrs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/forms/widgets.py", line 764, in get_context
+    context = super().get_context(name, value, attrs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/forms/widgets.py", line 715, in get_context
+    context["widget"]["optgroups"] = self.optgroups(
+                                     ~~~~~~~~~~~~~~^
+        name, context["widget"]["value"], attrs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/forms/widgets.py", line 655, in optgroups
+    for index, (option_value, option_label) in enumerate(self.choices):
+                                               ~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/forms/models.py", line 1425, in __iter__
+    yield self.choice(obj)
+          ~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/forms/models.py", line 1439, in choice
+    self.field.label_from_instance(obj),
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/forms/models.py", line 1529, in label_from_instance
+    return str(obj)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/models.py", line 57, in __str__
+    return f"{self.name} - {self.vendor.first_name} {self.vendor.last_name}"
+                            ^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/fields/related_descriptors.py", line 257, in __get__
+    rel_obj = self.get_object(instance)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/fields/related_descriptors.py", line 220, in get_object
+    return qs.get(self.field.get_reverse_related_filter(instance))
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 649, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+authentication.models.Vendor.DoesNotExist: Vendor matching query does not exist.
+WARNING 2025-08-16 13:09:59,404 log 9164 6220034048 Not Found: /favicon.ico
+WARNING 2025-08-16 13:23:43,306 log 9164 6220034048 Unauthorized: /api/orders/addresses/2/
+WARNING 2025-08-16 13:23:52,913 log 9164 6220034048 Not Found: /api/orders/addresses/2/
+WARNING 2025-08-16 13:24:05,572 log 9164 6220034048 Not Found: /api/orders/addresses/3/
+WARNING 2025-08-16 13:26:57,269 log 9164 6220034048 Unauthorized: /api/orders/addresses/5/
+INFO 2025-08-16 13:32:30,512 client 9164 6236860416 API queries_quota: 60
+INFO 2025-08-16 13:57:08,595 autoreload 8009 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 13:57:09,198 autoreload 11578 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 13:57:57,991 autoreload 11578 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 13:57:58,453 autoreload 11616 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 13:58:02,743 autoreload 11616 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-16 13:58:03,062 autoreload 11620 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 13:58:05,759 autoreload 11624 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 13:59:49,719 autoreload 11620 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 13:59:49,976 autoreload 11624 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 13:59:50,309 autoreload 11714 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 13:59:50,382 autoreload 11716 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 13:59:56,683 autoreload 11714 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 13:59:56,806 autoreload 11716 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 13:59:57,074 autoreload 11727 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 13:59:57,175 autoreload 11728 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 14:00:04,363 log 11728 6166196224 Unauthorized: /api/orders/geocode/
+WARNING 2025-08-16 14:00:14,343 log 11728 6166196224 Unauthorized: /api/orders/geocode/
+INFO 2025-08-16 14:00:45,046 client 11728 6166196224 API queries_quota: 60
+INFO 2025-08-16 14:03:06,711 client 11728 6183596032 API queries_quota: 60
+ERROR 2025-08-16 14:03:52,642 log 11728 6200422400 Internal Server Error: /admin/orders/deliveryaddress/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: orders_deliveryaddress.place_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 718, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/sites.py", line 241, in inner
+    return view(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 2140, in changelist_view
+    "selection_note": _("0 of %(cnt)s selected") % {"cnt": len(cl.result_list)},
+                                                           ~~~^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 382, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: orders_deliveryaddress.place_id
+INFO 2025-08-16 14:17:07,015 autoreload 11727 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/migrations/0001_initial.py changed, reloading.
+INFO 2025-08-16 14:17:07,400 autoreload 12522 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:18:11,580 autoreload 12563 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 14:18:57,625 log 12563 6201962496 Not Found: /
+WARNING 2025-08-16 14:18:57,692 log 12563 6201962496 Not Found: /favicon.ico
+WARNING 2025-08-16 14:19:01,545 log 12563 6201962496 Not Found: /admin
+INFO 2025-08-16 14:19:45,865 autoreload 12563 8405360832 /Users/macbookair/Desktop/Yumbackend/Yumbackend/settings.py changed, reloading.
+INFO 2025-08-16 14:19:45,896 autoreload 12522 8405360832 /Users/macbookair/Desktop/Yumbackend/Yumbackend/settings.py changed, reloading.
+INFO 2025-08-16 14:19:46,402 autoreload 12656 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:19:46,403 autoreload 12657 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:22:11,202 services 12656 6141505536 OTP email sent to amirmussa2003@gmail.com
+WARNING 2025-08-16 14:23:14,746 log 12656 6141505536 Method Not Allowed: /api/auth/profile
+WARNING 2025-08-16 14:26:40,643 log 12656 6124679168 Forbidden: /api/auth/admin/create-vendor/
+WARNING 2025-08-16 14:26:54,863 log 12656 6124679168 Unauthorized: /api/auth/admin/create-driver/
+ERROR 2025-08-16 14:29:57,354 services 12656 6175158272 Failed to send SMS to 255684106419: {"messages":[{"to":"255684106419","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":358399163459490622,"smsCount":1,"message":"Welcome to Yum Express! Your temporary password is: YmS431rT. Please login and change your password immediately.","sendReference":32257406949112253}]}
+WARNING 2025-08-16 14:30:44,292 log 12656 6175158272 Bad Request: /api/auth/admin/create-driver/
+ERROR 2025-08-16 14:31:11,398 services 12656 6175158272 Failed to send SMS to 255772236727: {"messages":[{"to":"255772236727","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":715186248744809857,"smsCount":1,"message":"Welcome to Yum Express! Your temporary password is: vmdNSnI6. Please login and change your password immediately.","sendReference":634998321690478014}]}
+WARNING 2025-08-16 14:33:03,748 log 12656 6175158272 Unauthorized: /api/auth/vendor/profile
+ERROR 2025-08-16 14:33:09,875 log 12656 6175158272 Internal Server Error: /api/auth/vendor/profile
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 256, in get
+    return self.retrieve(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 54, in retrieve
+    instance = self.get_object()
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 533, in get_object
+    raise permissions.PermissionDenied("Only vendors can access this endpoint")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'rest_framework.permissions' has no attribute 'PermissionDenied'
+ERROR 2025-08-16 14:34:30,659 log 12656 6191984640 Internal Server Error: /api/auth/vendor/profile
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 256, in get
+    return self.retrieve(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 54, in retrieve
+    instance = self.get_object()
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 533, in get_object
+    raise permissions.PermissionDenied("Only vendors can access this endpoint")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'rest_framework.permissions' has no attribute 'PermissionDenied'
+INFO 2025-08-16 14:34:31,454 autoreload 12656 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:34:31,796 autoreload 12657 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:34:32,129 autoreload 13210 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:34:32,190 autoreload 13211 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 14:34:38,029 log 13210 6161870848 Internal Server Error: /api/auth/vendor/profile
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 437, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 104, in get_attribute
+    instance = getattr(instance, attr)
+AttributeError: 'Response' object has no attribute 'business_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 256, in get
+    return self.retrieve(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 56, in retrieve
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 573, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 251, in data
+    self._data = self.to_representation(self.instance)
+                 ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 527, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 470, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `business_name` on serializer `VendorProfileSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `Response` instance.
+Original exception text was: 'Response' object has no attribute 'business_name'.
+ERROR 2025-08-16 14:34:51,859 log 13210 6161870848 Internal Server Error: /api/auth/vendor/profile
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 437, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 104, in get_attribute
+    instance = getattr(instance, attr)
+AttributeError: 'Response' object has no attribute 'business_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 256, in get
+    return self.retrieve(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 56, in retrieve
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 573, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 251, in data
+    self._data = self.to_representation(self.instance)
+                 ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 527, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 470, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `business_name` on serializer `VendorProfileSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `Response` instance.
+Original exception text was: 'Response' object has no attribute 'business_name'.
+ERROR 2025-08-16 14:36:42,489 log 13210 6178697216 Internal Server Error: /api/auth/vendor/profile
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 437, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 104, in get_attribute
+    instance = getattr(instance, attr)
+AttributeError: 'Response' object has no attribute 'business_name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 256, in get
+    return self.retrieve(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 56, in retrieve
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 573, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 251, in data
+    self._data = self.to_representation(self.instance)
+                 ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 527, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/fields.py", line 470, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `business_name` on serializer `VendorProfileSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `Response` instance.
+Original exception text was: 'Response' object has no attribute 'business_name'.
+INFO 2025-08-16 14:37:32,954 autoreload 13211 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:37:33,078 autoreload 13210 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:37:33,504 autoreload 13340 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:37:33,504 autoreload 13339 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 14:37:34,612 log 13340 6325039104 Internal Server Error: /api/auth/vendor/profile
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 256, in get
+    return self.retrieve(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 54, in retrieve
+    instance = self.get_object()
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 534, in get_object
+    raise PermissionDenied(detail="Only vendors can access this endpoint")
+          ^^^^^^^^^^^^^^^^
+NameError: name 'PermissionDenied' is not defined. Did you mean: 'PermissionError'?
+INFO 2025-08-16 14:38:11,872 autoreload 13339 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:38:12,168 autoreload 13340 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:38:12,421 autoreload 13368 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:38:12,607 autoreload 13370 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 14:38:14,120 log 13370 6126006272 Forbidden: /api/auth/vendor/profile
+WARNING 2025-08-16 14:38:26,490 log 13370 6126006272 Method Not Allowed: /api/auth/vendor/profile
+WARNING 2025-08-16 14:38:30,340 log 13370 6126006272 Forbidden: /api/auth/vendor/profile
+WARNING 2025-08-16 14:38:43,933 log 13370 6126006272 Not Found: /api/auth/vendor/dashboard/
+WARNING 2025-08-16 14:38:47,952 log 13370 6126006272 Unauthorized: /api/auth/vendor/dashboard
+WARNING 2025-08-16 14:38:53,488 log 13370 6126006272 Unauthorized: /api/auth/vendor/dashboard
+WARNING 2025-08-16 14:38:58,590 log 13370 6126006272 Unauthorized: /api/auth/vendor/dashboard
+WARNING 2025-08-16 14:39:14,057 log 13370 6126006272 Forbidden: /api/auth/vendor/dashboard
+WARNING 2025-08-16 14:39:20,560 log 13370 6126006272 Method Not Allowed: /api/auth/vendor/dashboard
+WARNING 2025-08-16 14:39:24,179 log 13370 6126006272 Method Not Allowed: /api/auth/vendor/dashboard
+WARNING 2025-08-16 14:39:27,817 log 13370 6126006272 Forbidden: /api/auth/vendor/dashboard
+WARNING 2025-08-16 14:39:36,517 log 13370 6126006272 Not Found: /api/auth/vendor/hours/
+WARNING 2025-08-16 14:39:42,247 log 13370 6126006272 Not Found: /api/auth/vendor/hours/
+WARNING 2025-08-16 14:39:43,349 log 13370 6126006272 Not Found: /api/auth/vendor/hours/
+ERROR 2025-08-16 14:39:56,004 log 13370 6126006272 Internal Server Error: /api/auth/vendor/hours
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 246, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 550, in perform_create
+    serializer.save(vendor=self.request.user.vendor_profile)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/fields/related_descriptors.py", line 531, in __get__
+    raise self.RelatedObjectDoesNotExist(
+    ...<2 lines>...
+    )
+authentication.models.User.vendor_profile.RelatedObjectDoesNotExist: User has no vendor_profile.. Did you mean: 'driver_profile'?
+INFO 2025-08-16 14:42:42,163 autoreload 13368 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:42:42,642 autoreload 13370 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:42:42,745 autoreload 13541 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:42:43,114 autoreload 13542 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 14:42:48,183 log 13542 6135869440 Forbidden: /api/auth/vendor/hours
+WARNING 2025-08-16 14:42:59,018 log 13542 6135869440 Forbidden: /api/auth/vendor/dashboard
+WARNING 2025-08-16 14:43:03,473 log 13542 6135869440 Forbidden: /api/auth/vendor/hours
+WARNING 2025-08-16 14:43:06,779 log 13542 6135869440 Forbidden: /api/auth/vendor/hours
+WARNING 2025-08-16 14:43:13,218 log 13542 6135869440 Not Found: /api/auth/vendor/hours/1/
+WARNING 2025-08-16 14:43:44,835 log 13542 6135869440 Not Found: /api/auth/vendor/locations/
+ERROR 2025-08-16 14:43:48,389 log 13542 6135869440 Internal Server Error: /api/auth/vendor/locations
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 246, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 578, in perform_create
+    serializer.save(vendor=self.request.user.vendor_profile)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/fields/related_descriptors.py", line 531, in __get__
+    raise self.RelatedObjectDoesNotExist(
+    ...<2 lines>...
+    )
+authentication.models.User.vendor_profile.RelatedObjectDoesNotExist: User has no vendor_profile.. Did you mean: 'driver_profile'?
+INFO 2025-08-16 14:45:38,343 autoreload 13541 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
+INFO 2025-08-16 14:45:38,890 autoreload 13687 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:45:39,010 autoreload 13542 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
+INFO 2025-08-16 14:45:39,363 autoreload 13689 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:46:06,487 autoreload 13689 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
+INFO 2025-08-16 14:46:06,570 autoreload 13687 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
+INFO 2025-08-16 14:46:07,016 autoreload 13705 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:46:07,016 autoreload 13706 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:46:57,013 autoreload 13706 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:46:57,028 autoreload 13705 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:46:57,632 autoreload 13741 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:46:57,632 autoreload 13740 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 14:46:59,593 log 13741 6125039616 Forbidden: /api/auth/vendor/locations
+WARNING 2025-08-16 14:47:11,608 log 13741 6125039616 Not Found: /api/auth/vendor/locations/e470bf82-11af-4573-a6ea-b36263583d25/
+WARNING 2025-08-16 14:47:15,250 log 13741 6125039616 Unauthorized: /api/auth/vendor/locations/e470bf82-11af-4573-a6ea-b36263583d25
+WARNING 2025-08-16 14:47:22,303 log 13741 6125039616 Not Found: /api/auth/vendor/locations/e470bf82-11af-4573-a6ea-b36263583d25
+WARNING 2025-08-16 14:47:35,901 log 13741 6125039616 Not Found: /api/auth/vendor/categories/
+ERROR 2025-08-16 14:47:39,496 log 13741 6125039616 Internal Server Error: /api/auth/vendor/categories
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 246, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 604, in perform_create
+    serializer.save(vendor=self.request.user.vendor_profile)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/fields/related_descriptors.py", line 531, in __get__
+    raise self.RelatedObjectDoesNotExist(
+    ...<2 lines>...
+    )
+authentication.models.User.vendor_profile.RelatedObjectDoesNotExist: User has no vendor_profile.. Did you mean: 'driver_profile'?
+INFO 2025-08-16 14:48:42,650 autoreload 13740 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:48:42,865 autoreload 13741 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:48:43,282 autoreload 13833 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:48:43,314 autoreload 13834 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:49:13,877 autoreload 13834 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:49:14,187 autoreload 13833 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 14:49:14,463 autoreload 13875 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 14:49:14,642 autoreload 13876 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 14:49:14,982 log 13875 6155399168 Forbidden: /api/auth/vendor/categories
+WARNING 2025-08-16 14:49:55,116 log 13875 6155399168 Not Found: /api/auth/vendor/categories/1/
+WARNING 2025-08-16 14:49:59,358 log 13875 6155399168 Unauthorized: /api/auth/vendor/categories/1
+WARNING 2025-08-16 14:50:05,966 log 13875 6155399168 Unauthorized: /api/auth/vendor/categories/1
+WARNING 2025-08-16 14:50:20,924 log 13875 6155399168 Not Found: /api/auth/vendor/categories/1
+WARNING 2025-08-16 14:51:10,328 log 13875 6155399168 Unauthorized: /api/orders/categories/
+WARNING 2025-08-16 14:52:17,203 log 13875 6172225536 Bad Request: /api/auth/login
+WARNING 2025-08-16 14:52:26,445 log 13875 6172225536 Bad Request: /api/auth/login
+WARNING 2025-08-16 14:54:26,785 log 13875 6189051904 Not Found: /api/auth/change-password/
+WARNING 2025-08-16 14:54:30,432 log 13875 6189051904 Unauthorized: /api/auth/change-password
+WARNING 2025-08-16 14:55:22,846 log 13875 6189051904 Bad Request: /api/auth/profile
+WARNING 2025-08-16 14:57:21,324 log 13875 6189051904 Method Not Allowed: /api/auth/vendors
+WARNING 2025-08-16 14:57:37,054 log 13875 6189051904 Method Not Allowed: /api/auth/vendor/profile
+WARNING 2025-08-16 14:57:40,224 log 13875 6189051904 Bad Request: /api/auth/vendor/profile
+WARNING 2025-08-16 14:57:56,613 log 13875 6189051904 Method Not Allowed: /api/auth/vendor/profile
+WARNING 2025-08-16 14:58:01,342 log 13875 6189051904 Bad Request: /api/auth/vendor/profile
+INFO 2025-08-16 15:00:51,682 autoreload 13876 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
+INFO 2025-08-16 15:00:51,818 autoreload 13875 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
+INFO 2025-08-16 15:00:52,308 autoreload 14547 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:00:52,308 autoreload 14546 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:01:03,786 autoreload 14546 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:01:04,006 autoreload 14547 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:01:04,308 autoreload 14564 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:01:04,379 autoreload 14565 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:01:52,327 autoreload 14565 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:01:52,337 autoreload 14564 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:01:53,017 autoreload 14588 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:01:53,017 autoreload 14589 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:04:58,974 log 14588 6141276160 Internal Server Error: /api/auth/vendor/dashboard
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 674, in vendor_dashboard
+    orders = Order.objects.filter(vendor=request.user)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "amirimussa2003@gmail.com (vendor)": Must be "Vendor" instance.
+INFO 2025-08-16 15:07:03,073 autoreload 14588 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:07:03,461 autoreload 14589 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:07:03,702 autoreload 14829 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:07:03,843 autoreload 14830 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:07:05,225 log 14829 6125121536 Internal Server Error: /api/auth/vendor/dashboard
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 676, in vendor_dashboard
+    payout_requests = PayoutRequest.objects.filter(vendor=vendor_profile)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "Poaz's Delivery Services": Must be "User" instance.
+INFO 2025-08-16 15:08:01,231 autoreload 14830 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:08:01,721 autoreload 14878 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:08:01,977 autoreload 14829 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:08:02,327 autoreload 14879 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:11:16,351 autoreload 14878 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:11:16,649 autoreload 14879 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:11:17,132 autoreload 15055 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:11:17,146 autoreload 15056 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:11:47,559 autoreload 15056 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:11:48,038 autoreload 15055 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:11:48,056 autoreload 15103 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:11:48,457 autoreload 15105 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:11:55,595 autoreload 15103 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:11:55,788 autoreload 15105 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:11:55,999 autoreload 15116 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:11:56,150 autoreload 15117 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:11:57,396 log 15116 6159052800 Internal Server Error: /api/auth/vendor/dashboard
+INFO 2025-08-16 15:14:39,546 autoreload 15116 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 15:14:39,721 autoreload 15117 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-16 15:14:40,071 autoreload 15224 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:14:40,072 autoreload 15227 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:14:43,050 log 15224 6134132736 Internal Server Error: /api/auth/vendor/dashboard
+INFO 2025-08-16 15:15:46,471 autoreload 15227 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:15:46,532 autoreload 15224 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:15:47,057 autoreload 15409 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:15:47,057 autoreload 15408 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:15:57,711 autoreload 15409 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:15:58,237 autoreload 15420 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:15:58,522 autoreload 15408 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:15:58,978 autoreload 15421 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:16:01,842 log 15420 6128021504 Internal Server Error: /api/auth/vendor/dashboard
+INFO 2025-08-16 15:16:51,461 autoreload 15420 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:16:51,986 autoreload 15421 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:16:51,997 autoreload 15454 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:16:52,383 autoreload 15456 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:17:06,765 autoreload 15456 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:17:06,775 autoreload 15454 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:17:07,320 autoreload 15481 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:17:07,320 autoreload 15482 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:19:09,502 log 15481 6123384832 Internal Server Error: /api/auth/vendor/dashboard
+INFO 2025-08-16 15:20:23,814 autoreload 15482 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:20:23,941 autoreload 15481 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:20:24,371 autoreload 15642 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:20:24,373 autoreload 15641 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:20:58,650 autoreload 15642 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:20:59,113 autoreload 15641 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:20:59,256 autoreload 15663 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:20:59,516 autoreload 15664 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:21:00,741 log 15663 6201683968 Internal Server Error: /api/auth/vendor/dashboard
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 670, in vendor_dashboard
+    orders = Order.objects.filter(vendor=vendor)
+             ^^^^^
+NameError: name 'Order' is not defined
+INFO 2025-08-16 15:21:26,143 autoreload 15664 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:21:26,447 autoreload 15663 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:21:26,737 autoreload 15679 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:21:27,053 autoreload 15681 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:22:24,610 log 15681 6157889536 Internal Server Error: /api/auth/vendor/dashboard
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 684, in vendor_dashboard
+    'vendor_profile': VendorProfileSerializer(vendor).data,
+                                              ^^^^^^
+UnboundLocalError: cannot access local variable 'vendor' where it is not associated with a value
+INFO 2025-08-16 15:23:00,619 autoreload 15679 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:23:00,703 autoreload 15681 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:23:01,163 autoreload 15730 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:23:01,164 autoreload 15729 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:23:01,641 log 15730 6122582016 Internal Server Error: /api/auth/vendor/dashboard
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 517, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+                    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 429, in finalize_response
+    assert isinstance(response, HttpResponseBase), (
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Expected a `Response`, `HttpResponse` or `StreamingHttpResponse` to be returned from the view, but received a `<class 'NoneType'>`
+INFO 2025-08-16 15:23:31,048 autoreload 15729 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:23:31,537 autoreload 15770 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:23:31,542 autoreload 15730 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:23:31,925 autoreload 15773 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:23:36,408 log 15773 6130397184 Internal Server Error: /api/auth/vendor/dashboard
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 671, in vendor_dashboard
+    orders = Order.objects.filter(vendor=vendor)
+             ^^^^^
+NameError: name 'Order' is not defined
+ERROR 2025-08-16 15:23:54,017 log 15773 6130397184 Internal Server Error: /api/auth/vendor/dashboard
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/authentication/views.py", line 671, in vendor_dashboard
+    orders = Order.objects.filter(vendor=vendor)
+             ^^^^^
+NameError: name 'Order' is not defined
+INFO 2025-08-16 15:23:54,921 autoreload 15773 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:23:55,366 autoreload 15770 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:23:55,759 autoreload 15793 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:23:55,919 autoreload 15794 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:24:21,241 autoreload 15793 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:24:21,786 autoreload 15809 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:24:21,997 autoreload 15794 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:24:22,417 autoreload 15810 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:24:59,359 autoreload 15810 8405360832 /Users/macbookair/Desktop/Yumbackend/payments/models.py changed, reloading.
+INFO 2025-08-16 15:24:59,441 autoreload 15809 8405360832 /Users/macbookair/Desktop/Yumbackend/payments/models.py changed, reloading.
+INFO 2025-08-16 15:24:59,922 autoreload 15830 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:24:59,923 autoreload 15829 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:25:37,332 autoreload 15829 8405360832 /Users/macbookair/Desktop/Yumbackend/payments/models.py changed, reloading.
+INFO 2025-08-16 15:25:37,579 autoreload 15830 8405360832 /Users/macbookair/Desktop/Yumbackend/payments/models.py changed, reloading.
+INFO 2025-08-16 15:25:38,231 autoreload 15848 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:25:38,235 autoreload 15847 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:25:52,336 autoreload 15867 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:26:02,963 autoreload 15867 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:26:03,457 autoreload 15847 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:26:03,607 autoreload 15870 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:26:03,982 autoreload 15871 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:26:09,940 log 15870 6166769664 Internal Server Error: /api/auth/vendor/dashboard
+INFO 2025-08-16 15:26:42,367 autoreload 15870 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:26:42,941 autoreload 15871 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:26:42,961 autoreload 15915 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:26:43,392 autoreload 15916 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:26:49,483 autoreload 15915 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:26:49,771 autoreload 15916 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:26:50,086 autoreload 15925 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:26:50,321 autoreload 15927 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-16 15:26:53,453 log 15925 6130577408 Internal Server Error: /api/auth/vendor/dashboard
+ERROR 2025-08-16 15:26:55,839 log 15925 6130577408 Internal Server Error: /api/auth/vendor/dashboard
+INFO 2025-08-16 15:27:24,446 autoreload 15927 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:27:24,777 autoreload 15925 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:27:24,897 autoreload 15958 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:27:25,127 autoreload 15959 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:29:30,955 autoreload 15959 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/models.py changed, reloading.
+INFO 2025-08-16 15:29:31,257 autoreload 15958 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/models.py changed, reloading.
+INFO 2025-08-16 15:29:31,554 autoreload 16070 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:29:31,689 autoreload 16076 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 15:33:20,624 log 16070 6173569024 Bad Request: /api/auth/vendor/hours
+WARNING 2025-08-16 15:34:09,191 log 16070 6173569024 Method Not Allowed: /api/auth/vendor/hours
+WARNING 2025-08-16 15:34:18,696 log 16070 6173569024 Unauthorized: /api/auth/vendor/hours/1
+WARNING 2025-08-16 15:34:50,232 log 16070 6173569024 Bad Request: /api/auth/vendor/hours/5
+INFO 2025-08-16 15:36:18,039 autoreload 16076 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:36:18,259 autoreload 16070 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:36:18,756 autoreload 16372 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:36:18,788 autoreload 16373 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 15:37:09,431 log 16373 6165999616 Unauthorized: /api/auth/vendor/locations
+WARNING 2025-08-16 15:41:57,744 log 16373 6182825984 Unauthorized: /api/auth/vendor/locations/e470bf82-11af-4573-a6ea-b36263583d25
+WARNING 2025-08-16 15:42:02,851 log 16373 6182825984 Not Found: /api/auth/vendor/locations/e470bf82-11af-4573-a6ea-b36263583d25
+WARNING 2025-08-16 15:42:36,998 log 16373 6182825984 Unsupported Media Type: /api/auth/vendor/locations/78160f2d-dede-4fcc-a243-745d2a015937
+WARNING 2025-08-16 15:42:47,597 log 16373 6182825984 Bad Request: /api/auth/vendor/locations/78160f2d-dede-4fcc-a243-745d2a015937
+INFO 2025-08-16 15:43:43,616 autoreload 16373 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:43:44,294 autoreload 16720 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:43:44,505 autoreload 16372 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:43:44,882 autoreload 16723 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 15:48:41,893 log 16720 6211661824 Unsupported Media Type: /api/auth/vendor/categories/1
+WARNING 2025-08-16 15:48:50,740 log 16720 6211661824 Bad Request: /api/auth/vendor/categories/1
+INFO 2025-08-16 15:49:43,242 autoreload 16723 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:49:43,444 autoreload 16720 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-16 15:49:43,838 autoreload 16985 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:49:43,838 autoreload 16984 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 15:52:00,290 log 16985 6175092736 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:52:18,033 log 16985 6175092736 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:52:21,124 log 16985 6175092736 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:52:44,171 log 16985 6175092736 Not Found: /api/orders/categories/3/
+WARNING 2025-08-16 15:52:47,978 log 16985 6175092736 Not Found: /api/orders/categories/3
+WARNING 2025-08-16 15:53:05,228 log 16985 6175092736 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:53:21,359 log 16985 6175092736 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:53:26,171 log 16985 6175092736 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:53:33,433 log 16985 6175092736 Not Found: /api/orders/categories/3
+WARNING 2025-08-16 15:53:37,180 log 16985 6175092736 Not Found: /api/orders/categories/3/
+WARNING 2025-08-16 15:53:44,231 log 16985 6175092736 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:55:11,054 log 16985 6191919104 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:55:43,454 log 16985 6191919104 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:55:55,158 log 16985 6191919104 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:55:56,310 log 16985 6191919104 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:55:57,039 log 16985 6191919104 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:55:57,673 log 16985 6191919104 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:56:01,220 log 16985 6191919104 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:56:15,597 log 16985 6191919104 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 15:56:19,318 log 16985 6191919104 Unauthorized: /api/orders/categories/
+WARNING 2025-08-16 15:56:40,935 log 16985 6191919104 Unauthorized: /api/orders/categories/
+WARNING 2025-08-16 15:56:48,433 log 16985 6191919104 Not Found: /api/orders/categories/3/
+WARNING 2025-08-16 15:56:52,883 log 16985 6191919104 Unauthorized: /api/orders/categories/
+WARNING 2025-08-16 15:57:00,393 log 16985 6191919104 Unauthorized: /api/orders/categories/
+WARNING 2025-08-16 15:57:05,651 log 16985 6191919104 Unauthorized: /api/orders/categories/
+WARNING 2025-08-16 15:57:06,687 log 16985 6191919104 Unauthorized: /api/orders/categories/
+WARNING 2025-08-16 15:57:26,020 log 16985 6191919104 Method Not Allowed: /api/orders/categories/
+INFO 2025-08-16 15:59:49,591 autoreload 16984 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 15:59:50,108 autoreload 17383 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 15:59:50,583 autoreload 16985 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 15:59:50,982 autoreload 17389 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:00:23,210 autoreload 17389 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-16 16:00:23,709 autoreload 17429 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:00:23,814 autoreload 17383 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-16 16:00:24,134 autoreload 17436 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 16:00:39,979 log 17429 6198800384 Bad Request: /api/orders/categories/
+ERROR 2025-08-16 16:01:21,886 log 17429 6198800384 Internal Server Error: /api/orders/categories/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 991, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 677, in create
+    obj = self.model(**kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/base.py", line 567, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: Category() got unexpected keyword arguments: 'vendor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 246, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 35, in perform_create
+    serializer.save(vendor=self.request.user.vendor_profile)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 1010, in create
+    raise TypeError(msg)
+TypeError: Got a `TypeError` when calling `Category.objects.create()`. This may be because you have a writable field on the serializer class that is not a valid argument to `Category.objects.create()`. You may need to make the field read-only, or override the CategorySerializer.create() method to handle this correctly.
+Original exception was:
+ Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 991, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 677, in create
+    obj = self.model(**kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/base.py", line 567, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: Category() got unexpected keyword arguments: 'vendor'
+
+INFO 2025-08-16 16:02:07,560 autoreload 17436 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:02:07,718 autoreload 17429 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:02:08,136 autoreload 17652 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:02:08,137 autoreload 17647 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:02:21,753 autoreload 17647 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:02:21,859 autoreload 17652 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:02:22,264 autoreload 17671 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:02:22,264 autoreload 17670 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:02:33,630 autoreload 17670 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-16 16:02:33,803 autoreload 17671 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-16 16:02:34,218 autoreload 17700 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:02:34,220 autoreload 17701 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 16:02:37,208 log 17701 6122385408 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 16:10:46,903 log 17701 6156038144 Unauthorized: /api/orders/categories/
+WARNING 2025-08-16 16:11:12,595 log 17701 6156038144 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 16:11:17,055 log 17701 6156038144 Method Not Allowed: /api/orders/categories/
+WARNING 2025-08-16 16:11:46,085 log 17701 6156038144 Not Found: /api/orders/categories/1/
+WARNING 2025-08-16 16:11:52,317 log 17701 6156038144 Not Found: /api/orders/categories/3/
+WARNING 2025-08-16 16:12:15,399 log 17701 6156038144 Not Found: /api/orders/categories/1
+WARNING 2025-08-16 16:12:37,967 log 17701 6156038144 Method Not Allowed: /api/orders/products/
+WARNING 2025-08-16 16:12:41,454 log 17701 6156038144 Method Not Allowed: /api/orders/products/
+WARNING 2025-08-16 16:12:59,475 log 17701 6156038144 Not Found: /api/orders/products/2/
+WARNING 2025-08-16 16:13:28,007 log 17701 6156038144 Method Not Allowed: /api/orders/products/2/
+WARNING 2025-08-16 16:13:30,639 log 17701 6156038144 Method Not Allowed: /api/orders/products/2/
+WARNING 2025-08-16 16:13:34,827 log 17701 6156038144 Not Found: /api/orders/products/2/
+WARNING 2025-08-16 16:15:42,981 log 17701 6172864512 Not Found: /api/orders/products/2/
+WARNING 2025-08-16 16:16:22,066 log 17701 6172864512 Method Not Allowed: /api/orders/vendor/3/restaurant/
+WARNING 2025-08-16 16:16:25,531 log 17701 6172864512 Method Not Allowed: /api/orders/vendor/3/restaurant/
+WARNING 2025-08-16 16:16:52,278 log 17701 6172864512 Unauthorized: /api/orders/vendor/products/
+WARNING 2025-08-16 16:17:00,531 log 17701 6172864512 Unauthorized: /api/orders/vendor/products/
+ERROR 2025-08-16 16:17:24,160 log 17701 6172864512 Internal Server Error: /api/orders/vendor/products/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 243, in get
+    return self.list(request, *args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ~~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 57, in get_queryset
+    return Product.objects.filter(vendor=self.request.user)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "amirimussa2003@gmail.com (vendor)": Must be "Vendor" instance.
+INFO 2025-08-16 16:19:29,622 autoreload 17701 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:19:29,978 autoreload 17700 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:19:30,246 autoreload 18360 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:19:30,421 autoreload 18362 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 16:21:31,240 log 18360 6143258624 Method Not Allowed: /api/orders/vendor/products/
+WARNING 2025-08-16 16:23:12,986 log 18360 6160084992 Unauthorized: /api/orders/vendor/products/
+WARNING 2025-08-16 16:23:38,020 log 18360 6160084992 Method Not Allowed: /api/orders/vendor/products/
+ERROR 2025-08-16 16:23:57,249 log 18360 6160084992 Internal Server Error: /api/orders/vendor/products/2/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 286, in get
+    return self.retrieve(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 54, in retrieve
+    instance = self.get_object()
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 87, in get_object
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ~~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 74, in get_queryset
+    return Product.objects.filter(vendor=self.request.user)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1609, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1641, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ~~~~~~~~~~~~~~~~~^
+        child,
+        ^^^^^^
+    ...<7 lines>...
+        update_join_types=update_join_types,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1528, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1342, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/query.py", line 1319, in check_query_object_type
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Cannot query "amirimussa2003@gmail.com (vendor)": Must be "Vendor" instance.
+INFO 2025-08-16 16:24:59,930 autoreload 18360 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:25:00,568 autoreload 18594 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:25:00,569 autoreload 18362 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:25:01,016 autoreload 18595 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 16:27:29,430 log 18594 6175338496 Method Not Allowed: /api/orders/addresses/
+ERROR 2025-08-16 16:27:57,870 log 18594 6192164864 Internal Server Error: /admin/orders/product/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/options.py", line 676, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'action_checkbox'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 290, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 330, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/options.py", line 678, in get_field
+    raise FieldDoesNotExist(
+        "%s has no field named '%s'" % (self.object_name, field_name)
+    )
+django.core.exceptions.FieldDoesNotExist: Product has no field named 'action_checkbox'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 346, in result_list
+    "results": list(results(cl)),
+               ~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 322, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 313, in __init__
+    super().__init__(*items)
+    ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 218, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 299, in lookup_field
+    value = attr(obj)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 1030, in action_checkbox
+    _("Select this object for an action - {}"), str(obj)
+                                                ~~~^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/models.py", line 57, in __str__
+    return f"{self.name} - {self.vendor.first_name} {self.vendor.last_name}"
+                            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Vendor' object has no attribute 'first_name'
+ERROR 2025-08-16 16:28:00,837 log 18594 6192164864 Internal Server Error: /admin/orders/product/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/options.py", line 676, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'action_checkbox'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 290, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 330, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/options.py", line 678, in get_field
+    raise FieldDoesNotExist(
+        "%s has no field named '%s'" % (self.object_name, field_name)
+    )
+django.core.exceptions.FieldDoesNotExist: Product has no field named 'action_checkbox'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 346, in result_list
+    "results": list(results(cl)),
+               ~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 322, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 313, in __init__
+    super().__init__(*items)
+    ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 218, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 299, in lookup_field
+    value = attr(obj)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 1030, in action_checkbox
+    _("Select this object for an action - {}"), str(obj)
+                                                ~~~^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/models.py", line 57, in __str__
+    return f"{self.name} - {self.vendor.first_name} {self.vendor.last_name}"
+                            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Vendor' object has no attribute 'first_name'
+ERROR 2025-08-16 16:28:07,275 log 18594 6192164864 Internal Server Error: /admin/orders/product/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/options.py", line 676, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'action_checkbox'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 290, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 330, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/options.py", line 678, in get_field
+    raise FieldDoesNotExist(
+        "%s has no field named '%s'" % (self.object_name, field_name)
+    )
+django.core.exceptions.FieldDoesNotExist: Product has no field named 'action_checkbox'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 346, in result_list
+    "results": list(results(cl)),
+               ~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 322, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 313, in __init__
+    super().__init__(*items)
+    ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 218, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 299, in lookup_field
+    value = attr(obj)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 1030, in action_checkbox
+    _("Select this object for an action - {}"), str(obj)
+                                                ~~~^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/models.py", line 57, in __str__
+    return f"{self.name} - {self.vendor.first_name} {self.vendor.last_name}"
+                            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Vendor' object has no attribute 'first_name'
+ERROR 2025-08-16 16:28:10,339 log 18594 6192164864 Internal Server Error: /admin/orders/product/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/options.py", line 676, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'action_checkbox'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 290, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 330, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/options.py", line 678, in get_field
+    raise FieldDoesNotExist(
+        "%s has no field named '%s'" % (self.object_name, field_name)
+    )
+django.core.exceptions.FieldDoesNotExist: Product has no field named 'action_checkbox'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 346, in result_list
+    "results": list(results(cl)),
+               ~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 322, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 313, in __init__
+    super().__init__(*items)
+    ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 218, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 299, in lookup_field
+    value = attr(obj)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 1030, in action_checkbox
+    _("Select this object for an action - {}"), str(obj)
+                                                ~~~^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/models.py", line 57, in __str__
+    return f"{self.name} - {self.vendor.first_name} {self.vendor.last_name}"
+                            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Vendor' object has no attribute 'first_name'
+ERROR 2025-08-16 16:28:11,645 log 18594 6192164864 Internal Server Error: /admin/orders/product/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/options.py", line 676, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'action_checkbox'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 290, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 330, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/options.py", line 678, in get_field
+    raise FieldDoesNotExist(
+        "%s has no field named '%s'" % (self.object_name, field_name)
+    )
+django.core.exceptions.FieldDoesNotExist: Product has no field named 'action_checkbox'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 346, in result_list
+    "results": list(results(cl)),
+               ~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 322, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 313, in __init__
+    super().__init__(*items)
+    ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/templatetags/admin_list.py", line 218, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/utils.py", line 299, in lookup_field
+    value = attr(obj)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 1030, in action_checkbox
+    _("Select this object for an action - {}"), str(obj)
+                                                ~~~^^^^^
+  File "/Users/macbookair/Desktop/Yumbackend/orders/models.py", line 57, in __str__
+    return f"{self.name} - {self.vendor.first_name} {self.vendor.last_name}"
+                            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Vendor' object has no attribute 'first_name'
+WARNING 2025-08-16 16:28:11,727 log 18594 6192164864 Not Found: /favicon.ico
+INFO 2025-08-16 16:30:22,352 autoreload 18595 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:30:22,420 autoreload 18594 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:30:23,041 autoreload 18919 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:30:23,042 autoreload 18918 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 16:30:26,441 log 18919 6170603520 Forbidden: /api/orders/addresses/
+WARNING 2025-08-16 16:30:34,035 log 18919 6170603520 Forbidden: /api/orders/addresses/
+WARNING 2025-08-16 16:30:37,037 log 18919 6170603520 Forbidden: /api/orders/addresses/
+INFO 2025-08-16 16:31:08,044 autoreload 18919 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:31:08,140 autoreload 18918 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:31:08,793 autoreload 18943 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:31:08,793 autoreload 18942 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 16:31:19,499 log 18942 6128463872 Unauthorized: /api/orders/addresses/5/
+WARNING 2025-08-16 16:31:35,518 log 18942 6128463872 Not Found: /api/orders/addresses/5/
+WARNING 2025-08-16 16:31:54,990 log 18942 6128463872 Bad Request: /api/orders/addresses/1/
+INFO 2025-08-16 16:33:00,012 autoreload 18943 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:33:00,473 autoreload 18942 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-16 16:33:00,691 autoreload 19004 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-16 16:33:01,052 autoreload 19005 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-16 16:33:02,805 log 19005 6126596096 Bad Request: /api/orders/addresses/1/
+WARNING 2025-08-16 16:33:08,749 log 19005 6126596096 Bad Request: /api/orders/addresses/1/
+WARNING 2025-08-16 16:34:16,116 log 19005 6126596096 Unauthorized: /api/orders/create/
+WARNING 2025-08-16 16:34:43,226 log 19005 6126596096 Bad Request: /api/orders/create/

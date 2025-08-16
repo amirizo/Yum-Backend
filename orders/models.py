@@ -7,7 +7,7 @@ import uuid
 from django.conf import settings
 import math
 User = get_user_model()
-
+from authentication.models import Vendor, Driver  # import your profile models
 
 class Category(models.Model):
     CATEGORY_TYPES = [
@@ -35,7 +35,7 @@ class Product(models.Model):
         ('inactive', 'Inactive'),
         ('archived', 'Archived'),
     ]
-    vendor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='products')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     name = models.CharField(max_length=200)
     description = models.TextField()
@@ -145,16 +145,17 @@ class DeliveryAddress(models.Model):
     street_address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
-    postal_code = models.CharField(max_length=20)
-    country = models.CharField(max_length=100, default='Tanzania')  # Updated default country
+    postal_code = models.CharField(max_length=20, blank=True)
+    country = models.CharField(max_length=100, default='Tanzania')
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    place_id = models.CharField(max_length=255, blank=True)
+    formatted_address = models.CharField(max_length=255, blank=True)
     is_default = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
         if self.is_default:
-            # Set all other addresses for this user to not default
             DeliveryAddress.objects.filter(user=self.user, is_default=True).update(is_default=False)
         super().save(*args, **kwargs)
 
@@ -186,8 +187,8 @@ class Order(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
-    vendor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='vendor_orders')
-    driver = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='driver_orders')
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='orders')
+    driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='driver_orders')
     
     # Order details
     order_number = models.CharField(max_length=20, unique=True)
@@ -268,8 +269,8 @@ class OrderStatusHistory(models.Model):
 class Review(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='review')
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
-    vendor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='vendor_reviews')
-    driver = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='driver_reviews')
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='reviews')
+    driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='driver_reviews')
     
     # Ratings (1-5 stars)
     food_rating = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
@@ -289,7 +290,7 @@ class Review(models.Model):
 
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
-    vendor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='carts', null=True, blank=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='carts', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

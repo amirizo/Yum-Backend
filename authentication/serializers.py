@@ -225,34 +225,50 @@ class VendorCategorySerializer(serializers.ModelSerializer):
         model = VendorCategory
         fields = ['name', 'description', 'is_primary']
 
+
 class VendorProfileSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+    email = serializers.EmailField(source='user.email', read_only=True)
+    phone_number = serializers.CharField(source='user.phone_number', read_only=True)
+    first_name = serializers.CharField(source='user.first_name', read_only=True)
+    last_name = serializers.CharField(source='user.last_name', read_only=True)
     opening_hours = BusinessHoursSerializer(many=True, read_only=True)
     locations = VendorLocationSerializer(many=True, read_only=True)
     categories = VendorCategorySerializer(many=True, read_only=True)
     is_open_now = serializers.SerializerMethodField()
     primary_location = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = Vendor
-        fields = ['id', 'user', 'business_name', 'business_type', 'business_description',
-                 'business_address', 'business_phone', 'business_email', 'business_license',
-                 'tax_id', 'logo', 'cover_image', 'status', 'is_verified', 'rating',
-                 'total_orders', 'total_reviews', 'delivery_fee', 'minimum_order_amount',
-                 'delivery_radius', 'average_preparation_time', 'accepts_cash',
-                 'accepts_card', 'accepts_mobile_money', 'opening_hours', 'locations',
-                 'categories', 'is_open_now', 'primary_location', 'created_at', 'updated_at']
-        read_only_fields = ['id', 'user', 'status', 'is_verified', 'rating', 
-                           'total_orders', 'total_reviews', 'created_at', 'updated_at']
-    
+        fields = [
+            'id', 'business_name', 'business_type', 'business_description',
+            'business_address', 'business_phone', 'business_email',
+            'business_license', 'tax_id', 'logo', 'cover_image', 'status',
+            'is_verified', 'rating', 'total_orders', 'total_reviews',
+            'delivery_fee', 'minimum_order_amount', 'delivery_radius',
+            'average_preparation_time', 'accepts_cash', 'accepts_card',
+            'accepts_mobile_money', 'opening_hours', 'locations', 'categories',
+            'is_open_now', 'primary_location', 'created_at', 'updated_at',
+            
+            # user fields exposed here
+            'email', 'phone_number', 'first_name', 'last_name'
+        ]
+        read_only_fields = [
+            'id', 'status', 'is_verified', 'rating',
+            'total_orders', 'total_reviews', 'created_at', 'updated_at',
+            'email', 'phone_number', 'first_name', 'last_name'
+        ]
+
     def get_is_open_now(self, obj):
         return obj.is_open_now()
-    
+
     def get_primary_location(self, obj):
         primary_location = obj.locations.filter(is_primary=True).first()
         if primary_location:
             return VendorLocationSerializer(primary_location).data
         return None
+
+
+
 
 
 class VendorProfileUpdateSerializer(serializers.ModelSerializer):
@@ -306,6 +322,23 @@ class VendorProfileUpdateSerializer(serializers.ModelSerializer):
         
         return instance
 
+
+
+
+
+class VendorProfileUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vendor
+        # Allow updating all fields, but none of them are required
+        fields = [
+            'business_name', 'business_type', 'business_description',
+            'business_address', 'business_phone', 'business_email',
+            'business_license', 'tax_id', 'logo', 'cover_image',
+            'delivery_fee', 'minimum_order_amount', 'delivery_radius',
+            'average_preparation_time', 'accepts_cash',
+            'accepts_card', 'accepts_mobile_money',
+        ]
+        extra_kwargs = {field: {'required': False} for field in fields}
 
 
 

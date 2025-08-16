@@ -10,10 +10,10 @@ from .serializers import (
     OrderCreateSerializer, OrderSerializer, OrderStatusHistorySerializer,
     OrderStatusUpdateSerializer, CartSerializer, CartItemSerializer, VendorWithProductsSerializer,CheckoutSerializer
 )
-
+from rest_framework.exceptions import PermissionDenied
 from .services import OrderNotificationService
 from decimal import Decimal
-
+from authentication.models import Vendor
 
 User = get_user_model()
 from django.shortcuts import get_object_or_404
@@ -54,14 +54,27 @@ class VendorProductListView(generics.ListCreateAPIView):
     ordering = ['-created_at']
 
     def get_queryset(self):
-        return Product.objects.filter(vendor=self.request.user)
+        # Only vendors can access this
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can access this endpoint")
+        # Use vendor_profile to filter products
+        return Product.objects.filter(vendor=self.request.user.vendor_profile)
+
+    def perform_create(self, serializer):
+        # Automatically assign vendor on product creation
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can create products")
+        serializer.save(vendor=self.request.user.vendor_profile)
 
 class VendorProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Product.objects.filter(vendor=self.request.user)
+        # Only vendors can access their products
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can access this endpoint")
+        return Product.objects.filter(vendor=self.request.user.vendor_profile)
 
 
 
@@ -103,6 +116,13 @@ class DeliveryAddressDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return DeliveryAddress.objects.filter(user=self.request.user)
+
+    def update(self, request, *args, **kwargs):
+        """Allow partial updates without requiring all fields"""
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)
+
+        
 
 # Order Views
 class OrderCreateView(generics.CreateAPIView):
@@ -356,7 +376,14 @@ class CheckoutView(generics.CreateAPIView):
         vendor_id = serializer.validated_data["vendor_id"]
         delivery_address = serializer.validated_data["delivery_address"]
 
-        vendor = get_object_or_404(Vendor, id=vendor_id)
+        # Fetch vendor (ensure it's active)
+        try:
+            vendor = Vendor.objects.get(id=vendor_id, status="active")
+        except Vendor.DoesNotExist:
+            return Response(
+                {"error": f"Vendor with id {vendor_id} does not exist or is inactive"},
+                status=status.HTTP_404_NOT_FOUND
+            )
 
         # Ensure vendor has a primary location
         if not vendor.primary_location:
@@ -368,6 +395,7 @@ class CheckoutView(generics.CreateAPIView):
         # Get cart
         if request.user.is_authenticated:
             cart = Cart.objects.filter(user=request.user, vendor=vendor).first()
+
         else:
             cart_id = serializer.validated_data.get("cart_id")
             cart = Cart.objects.filter(id=cart_id, vendor=vendor).first()
@@ -378,10 +406,9 @@ class CheckoutView(generics.CreateAPIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Calculate cart total
-        cart_total = cart.get_total_amount()  # Make sure your Cart model has this method
+        # Calculate totals
+        cart_total = cart.get_total_amount()
 
-        # Calculate delivery fee
         vendor_coords = (
             float(vendor.primary_location.latitude),
             float(vendor.primary_location.longitude)
@@ -394,14 +421,16 @@ class CheckoutView(generics.CreateAPIView):
         fee_per_km = Decimal("2000")  # 2000 TZS per km
         delivery_fee = (Decimal(distance_km) * fee_per_km).quantize(Decimal("0.01"))
 
-        # Calculate grand total
         grand_total = cart_total + delivery_fee
 
         return Response({
+            "vendor": vendor.business_name,
             "cart_total": f"{cart_total} TZS",
             "delivery_fee": f"{delivery_fee} TZS",
             "grand_total": f"{grand_total} TZS",
-            "distance_km": round(distance_km, 2)
+            "distance_km": round(distance_km, 2),
+            "delivery_from": vendor.primary_location.address,
+            "delivery_to": delivery_address
         })
 
 
@@ -606,47 +635,38 @@ def calculate_delivery_fee_api(request):
         )
 
 
+
 @api_view(['POST'])
-@permission_classes([permissions.AllowAny])
+@permission_classes([permissions.IsAuthenticated])
 def geocode_address(request):
     """Convert address to coordinates using Google Maps API"""
     try:
         address = request.data.get('address')
         if not address:
-            return Response({
-                'error': 'Address is required'
-            }, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Address is required'}, status=status.HTTP_400_BAD_REQUEST)
         
         if not settings.GOOGLE_MAPS_API_KEY:
-            return Response({
-                'error': 'Google Maps API key not configured'
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': 'Google Maps API key not configured'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
-        # Initialize Google Maps client
         gmaps = googlemaps.Client(key=settings.GOOGLE_MAPS_API_KEY)
-        
-        # Geocode the address
-        geocode_result = gmaps.geocode(address)
+        geocode_result = gmaps.geocode(address, region='TZ')  # Restrict to Tanzania
         
         if not geocode_result:
-            return Response({
-                'error': 'Address not found'
-            }, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'Address not found'}, status=status.HTTP_404_NOT_FOUND)
         
-        location = geocode_result[0]['geometry']['location']
-        formatted_address = geocode_result[0]['formatted_address']
-        
+        place = geocode_result[0]
+        location = place['geometry']['location']
+
         return Response({
             'latitude': location['lat'],
             'longitude': location['lng'],
-            'formatted_address': formatted_address,
-            'place_id': geocode_result[0].get('place_id', '')
-        })
+            'formatted_address': place.get('formatted_address', ''),
+            'place_id': place.get('place_id', '')
+        }, status=status.HTTP_200_OK)
         
     except Exception as e:
-        return Response({
-            'error': f'Error geocoding address: {str(e)}'
-        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response({'error': f'Error geocoding address: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])

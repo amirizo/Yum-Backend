@@ -51,14 +51,6 @@ class ProductSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 class DeliveryAddressSerializer(serializers.ModelSerializer):
-    formatted_address = serializers.CharField(required=False, allow_blank=True)
-    place_id = serializers.CharField(required=False, allow_blank=True)
-    label = serializers.CharField(required=False, allow_blank=True)
-    street_address = serializers.CharField(required=False, allow_blank=True)
-    city = serializers.CharField(required=False, allow_blank=True)
-    state = serializers.CharField(required=False, allow_blank=True)
-    postal_code = serializers.CharField(required=False, allow_blank=True)
-        
     class Meta:
         model = DeliveryAddress
         fields = '__all__'
@@ -68,12 +60,12 @@ class DeliveryAddressSerializer(serializers.ModelSerializer):
         if 'user' not in validated_data and self.context.get('request'):
             validated_data['user'] = self.context['request'].user
         return super().create(validated_data)
-    
+
     def validate(self, data):
-        # Ensure we have either coordinates or address
+        # Ensure coordinates or street_address is present
         if not data.get('latitude') or not data.get('longitude'):
-            if not data.get('address'):
-                raise serializers.ValidationError("Either coordinates or address is required")
+            if not data.get('street_address'):
+                raise serializers.ValidationError("Either coordinates or street address is required")
         return data
     
 

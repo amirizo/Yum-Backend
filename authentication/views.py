@@ -2,7 +2,7 @@ from rest_framework import status, generics, permissions, filters
 from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
-
+from rest_framework.exceptions import PermissionDenied
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -19,7 +19,7 @@ from .serializers import (
     PasswordResetRequestSerializer, PasswordResetConfirmSerializer, UserSerializer, ResendOTPSerializer, OTPVerificationSerializer,
     VendorProfileSerializer, VendorProfileUpdateSerializer,
     DriverProfileSerializer, BusinessHoursSerializer, VendorLocationSerializer,
-    VendorCategorySerializer, ContactMessageSerializer
+    VendorCategorySerializer, ContactMessageSerializer,VendorProfileUpdateSerializer
 )
 import logging
 logger = logging.getLogger(__name__)
@@ -522,16 +522,22 @@ class VendorListView(generics.ListAPIView):
 
 class VendorProfileView(generics.RetrieveUpdateAPIView):
     permission_classes = [permissions.IsAuthenticated]
-    
+
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return VendorProfileSerializer
         return VendorProfileUpdateSerializer
-    
+
     def get_object(self):
         if self.request.user.user_type != 'vendor':
-            raise permissions.PermissionDenied("Only vendors can access this endpoint")
+            raise PermissionDenied(detail="Only vendors can access this endpoint")
         return self.request.user.vendor_profile
+
+    def update(self, request, *args, **kwargs):
+        # Allow partial updates automatically
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)
+
 
 
 
@@ -542,10 +548,12 @@ class VendorBusinessHoursView(generics.ListCreateAPIView):
     
     def get_queryset(self):
         if self.request.user.user_type != 'vendor':
-            return BusinessHours.objects.none()
+            raise PermissionDenied("Only vendors can access business hours.")
         return BusinessHours.objects.filter(vendor=self.request.user.vendor_profile)
     
     def perform_create(self, serializer):
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can create business hours.")
         serializer.save(vendor=self.request.user.vendor_profile)
 
 
@@ -553,11 +561,22 @@ class VendorBusinessHoursView(generics.ListCreateAPIView):
 class VendorBusinessHoursDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BusinessHoursSerializer
     permission_classes = [permissions.IsAuthenticated]
-    
+
     def get_queryset(self):
+        # Only allow vendors to see their own business hours
         if self.request.user.user_type != 'vendor':
             return BusinessHours.objects.none()
         return BusinessHours.objects.filter(vendor=self.request.user.vendor_profile)
+
+    def get_serializer(self, *args, **kwargs):
+        # On update/partial_update, make fields not required
+        if self.request.method in ['PUT', 'PATCH']:
+            kwargs['partial'] = True  # allows partial updates
+        return super().get_serializer(*args, **kwargs)
+
+    def perform_update(self, serializer):
+        # Ensure the vendor field is always set correctly
+        serializer.save(vendor=self.request.user.vendor_profile)
 
 
 
@@ -567,35 +586,46 @@ class VendorLocationView(generics.ListCreateAPIView):
     
     def get_queryset(self):
         if self.request.user.user_type != 'vendor':
-            return VendorLocation.objects.none()
+            raise PermissionDenied("Only vendors can access this resource.")
         return VendorLocation.objects.filter(vendor=self.request.user.vendor_profile)
     
     def perform_create(self, serializer):
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can create locations.")
         serializer.save(vendor=self.request.user.vendor_profile)
-
 
 
 class VendorLocationDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = VendorLocationSerializer
     permission_classes = [permissions.IsAuthenticated]
-    
+
     def get_queryset(self):
         if self.request.user.user_type != 'vendor':
+            # Non-vendors cannot access
             return VendorLocation.objects.none()
         return VendorLocation.objects.filter(vendor=self.request.user.vendor_profile)
+
+    def update(self, request, *args, **kwargs):
+        if request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can update locations.")
+        # Allow partial updates (don't require all fields)
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)
 
 
 
 class VendorCategoryView(generics.ListCreateAPIView):
     serializer_class = VendorCategorySerializer
     permission_classes = [permissions.IsAuthenticated]
-    
+
     def get_queryset(self):
         if self.request.user.user_type != 'vendor':
-            return VendorCategory.objects.none()
+            raise PermissionDenied("Only vendors can access categories.")
         return VendorCategory.objects.filter(vendor=self.request.user.vendor_profile)
-    
+
     def perform_create(self, serializer):
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can create categories.")
         serializer.save(vendor=self.request.user.vendor_profile)
 
 
@@ -603,11 +633,18 @@ class VendorCategoryView(generics.ListCreateAPIView):
 class VendorCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = VendorCategorySerializer
     permission_classes = [permissions.IsAuthenticated]
-    
+
     def get_queryset(self):
         if self.request.user.user_type != 'vendor':
             return VendorCategory.objects.none()
         return VendorCategory.objects.filter(vendor=self.request.user.vendor_profile)
+
+    def update(self, request, *args, **kwargs):
+        if request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can update categories.")
+        # Allow partial updates (fields are not required)
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)
 
 
 
@@ -646,40 +683,42 @@ def update_driver_location(request):
 
 
 
+
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def vendor_dashboard(request):
     if request.user.user_type != 'vendor':
         return Response({'error': 'Access denied'}, status=status.HTTP_403_FORBIDDEN)
-    
+
     try:
-        vendor_profile = request.user.vendor_profile
-        
-        # Import here to avoid circular imports
+        vendor = request.user.vendor_profile
+
         from orders.models import Order, Product
         from payments.models import PayoutRequest
-        
-        # Get vendor statistics
-        orders = Order.objects.filter(vendor=request.user)
-        products = Product.objects.filter(vendor=request.user)
-        payout_requests = PayoutRequest.objects.filter(vendor=request.user)
-        
-        # Calculate metrics
+        from django.db.models import Sum
+
+        # ✅ These models are linked to Vendor
+        orders = Order.objects.filter(vendor=vendor)
+        products = Product.objects.filter(vendor=vendor)
+        payout_requests = PayoutRequest.objects.filter(vendor=vendor)
+
+        # Stats
         total_orders = orders.count()
         pending_orders = orders.filter(status__in=['pending', 'confirmed']).count()
         completed_orders = orders.filter(status='delivered').count()
         total_products = products.count()
         active_products = products.filter(is_available=True).count()
-        
-        # Revenue calculations
-        from django.db.models import Sum
+
+        # Revenue
         total_revenue = orders.filter(status='delivered').aggregate(
-            total=Sum('total_amount'))['total'] or 0
+            total=Sum('total_amount')
+        )['total'] or 0
         pending_payouts = payout_requests.filter(status='pending').aggregate(
-            total=Sum('amount'))['total'] or 0
-        
+            total=Sum('amount')
+        )['total'] or 0
+
         return Response({
-            'vendor_profile': VendorProfileSerializer(vendor_profile).data,
+            'vendor_profile': VendorProfileSerializer(vendor).data,
             'statistics': {
                 'total_orders': total_orders,
                 'pending_orders': pending_orders,
@@ -688,15 +727,15 @@ def vendor_dashboard(request):
                 'active_products': active_products,
                 'total_revenue': float(total_revenue),
                 'pending_payouts': float(pending_payouts),
-                'average_rating': float(vendor_profile.rating),
-                'total_reviews': vendor_profile.total_reviews,
+                'average_rating': float(vendor.rating or 0),
+                'total_reviews': vendor.total_reviews,
             },
-            'is_open_now': vendor_profile.is_open_now(),
-            'recent_orders': []  # Will be populated when order serializer is available
+            'is_open_now': vendor.is_open_now(),
+            'recent_orders': []  # TODO: hook up serializer
         })
-    except Vendor.DoesNotExist:
-        return Response({'error': 'Vendor profile not found'}, 
-                       status=status.HTTP_404_NOT_FOUND)
+
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 
