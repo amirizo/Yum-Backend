@@ -54,7 +54,7 @@ class Product(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
 
     def __str__(self):
-        return f"{self.name} - {self.vendor.first_name} {self.vendor.last_name}"
+        return f"{self.name} - {self.vendor.business_name} {self.vendor.business_phone}"
 
     @property
     def is_low_stock(self):
