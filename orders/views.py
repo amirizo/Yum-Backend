@@ -1,34 +1,121 @@
 from rest_framework import generics, permissions, status, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth import get_user_model
 from django.db.models import Q, Count, Sum, Avg
+from django.shortcuts import get_object_or_404
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from django.utils import timezone
+from decimal import Decimal
+from geopy.distance import geodesic
+import googlemaps
+import json
+import logging
 from .models import Category, Product, DeliveryAddress, Order,  OrderItem, OrderStatusHistory, Cart, CartItem, calculate_delivery_fee
 from .serializers import (
     CategorySerializer, ProductSerializer,ProductVariantSerializer,
     DeliveryAddressSerializer,
     OrderCreateSerializer, OrderSerializer, OrderStatusHistorySerializer,
     OrderStatusUpdateSerializer, CartSerializer, CartItemSerializer, 
-    VendorWithProductsSerializer,CheckoutSerializer
+    VendorWithProductsSerializer,CheckoutSerializer, VendorCategorySerializer
 )
 from rest_framework.exceptions import PermissionDenied
 from .services import OrderNotificationService
-from decimal import Decimal
 from authentication.models import Vendor
 
 User = get_user_model()
-from django.shortcuts import get_object_or_404
-from django.conf import settings
-import googlemaps
 from .utils import add_item_to_cart, get_cart_for_request, remove_cart_item ,update_cart_item , clear_cart
+
+logger = logging.getLogger(__name__)
 # Category Views
 class CategoryListView(generics.ListAPIView):
-    queryset = Category.objects.filter(is_active=True)
+    """Public view to list all active categories"""
     serializer_class = CategorySerializer
     permission_classes = [permissions.AllowAny]
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['category_type']
+    filterset_fields = ['category_type', 'vendor']
+
+    def get_queryset(self):
+        # Show both global categories (vendor=None) and vendor-specific categories
+        return Category.objects.filter(is_active=True)
+
+
+class VendorCategoryListCreateView(generics.ListCreateAPIView):
+    """Vendor view to list their categories and create new ones"""
+    serializer_class = VendorCategorySerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['category_type', 'is_active']
+    search_fields = ['name', 'description']
+    ordering_fields = ['name', 'created_at']
+    ordering = ['name']
+
+    def get_queryset(self):
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can access this endpoint")
+        return Category.objects.filter(vendor=self.request.user.vendor_profile)
+
+    def perform_create(self, serializer):
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can create categories")
+        serializer.save()
+
+
+class VendorCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """Vendor view to retrieve, update, or delete their categories"""
+    serializer_class = VendorCategorySerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can access this endpoint")
+        return Category.objects.filter(vendor=self.request.user.vendor_profile)
+
+    def perform_update(self, serializer):
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can update categories")
+        serializer.save()
+
+    def perform_destroy(self, instance):
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can delete categories")
+        
+        # Check if category has products
+        if instance.products.exists():
+            from rest_framework.exceptions import ValidationError
+            raise ValidationError("Cannot delete category that has products. Please remove or reassign products first.")
+        
+        instance.delete()
+
+
+class VendorCategoryStatsView(generics.RetrieveAPIView):
+    """Get statistics for vendor's categories"""
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        if request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can access this endpoint")
+        
+        vendor = request.user.vendor_profile
+        categories = Category.objects.filter(vendor=vendor)
+        
+        stats = {
+            'total_categories': categories.count(),
+            'active_categories': categories.filter(is_active=True).count(),
+            'inactive_categories': categories.filter(is_active=False).count(),
+            'categories_by_type': {
+                'food': categories.filter(category_type='food').count(),
+                'grocery': categories.filter(category_type='grocery').count(),
+            },
+            'categories_with_products': categories.filter(products__isnull=False).distinct().count(),
+            'empty_categories': categories.filter(products__isnull=True).count(),
+        }
+        
+        return Response(stats)
 
 # Product Views
 class ProductListView(generics.ListAPIView):
@@ -194,6 +281,14 @@ class OrderStatusHistoryView(generics.ListAPIView):
 
 
 
+
+
+class VendorOrdersView(APIView):
+    def get(self, request):
+        # Get orders for the authenticated vendor only
+        vendor_orders = Order.objects.filter(vendor=request.user.vendor_profile)
+        serializer = OrderSerializer(vendor_orders, many=True)
+        return Response(serializer.data)
 
 
 # Cart Management Views
@@ -371,6 +466,7 @@ class ClearCartView(generics.GenericAPIView):
         return Response({"message": "Cart cleared"})
 
 class CheckoutView(generics.CreateAPIView):
+    """Calculate checkout totals and preview order (doesn't create order)"""
     permission_classes = [permissions.AllowAny]
     serializer_class = CheckoutSerializer
 
@@ -400,7 +496,6 @@ class CheckoutView(generics.CreateAPIView):
         # Get cart
         if request.user.is_authenticated:
             cart = Cart.objects.filter(user=request.user, vendor=vendor).first()
-
         else:
             cart_id = serializer.validated_data.get("cart_id")
             cart = Cart.objects.filter(id=cart_id, vendor=vendor).first()
@@ -435,7 +530,8 @@ class CheckoutView(generics.CreateAPIView):
             "grand_total": f"{grand_total} TZS",
             "distance_km": round(distance_km, 2),
             "delivery_from": vendor.primary_location.address,
-            "delivery_to": delivery_address
+            "delivery_to": delivery_address,
+            "message": "Use /api/payments/create-order-and-payment/ to create the order and process payment"
         })
 
 
@@ -517,9 +613,15 @@ def assign_driver_to_order(request, order_id):
     
     try:
         order = Order.objects.get(id=order_id, status='ready', driver__isnull=True)
-        order.driver = request.user
+        
+        # Check if driver is available
+        driver_profile = getattr(request.user, 'driver_profile', None)
+        if not driver_profile or not driver_profile.is_available:
+            return Response({'error': 'Driver is not available for deliveries'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        order.driver = request.user.driver_profile
         order.status = 'picked_up'
-        order.save()
+        order.save()  # This will trigger the comprehensive notification system through signals
         
         # Create status history
         OrderStatusHistory.objects.create(
@@ -529,9 +631,251 @@ def assign_driver_to_order(request, order_id):
             notes='Order picked up by driver'
         )
         
-        return Response({'message': 'Order assigned successfully'})
+        return Response({
+            'message': 'Order assigned successfully',
+            'order_number': order.order_number,
+            'status': order.status
+        })
     except Order.DoesNotExist:
         return Response({'error': 'Order not found or not available'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def vendor_set_preparing(request, order_id):
+    """Vendor sets order status to preparing"""
+    if request.user.user_type != 'vendor':
+        return Response({'error': 'Only vendors can update order status'}, status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        order = Order.objects.get(
+            id=order_id,
+            vendor=request.user.vendor_profile,
+            status='confirmed',
+            payment_status='paid'
+        )
+        
+        old_status = order.status
+        order.status = 'preparing'
+        order.save()  # This will trigger the notification system through signals
+        
+        # Create status history
+        OrderStatusHistory.objects.create(
+            order=order,
+            status='preparing',
+            changed_by=request.user,
+            notes='Vendor started preparing the order'
+        )
+        
+        return Response({
+            'message': 'Order status updated to preparing',
+            'order_number': order.order_number,
+            'status': order.status
+        })
+        
+    except Order.DoesNotExist:
+        return Response({'error': 'Order not found or cannot be updated'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def vendor_set_ready(request, order_id):
+    """Vendor sets order status to ready and notifies drivers"""
+    if request.user.user_type != 'vendor':
+        return Response({'error': 'Only vendors can update order status'}, status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        order = Order.objects.get(
+            id=order_id,
+            vendor=request.user.vendor_profile,
+            status='preparing',
+            payment_status='paid'
+        )
+        
+        old_status = order.status
+        order.status = 'ready'
+        
+        # Set estimated delivery time if not already set
+        if not order.estimated_delivery_time:
+            order.estimated_delivery_time = timezone.now() + timezone.timedelta(minutes=30)
+        
+        order.save()  # This will trigger the comprehensive notification system through signals
+        
+        # Create status history
+        OrderStatusHistory.objects.create(
+            order=order,
+            status='ready',
+            changed_by=request.user,
+            notes='Order is ready for pickup'
+        )
+        
+        return Response({
+            'message': 'Order is ready for pickup. Drivers have been notified.',
+            'order_number': order.order_number,
+            'status': order.status,
+            'estimated_delivery': order.estimated_delivery_time
+        })
+        
+    except Order.DoesNotExist:
+        return Response({'error': 'Order not found or cannot be updated'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def driver_mark_delivered(request, order_id):
+    """Driver marks order as delivered"""
+    if request.user.user_type != 'driver':
+        return Response({'error': 'Only drivers can mark orders as delivered'}, status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        order = Order.objects.get(
+            id=order_id,
+            driver=request.user.driver_profile,
+            status__in=['picked_up', 'in_transit']
+        )
+        
+        old_status = order.status
+        order.status = 'delivered'
+        order.actual_delivery_time = timezone.now()
+        order.delivered_at = timezone.now()
+        order.save()  # This will trigger the comprehensive notification system through signals
+        
+        # Create status history
+        OrderStatusHistory.objects.create(
+            order=order,
+            status='delivered',
+            changed_by=request.user,
+            notes='Order delivered to customer'
+        )
+        
+        # Update driver availability if needed
+        driver_profile = request.user.driver_profile
+        driver_profile.current_orders_count = driver_profile.current_orders_count - 1 if driver_profile.current_orders_count > 0 else 0
+        driver_profile.save()
+        
+        return Response({
+            'message': 'Order marked as delivered successfully',
+            'order_number': order.order_number,
+            'status': order.status,
+            'delivery_time': order.actual_delivery_time
+        })
+        
+    except Order.DoesNotExist:
+        return Response({'error': 'Order not found or cannot be marked as delivered'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def driver_update_location(request, order_id):
+    """Driver updates their location during delivery"""
+    if request.user.user_type != 'driver':
+        return Response({'error': 'Only drivers can update location'}, status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        order = Order.objects.get(
+            id=order_id,
+            driver=request.user.driver_profile,
+            status__in=['picked_up', 'in_transit']
+        )
+        
+        latitude = request.data.get('latitude')
+        longitude = request.data.get('longitude')
+        
+        if not latitude or not longitude:
+            return Response({'error': 'Latitude and longitude are required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Update driver's current location
+        driver_profile = request.user.driver_profile
+        driver_profile.current_latitude = latitude
+        driver_profile.current_longitude = longitude
+        driver_profile.last_location_update = timezone.now()
+        driver_profile.save()
+        
+        # Update order status to in_transit if not already
+        if order.status != 'in_transit':
+            old_status = order.status
+            order.status = 'in_transit'
+            order.save()  # This will trigger the comprehensive notification system through signals
+            
+            # Create status history
+            OrderStatusHistory.objects.create(
+                order=order,
+                status='in_transit',
+                changed_by=request.user,
+                notes='Driver is en route to delivery location'
+            )
+        
+        # Send real-time location update via WebSocket
+        from notifications.services import NotificationService
+        NotificationService.send_driver_location_update(order, latitude, longitude, driver_profile)
+        
+        return Response({
+            'message': 'Location updated successfully',
+            'order_status': order.status,
+            'latitude': float(latitude),
+            'longitude': float(longitude)
+        })
+        
+    except Order.DoesNotExist:
+        return Response({'error': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def available_orders_for_drivers(request):
+    """Get list of orders available for driver pickup"""
+    if request.user.user_type != 'driver':
+        return Response({'error': 'Only drivers can access this endpoint'}, status=status.HTTP_403_FORBIDDEN)
+    
+    # Get orders that are ready and don't have a driver assigned
+    orders = Order.objects.filter(
+        status='ready',
+        driver__isnull=True,
+        payment_status='paid'
+    ).select_related('vendor', 'customer').prefetch_related('items__product')
+    
+    # Calculate distance from driver's location if available
+    driver_profile = request.user.driver_profile
+    order_data = []
+    
+    for order in orders:
+        vendor_location = order.vendor.primary_location
+        order_info = {
+            'id': str(order.id),
+            'order_number': order.order_number,
+            'vendor_name': order.vendor.business_name,
+            'vendor_address': vendor_location.address if vendor_location else 'N/A',
+            'customer_address': order.delivery_address_text,
+            'total_amount': order.total_amount,
+            'item_count': order.items.count(),
+            'estimated_delivery_time': order.estimated_delivery_time,
+            'created_at': order.created_at,
+        }
+        
+        # Calculate distance if driver location is available
+        if (driver_profile.current_latitude and driver_profile.current_longitude and 
+            vendor_location and vendor_location.latitude and vendor_location.longitude):
+            
+            distance = calculate_delivery_fee(
+                float(driver_profile.current_latitude),
+                float(driver_profile.current_longitude),
+                float(vendor_location.latitude),
+                float(vendor_location.longitude)
+            )
+            order_info['distance_km'] = distance
+        
+        order_data.append(order_info)
+    
+    # Sort by distance if available, otherwise by creation time
+    if any('distance_km' in order for order in order_data):
+        order_data.sort(key=lambda x: x.get('distance_km', float('inf')))
+    else:
+        order_data.sort(key=lambda x: x['created_at'], reverse=True)
+    
+    return Response({
+        'available_orders': order_data,
+        'count': len(order_data)
+    })
 
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
@@ -723,3 +1067,6 @@ def reverse_geocode(request):
         return Response({
             'error': f'Error reverse geocoding: {str(e)}'
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# Payment-related functionality has been moved to the payments app

@@ -9,6 +9,23 @@ User = get_user_model()
 
 class CategorySerializer(serializers.ModelSerializer):
     product_count = serializers.SerializerMethodField()
+    vendor_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'description', 'image', 'category_type', 'is_active', 'product_count', 'vendor_name', 'created_at']
+        read_only_fields = ['created_at', 'product_count', 'vendor_name']
+
+    def get_product_count(self, obj):
+        return obj.products.filter(is_available=True).count()
+    
+    def get_vendor_name(self, obj):
+        return obj.vendor.business_name if obj.vendor else "Global"
+
+
+class VendorCategorySerializer(serializers.ModelSerializer):
+    """Serializer for vendor category management"""
+    product_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
@@ -17,6 +34,27 @@ class CategorySerializer(serializers.ModelSerializer):
 
     def get_product_count(self, obj):
         return obj.products.filter(is_available=True).count()
+    
+    def validate_name(self, value):
+        """Ensure category name is unique for this vendor"""
+        vendor = self.context['request'].user.vendor_profile
+        
+        # For updates, exclude current instance
+        if self.instance:
+            existing = Category.objects.filter(vendor=vendor, name=value).exclude(id=self.instance.id)
+        else:
+            existing = Category.objects.filter(vendor=vendor, name=value)
+        
+        if existing.exists():
+            raise serializers.ValidationError("You already have a category with this name.")
+        
+        return value
+
+    def create(self, validated_data):
+        """Automatically set vendor when creating category"""
+        vendor = self.context['request'].user.vendor_profile
+        validated_data['vendor'] = vendor
+        return super().create(validated_data)
     
 
 
@@ -263,6 +301,9 @@ class VendorSerializer(serializers.ModelSerializer):
         fields = ['id', 'business_name', 'business_phone', 'business_email', 'location']  # add fields you need
 
 class DriverSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source='user.first_name', read_only=True)
+    last_name = serializers.CharField(source='user.last_name', read_only=True)
+    phone = serializers.CharField(source='user.phone_number', read_only=True)  # or `user.phone` if you extended User model
     class Meta:
         model = Driver
         fields = ['id', 'first_name', 'last_name', 'phone']

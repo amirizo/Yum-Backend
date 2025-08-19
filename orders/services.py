@@ -201,3 +201,182 @@ class OrderNotificationService:
             
         except Exception as e:
             logger.error(f"Failed to process refund for order {order.order_number}: {str(e)}")
+
+    @staticmethod
+    def send_order_delivered_email(order):
+        """Send thank you email to customer when order is delivered"""
+        try:
+            driver_user = getattr(order.driver, 'user', None)
+            vendor_user = getattr(order.vendor, 'user', None)
+            
+            context = {
+                'customer_name': f"{order.customer.first_name} {order.customer.last_name}",
+                'order_number': order.order_number,
+                'vendor_name': f"{vendor_user.first_name} {vendor_user.last_name}" if vendor_user else order.vendor.business_name,
+                'driver_name': f"{driver_user.first_name} {driver_user.last_name}" if driver_user else "Driver",
+                'delivery_time': order.actual_delivery_time or timezone.now(),
+                'total_amount': order.total_amount,
+                'order_items': order.items.all(),
+                'delivery_address': order.delivery_address,
+            }
+            
+            subject = f"Order #{order.order_number} Delivered - Thank You! - YumExpress"
+            html_message = render_to_string('emails/order_delivered.html', context)
+            plain_message = render_to_string('emails/order_delivered.txt', context)
+            
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[order.customer.email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+            logger.info(f"Order delivered email sent to {order.customer.email} for order {order.order_number}")
+            
+            # Send SMS notification
+            sms_message = f"Your order #{order.order_number} has been delivered! Thank you for choosing YumExpress. Total: TZS {order.total_amount:,.0f}"
+            SMSService.send_sms(order.customer.phone_number, sms_message)
+            
+        except Exception as e:
+            logger.error(f"Failed to send order delivered email: {str(e)}")
+
+    @staticmethod
+    def notify_vendor_order_delivered(order):
+        """Notify vendor when order is delivered"""
+        try:
+            vendor_user = getattr(order.vendor, 'user', None)
+            if not vendor_user:
+                return
+                
+            driver_user = getattr(order.driver, 'user', None)
+            
+            context = {
+                'vendor_name': f"{vendor_user.first_name} {vendor_user.last_name}",
+                'order_number': order.order_number,
+                'customer_name': f"{order.customer.first_name} {order.customer.last_name}",
+                'driver_name': f"{driver_user.first_name} {driver_user.last_name}" if driver_user else "Driver",
+                'delivery_time': order.actual_delivery_time or timezone.now(),
+                'total_amount': order.total_amount,
+            }
+            
+            subject = f"Order #{order.order_number} Successfully Delivered - YumExpress"
+            html_message = render_to_string('emails/vendor_order_delivered.html', context)
+            plain_message = render_to_string('emails/vendor_order_delivered.txt', context)
+            
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[vendor_user.email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+            logger.info(f"Vendor delivery notification sent to {vendor_user.email} for order {order.order_number}")
+            
+        except Exception as e:
+            logger.error(f"Failed to send vendor delivery notification: {str(e)}")
+
+    @staticmethod
+    def notify_all_drivers_new_order(order):
+        """Notify all available drivers when order is ready for pickup"""
+        try:
+            from django.contrib.auth import get_user_model
+            from authentication.services import SMSService
+            
+            User = get_user_model()
+            
+            # Get all active drivers
+            drivers = User.objects.filter(
+                user_type='driver', 
+                is_active=True,
+                driver_profile__is_available=True
+            )
+            
+            vendor_user = getattr(order.vendor, 'user', None)
+            vendor_location = order.vendor.primary_location
+            
+            for driver in drivers:
+                try:
+                    # Send SMS notification
+                    sms_message = (
+                        f"New order available! Order #{order.order_number} "
+                        f"from {order.vendor.business_name}. "
+                        f"Value: TZS {order.total_amount:,.0f}. "
+                        f"Pickup: {vendor_location.address if vendor_location else 'N/A'}. "
+                        f"Reply to accept."
+                    )
+                    SMSService.send_sms(driver.phone_number, sms_message)
+                    
+                    # Send email notification
+                    context = {
+                        'driver_name': f"{driver.first_name} {driver.last_name}",
+                        'order_number': order.order_number,
+                        'vendor_name': order.vendor.business_name,
+                        'vendor_location': vendor_location.address if vendor_location else 'N/A',
+                        'customer_address': order.delivery_address_text,
+                        'total_amount': order.total_amount,
+                        'estimated_delivery': order.estimated_delivery_time,
+                        'pickup_instructions': getattr(order, 'pickup_instructions', ''),
+                    }
+                    
+                    subject = f"New Delivery Available - Order #{order.order_number} - YumExpress"
+                    html_message = render_to_string('emails/driver_new_order.html', context)
+                    plain_message = render_to_string('emails/driver_new_order.txt', context)
+                    
+                    send_mail(
+                        subject=subject,
+                        message=plain_message,
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        recipient_list=[driver.email],
+                        html_message=html_message,
+                        fail_silently=True,  # Don't fail if one email fails
+                    )
+                    
+                except Exception as e:
+                    logger.error(f"Failed to notify driver {driver.id}: {str(e)}")
+                    continue
+            
+            logger.info(f"Notified {drivers.count()} drivers about order {order.order_number}")
+            
+        except Exception as e:
+            logger.error(f"Failed to notify drivers about order {order.order_number}: {str(e)}")
+
+    @staticmethod
+    def send_order_status_update_email(order, old_status, new_status, notes=""):
+        """Send email notification for order status updates"""
+        try:
+            status_messages = {
+                'preparing': 'Your order is being prepared',
+                'ready': 'Your order is ready for pickup',
+                'picked_up': 'Your order has been picked up by our driver',
+                'in_transit': 'Your order is on the way',
+                'delivered': 'Your order has been delivered',
+            }
+            
+            context = {
+                'customer_name': f"{order.customer.first_name} {order.customer.last_name}",
+                'order_number': order.order_number,
+                'old_status': old_status.replace('_', ' ').title(),
+                'new_status': new_status.replace('_', ' ').title(),
+                'status_message': status_messages.get(new_status, f'Order status updated to {new_status}'),
+                'notes': notes,
+                'estimated_delivery': order.estimated_delivery_time,
+            }
+            
+            subject = f"Order #{order.order_number} Update - {new_status.replace('_', ' ').title()} - YumExpress"
+            html_message = render_to_string('emails/order_status_update.html', context)
+            plain_message = render_to_string('emails/order_status_update.txt', context)
+            
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[order.customer.email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+            logger.info(f"Order status update email sent to {order.customer.email} for order {order.order_number}")
+            
+        except Exception as e:
+            logger.error(f"Failed to send order status update email: {str(e)}")

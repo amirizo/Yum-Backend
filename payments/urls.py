@@ -6,6 +6,7 @@ urlpatterns = [
     path('methods/', views.PaymentMethodListView.as_view(), name='payment-method-list'),
     
     # Payment Processing
+    path('create-order-and-payment/', views.create_order_and_payment, name='create-order-and-payment'),
     path('create-intent/', views.create_payment_intent, name='create-payment-intent'),
     path('confirm/', views.confirm_payment, name='confirm-payment'),
     # path('mobile-money/', views.mobile_money_payment, name='mobile-money-payment'),

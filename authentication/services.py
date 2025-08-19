@@ -90,11 +90,12 @@ class SMSService:
         return SMSService.send_sms(user.phone_number, message)
     
 
-    def send_payment_success_sms(self, phone_number, order_reference, amount):
+    @staticmethod
+    def send_payment_success_sms(phone_number, order_reference, amount):
         """Send payment success SMS to customer"""
         message = f"Payment successful! Your order {order_reference} for TZS {amount:,.0f} has been confirmed. Thank you for choosing YumExpress!"
         
-        return self._send_sms(phone_number, message)
+        return SMSService.send_sms(phone_number, message)
     
     # def send_cash_order_sms(self, phone_number, order_reference):
     #     """Send cash order confirmation SMS"""
@@ -274,6 +275,45 @@ class EmailService:
             return {'success': False, 'error': str(e)}
             
             
+    @staticmethod
+    def send_admin_cash_order_notification(order, payment):
+        """Send notification to admin when cash order is created"""
+        try:
+            subject = f'New Cash Order - Order #{order.order_number}'
+            
+            # Get admin emails
+            from django.contrib.auth import get_user_model
+            User = get_user_model()
+            admin_emails = list(User.objects.filter(is_staff=True, is_active=True).values_list('email', flat=True))
+            
+            if not admin_emails:
+                logger.warning("No admin emails found for cash order notification")
+                return False
+            
+            html_message = render_to_string('emails/admin_cash_order_notification.html', {
+                'order': order,
+                'payment': payment,
+                'customer': order.customer,
+                'order_items': order.items.all(),
+            })
+            
+            plain_message = strip_tags(html_message)
+            
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=admin_emails,
+                html_message=html_message,
+                fail_silently=False,
+            )
+            
+            logger.info(f"Admin cash order notification sent for order {order.order_number}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to send admin cash order notification: {str(e)}")
+            return False
         
 
     

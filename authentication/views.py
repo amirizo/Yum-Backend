@@ -551,10 +551,24 @@ class VendorBusinessHoursView(generics.ListCreateAPIView):
             raise PermissionDenied("Only vendors can access business hours.")
         return BusinessHours.objects.filter(vendor=self.request.user.vendor_profile)
     
+   
+
+
     def perform_create(self, serializer):
         if self.request.user.user_type != 'vendor':
             raise PermissionDenied("Only vendors can create business hours.")
-        serializer.save(vendor=self.request.user.vendor_profile)
+        vendor = self.request.user.vendor_profile
+        day = serializer.validated_data.get("day_of_week")
+        
+
+        BusinessHours.objects.update_or_create(
+            vendor=vendor,
+            day_of_week=day,
+            defaults={
+                "opening_time": serializer.validated_data.get("opening_time"),
+                "closing_time": serializer.validated_data.get("closing_time"),
+            },
+        )
 
 
 
@@ -577,6 +591,11 @@ class VendorBusinessHoursDetailView(generics.RetrieveUpdateDestroyAPIView):
     def perform_update(self, serializer):
         # Ensure the vendor field is always set correctly
         serializer.save(vendor=self.request.user.vendor_profile)
+    
+    
+
+
+    
 
 
 

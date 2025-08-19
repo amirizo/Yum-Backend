@@ -209,6 +209,12 @@ class BusinessHoursSerializer(serializers.ModelSerializer):
         model = BusinessHours
         fields = ['day_of_week', 'opening_time', 'closing_time', 'is_closed']
 
+    def update(self, instance, validated_data):
+        # Prevent changing vendor and day_of_week on update
+        validated_data.pop("vendor", None)
+        validated_data.pop("day_of_week", None)
+        return super().update(instance, validated_data)
+
 
 
 class VendorLocationSerializer(serializers.ModelSerializer):

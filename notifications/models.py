@@ -12,6 +12,9 @@ class Notification(models.Model):
     NOTIFICATION_TYPES = [
         ('order_created', 'Order Created'),
         ('order_confirmed', 'Order Confirmed'),
+        ('order_preparing', 'Order Being Prepared'),
+        ('order_ready', 'Order Ready for Pickup'),
+        ('order_available', 'Order Available for Drivers'),
         ('order_assigned', 'Order Assigned'),
         ('driver_en_route', 'Driver En Route'),
         ('driver_arrived', 'Driver Arrived'),
@@ -22,6 +25,8 @@ class Notification(models.Model):
         ('payment_received', 'Payment Received'),
         ('rating_received', 'Rating Received'),
         ('system_alert', 'System Alert'),
+        ('location_update', 'Location Update'),
+        ('status_update', 'Status Update'),
     ]
 
     PRIORITY_LEVELS = [
@@ -43,7 +48,7 @@ class Notification(models.Model):
     
     # Generic relation to any model
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
-    object_id = models.PositiveIntegerField(null=True, blank=True)
+    object_id = models.CharField(max_length=36, null=True, blank=True)  # Support UUID strings
     content_object = GenericForeignKey('content_type', 'object_id')
     
     # Status and metadata

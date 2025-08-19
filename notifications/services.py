@@ -2,7 +2,13 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from django.contrib.contenttypes.models import ContentType
 from .models import Notification, NotificationPreference
+from django.contrib.auth import get_user_model
+from django.utils import timezone
 import json
+import logging
+
+logger = logging.getLogger(__name__)
+User = get_user_model()
 
 
 class NotificationService:
@@ -23,7 +29,7 @@ class NotificationService:
         
         if content_object:
             notification_data['content_type'] = ContentType.objects.get_for_model(content_object)
-            notification_data['object_id'] = content_object.pk
+            notification_data['object_id'] = str(content_object.pk)  # Convert to string to avoid SQLite integer overflow
         
         notification = Notification.objects.create(**notification_data)
         
@@ -31,6 +37,318 @@ class NotificationService:
         NotificationService.send_notification(notification)
         
         return notification
+
+    @staticmethod
+    def send_order_status_notification(order, old_status=None):
+        """Send comprehensive notifications for order status changes"""
+        status = order.status
+        order_number = order.order_number
+        
+        # Define notification content for each status
+        notification_config = {
+            'pending': {
+                'customer': {
+                    'title': f"Order {order_number} Created",
+                    'message': f"Your order has been created and is pending confirmation from {order.vendor.business_name}.",
+                    'type': 'order_created'
+                },
+                'vendor': {
+                    'title': f"New Order Received - {order_number}",
+                    'message': f"You have received a new order from {order.customer.get_full_name()}. Please review and confirm.",
+                    'type': 'order_created'
+                }
+            },
+            'confirmed': {
+                'customer': {
+                    'title': f"Order {order_number} Confirmed",
+                    'message': f"Great news! {order.vendor.business_name} has confirmed your order and will start preparing it soon.",
+                    'type': 'order_confirmed'
+                },
+                'vendor': {
+                    'title': f"Order {order_number} Confirmed",
+                    'message': f"Order has been confirmed. Please start preparing the items.",
+                    'type': 'order_confirmed'
+                }
+            },
+            'preparing': {
+                'customer': {
+                    'title': f"Order {order_number} Being Prepared",
+                    'message': f"Your order is now being prepared by {order.vendor.business_name}. We'll notify you when it's ready!",
+                    'type': 'order_preparing'
+                },
+                'vendor': {
+                    'title': f"Order {order_number} - Preparation Started",
+                    'message': f"Order preparation has been marked as started.",
+                    'type': 'order_preparing'
+                }
+            },
+            'ready': {
+                'customer': {
+                    'title': f"Order {order_number} Ready for Pickup",
+                    'message': f"Your order is ready! We're looking for a driver to pick it up and deliver it to you.",
+                    'type': 'order_ready'
+                },
+                'vendor': {
+                    'title': f"Order {order_number} Ready",
+                    'message': f"Order is ready for pickup. Drivers have been notified.",
+                    'type': 'order_ready'
+                },
+                'drivers': {
+                    'title': f"New Order Available - {order_number}",
+                    'message': f"Order ready for pickup from {order.vendor.business_name}. Tap to accept!",
+                    'type': 'order_available'
+                }
+            },
+            'picked_up': {
+                'customer': {
+                    'title': f"Order {order_number} Picked Up",
+                    'message': f"Your order has been picked up by {order.driver.user.get_full_name() if order.driver and hasattr(order.driver, 'user') else 'our driver'} and is on the way to you!",
+                    'type': 'order_picked_up'
+                },
+                'vendor': {
+                    'title': f"Order {order_number} Picked Up",
+                    'message': f"Order has been picked up by the driver.",
+                    'type': 'order_picked_up'
+                },
+                'driver': {
+                'title': f"Order {order_number} Assignment",
+                'message': f"You have successfully picked up the order. Please deliver to customer.",
+                'type': 'order_assigned'
+            }
+            },
+            'in_transit': {
+                'customer': {
+                    'title': f"Order {order_number} On The Way",
+                    'message': f"Your order is currently being delivered to you. Track your driver's location in real-time!",
+                    'type': 'driver_en_route'
+                },
+                'vendor': {
+                    'title': f"Order {order_number} In Transit",
+                    'message': f"Order is currently being delivered to the customer.",
+                    'type': 'order_in_transit'
+                }
+            },
+            'delivered': {
+                'customer': {
+                    'title': f"Order {order_number} Delivered!",
+                    'message': f"Your order has been successfully delivered! Thank you for choosing us. Please rate your experience.",
+                    'type': 'order_delivered'
+                },
+                'vendor': {
+                    'title': f"Order {order_number} Delivered",
+                    'message': f"Order has been successfully delivered to the customer.",
+                    'type': 'order_delivered'
+                },
+                'driver': {
+                    'title': f"Order {order_number} Delivered",
+                    'message': f"Order has been marked as delivered. Great job!",
+                    'type': 'order_delivered'
+                }
+            },
+            'cancelled': {
+                'customer': {
+                    'title': f"Order {order_number} Cancelled",
+                    'message': f"Your order has been cancelled. If payment was made, a refund will be processed within 3-5 business days.",
+                    'type': 'order_cancelled'
+                },
+                'vendor': {
+                    'title': f"Order {order_number} Cancelled",
+                    'message': f"Order has been cancelled.",
+                    'type': 'order_cancelled'
+                }
+            }
+        }
+        
+        # Send notifications based on status
+        if status in notification_config:
+            config = notification_config[status]
+            
+            # Send to customer
+            if 'customer' in config:
+                NotificationService.create_notification(
+                    recipient=order.customer,
+                    title=config['customer']['title'],
+                    message=config['customer']['message'],
+                    notification_type=config['customer']['type'],
+                    priority='normal',
+                    content_object=order,
+                    extra_data={'order_id': str(order.id), 'status': status}
+                )
+            
+            # Send to vendor
+            if 'vendor' in config and hasattr(order.vendor, 'user'):
+                NotificationService.create_notification(
+                    recipient=order.vendor.user,
+                    title=config['vendor']['title'],
+                    message=config['vendor']['message'],
+                    notification_type=config['vendor']['type'],
+                    priority='normal',
+                    content_object=order,
+                    extra_data={'order_id': str(order.id), 'status': status}
+                )
+            
+            # Send to driver (if assigned)
+            if 'driver' in config and order.driver and hasattr(order.driver, 'user'):
+                NotificationService.create_notification(
+                    recipient=order.driver.user,
+                    title=config['driver']['title'],
+                    message=config['driver']['message'],
+                    notification_type=config['driver']['type'],
+                    priority='normal',
+                    content_object=order,
+                    extra_data={'order_id': str(order.id), 'status': status}
+                )
+            
+            # Send to all available drivers (for ready status)
+            if 'drivers' in config and status == 'ready':
+                NotificationService.notify_available_drivers(order, config['drivers'])
+        
+        # Send real-time updates via WebSocket
+        NotificationService.broadcast_order_status_update(order, old_status)
+
+    @staticmethod
+    def notify_available_drivers(order, driver_config):
+        """Notify all available drivers about a new order"""
+        try:
+            from authentication.models import Driver
+            
+            # Get all active drivers
+            available_drivers = Driver.objects.filter(
+                user__is_active=True,
+                is_available=True
+            ).select_related('user')
+            
+            for driver in available_drivers:
+                if hasattr(driver, 'user'):
+                    NotificationService.create_notification(
+                        recipient=driver.user,
+                        title=driver_config['title'],
+                        message=driver_config['message'],
+                        notification_type=driver_config['type'],
+                        priority='high',
+                        content_object=order,
+                        extra_data={
+                            'order_id': str(order.id),
+                            'vendor_name': order.vendor.business_name,
+                            'vendor_address': order.vendor.business_address,
+                            'customer_address': order.delivery_address_text,
+                            'total_amount': str(order.total_amount),
+                            'estimated_delivery_time': order.estimated_delivery_time.isoformat() if order.estimated_delivery_time else None
+                        }
+                    )
+                    
+        except Exception as e:
+            logger.error(f"Error notifying drivers: {str(e)}")
+
+    @staticmethod
+    def broadcast_order_status_update(order, old_status=None):
+        """Broadcast order status update via WebSocket"""
+        try:
+            channel_layer = get_channel_layer()
+            
+            update_data = {
+                'order_id': str(order.id),
+                'order_number': order.order_number,
+                'status': order.status,
+                'old_status': old_status,
+                'vendor_name': order.vendor.business_name,
+                'estimated_delivery_time': order.estimated_delivery_time.isoformat() if order.estimated_delivery_time else None,
+                'timestamp': order.updated_at.isoformat()
+            }
+            
+            # Send to order-specific room
+            async_to_sync(channel_layer.group_send)(
+                f"order_{order.id}",
+                {
+                    'type': 'order_status_update',
+                    'data': update_data
+                }
+            )
+            
+            # Send to customer's personal channel
+            async_to_sync(channel_layer.group_send)(
+                f"user_{order.customer.id}",
+                {
+                    'type': 'order_update',
+                    'order_id': str(order.id),
+                    'status': order.status,
+                    'data': update_data
+                }
+            )
+            
+            # Send to vendor's personal channel
+            if hasattr(order.vendor, 'user'):
+                async_to_sync(channel_layer.group_send)(
+                    f"user_{order.vendor.user.id}",
+                    {
+                        'type': 'order_update',
+                        'order_id': str(order.id),
+                        'status': order.status,
+                        'data': update_data
+                    }
+                )
+            
+            # Send to driver's personal channel (if assigned)
+            if order.driver and hasattr(order.driver, 'user'):
+                async_to_sync(channel_layer.group_send)(
+                    f"user_{order.driver.user.id}",
+                    {
+                        'type': 'order_update',
+                        'order_id': str(order.id),
+                        'status': order.status,
+                        'data': update_data
+                    }
+                )
+            
+            # Send to all drivers if order is ready
+            if order.status == 'ready':
+                async_to_sync(channel_layer.group_send)(
+                    "drivers",
+                    {
+                        'type': 'new_order_available',
+                        'order_id': str(order.id),
+                        'data': update_data
+                    }
+                )
+                
+        except Exception as e:
+            logger.error(f"Error broadcasting order status update: {str(e)}")
+
+    @staticmethod
+    def send_driver_location_update(order, latitude, longitude, driver):
+        """Send real-time location updates to customer and vendor"""
+        try:
+            channel_layer = get_channel_layer()
+            
+            location_data = {
+                'order_id': str(order.id),
+                'driver_id': str(driver.id),
+                'driver_name': driver.user.get_full_name() if hasattr(driver, 'user') else 'Driver',
+                'latitude': str(latitude),
+                'longitude': str(longitude),
+                'timestamp': timezone.now().isoformat()
+            }
+            
+            # Send to order tracking room
+            async_to_sync(channel_layer.group_send)(
+                f"tracking_{order.id}",
+                {
+                    'type': 'location_update',
+                    'data': location_data
+                }
+            )
+            
+            # Send to customer
+            async_to_sync(channel_layer.group_send)(
+                f"user_{order.customer.id}",
+                {
+                    'type': 'driver_location_update',
+                    'data': location_data
+                }
+            )
+            
+        except Exception as e:
+            logger.error(f"Error sending location update: {str(e)}")
 
     @staticmethod
     def send_notification(notification):
@@ -67,6 +385,9 @@ class NotificationService:
         type_mapping = {
             'order_created': preferences.order_updates,
             'order_confirmed': preferences.order_updates,
+            'order_preparing': preferences.order_updates,
+            'order_ready': preferences.order_updates,
+            'order_available': preferences.delivery_updates,
             'order_assigned': preferences.delivery_updates,
             'driver_en_route': preferences.delivery_updates,
             'driver_arrived': preferences.delivery_updates,
@@ -118,96 +439,77 @@ class NotificationService:
         for device in devices:
             # Here you would integrate with FCM, APNs, or other push services
             # For now, we'll just log it
-            print(f"Sending push notification to {device.device_token}: {notification.title}")
+            logger.info(f"Sending push notification to {device.device_token}: {notification.title}")
 
     @staticmethod
     def _send_email_notification(notification):
         """Send email notification"""
         # Here you would integrate with email service
         # For now, we'll just log it
-        print(f"Sending email to {notification.recipient.email}: {notification.title}")
+        logger.info(f"Sending email to {notification.recipient.email}: {notification.title}")
 
     @staticmethod
     def broadcast_location_update(dispatch, latitude, longitude):
-        """Broadcast location update to relevant users"""
-        channel_layer = get_channel_layer()
-        
-        update_data = {
-            'dispatch_id': str(dispatch.id),
-            'order_id': str(dispatch.order.id),
-            'latitude': str(latitude),
-            'longitude': str(longitude),
-            'driver_name': dispatch.driver.get_full_name(),
-            'timestamp': dispatch.last_location_update.isoformat() if dispatch.last_location_update else None
-        }
-        
-        # Send to order tracking room
-        async_to_sync(channel_layer.group_send)(
-            f"tracking_{dispatch.order.id}",
-            {
-                'type': 'tracking_update',
-                'data': update_data
-            }
-        )
-        
-        # Send to customer
-        async_to_sync(channel_layer.group_send)(
-            f"user_{dispatch.order.customer.id}",
-            {
-                'type': 'location_update',
+        """Broadcast location update to relevant users (legacy method for backward compatibility)"""
+        try:
+            from dispatch.models import Dispatch
+            
+            update_data = {
                 'dispatch_id': str(dispatch.id),
+                'order_id': str(dispatch.order.id),
                 'latitude': str(latitude),
                 'longitude': str(longitude),
-                'timestamp': update_data['timestamp']
+                'driver_name': dispatch.driver.get_full_name(),
+                'timestamp': dispatch.last_location_update.isoformat() if dispatch.last_location_update else None
             }
-        )
+            
+            channel_layer = get_channel_layer()
+            
+            # Send to order tracking room
+            async_to_sync(channel_layer.group_send)(
+                f"tracking_{dispatch.order.id}",
+                {
+                    'type': 'tracking_update',
+                    'data': update_data
+                }
+            )
+            
+            # Send to customer
+            async_to_sync(channel_layer.group_send)(
+                f"user_{dispatch.order.customer.id}",
+                {
+                    'type': 'location_update',
+                    'dispatch_id': str(dispatch.id),
+                    'latitude': str(latitude),
+                    'longitude': str(longitude),
+                    'timestamp': update_data['timestamp']
+                }
+            )
+        except Exception as e:
+            logger.error(f"Error broadcasting location update: {str(e)}")
 
     @staticmethod
     def broadcast_status_update(dispatch, status):
-        """Broadcast status update to relevant users"""
-        channel_layer = get_channel_layer()
-        
-        # Send to order tracking room
-        async_to_sync(channel_layer.group_send)(
-            f"tracking_{dispatch.order.id}",
-            {
-                'type': 'tracking_update',
-                'data': {
-                    'dispatch_id': str(dispatch.id),
-                    'order_id': str(dispatch.order.id),
-                    'status': status,
-                    'driver_name': dispatch.driver.get_full_name()
+        """Broadcast status update to relevant users (legacy method for backward compatibility)"""
+        try:
+            channel_layer = get_channel_layer()
+            
+            # Send to order tracking room
+            async_to_sync(channel_layer.group_send)(
+                f"tracking_{dispatch.order.id}",
+                {
+                    'type': 'tracking_update',
+                    'data': {
+                        'dispatch_id': str(dispatch.id),
+                        'order_id': str(dispatch.order.id),
+                        'status': status,
+                        'driver_name': dispatch.driver.get_full_name()
+                    }
                 }
-            }
-        )
-        
-        # Create notifications for status changes
-        status_messages = {
-            'accepted': 'Your order has been accepted by the driver',
-            'en_route_pickup': 'Driver is on the way to pickup location',
-            'arrived_pickup': 'Driver has arrived at pickup location',
-            'picked_up': 'Your order has been picked up',
-            'en_route_delivery': 'Your order is on the way',
-            'arrived_delivery': 'Driver has arrived at delivery location',
-            'delivered': 'Your order has been delivered successfully',
-        }
-        
-        if status in status_messages:
-            # Notify customer
-            NotificationService.create_notification(
-                recipient=dispatch.order.customer,
-                title=f"Order {dispatch.order.order_number} Update",
-                message=status_messages[status],
-                notification_type='delivery_updates',
-                content_object=dispatch.order
             )
             
-            # Notify vendor for certain statuses
-            if status in ['picked_up', 'delivered']:
-                NotificationService.create_notification(
-                    recipient=dispatch.order.vendor,
-                    title=f"Order {dispatch.order.order_number} Update",
-                    message=status_messages[status],
-                    notification_type='order_updates',
-                    content_object=dispatch.order
-                )
+            # Create notifications for status changes using the new comprehensive system
+            NotificationService.send_order_status_notification(dispatch.order)
+            
+        except Exception as e:
+            logger.error(f"Error broadcasting status update: {str(e)}")

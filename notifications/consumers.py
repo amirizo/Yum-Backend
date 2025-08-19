@@ -200,6 +200,28 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             'data': event.get('data', {})
         }))
 
+    async def order_status_update(self, event):
+        """Send order status update to WebSocket"""
+        await self.send(text_data=json.dumps({
+            'type': 'order_status_update',
+            'data': event['data']
+        }))
+
+    async def new_order_available(self, event):
+        """Send new order available notification to drivers"""
+        await self.send(text_data=json.dumps({
+            'type': 'new_order_available',
+            'order_id': event['order_id'],
+            'data': event['data']
+        }))
+
+    async def driver_location_update(self, event):
+        """Send driver location update to WebSocket"""
+        await self.send(text_data=json.dumps({
+            'type': 'driver_location_update',
+            'data': event['data']
+        }))
+
     # Database operations
     @database_sync_to_async
     def update_dispatch_location(self, dispatch_id, latitude, longitude):

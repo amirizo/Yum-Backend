@@ -18,7 +18,8 @@ class Category(models.Model):
         ('grocery', 'Grocery'),
     ]
     
-    name = models.CharField(max_length=100, unique=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='product_categories', null=True, blank=True)
+    name = models.CharField(max_length=100)
     category_type = models.CharField(max_length=20, choices=CATEGORY_TYPES, default='food')
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='categories/', blank=True, null=True)
@@ -27,8 +28,11 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "Categories"
+        unique_together = ['vendor', 'name']  # Vendors can't have duplicate category names
 
     def __str__(self):
+        if self.vendor:
+            return f"{self.name} - {self.vendor.business_name}"
         return self.name
 
 
@@ -203,13 +207,18 @@ class Order(models.Model):
     payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='pending')
     
     # Delivery information
-    delivery_address = models.ForeignKey(DeliveryAddress, on_delete=models.CASCADE)
+    delivery_address = models.ForeignKey(DeliveryAddress, on_delete=models.CASCADE, null=True, blank=True)
+    delivery_address_text = models.TextField(help_text="Delivery address as text for non-registered users")
+    delivery_latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    delivery_longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     delivery_instructions = models.TextField(blank=True)
+    special_instructions = models.TextField(blank=True, help_text="Customer's special instructions for the order")
     estimated_delivery_time = models.DateTimeField(null=True, blank=True)
     actual_delivery_time = models.DateTimeField(null=True, blank=True)
     
     # Pricing
     subtotal = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    
     delivery_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     tax_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
@@ -230,6 +239,7 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.order_number} - {self.customer.first_name} {self.customer.last_name}"
+        
 
     class Meta:
         ordering = ['-created_at']

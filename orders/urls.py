@@ -3,14 +3,22 @@ from . import views
 
 urlpatterns = [
     # Categories
-    path('categories/', views.CategoryListView.as_view(), name='category-list'),
+    path('product/categories/', views.CategoryListView.as_view(), name='category-list'),
+    
+    # Vendor Category Management
+    path('vendor/categories/', views.VendorCategoryListCreateView.as_view(), name='vendor-category-list-create'),
+    path('vendor/categories/<int:pk>/', views.VendorCategoryDetailView.as_view(), name='vendor-category-detail'),
+    path('vendor/categories/stats/', views.VendorCategoryStatsView.as_view(), name='vendor-category-stats'),
     
     # Products
     path('products/', views.ProductListView.as_view(), name='product-list'),
     path('products/<int:pk>/', views.ProductDetailView.as_view(), name='product-detail'),
     path('vendor/products/', views.VendorProductListView.as_view(), name='vendor-product-list'),
+    # In your urls.py
+    path('vendor/orders/', views.VendorOrdersView.as_view(), name='vendor-orders'),
     path('vendor/products/<int:pk>/', views.VendorProductDetailView.as_view(), name='vendor-product-detail'),
 
+    
     path('vendor/<int:vendor_id>/restaurant/', views.VendorRestaurantView.as_view(), name='vendor-restaurant'),
     
     # Delivery Addresses
@@ -24,7 +32,6 @@ urlpatterns = [
     path('cart/items/<int:pk>/', views.UpdateCartItemView.as_view(), name='update-cart-item'),
     path('cart/items/<int:pk>/remove/', views.RemoveFromCartView.as_view(), name='remove-from-cart'),
     path('cart/clear/', views.ClearCartView.as_view(), name='clear-cart'),
-
 
     path('checkout/', views.CheckoutView.as_view(), name='checkout'),
     path('calculate-delivery-fee/', views.calculate_delivery_fee_api, name='calculate-delivery-fee'),
@@ -43,6 +50,14 @@ urlpatterns = [
     # Vendor actions
     path('<uuid:order_id>/accept/', views.vendor_accept_order, name='vendor-accept-order'),
     path('<uuid:order_id>/reject/', views.vendor_reject_order, name='vendor-reject-order'),
+    path('<uuid:order_id>/preparing/', views.vendor_set_preparing, name='vendor-set-preparing'),
+    path('<uuid:order_id>/ready/', views.vendor_set_ready, name='vendor-set-ready'),
+    
+    # Driver actions
+    path('available-for-drivers/', views.available_orders_for_drivers, name='available-orders-drivers'),
+    path('<uuid:order_id>/assign-driver/', views.assign_driver_to_order, name='assign-driver'),
+    path('<uuid:order_id>/delivered/', views.driver_mark_delivered, name='driver-mark-delivered'),
+    path('<uuid:order_id>/update-location/', views.driver_update_location, name='driver-update-location'),
     
     
     # Dashboards

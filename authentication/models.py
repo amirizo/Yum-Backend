@@ -252,6 +252,7 @@ class BusinessHours(models.Model):
     
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='opening_hours')
     day_of_week = models.CharField(max_length=10, choices=DAYS_OF_WEEK)
+    
     opening_time = models.TimeField()
     closing_time = models.TimeField()
     is_closed = models.BooleanField(default=False)
