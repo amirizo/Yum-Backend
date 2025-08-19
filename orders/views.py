@@ -630,7 +630,7 @@ def assign_driver_to_order(request, order_id):
             changed_by=request.user,
             notes='Order picked up by driver'
         )
-        
+        OrderNotificationService.send_order_picked_up_email(order)
         return Response({
             'message': 'Order assigned successfully',
             'order_number': order.order_number,
@@ -666,6 +666,8 @@ def vendor_set_preparing(request, order_id):
             changed_by=request.user,
             notes='Vendor started preparing the order'
         )
+
+        OrderNotificationService.send_order_status_update_email(order)
         
         return Response({
             'message': 'Order status updated to preparing',
@@ -708,7 +710,7 @@ def vendor_set_ready(request, order_id):
             changed_by=request.user,
             notes='Order is ready for pickup'
         )
-        
+        OrderNotificationService.notify_all_drivers_new_order(order)
         return Response({
             'message': 'Order is ready for pickup. Drivers have been notified.',
             'order_number': order.order_number,
@@ -748,6 +750,8 @@ def driver_mark_delivered(request, order_id):
             notes='Order delivered to customer'
         )
         
+        OrderNotificationService.send_order_delivered_email(order)
+        OrderNotificationService.notify_vendor_order_delivered(order)
         # Update driver availability if needed
         driver_profile = request.user.driver_profile
         driver_profile.current_orders_count = driver_profile.current_orders_count - 1 if driver_profile.current_orders_count > 0 else 0
@@ -778,6 +782,7 @@ def driver_update_location(request, order_id):
             status__in=['picked_up', 'in_transit']
         )
         
+        
         latitude = request.data.get('latitude')
         longitude = request.data.get('longitude')
         
@@ -791,6 +796,7 @@ def driver_update_location(request, order_id):
         driver_profile.last_location_update = timezone.now()
         driver_profile.save()
         
+
         # Update order status to in_transit if not already
         if order.status != 'in_transit':
             old_status = order.status
@@ -876,6 +882,8 @@ def available_orders_for_drivers(request):
         'available_orders': order_data,
         'count': len(order_data)
     })
+
+
 
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])

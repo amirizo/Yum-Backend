@@ -1,0 +1,16 @@
+Hello {{ customer_name }},
+
+Your order #{{ order_number }} has been successfully delivered!
+
+Vendor: {{ vendor_name }}
+Driver: {{ driver_name }}
+Delivered At: {{ delivery_time|date:"M d, Y H:i" }}
+Delivery Address: {{ delivery_address }}
+Total Amount: TZS {{ total_amount|floatformat:0 }}
+
+Items:
+{% for item in order_items %}
+- {{ item.quantity }} × {{ item.product.name }}
+{% endfor %}
+
+Thank you for choosing YumExpress. We look forward to serving you again!

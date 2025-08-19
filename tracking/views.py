@@ -195,6 +195,7 @@ class NotificationListView(generics.ListAPIView):
             recipient=self.request.user
         ).order_by('-created_at')[:50]
 
+
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def get_nearby_drivers(request):

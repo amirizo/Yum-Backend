@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>New Delivery Available - YumExpress</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; line-height: 1.6; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #2563eb; color: white; padding: 20px; text-align: center; }
+        .content { background: #f9f9f9; padding: 20px; border-radius: 6px; margin-top: 15px; }
+        .order-details { background: #fff; padding: 15px; border-radius: 5px; margin: 15px 0; border: 1px solid #eee; }
+        .footer { text-align: center; font-size: 12px; color: #777; padding: 20px; }
+        .cta-btn { display: inline-block; background: #16a34a; color: white; text-decoration: none; padding: 12px 20px; border-radius: 5px; font-weight: bold; }
+        .cta-btn:hover { background: #15803d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚚 New Delivery Available</h1>
+            <p>Order #{{ order_number }}</p>
+        </div>
+        
+        <div class="content">
+            <p>Dear {{ driver_name }},</p>
+            <p>A new delivery is available for pickup from <strong>{{ vendor_name }}</strong>.</p>
+
+            <div class="order-details">
+                <h3>Order Details</h3>
+                <p><strong>Order Number:</strong> #{{ order_number }}</p>
+                <p><strong>Pickup Location:</strong> {{ vendor_location }}</p>
+                <p><strong>Customer Address:</strong> {{ customer_address }}</p>
+                <p><strong>Total Amount:</strong> TZS {{ total_amount|floatformat:0 }}</p>
+                {% if estimated_delivery %}
+                <p><strong>Estimated Delivery Time:</strong> {{ estimated_delivery|date:"M d, Y H:i" }}</p>
+                {% endif %}
+                {% if pickup_instructions %}
+                <p><strong>Pickup Instructions:</strong> {{ pickup_instructions }}</p>
+                {% endif %}
+            </div>
+
+            <p>Please accept this delivery as soon as possible.</p>
+
+            <div style="text-align:center; margin-top:20px;">
+                <a href="" class="cta-btn">Accept Delivery</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>YumExpress Driver Network</p>
+            <p>For support, contact <a href="mailto:info@yum-express.com">info@yum-express.com</a></p>
+        </div>
+    </div>
+</body>
+</html>

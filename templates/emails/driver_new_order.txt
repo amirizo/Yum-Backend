@@ -1,0 +1,21 @@
+Dear {{ driver_name }},
+
+A new delivery is available for pickup.
+
+Order Number: #{{ order_number }}
+Pickup Location: {{ vendor_location }}
+Customer Address: {{ customer_address }}
+Total Amount: TZS {{ total_amount|floatformat:0 }}
+
+{% if estimated_delivery %}
+Estimated Delivery Time: {{ estimated_delivery|date:"M d, Y H:i" }}
+{% endif %}
+
+{% if pickup_instructions %}
+Pickup Instructions: {{ pickup_instructions }}
+{% endif %}
+
+Please accept this delivery as soon as possible.
+
+YumExpress Driver Network
+For support, contact info@yum-express.com

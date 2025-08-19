@@ -342,9 +342,9 @@ class OrderNotificationService:
         except Exception as e:
             logger.error(f"Failed to notify drivers about order {order.order_number}: {str(e)}")
 
+
     @staticmethod
     def send_order_status_update_email(order, old_status, new_status, notes=""):
-        """Send email notification for order status updates"""
         try:
             status_messages = {
                 'preparing': 'Your order is being prepared',
@@ -353,7 +353,7 @@ class OrderNotificationService:
                 'in_transit': 'Your order is on the way',
                 'delivered': 'Your order has been delivered',
             }
-            
+
             context = {
                 'customer_name': f"{order.customer.first_name} {order.customer.last_name}",
                 'order_number': order.order_number,
@@ -363,11 +363,28 @@ class OrderNotificationService:
                 'notes': notes,
                 'estimated_delivery': order.estimated_delivery_time,
             }
-            
+
+            # Extra context if picked up or in transit
+            if new_status in ['picked_up', 'in_transit']:
+                driver = getattr(order, "driver", None)
+                delivery_address = getattr(order, "delivery_address", None)
+
+                context.update({
+                    'driver_name': f"{driver.first_name} {driver.last_name}" if driver else "Assigned Driver",
+                    'driver_phone': driver.phone if driver and hasattr(driver, "phone") else "",
+                    'delivery_address': delivery_address if delivery_address else {"street_address": "", "city": ""},
+                })
+
+            # Choose template depending on status
+            if new_status == "picked_up":
+                html_template = "emails/order_picked_up.html"
+            else:
+                html_template = "emails/order_status_update.html"
+
             subject = f"Order #{order.order_number} Update - {new_status.replace('_', ' ').title()} - YumExpress"
-            html_message = render_to_string('emails/order_status_update.html', context)
-            plain_message = render_to_string('emails/order_status_update.txt', context)
-            
+            html_message = render_to_string(html_template, context)
+            plain_message = render_to_string("emails/order_status_update.txt", context)
+
             send_mail(
                 subject=subject,
                 message=plain_message,
@@ -377,6 +394,6 @@ class OrderNotificationService:
                 fail_silently=False,
             )
             logger.info(f"Order status update email sent to {order.customer.email} for order {order.order_number}")
-            
+
         except Exception as e:
             logger.error(f"Failed to send order status update email: {str(e)}")

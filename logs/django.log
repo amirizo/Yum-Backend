@@ -10425,3 +10425,129 @@ INFO 2025-08-19 09:43:24,706 autoreload 29345 8405360832 /Users/macbookair/Deskt
 INFO 2025-08-19 09:43:25,171 autoreload 29625 8405360832 Watching for file changes with StatReloader
 INFO 2025-08-19 09:44:36,635 autoreload 29625 8405360832 /Users/macbookair/Desktop/Yumbackend/notifications/services.py changed, reloading.
 INFO 2025-08-19 09:44:37,156 autoreload 29665 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 10:58:44,272 autoreload 30178 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-19 11:10:05,262 log 30178 6167212032 Not Found: /api/orders/categories/
+WARNING 2025-08-19 11:10:47,143 log 30178 6167212032 Method Not Allowed: /api/orders/product/categories/
+WARNING 2025-08-19 11:10:50,891 log 30178 6167212032 Method Not Allowed: /api/orders/product/categories/
+WARNING 2025-08-19 11:11:14,770 log 30178 6167212032 Not Found: /api/orders/categories/1
+WARNING 2025-08-19 11:11:19,656 log 30178 6167212032 Not Found: /api/orders/categories/2
+WARNING 2025-08-19 11:12:33,664 log 30178 6167212032 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-19 11:47:32,480 log 30178 6325039104 Unauthorized: /api/orders/vendor/categories/4/
+WARNING 2025-08-19 11:48:02,729 log 30178 6325039104 Method Not Allowed: /api/orders/vendor/categories/4/
+WARNING 2025-08-19 11:48:06,214 log 30178 6325039104 Bad Request: /api/orders/vendor/categories/4/
+WARNING 2025-08-19 11:49:12,212 log 30178 6341865472 Method Not Allowed: /api/orders/vendor/categories/stats/
+WARNING 2025-08-19 12:03:04,552 log 30178 6375518208 Unauthorized: /api/orders/product/categories/
+INFO 2025-08-19 12:17:52,675 autoreload 32101 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-19 12:18:00,577 log 32101 6127415296 Unauthorized: /api/orders/vendor/products/
+WARNING 2025-08-19 12:20:34,339 log 32101 6144241664 Bad Request: /api/orders/vendor/products/
+WARNING 2025-08-19 12:22:16,338 log 32101 6161068032 Not Found: /api/orders/vendor/products/1
+WARNING 2025-08-19 12:28:21,358 log 32101 6177894400 Unauthorized: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/preparing/
+WARNING 2025-08-19 12:28:59,840 log 32101 6177894400 Method Not Allowed: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/preparing/
+WARNING 2025-08-19 12:29:04,492 log 32101 6177894400 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/preparing/
+WARNING 2025-08-19 12:29:38,568 log 32101 6177894400 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/preparing/
+WARNING 2025-08-19 12:30:45,175 log 32101 6194720768 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/preparing/
+WARNING 2025-08-19 12:31:07,760 log 32101 6194720768 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/ready/
+WARNING 2025-08-19 12:31:11,635 log 32101 6194720768 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/ready/
+INFO 2025-08-19 12:31:56,217 services 32101 6194720768 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Confirmed
+INFO 2025-08-19 12:31:56,222 services 32101 6194720768 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Confirmed
+INFO 2025-08-19 12:31:56,225 signals 32101 6194720768 Order 0T2IXXDH status changed from pending to confirmed
+INFO 2025-08-19 12:32:00,535 services 32101 6194720768 Order accepted email sent to amirimussa2003@gmail.com for order 0T2IXXDH
+INFO 2025-08-19 12:32:42,702 services 32101 6194720768 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Being Prepared
+INFO 2025-08-19 12:32:42,708 services 32101 6194720768 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH - Preparation Started
+INFO 2025-08-19 12:32:42,712 signals 32101 6194720768 Order 0T2IXXDH status changed from confirmed to preparing
+INFO 2025-08-19 13:11:37,292 autoreload 32101 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-19 13:11:37,958 autoreload 33469 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 13:14:43,630 autoreload 33469 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-19 13:14:44,434 autoreload 33867 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 13:15:03,382 autoreload 33867 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-19 13:15:03,899 autoreload 33885 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 13:16:22,217 autoreload 33885 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-19 13:16:22,950 autoreload 33969 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 13:16:55,536 autoreload 33969 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-19 13:16:56,235 autoreload 33998 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 13:17:47,847 autoreload 33998 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-19 13:17:48,591 autoreload 34140 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 13:19:15,317 autoreload 34140 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-19 13:19:15,821 autoreload 34197 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 13:21:47,704 autoreload 34197 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-19 13:21:48,263 autoreload 34430 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 13:32:05,447 autoreload 34430 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-19 13:32:06,024 autoreload 35153 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 13:46:25,829 services 35153 6160756736 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Ready for Pickup
+INFO 2025-08-19 13:46:25,834 services 35153 6160756736 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Ready
+INFO 2025-08-19 13:46:25,839 services 35153 6160756736 Sending email to driver_ng1y0e@test.com: New Order Available - 0T2IXXDH
+INFO 2025-08-19 13:46:25,842 services 35153 6160756736 Sending email to driver_iwe18l@test.com: New Order Available - 0T2IXXDH
+INFO 2025-08-19 13:46:25,848 signals 35153 6160756736 Order 0T2IXXDH status changed from preparing to ready
+WARNING 2025-08-19 13:46:25,852 services 35153 6160756736 Invalid phone number: 
+WARNING 2025-08-19 13:46:30,942 services 35153 6160756736 Invalid phone number: 
+INFO 2025-08-19 13:46:35,366 services 35153 6160756736 Notified 2 drivers about order 0T2IXXDH
+INFO 2025-08-19 13:54:18,552 autoreload 35153 8405360832 /Users/macbookair/Desktop/Yumbackend/tracking/views.py changed, reloading.
+INFO 2025-08-19 13:54:19,131 autoreload 35410 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-19 13:57:21,012 log 35410 6157856768 Method Not Allowed: /api/orders/available-for-drivers/
+WARNING 2025-08-19 13:57:23,945 log 35410 6157856768 Forbidden: /api/orders/available-for-drivers/
+WARNING 2025-08-19 13:57:41,552 log 35410 6157856768 Bad Request: /api/auth/login
+WARNING 2025-08-19 13:59:36,576 log 35410 6174683136 Bad Request: /api/auth/login
+WARNING 2025-08-19 13:59:45,953 log 35410 6174683136 Bad Request: /api/auth/login
+WARNING 2025-08-19 13:59:51,410 log 35410 6174683136 Bad Request: /api/auth/login
+WARNING 2025-08-19 14:00:14,336 log 35410 6174683136 Bad Request: /api/auth/login
+WARNING 2025-08-19 14:01:14,695 log 35410 6174683136 Not Found: /api/auth/password-reset/confirm/
+WARNING 2025-08-19 14:01:18,801 log 35410 6174683136 Bad Request: /api/auth/password-reset/confirm
+WARNING 2025-08-19 14:04:18,055 log 35410 6191509504 Method Not Allowed: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/assign-driver/
+WARNING 2025-08-19 14:04:21,679 log 35410 6191509504 Bad Request: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/assign-driver/
+INFO 2025-08-19 14:08:20,960 autoreload 35410 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-19 14:08:21,483 autoreload 35528 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 14:10:49,782 services 35528 6341865472 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Picked Up
+INFO 2025-08-19 14:10:49,786 services 35528 6341865472 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Picked Up
+INFO 2025-08-19 14:10:49,789 services 35528 6341865472 Sending email to salvatorelingo2022@gmail.com: Order 0T2IXXDH Assignment
+INFO 2025-08-19 14:10:49,794 signals 35528 6341865472 Order 0T2IXXDH status changed from ready to picked_up
+ERROR 2025-08-19 14:10:49,798 services 35528 6341865472 Failed to send order picked up email: emails/order_picked_up.txt
+INFO 2025-08-19 14:17:59,542 services 35528 6325039104 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Ready for Pickup
+INFO 2025-08-19 14:17:59,546 services 35528 6325039104 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Ready
+INFO 2025-08-19 14:17:59,549 services 35528 6325039104 Sending email to salvatorelingo2022@gmail.com: New Order Available - 0T2IXXDH
+INFO 2025-08-19 14:17:59,551 services 35528 6325039104 Sending email to driver_ng1y0e@test.com: New Order Available - 0T2IXXDH
+INFO 2025-08-19 14:17:59,553 services 35528 6325039104 Sending email to driver_iwe18l@test.com: New Order Available - 0T2IXXDH
+INFO 2025-08-19 14:17:59,559 signals 35528 6325039104 Order 0T2IXXDH status changed from picked_up to ready
+WARNING 2025-08-19 14:18:04,719 log 35528 6358691840 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/assign-driver/
+WARNING 2025-08-19 14:18:07,483 log 35528 6358691840 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/assign-driver/
+INFO 2025-08-19 14:19:10,071 services 35528 6325039104 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Picked Up
+INFO 2025-08-19 14:19:10,075 services 35528 6325039104 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Picked Up
+INFO 2025-08-19 14:19:10,078 services 35528 6325039104 Sending email to salvatorelingo2022@gmail.com: Order 0T2IXXDH Assignment
+INFO 2025-08-19 14:19:10,084 signals 35528 6325039104 Order 0T2IXXDH status changed from ready to picked_up
+INFO 2025-08-19 14:20:00,971 services 35528 6375518208 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Delivered!
+INFO 2025-08-19 14:20:00,978 services 35528 6375518208 Sending email to amirimussa2003@gmail.com: Order 0T2IXXDH Delivered
+INFO 2025-08-19 14:20:00,981 services 35528 6375518208 Sending email to salvatorelingo2022@gmail.com: Order 0T2IXXDH Delivered
+INFO 2025-08-19 14:20:00,988 signals 35528 6375518208 Order 0T2IXXDH status changed from picked_up to delivered
+INFO 2025-08-19 14:20:05,496 services 35528 6375518208 Order delivered email sent to amirimussa2003@gmail.com for order 0T2IXXDH
+ERROR 2025-08-19 14:20:06,933 services 35528 6375518208 Failed to send SMS to 255684106419: {"messages":[{"to":"255684106419","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":569143267030311249,"smsCount":1,"message":"Your order #0T2IXXDH has been delivered! Thank you for choosing YumExpress. Total: TZS 34,400","sendReference":137249931353576415}]}
+INFO 2025-08-19 14:20:12,937 services 35528 6375518208 Vendor delivery notification sent to amirimussa2003@gmail.com for order 0T2IXXDH
+ERROR 2025-08-19 14:20:12,978 log 35528 6375518208 Internal Server Error: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/delivered/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/views.py", line 757, in driver_mark_delivered
+    driver_profile.current_orders_count = driver_profile.current_orders_count - 1 if driver_profile.current_orders_count > 0 else 0
+                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Driver' object has no attribute 'current_orders_count'
+WARNING 2025-08-19 14:28:35,963 log 35528 6159626240 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/update-location/
+WARNING 2025-08-19 14:28:38,923 log 35528 6159626240 Not Found: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/update-location/
+INFO 2025-08-19 14:34:32,927 autoreload 35528 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-19 14:34:33,561 autoreload 35966 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-19 15:19:35,306 log 35966 6196719616 Unauthorized: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/update-location/

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Order Delivered - YumExpress</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; line-height: 1.6; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #16a34a; color: white; padding: 20px; text-align: center; }
+        .content { background: #f9f9f9; padding: 20px; border-radius: 6px; margin-top: 15px; }
+        .order-details { background: #fff; padding: 15px; border-radius: 5px; margin: 15px 0; border: 1px solid #eee; }
+        .footer { text-align: center; font-size: 12px; color: #777; padding: 20px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🎉 Order Delivered</h1>
+        <p>Order #{{ order_number }}</p>
+    </div>
+
+    <div class="content">
+        <p>Dear {{ customer_name }},</p>
+        <p>Your order has been successfully delivered. We hope you enjoyed the service!</p>
+
+        <div class="order-details">
+            <h3>Order Summary</h3>
+            <p><strong>Order Number:</strong> #{{ order_number }}</p>
+            <p><strong>Vendor:</strong> {{ vendor_name }}</p>
+            <p><strong>Driver:</strong> {{ driver_name }}</p>
+            <p><strong>Delivered At:</strong> {{ delivery_time|date:"M d, Y H:i" }}</p>
+            <p><strong>Delivery Address:</strong> {{ delivery_address }}</p>
+            <p><strong>Total Amount:</strong> TZS {{ total_amount|floatformat:0 }}</p>
+            <h4>Items:</h4>
+            <ul>
+                {% for item in order_items %}
+                    <li>{{ item.quantity }} × {{ item.product.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <p>Thank you for choosing <strong>YumExpress</strong>! We look forward to serving you again soon.</p>
+    </div>
+
+    <div class="footer">
+        <p>YumExpress • Fast • Reliable • Delicious</p>
+        <p>For support, contact <a href="mailto:info@yum-express.com">info@yum-express.com</a></p>
+    </div>
+</div>
+</body>
+</html>
