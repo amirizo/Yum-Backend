@@ -180,16 +180,16 @@ class VendorRestaurantView(generics.RetrieveAPIView):
     lookup_url_kwarg = 'vendor_id'
     
     def get_queryset(self):
-        return User.objects.filter(user_type='vendor', is_active=True)
+        return Vendor.objects.filter(user__user_type='vendor', user__is_active=True)
     
     def get_object(self):
         vendor_id = self.kwargs.get('vendor_id')
         try:
-            vendor = User.objects.get(id=vendor_id, user_type='vendor', is_active=True)
-            return vendor
-        except User.DoesNotExist:
+            return Vendor.objects.get(id=vendor_id, user__user_type='vendor', user__is_active=True)
+        except Vendor.DoesNotExist:
             from rest_framework.exceptions import NotFound
             raise NotFound("Vendor not found")
+
 
 
 

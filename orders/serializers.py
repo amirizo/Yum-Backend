@@ -17,10 +17,21 @@ class CategorySerializer(serializers.ModelSerializer):
         read_only_fields = ['created_at', 'product_count', 'vendor_name']
 
     def get_product_count(self, obj):
-        return obj.products.filter(is_available=True).count()
-    
+        # Count only active and available products for this category
+        return obj.products.filter(is_available=True, status="active").count()
+
     def get_vendor_name(self, obj):
-        return obj.vendor.business_name if obj.vendor else "Global"
+        if obj.vendor:
+            return obj.vendor.business_name
+        return "Global"
+
+    def to_representation(self, instance):
+        """Make image URL absolute if request is in context"""
+        representation = super().to_representation(instance)
+        request = self.context.get('request')
+        if instance.image and request:
+            representation['image'] = request.build_absolute_uri(instance.image.url)
+        return representation
 
 
 class VendorCategorySerializer(serializers.ModelSerializer):
@@ -67,21 +78,23 @@ class ProductVariantSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     variants = ProductVariantSerializer(many=True, required=False)
-    vendor = VendorProfileSerializer
+    vendor = VendorProfileSerializer(read_only=True)
+    """Serializer for product management"""
     category = CategorySerializer(read_only=True)
     category_id = serializers.IntegerField(write_only=True)
     image = serializers.ImageField(required=True)  # ✅ Image required
     stock_quantity = serializers.IntegerField(required=True, min_value=0)  # ✅ Stock required
     is_in_stock = serializers.SerializerMethodField()
     is_low_stock = serializers.SerializerMethodField()
+ 
 
     class Meta:
         model = Product
         fields = [
             'id', 'vendor', 'category', 'category_id', 'name', 'description', 
-            'price', 'stock_quantity', 'unit', 'image', 'is_available', 
+            'price', 'stock_quantity', 'unit', 'image', 'is_available',
             'preparation_time', 'is_in_stock', 'is_low_stock',
-            'created_at', 'updated_at', 'variants'
+            'max_order_quantity', 'created_at', 'updated_at', 'variants'
         ]
         read_only_fields = ['vendor', 'created_at', 'updated_at']
 
@@ -90,6 +103,29 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_is_low_stock(self, obj):
         return obj.stock_quantity <= 10  # Low stock threshold
+    
+
+    
+    
+    def get_vendor(self, obj):
+        """Return vendor profile with open/close info"""
+        vendor = obj.vendor
+        if not vendor:
+            return None
+        request = self.context.get('request')
+        return {
+            "id": vendor.id,
+            "business_name": vendor.business_name,
+            "business_type": vendor.business_type,
+            "is_open": vendor.is_open_now(),
+            "rating": vendor.rating,
+            "total_reviews": vendor.total_reviews,
+            "minimum_order_amount": vendor.minimum_order_amount,
+            "logo": request.build_absolute_uri(vendor.logo.url) if vendor.logo else None,
+            "cover_image": request.build_absolute_uri(vendor.cover_image.url) if vendor.cover_image else None,
+        }
+    
+    
 
     # def create(self, validated_data):
     #     validated_data['vendor'] = self.context['request'].user.vendor_profile
@@ -294,11 +330,11 @@ class OrderCreateSerializer(serializers.ModelSerializer):
 
 
 
-class VendorSerializer(serializers.ModelSerializer):
-    location = VendorLocationSerializer(source='primary_location', read_only=True)
-    class Meta:
-        model = Vendor
-        fields = ['id', 'business_name', 'business_phone', 'business_email', 'location']  # add fields you need
+# class VendorSerializer(serializers.ModelSerializer):
+#     location = VendorLocationSerializer(source='primary_location', read_only=True)
+#     class Meta:
+#         model = Vendor
+#         fields = ['id', 'business_name', 'business_phone', 'business_email', 'location']  # add fields you need
 
 class DriverSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(source='user.first_name', read_only=True)
@@ -311,7 +347,7 @@ class DriverSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     customer = UserSerializer(read_only=True)
-    vendor = VendorSerializer(read_only=True)
+    vendor = VendorProfileSerializer(read_only=True)
     driver = DriverSerializer(read_only=True)
     delivery_address = DeliveryAddressSerializer(read_only=True)
     items = OrderItemSerializer(many=True, read_only=True)
@@ -379,40 +415,41 @@ class ReviewSerializer(serializers.ModelSerializer):
         
         return super().create(validated_data)
 
-class VendorRestaurantSerializer(serializers.ModelSerializer):
-    """Serializer for displaying vendor restaurant page with business info and products"""
-    vendor_profile = serializers.SerializerMethodField()
-    products = serializers.SerializerMethodField()
-    total_products = serializers.SerializerMethodField()
-    is_open = serializers.SerializerMethodField()
+# class VendorRestaurantSerializer(serializers.ModelSerializer):
+#     """Serializer for displaying vendor restaurant page with business info and products"""
+#     vendor_profile = serializers.SerializerMethodField()
+#     category = serializers.SerializerMethodField()
+#     products = serializers.SerializerMethodField()
+#     total_products = serializers.SerializerMethodField()
+#     is_open = serializers.SerializerMethodField()
     
-    class Meta:
-        model = User
-        fields = ['id', 'first_name', 'last_name', 'email', 'phone', 'vendor_profile', 'products', 'total_products', 'is_open']
+#     class Meta:
+#         model = User
+#         fields = ['id', 'first_name', 'last_name', 'email', 'phone', 'vendor_profile', 'products', 'total_products', 'is_open']
     
-    def get_vendor_profile(self, obj):
-        """Get vendor business profile information"""
-        try:
-            from authentication.serializers import VendorProfileSerializer
-            return VendorProfileSerializer(obj.vendor_profile).data
-        except:
-            return None
+#     def get_vendor_profile(self, obj):
+#         """Get vendor business profile information"""
+#         try:
+#             from authentication.serializers import VendorProfileSerializer
+#             return VendorProfileSerializer(obj.vendor_profile).data
+#         except:
+#             return None
     
-    def get_products(self, obj):
-        """Get vendor's available products"""
-        products = Product.objects.filter(vendor=obj, is_available=True).order_by('-created_at')
-        return ProductSerializer(products, many=True).data
+#     def get_products(self, obj):
+#         """Get vendor's available products"""
+#         products = Product.objects.filter(vendor=obj, is_available=True).order_by('-created_at')
+#         return ProductSerializer(products, many=True).data
     
-    def get_total_products(self, obj):
-        """Get total count of vendor's available products"""
-        return Product.objects.filter(vendor=obj, is_available=True).count()
+#     def get_total_products(self, obj):
+#         """Get total count of vendor's available products"""
+#         return Product.objects.filter(vendor=obj, is_available=True).count()
     
-    def get_is_open(self, obj):
-        """Check if vendor is currently open based on business hours"""
-        try:
-            return obj.vendor_profile.is_open_now()
-        except:
-            return True
+#     def get_is_open(self, obj):
+#         """Check if vendor is currently open based on business hours"""
+#         try:
+#             return obj.vendor_profile.is_open_now()
+#         except:
+#             return True
 
 class CartItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
@@ -433,7 +470,7 @@ class CartItemSerializer(serializers.ModelSerializer):
 
 class CartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(many=True, read_only=True)
-    vendor = UserSerializer(read_only=True)
+    vendor = VendorProfileSerializer(read_only=True)
     total_amount = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
     total_items = serializers.IntegerField(read_only=True)
 
@@ -442,38 +479,69 @@ class CartSerializer(serializers.ModelSerializer):
         fields = ['id', 'vendor', 'items', 'total_amount', 'total_items', 'created_at', 'updated_at']
         read_only_fields = ['id', 'vendor', 'total_amount', 'total_items', 'created_at', 'updated_at']
 
+
 class VendorWithProductsSerializer(serializers.ModelSerializer):
     vendor_profile = serializers.SerializerMethodField()
-    products = ProductSerializer(many=True, read_only=True)
-    total_products = serializers.IntegerField(read_only=True)
+    products = serializers.SerializerMethodField()
+    total_products = serializers.SerializerMethodField()
     average_rating = serializers.DecimalField(max_digits=3, decimal_places=2, read_only=True)
-    business_name = serializers.SerializerMethodField()
-    business_type = serializers.SerializerMethodField()
     is_open = serializers.SerializerMethodField()
+    categories = serializers.SerializerMethodField()
+    total_categories = serializers.SerializerMethodField()
 
     class Meta:
-        model = User
-        fields = ['id', 'business_name', 'business_type', 'vendor_profile', 'products', 'total_products', 'average_rating', 'is_open']
+        model = Vendor
+        fields = [
+            'id',
+            'business_name',
+            'business_type',
+            'vendor_profile',
+            'products',
+            'total_products',
+            'average_rating',
+            'is_open',
+            'categories',
+            'total_categories',
+        ]
 
     def get_vendor_profile(self, obj):
-        if hasattr(obj, 'vendor_profile'):
-            return VendorProfileSerializer(obj.vendor_profile).data
-        return None
-    
-    def get_business_name(self, obj):
-        if hasattr(obj, 'vendor_profile'):
-            return obj.vendor_profile.business_name
-        return f"{obj.first_name} {obj.last_name}".strip()
-    
-    def get_business_type(self, obj):
-        if hasattr(obj, 'vendor_profile'):
-            return obj.vendor_profile.get_business_type_display()
-        return None
-    
+        request = self.context.get('request')
+        return {
+            "business_name": obj.business_name,
+            "business_type": obj.get_business_type_display(),
+            "business_description": obj.business_description,
+            "business_address": obj.business_address,
+            "business_phone": obj.business_phone,
+            "business_email": obj.business_email,
+            "logo": request.build_absolute_uri(obj.logo.url) if obj.logo else None,
+            "cover_image": request.build_absolute_uri(obj.cover_image.url) if obj.cover_image else None,
+            "rating": obj.rating,
+            "total_orders": obj.total_orders,
+            "total_reviews": obj.total_reviews,
+        }
+
     def get_is_open(self, obj):
-        if hasattr(obj, 'vendor_profile'):
-            return obj.vendor_profile.is_open_now()
-        return True
+        return obj.is_open_now()
+
+    def get_products(self, obj):
+        """Get vendor's available products"""
+        products = Product.objects.filter(vendor=obj, is_available=True, status="active").order_by('-created_at')
+        request = self.context.get('request')
+        return ProductSerializer(products, many=True, context={'request': request}).data
+
+    def get_total_products(self, obj):
+        """Get total count of vendor's available products"""
+        return Product.objects.filter(vendor=obj, is_available=True, status="active").count()
+    
+
+    def get_categories(self, obj):
+        categories = Category.objects.filter(vendor=obj, is_active=True)
+        request = self.context.get('request')
+        return CategorySerializer(categories, many=True, context={'request': request}).data
+
+    def get_total_categories(self, obj):
+        return Category.objects.filter(vendor=obj, is_active=True).count()
+
 
 
 

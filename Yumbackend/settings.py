@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-6^+_byj)@3m*k(_nn4+3h2d46ob6#%=(pb0!+nc)wzv4k@(id-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.api.yum-express.com', 'api.yum-express.com', 'localhost',  "127.0.0.1", "5c3e3a7bea27.ngrok-free.app", "testserver"  ]
+ALLOWED_HOSTS = ['www.api.yum-express.com', 'api.yum-express.com', 'localhost',  "127.0.0.1", "77f464762855.ngrok-free.app", "testserver"  ]
 
 
 # Application definition
@@ -189,7 +189,7 @@ USE_TZ = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://5c3e3a7bea27.ngrok-free.app",
+    "https://77f464762855.ngrok-free.app",
 
     "https://yum-express.com",
     "https://www.yum-express.com",

@@ -46,9 +46,9 @@ class ProductAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Basic Information', {'fields': ('vendor', 'category', 'name', 'description')}),
         ('Pricing', {'fields': ('price',)}),
-        ('Inventory', {'fields': ('stock_quantity', 'unit')}),
+        ('Inventory', {'fields': ('stock_quantity', 'unit', 'max_order_quantity')}),
         ('Media', {'fields': ('image',)}),
-        ('Status & Availability', {'fields': ('is_available',)}),
+        ('Status & Availability', {'fields': ('is_available', 'status')}),
         ('Restaurant Specific', {'fields': ('preparation_time',)}),
         ('Timestamps', {'fields': ('created_at', 'updated_at')}),
     )
