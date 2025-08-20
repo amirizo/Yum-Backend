@@ -10551,3 +10551,202 @@ WARNING 2025-08-19 14:28:38,923 log 35528 6159626240 Not Found: /api/orders/d1bc
 INFO 2025-08-19 14:34:32,927 autoreload 35528 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
 INFO 2025-08-19 14:34:33,561 autoreload 35966 8405360832 Watching for file changes with StatReloader
 WARNING 2025-08-19 15:19:35,306 log 35966 6196719616 Unauthorized: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/update-location/
+INFO 2025-08-19 20:28:25,083 autoreload 36946 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-19 20:32:41,292 log 36946 6159396864 Not Found: /auth/drivers/login
+INFO 2025-08-19 20:43:10,047 autoreload 39699 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 20:44:40,778 autoreload 39699 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-19 20:44:41,289 autoreload 39740 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 20:46:11,482 autoreload 39740 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-19 20:46:12,000 autoreload 39780 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 20:46:32,123 autoreload 39780 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-19 20:46:32,610 autoreload 39810 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 20:46:47,577 autoreload 39810 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/urls.py changed, reloading.
+INFO 2025-08-19 20:46:48,072 autoreload 39816 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 20:47:05,086 autoreload 39816 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
+INFO 2025-08-19 20:47:05,550 autoreload 39844 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 20:47:20,448 autoreload 39844 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-19 20:47:20,933 autoreload 39860 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 20:47:34,563 autoreload 39860 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-19 20:47:35,066 autoreload 39870 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-19 20:50:39,639 exception 40165 8405360832 Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+WARNING 2025-08-19 20:50:39,796 log 40165 8405360832 Bad Request: /api/auth/login
+INFO 2025-08-19 20:50:53,306 autoreload 39870 8405360832 /Users/macbookair/Desktop/Yumbackend/Yumbackend/settings.py changed, reloading.
+INFO 2025-08-19 20:50:53,770 autoreload 40238 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-19 20:51:34,513 log 40316 8405360832 Bad Request: /api/auth/driver/profile/create
+WARNING 2025-08-19 20:51:35,447 log 40316 8405360832 Not Found: /api/auth/driver/profile
+WARNING 2025-08-19 20:51:35,755 log 40316 8405360832 Bad Request: /api/auth/driver/profile/create
+WARNING 2025-08-19 20:51:36,063 log 40316 8405360832 Forbidden: /api/auth/driver/profile
+WARNING 2025-08-19 20:51:36,889 log 40316 8405360832 Unauthorized: /api/auth/driver/profile
+WARNING 2025-08-19 20:52:29,219 log 40457 8405360832 Bad Request: /api/auth/driver/profile/create
+WARNING 2025-08-19 20:52:30,152 log 40457 8405360832 Not Found: /api/auth/driver/profile
+WARNING 2025-08-19 20:52:30,461 log 40457 8405360832 Bad Request: /api/auth/driver/profile/create
+WARNING 2025-08-19 20:52:30,769 log 40457 8405360832 Forbidden: /api/auth/driver/profile
+WARNING 2025-08-19 20:52:31,595 log 40457 8405360832 Unauthorized: /api/auth/driver/profile
+INFO 2025-08-19 20:53:36,177 autoreload 40238 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-19 20:53:36,680 autoreload 40564 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-19 20:55:31,786 log 40564 6191378432 Not Found: /api/auth/driver/profile'
+WARNING 2025-08-19 20:56:31,250 log 40564 6191378432 Not Found: /api/auth/driver/create
+WARNING 2025-08-19 20:56:50,049 log 40564 6191378432 Unsupported Media Type: /api/auth/driver/profile/create
+WARNING 2025-08-19 20:56:57,083 log 40564 6191378432 Bad Request: /api/auth/driver/profile/create
+WARNING 2025-08-19 20:57:34,816 log 40564 6191378432 Bad Request: /api/auth/driver/profile/create
+WARNING 2025-08-19 20:58:24,574 log 40564 6191378432 Method Not Allowed: /api/auth/driver/dashboard
+WARNING 2025-08-19 20:59:37,063 log 40564 6208204800 Unsupported Media Type: /api/auth/driver/profile
+WARNING 2025-08-19 21:00:23,254 log 40564 6208204800 Method Not Allowed: /api/auth/driver/toggle-availability
+WARNING 2025-08-19 21:00:26,706 log 40564 6208204800 Method Not Allowed: /api/auth/driver/toggle-availability
+WARNING 2025-08-19 21:48:31,035 log 40564 6225031168 Not Found: /api/login/
+WARNING 2025-08-19 21:48:49,751 log 40564 6225031168 Not Found: /api/login/
+WARNING 2025-08-19 21:55:38,469 log 40564 6225031168 Bad Request: /api/auth/login
+WARNING 2025-08-19 21:56:30,714 log 40564 6225031168 Not Found: /api/auth/driver/dashboard/
+WARNING 2025-08-19 21:57:13,338 log 40564 6225031168 Unauthorized: /api/auth/driver/dashboard
+WARNING 2025-08-19 22:02:16,861 log 40564 6225031168 Unauthorized: /api/auth/driver/dashboard
+INFO 2025-08-19 22:09:49,591 autoreload 40564 8405360832 /Users/macbookair/Desktop/Yumbackend/Yumbackend/settings.py changed, reloading.
+INFO 2025-08-19 22:09:50,228 autoreload 44443 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 22:10:07,341 autoreload 44443 8405360832 /Users/macbookair/Desktop/Yumbackend/Yumbackend/settings.py changed, reloading.
+INFO 2025-08-19 22:10:07,828 autoreload 44455 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-19 22:10:32,064 log 44455 6128070656 Forbidden: /api/auth/driver/dashboard
+WARNING 2025-08-19 22:13:56,673 log 44455 6128070656 Not Found: /support/tickets/
+WARNING 2025-08-19 22:13:56,676 log 44455 6144897024 Not Found: /support/faq/items/
+WARNING 2025-08-19 22:13:56,726 log 44455 6128070656 Not Found: /support/faq/items/
+WARNING 2025-08-19 22:13:56,735 log 44455 6144897024 Not Found: /support/tickets/
+WARNING 2025-08-19 22:14:34,111 log 44455 6128070656 Not Found: /api/orders/driver/deliveries/
+WARNING 2025-08-19 22:14:34,121 log 44455 6144897024 Not Found: /api/orders/driver/deliveries/
+INFO 2025-08-19 22:19:45,454 autoreload 44455 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-19 22:19:46,190 autoreload 44750 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 22:20:00,155 autoreload 44750 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-19 22:20:00,615 autoreload 44758 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-19 22:21:19,038 signals 44964 8405360832 Order b8712cfe-1cb1-45cd-8286-71cdf363393f not found in pre_save signal
+WARNING 2025-08-19 22:21:19,915 log 44964 8405360832 Bad Request: /api/orders/driver/deliveries/
+WARNING 2025-08-19 22:21:20,326 log 44964 8405360832 Forbidden: /api/orders/driver/deliveries/
+WARNING 2025-08-19 22:21:20,634 signals 44964 8405360832 Order 7026d3c9-bdf0-4ab3-b4b8-60b7ab6cfada not found in pre_save signal
+WARNING 2025-08-19 22:21:20,944 signals 44964 8405360832 Order 33ef2756-f56c-4569-9011-83ed442d1815 not found in pre_save signal
+WARNING 2025-08-19 22:21:21,253 log 44964 8405360832 Unauthorized: /api/orders/driver/deliveries/
+WARNING 2025-08-19 22:21:21,562 signals 44964 8405360832 Order 756dc212-f122-4770-9fbe-1be3156cb060 not found in pre_save signal
+WARNING 2025-08-19 22:21:21,871 signals 44964 8405360832 Order 3a104ac3-7d88-4093-b3db-ef827b4ce41b not found in pre_save signal
+WARNING 2025-08-19 22:21:54,209 signals 45147 8405360832 Order cd713295-d937-4265-8957-0d6998c6ff25 not found in pre_save signal
+INFO 2025-08-19 22:21:54,327 services 45147 8405360832 Sending email to testcustomer@example.com: Order TEST001 Delivered!
+INFO 2025-08-19 22:21:54,330 services 45147 8405360832 Sending email to testvendor@example.com: Order TEST001 Delivered
+INFO 2025-08-19 22:21:54,332 services 45147 8405360832 Sending email to testdriver@example.com: Order TEST001 Delivered
+WARNING 2025-08-19 22:21:54,338 signals 45147 8405360832 Order 4c2d8227-227d-43ee-be96-40f9c8eeb949 not found in pre_save signal
+WARNING 2025-08-19 22:22:22,564 signals 45344 8405360832 Order 7332591e-138f-4a1b-b4c8-7f245aec7057 not found in pre_save signal
+INFO 2025-08-19 22:22:22,627 services 45344 8405360832 Sending email to testcustomer@example.com: Order ZLN8UK5Q Delivered!
+INFO 2025-08-19 22:22:22,629 services 45344 8405360832 Sending email to testvendor@example.com: Order ZLN8UK5Q Delivered
+INFO 2025-08-19 22:22:22,631 services 45344 8405360832 Sending email to testdriver@example.com: Order ZLN8UK5Q Delivered
+WARNING 2025-08-19 22:22:22,635 signals 45344 8405360832 Order 58296f73-788f-465f-8bce-3c7c581eabd6 not found in pre_save signal
+INFO 2025-08-19 22:22:22,637 services 45344 8405360832 Sending email to testcustomer@example.com: Order 1N8S6JV4 On The Way
+INFO 2025-08-19 22:22:22,639 services 45344 8405360832 Sending email to testvendor@example.com: Order 1N8S6JV4 In Transit
+WARNING 2025-08-19 22:22:22,644 signals 45344 8405360832 Order 59f0d797-d8f9-466d-886b-8d1effda3a3f not found in pre_save signal
+INFO 2025-08-19 22:22:22,646 services 45344 8405360832 Sending email to testcustomer@example.com: Order TFXE4VRW Picked Up
+INFO 2025-08-19 22:22:22,648 services 45344 8405360832 Sending email to testvendor@example.com: Order TFXE4VRW Picked Up
+INFO 2025-08-19 22:22:22,650 services 45344 8405360832 Sending email to testdriver@example.com: Order TFXE4VRW Assignment
+INFO 2025-08-19 22:23:38,602 autoreload 45604 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 22:23:59,151 autoreload 44758 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-19 22:23:59,621 autoreload 45622 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 22:24:03,057 autoreload 45622 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-19 22:24:03,393 autoreload 45633 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-19 22:24:56,819 log 45633 6166884352 Not Found: /api/auth/orders/driver/deliveries/
+WARNING 2025-08-19 22:25:03,780 log 45633 6166884352 Method Not Allowed: /api/orders/driver/deliveries/
+ERROR 2025-08-19 22:25:07,935 views 45633 6166884352 Error retrieving driver deliveries: 'OrderItem' object has no attribute 'price'
+ERROR 2025-08-19 22:25:07,936 log 45633 6166884352 Internal Server Error: /api/orders/driver/deliveries/
+ERROR 2025-08-19 22:25:43,299 views 45633 6166884352 Error retrieving driver deliveries: 'OrderItem' object has no attribute 'price'
+ERROR 2025-08-19 22:25:43,300 log 45633 6166884352 Internal Server Error: /api/orders/driver/deliveries/
+ERROR 2025-08-19 22:26:04,038 views 45633 6183710720 Error retrieving driver deliveries: 'OrderItem' object has no attribute 'price'
+ERROR 2025-08-19 22:26:04,039 log 45633 6183710720 Internal Server Error: /api/orders/driver/deliveries/
+INFO 2025-08-19 22:29:45,708 autoreload 45633 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-19 22:29:46,275 autoreload 45790 8405360832 Watching for file changes with StatReloader
+ERROR 2025-08-19 22:30:01,226 views 45790 6191951872 Error retrieving driver deliveries: 'OrderStatusHistory' object has no attribute 'created_at'
+ERROR 2025-08-19 22:30:01,227 log 45790 6191951872 Internal Server Error: /api/orders/driver/deliveries/
+ERROR 2025-08-19 22:30:02,757 views 45790 6191951872 Error retrieving driver deliveries: 'OrderStatusHistory' object has no attribute 'created_at'
+ERROR 2025-08-19 22:30:02,758 log 45790 6191951872 Internal Server Error: /api/orders/driver/deliveries/
+INFO 2025-08-19 22:31:22,709 autoreload 45790 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-19 22:31:23,234 autoreload 45837 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 22:31:38,181 autoreload 45837 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-19 22:31:38,660 autoreload 45854 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-19 22:35:43,858 log 45854 6187053056 Not Found: /driver/earnings/
+WARNING 2025-08-19 22:35:43,862 log 45854 6187053056 Not Found: /driver/earnings/
+WARNING 2025-08-19 22:36:44,300 log 45854 6187053056 Not Found: /support/tickets/
+WARNING 2025-08-19 22:36:44,306 log 45854 6203879424 Not Found: /support/faq/items/
+WARNING 2025-08-19 22:36:44,322 log 45854 6187053056 Not Found: /support/tickets/
+WARNING 2025-08-19 22:36:44,327 log 45854 6203879424 Not Found: /support/faq/items/
+WARNING 2025-08-19 22:45:29,743 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:47:32,002 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:47:32,176 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:47:32,187 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:47:32,199 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:48:25,522 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:48:25,721 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:48:25,739 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:48:25,754 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:50:30,482 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:50:30,607 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:50:30,613 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:50:30,619 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:50:30,638 log 45854 6187053056 Not Found: /api/auth/password/change/
+WARNING 2025-08-19 22:50:30,651 log 45854 6187053056 Not Found: /api/auth/user/change-password/
+WARNING 2025-08-19 22:50:30,661 log 45854 6187053056 Not Found: /api/driver/change-password/
+WARNING 2025-08-19 22:50:30,670 log 45854 6187053056 Not Found: /api/auth/password/
+WARNING 2025-08-19 22:53:31,432 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:53:31,541 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:53:31,550 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:53:31,553 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 22:56:07,873 log 45854 6203879424 Not Found: /api/support/faq/items/
+WARNING 2025-08-19 22:56:07,876 log 45854 6187053056 Not Found: /api/support/tickets/
+WARNING 2025-08-19 22:56:07,904 log 45854 6187053056 Not Found: /api/support/faq/items/
+WARNING 2025-08-19 22:56:07,924 log 45854 6203879424 Not Found: /api/support/tickets/
+WARNING 2025-08-19 23:06:30,272 log 45854 6187053056 Not Found: /api/support/tickets/
+WARNING 2025-08-19 23:06:30,275 log 45854 6203879424 Not Found: /api/support/faq/items/
+WARNING 2025-08-19 23:06:30,279 log 45854 6187053056 Not Found: /api/support/tickets/
+WARNING 2025-08-19 23:06:30,281 log 45854 6203879424 Not Found: /api/support/faq/items/
+WARNING 2025-08-19 23:14:37,488 log 45854 6187053056 Unauthorized: /api/auth/driver/dashboard
+WARNING 2025-08-19 23:14:37,492 log 45854 6187053056 Unauthorized: /api/auth/driver/dashboard
+WARNING 2025-08-19 23:15:14,715 log 45854 6187053056 Bad Request: /api/auth/login
+WARNING 2025-08-19 23:15:21,703 log 45854 6187053056 Bad Request: /api/auth/login
+WARNING 2025-08-19 23:15:27,496 log 45854 6187053056 Bad Request: /api/auth/login
+WARNING 2025-08-19 23:18:51,750 log 45854 6187053056 Not Found: /api/driver/earnings/
+WARNING 2025-08-19 23:18:51,763 log 45854 6187053056 Not Found: /api/driver/earnings/
+WARNING 2025-08-19 23:44:18,485 log 45854 6187053056 Not Found: /api/driver/earnings/
+WARNING 2025-08-19 23:44:18,490 log 45854 6187053056 Not Found: /api/driver/earnings/
+WARNING 2025-08-19 23:45:40,426 log 45854 6187053056 Not Found: /api/driver/earnings/
+WARNING 2025-08-19 23:46:52,917 log 45854 6187053056 Not Found: /api/driver/earnings/
+WARNING 2025-08-19 23:47:31,515 log 45854 6187053056 Not Found: /api/support/tickets/
+WARNING 2025-08-19 23:47:31,517 log 45854 6203879424 Not Found: /api/support/faq/items/
+WARNING 2025-08-19 23:47:31,522 log 45854 6187053056 Not Found: /api/support/faq/items/
+WARNING 2025-08-19 23:47:31,523 log 45854 6203879424 Not Found: /api/support/tickets/
+WARNING 2025-08-19 23:50:38,168 log 45854 6187053056 Not Found: /api/support/tickets/
+WARNING 2025-08-19 23:50:38,171 log 45854 6203879424 Not Found: /api/support/faq/items/
+WARNING 2025-08-19 23:50:41,114 log 45854 6187053056 Not Found: /api/support/faq/items/
+WARNING 2025-08-19 23:50:41,116 log 45854 6203879424 Not Found: /api/support/tickets/
+WARNING 2025-08-19 23:50:47,895 log 45854 6187053056 Not Found: /api/support/tickets/
+WARNING 2025-08-19 23:50:47,898 log 45854 6203879424 Not Found: /api/support/faq/items/
+WARNING 2025-08-19 23:50:47,903 log 45854 6203879424 Not Found: /api/support/tickets/
+WARNING 2025-08-19 23:50:47,904 log 45854 6187053056 Not Found: /api/support/faq/items/
+WARNING 2025-08-19 23:51:33,442 log 45854 6187053056 Bad Request: /api/auth/change-password
+WARNING 2025-08-19 23:51:50,641 log 45854 6187053056 Bad Request: /api/auth/change-password
+INFO 2025-08-19 23:57:53,238 autoreload 45854 8405360832 /Users/macbookair/Desktop/Yumbackend/Yumbackend/settings.py changed, reloading.
+INFO 2025-08-19 23:57:53,952 autoreload 49116 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 23:58:04,729 autoreload 49116 8405360832 /Users/macbookair/Desktop/Yumbackend/Yumbackend/urls.py changed, reloading.
+INFO 2025-08-19 23:58:05,194 autoreload 49129 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-19 23:58:35,900 autoreload 49129 8405360832 /Users/macbookair/Desktop/Yumbackend/support/admin.py changed, reloading.
+INFO 2025-08-19 23:58:36,412 autoreload 49162 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 00:05:06,635 autoreload 49162 8405360832 /Users/macbookair/Desktop/Yumbackend/support/urls.py changed, reloading.
+INFO 2025-08-20 00:05:07,167 autoreload 49912 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-20 00:08:17,999 log 49912 6199799808 Bad Request: /api/support/feedback/
+WARNING 2025-08-20 00:13:47,478 log 49912 6267105280 Forbidden: /api/support/statistics/
+WARNING 2025-08-20 00:17:27,689 log 49912 6250278912 Unauthorized: /api/support/faq/items/
+WARNING 2025-08-20 00:17:27,690 log 49912 6233452544 Unauthorized: /api/support/tickets/
+WARNING 2025-08-20 00:18:43,097 log 49912 6233452544 Bad Request: /api/auth/login
+WARNING 2025-08-20 00:19:25,308 log 49912 6199799808 Bad Request: /api/support/feedback/
+WARNING 2025-08-20 00:21:39,493 log 49912 6199799808 Bad Request: /api/support/feedback/
+WARNING 2025-08-20 00:22:27,322 log 49912 6199799808 Bad Request: /api/support/tickets/
+WARNING 2025-08-20 00:22:33,798 log 49912 6199799808 Bad Request: /api/support/tickets/
+WARNING 2025-08-20 00:23:22,916 log 49912 6199799808 Not Found: /api/auth/driver/toggle-availability/
+WARNING 2025-08-20 00:23:28,488 log 49912 6199799808 Not Found: /api/auth/driver/toggle-availability/

@@ -2,7 +2,7 @@ from rest_framework import status, generics, permissions, filters
 from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied, NotFound, ValidationError
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -12,13 +12,14 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
 from django.utils.html import strip_tags
+from django.db import models
 from .models import PasswordResetToken, LoginAttempt, TemporaryPassword
 from .serializers import (
     UserRegistrationSerializer, AdminVendorCreationSerializer, 
     AdminDriverCreationSerializer, LoginSerializer, ChangePasswordSerializer,
     PasswordResetRequestSerializer, PasswordResetConfirmSerializer, UserSerializer, ResendOTPSerializer, OTPVerificationSerializer,
     VendorProfileSerializer, VendorProfileUpdateSerializer,
-    DriverProfileSerializer, BusinessHoursSerializer, VendorLocationSerializer,
+    DriverProfileSerializer, DriverProfileCreateSerializer, BusinessHoursSerializer, VendorLocationSerializer,
     VendorCategorySerializer, ContactMessageSerializer,VendorProfileUpdateSerializer
 )
 import logging
@@ -845,3 +846,172 @@ def contact_us(request):
         return Response({"success": "Your message has been sent successfully!"}, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class DriverProfileView(generics.RetrieveUpdateAPIView):
+    """
+    Driver profile view for retrieving and updating driver information
+    """
+    serializer_class = DriverProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_object(self):
+        if self.request.user.user_type != 'driver':
+            raise PermissionDenied("Only drivers can access driver profile.")
+        
+        try:
+            return self.request.user.driver_profile
+        except Driver.DoesNotExist:
+            raise NotFound("Driver profile not found.")
+    
+    def update(self, request, *args, **kwargs):
+        if request.user.user_type != 'driver':
+            raise PermissionDenied("Only drivers can update driver profile.")
+        
+        # Allow partial updates
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)
+
+
+class DriverProfileCreateView(generics.CreateAPIView):
+    """
+    Create driver profile for authenticated users
+    """
+    serializer_class = DriverProfileCreateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def perform_create(self, serializer):
+        if self.request.user.user_type != 'driver':
+            raise PermissionDenied("Only users with driver type can create driver profile.")
+        
+        # Check if driver profile already exists
+        if hasattr(self.request.user, 'driver_profile'):
+            raise ValidationError("Driver profile already exists for this user.")
+        
+        serializer.save(user=self.request.user)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def driver_dashboard(request):
+    """
+    Driver dashboard with statistics and current status
+    """
+    if request.user.user_type != 'driver':
+        return Response({'error': 'Only drivers can access driver dashboard'}, 
+                       status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        driver_profile = request.user.driver_profile
+        
+        # Get driver statistics
+        from orders.models import Order
+        
+        total_orders = Order.objects.filter(driver=driver_profile).count()
+        completed_orders = Order.objects.filter(driver=driver_profile, status='delivered').count()
+        in_progress_orders = Order.objects.filter(
+            driver=driver_profile, 
+            status__in=['picked_up', 'in_transit']
+        ).count()
+        
+        # Calculate completion rate
+        completion_rate = (completed_orders / total_orders * 100) if total_orders > 0 else 0
+        
+        # Get recent orders
+        recent_orders = Order.objects.filter(driver=driver_profile).order_by('-created_at')[:5]
+        
+        # Get earnings (you can implement this based on your payment model)
+        # For now, we'll calculate based on completed orders and delivery fees
+        total_earnings = Order.objects.filter(
+            driver=driver_profile, 
+            status='delivered'
+        ).aggregate(
+            total=models.Sum('delivery_fee')
+        )['total'] or 0
+        
+        return Response({
+            'driver_info': DriverProfileSerializer(driver_profile).data,
+            'statistics': {
+                'total_orders': total_orders,
+                'completed_orders': completed_orders,
+                'in_progress_orders': in_progress_orders,
+                'completion_rate': round(completion_rate, 2),
+                'total_earnings': total_earnings,
+                'average_rating': driver_profile.rating
+            },
+            'status': {
+                'is_online': driver_profile.is_online,
+                'is_available': driver_profile.is_available,
+                'is_verified': driver_profile.is_verified,
+                'last_location_update': driver_profile.last_location_update
+            }
+        })
+        
+    except Driver.DoesNotExist:
+        return Response({'error': 'Driver profile not found'}, 
+                       status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def toggle_driver_availability(request):
+    """
+    Toggle driver availability status
+    """
+    if request.user.user_type != 'driver':
+        return Response({'error': 'Only drivers can toggle availability'}, 
+                       status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        driver_profile = request.user.driver_profile
+        
+        # Toggle availability
+        driver_profile.is_available = not driver_profile.is_available
+        
+        # If going offline, also set is_online to False
+        if not driver_profile.is_available:
+            driver_profile.is_online = False
+        
+        driver_profile.save()
+        
+        return Response({
+            'message': f'Driver availability set to {"available" if driver_profile.is_available else "unavailable"}',
+            'is_available': driver_profile.is_available,
+            'is_online': driver_profile.is_online
+        })
+        
+    except Driver.DoesNotExist:
+        return Response({'error': 'Driver profile not found'}, 
+                       status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def toggle_driver_online_status(request):
+    """
+    Toggle driver online/offline status
+    """
+    if request.user.user_type != 'driver':
+        return Response({'error': 'Only drivers can toggle online status'}, 
+                       status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        driver_profile = request.user.driver_profile
+        
+        # Toggle online status
+        driver_profile.is_online = not driver_profile.is_online
+        
+        # If going online, must be available
+        if driver_profile.is_online and not driver_profile.is_available:
+            driver_profile.is_available = True
+        
+        driver_profile.save()
+        
+        return Response({
+            'message': f'Driver is now {"online" if driver_profile.is_online else "offline"}',
+            'is_online': driver_profile.is_online,
+            'is_available': driver_profile.is_available
+        })
+        
+    except Driver.DoesNotExist:
+        return Response({'error': 'Driver profile not found'}, 
+                       status=status.HTTP_404_NOT_FOUND)

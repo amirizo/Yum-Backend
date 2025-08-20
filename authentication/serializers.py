@@ -351,10 +351,51 @@ class VendorProfileUpdateSerializer(serializers.ModelSerializer):
 
 class DriverProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
-
+    total_orders = serializers.SerializerMethodField()
+    completed_orders = serializers.SerializerMethodField()
+    
     class Meta:
         model = Driver
-        fields = '__all__'
+        fields = [
+            'id', 'user', 'license_number', 'vehicle_type', 'vehicle_number', 
+            'vehicle_model', 'is_available', 'is_verified', 'is_online',
+            'current_latitude', 'current_longitude', 'last_location_update',
+            'rating', 'total_deliveries', 'created_at', 'approved_at',
+            'total_orders', 'completed_orders'
+        ]
+        read_only_fields = [
+            'user', 'is_verified', 'rating', 'total_deliveries', 
+            'created_at', 'approved_at', 'current_latitude', 'current_longitude',
+            'last_location_update'
+        ]
+    
+    def get_total_orders(self, obj):
+        from orders.models import Order
+        return Order.objects.filter(driver=obj).count()
+    
+    def get_completed_orders(self, obj):
+        from orders.models import Order
+        return Order.objects.filter(driver=obj, status='delivered').count()
+
+
+class DriverProfileCreateSerializer(serializers.ModelSerializer):
+    """Serializer for creating driver profile"""
+    
+    class Meta:
+        model = Driver
+        fields = [
+            'license_number', 'vehicle_type', 'vehicle_number', 'vehicle_model'
+        ]
+    
+    def validate_license_number(self, value):
+        if Driver.objects.filter(license_number=value).exists():
+            raise serializers.ValidationError("This license number is already registered.")
+        return value
+    
+    def validate_vehicle_number(self, value):
+        if Driver.objects.filter(vehicle_number=value).exists():
+            raise serializers.ValidationError("This vehicle number is already registered.")
+        return value
 
 class DriverLocationUpdateSerializer(serializers.Serializer):
     latitude = serializers.DecimalField(max_digits=10, decimal_places=8)

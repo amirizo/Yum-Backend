@@ -55,6 +55,7 @@ urlpatterns = [
     
     # Driver actions
     path('available-for-drivers/', views.available_orders_for_drivers, name='available-orders-drivers'),
+    path('driver/deliveries/', views.driver_deliveries, name='driver-deliveries'),
     path('<uuid:order_id>/assign-driver/', views.assign_driver_to_order, name='assign-driver'),
     path('<uuid:order_id>/delivered/', views.driver_mark_delivered, name='driver-mark-delivered'),
     path('<uuid:order_id>/update-location/', views.driver_update_location, name='driver-update-location'),

@@ -754,7 +754,7 @@ def driver_mark_delivered(request, order_id):
         OrderNotificationService.notify_vendor_order_delivered(order)
         # Update driver availability if needed
         driver_profile = request.user.driver_profile
-        driver_profile.current_orders_count = driver_profile.current_orders_count - 1 if driver_profile.current_orders_count > 0 else 0
+        driver_profile.total_deliveries += 1
         driver_profile.save()
         
         return Response({
@@ -1078,3 +1078,172 @@ def reverse_geocode(request):
 
 
 # Payment-related functionality has been moved to the payments app
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def driver_deliveries(request):
+    """Get all deliveries for the authenticated driver"""
+    if request.user.user_type != 'driver':
+        return Response({'error': 'Only drivers can access this endpoint'}, status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        driver_profile = request.user.driver_profile
+        
+        # Get filter parameters from query params
+        status_filter = request.GET.get('status', None)  # Filter by order status
+        date_from = request.GET.get('date_from', None)  # Filter from date (YYYY-MM-DD)
+        date_to = request.GET.get('date_to', None)      # Filter to date (YYYY-MM-DD)
+        page = int(request.GET.get('page', 1))          # Pagination
+        page_size = int(request.GET.get('page_size', 20))  # Items per page
+        
+        # Base queryset - all orders assigned to this driver
+        deliveries = Order.objects.filter(
+            driver=driver_profile
+        ).select_related(
+            'customer', 'vendor', 'vendor__user'
+        ).prefetch_related(
+            'items__product', 'status_history'
+        ).order_by('-created_at')
+        
+        # Apply status filter if provided
+        if status_filter:
+            valid_statuses = ['picked_up', 'in_transit', 'delivered', 'cancelled']
+            if status_filter in valid_statuses:
+                deliveries = deliveries.filter(status=status_filter)
+            else:
+                return Response({
+                    'error': f'Invalid status. Valid options: {", ".join(valid_statuses)}'
+                }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Apply date filters if provided
+        if date_from:
+            try:
+                from datetime import datetime
+                date_from_obj = datetime.strptime(date_from, '%Y-%m-%d').date()
+                deliveries = deliveries.filter(created_at__date__gte=date_from_obj)
+            except ValueError:
+                return Response({
+                    'error': 'Invalid date_from format. Use YYYY-MM-DD'
+                }, status=status.HTTP_400_BAD_REQUEST)
+        
+        if date_to:
+            try:
+                from datetime import datetime
+                date_to_obj = datetime.strptime(date_to, '%Y-%m-%d').date()
+                deliveries = deliveries.filter(created_at__date__lte=date_to_obj)
+            except ValueError:
+                return Response({
+                    'error': 'Invalid date_to format. Use YYYY-MM-DD'
+                }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Calculate pagination
+        total_count = deliveries.count()
+        start_index = (page - 1) * page_size
+        end_index = start_index + page_size
+        paginated_deliveries = deliveries[start_index:end_index]
+        
+        # Build response data
+        delivery_data = []
+        for order in paginated_deliveries:
+            # Calculate delivery details
+            pickup_address = order.vendor.primary_location.address if order.vendor.primary_location else 'N/A'
+            delivery_address = order.delivery_address_text
+            
+            # Get order items summary
+            items_summary = []
+            for item in order.items.all():
+                items_summary.append({
+                    'product_name': item.product.name,
+                    'quantity': item.quantity,
+                    'price': item.total_price,
+                    'special_instructions': item.special_instructions or 'None'
+                })
+            
+            # Calculate delivery earnings (you can adjust this logic based on your commission structure)
+            delivery_earnings = order.delivery_fee * Decimal('0.8')  # Driver gets 80% of delivery fee
+            
+            delivery_info = {
+                'id': str(order.id),
+                'order_number': order.order_number,
+                'status': order.status,
+                'customer_info': {
+                    'name': f"{order.customer.first_name} {order.customer.last_name}",
+                    'phone': order.customer.phone_number,
+                    'email': order.customer.email
+                },
+                'vendor_info': {
+                    'name': order.vendor.business_name,
+                    'phone': order.vendor.user.phone_number
+                },
+                'addresses': {
+                    'pickup_address': pickup_address,
+                    'delivery_address': delivery_address,
+                    'delivery_latitude': order.delivery_latitude,
+                    'delivery_longitude': order.delivery_longitude
+                },
+                'order_details': {
+                    'items': items_summary,
+                    'total_amount': order.total_amount,
+                    'delivery_fee': order.delivery_fee,
+                    'item_count': order.items.count()
+                },
+                'earnings': {
+                    'delivery_earnings': delivery_earnings,
+                    'currency': 'TZS'
+                },
+                'timestamps': {
+                    'ordered_at': order.created_at,
+                    'picked_up_at': order.status_history.filter(status='picked_up').first().timestamp if order.status_history.filter(status='picked_up').exists() else None,
+                    'delivered_at': order.actual_delivery_time,
+                    'estimated_delivery': order.estimated_delivery_time
+                },
+                'payment_status': order.payment_status,
+                'special_instructions': order.special_instructions or 'None'
+            }
+            
+            delivery_data.append(delivery_info)
+        
+        # Calculate statistics
+        all_driver_orders = Order.objects.filter(driver=driver_profile)
+        stats = {
+            'total_deliveries': all_driver_orders.filter(status='delivered').count(),
+            'active_deliveries': all_driver_orders.filter(status__in=['picked_up', 'in_transit']).count(),
+            'total_earnings': float(all_driver_orders.filter(status='delivered').aggregate(
+                total=Sum('delivery_fee')
+            )['total'] or 0) * 0.8,  # Driver gets 80%
+            'completion_rate': 0
+        }
+        
+        # Calculate completion rate
+        total_assigned = all_driver_orders.count()
+        if total_assigned > 0:
+            completed = all_driver_orders.filter(status='delivered').count()
+            stats['completion_rate'] = round((completed / total_assigned) * 100, 2)
+        
+        # Pagination info
+        total_pages = (total_count + page_size - 1) // page_size
+        pagination_info = {
+            'current_page': page,
+            'page_size': page_size,
+            'total_count': total_count,
+            'total_pages': total_pages,
+            'has_next': page < total_pages,
+            'has_previous': page > 1
+        }
+        
+        return Response({
+            'deliveries': delivery_data,
+            'statistics': stats,
+            'pagination': pagination_info,
+            'filters_applied': {
+                'status': status_filter,
+                'date_from': date_from,
+                'date_to': date_to
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"Error retrieving driver deliveries: {str(e)}")
+        return Response({
+            'error': 'An error occurred while retrieving deliveries'
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

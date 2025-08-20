@@ -48,5 +48,12 @@ urlpatterns = [
     # Drivers
     path('drivers', views.DriverListView.as_view(), name='driver-list'),
     path('drivers/location', views.update_driver_location, name='update-driver-location'),
+    
+    # Driver Profile
+    path('driver/profile', views.DriverProfileView.as_view(), name='driver-profile'),
+    path('driver/profile/create', views.DriverProfileCreateView.as_view(), name='driver-profile-create'),
+    path('driver/dashboard', views.driver_dashboard, name='driver-dashboard'),
+    path('driver/toggle-availability', views.toggle_driver_availability, name='toggle-driver-availability'),
+    path('driver/toggle-online', views.toggle_driver_online_status, name='toggle-driver-online'),
 ]
 

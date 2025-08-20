@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-6^+_byj)@3m*k(_nn4+3h2d46ob6#%=(pb0!+nc)wzv4k@(id-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.api.yum-express.com', 'api.yum-express.com', 'localhost',  "127.0.0.1", "5c3e3a7bea27.ngrok-free.app"  ]
+ALLOWED_HOSTS = ['www.api.yum-express.com', 'api.yum-express.com', 'localhost',  "127.0.0.1", "5c3e3a7bea27.ngrok-free.app", "testserver"  ]
 
 
 # Application definition
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'orders',
     'tracking',
     'payments',
+    'support',
     'dispatch',
     'notifications',
     
@@ -212,7 +213,6 @@ CORS_ALLOW_METHODS = [
 
 CORS_ALLOW_HEADERS = ["*"]
 CORS_ALLOW_CREDENTIALS = True
-
 
 # Also allow common headers (like Content-Type, Authorization)
 CORS_ALLOW_HEADERS = list(default_headers) + [
