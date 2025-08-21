@@ -3,6 +3,9 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .services import SMSService, EmailService
 from django.contrib import messages
 from django.utils.html import format_html
+from django.core.mail import send_mail
+from django.conf import settings
+from django.template.loader import render_to_string
 from .models import (
     User, Vendor, 
     Driver, 
@@ -17,11 +20,50 @@ from .models import (
 )
 
 
+
+
+
+
+
+
+
+def restore_user(modeladmin, request, queryset):
+    """Custom admin action to restore/deactivate users and send email"""
+    for user in queryset:
+        user.is_active = True
+        user.save()
+
+        # Send email notification
+        try:
+            subject = "Your Account Has Been Restored"
+            context = {
+                "first_name": user.first_name,
+                "username": user.username,
+            }
+            message_plain = render_to_string('emails/account_restored.txt', context)
+            message_html = render_to_string('emails/account_restored.html', context)
+
+            send_mail(
+                subject=subject,
+                message=message_plain,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                html_message=message_html,
+                fail_silently=False,
+            )
+        except Exception as e:
+            modeladmin.message_user(request, f"Failed to send email to {user.email}: {e}")
+
+    modeladmin.message_user(request, "Selected user accounts have been restored and notified via email.")
+
+restore_user.short_description = "Restore selected user accounts and send notification"
+
 class CustomUserAdmin(BaseUserAdmin):
     list_display = ['email', 'first_name', 'last_name', 'user_type', 'phone_number', 'is_active', 'created_at']
     list_filter = ['user_type', 'is_active', 'created_at']
     search_fields = ['email', 'first_name', 'last_name', 'phone_number']
     ordering = ['-created_at']
+    actions = [restore_user]  # Add your custom action here
     
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -137,6 +179,9 @@ class VendorProfileAdmin(admin.ModelAdmin):
     inlines = [BusinessHoursInline, VendorLocationInline, VendorCategoryInline]
     
     actions = ['approve_vendors', 'suspend_vendors', 'activate_vendors']
+
+
+    
     
     def approve_vendors(self, request, queryset):
         for vendor in queryset:

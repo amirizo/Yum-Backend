@@ -20,7 +20,8 @@ from .serializers import (
     PasswordResetRequestSerializer, PasswordResetConfirmSerializer, UserSerializer, ResendOTPSerializer, OTPVerificationSerializer,
     VendorProfileSerializer, VendorProfileUpdateSerializer,
     DriverProfileSerializer, DriverProfileCreateSerializer, BusinessHoursSerializer, VendorLocationSerializer,
-    VendorCategorySerializer, ContactMessageSerializer,VendorProfileUpdateSerializer
+    VendorCategorySerializer, ContactMessageSerializer,VendorProfileUpdateSerializer,
+    AccountDeletionSerializer, DeletedAccountListSerializer, AdminAccountDeletionSerializer, AccountRestoreSerializer
 )
 import logging
 logger = logging.getLogger(__name__)
@@ -1015,3 +1016,322 @@ def toggle_driver_online_status(request):
     except Driver.DoesNotExist:
         return Response({'error': 'Driver profile not found'}, 
                        status=status.HTTP_404_NOT_FOUND)
+
+
+# =============================================================================
+# ACCOUNT DELETION APIS
+# =============================================================================
+
+class AccountSoftDeleteView(generics.GenericAPIView):
+    """Soft delete user account (can be restored)"""
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = AccountDeletionSerializer
+    
+    def post(self, request):
+        """Soft delete the authenticated user's account"""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        user = request.user
+        reason = serializer.validated_data.get('reason', 'User requested account deletion')
+        
+        # Check if account is already deleted
+        if user.is_deleted:
+            return Response({
+                'error': 'Account is already deleted'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Perform soft delete
+        user.soft_delete(reason=reason)
+        
+        # Log the activity
+        from .models import UserActivity
+        UserActivity.objects.create(
+            user=user,
+            activity_type='account_deletion',
+            description=f'Account soft deleted. Reason: {reason}',
+            ip_address=request.META.get('REMOTE_ADDR'),
+            user_agent=request.META.get('HTTP_USER_AGENT', '')
+        )
+        
+        # Logout user by deleting their token
+        try:
+            from rest_framework.authtoken.models import Token
+            Token.objects.filter(user=user).delete()
+        except:
+            pass
+        
+        return Response({
+            'message': 'Account has been successfully deleted. You can restore it within 30 days by contacting support.',
+            'deleted_at': user.deleted_at,
+            'can_restore_until': user.deleted_at + timezone.timedelta(days=30) if user.deleted_at else None
+        }, status=status.HTTP_200_OK)
+
+
+class AccountHardDeleteView(generics.GenericAPIView):
+    """Permanently delete user account (cannot be restored)"""
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = AccountDeletionSerializer
+    
+    def delete(self, request):
+        """Permanently delete the authenticated user's account"""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        user = request.user
+        user_email = user.email
+        user_id = user.id
+        
+        # Log the activity before deletion
+        from .models import UserActivity
+        UserActivity.objects.create(
+            user=user,
+            activity_type='account_hard_deletion',
+            description='Account permanently deleted by user',
+            ip_address=request.META.get('REMOTE_ADDR'),
+            user_agent=request.META.get('HTTP_USER_AGENT', '')
+        )
+        
+        # Delete all related data
+        # Note: Some related objects might need special handling based on your business logic
+        try:
+            # Delete authentication tokens
+            from rest_framework.authtoken.models import Token
+            Token.objects.filter(user=user).delete()
+            
+            # Delete user account permanently
+            user.delete()
+            
+        except Exception as e:
+            return Response({
+                'error': 'Failed to delete account. Please contact support.',
+                'details': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        return Response({
+            'message': f'Account {user_email} has been permanently deleted.',
+            'deleted_user_id': user_id
+        }, status=status.HTTP_200_OK)
+
+
+class AccountRestoreView(generics.GenericAPIView):
+    """Restore a soft deleted account"""
+    permission_classes = [permissions.AllowAny]
+    serializer_class = AccountRestoreSerializer
+    
+    def post(self, request):
+        """Restore a soft deleted account"""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        user = serializer.validated_data['user']
+        
+        # Check if account can still be restored (within 30 days)
+        if user.deleted_at:
+            days_since_deletion = (timezone.now() - user.deleted_at).days
+            if days_since_deletion > 30:
+                return Response({
+                    'error': 'Account cannot be restored. Deletion period has expired (>30 days).'
+                }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Restore the account
+        user.restore_account()
+        
+        # Log the activity
+        from .models import UserActivity
+        UserActivity.objects.create(
+            user=user,
+            activity_type='account_restoration',
+            description='Account restored from soft deletion',
+            ip_address=request.META.get('REMOTE_ADDR'),
+            user_agent=request.META.get('HTTP_USER_AGENT', '')
+        )
+        
+        # Create new authentication token
+        from rest_framework.authtoken.models import Token
+        token, created = Token.objects.get_or_create(user=user)
+        
+        return Response({
+            'message': 'Account has been successfully restored.',
+            'token': token.key,
+            'user': {
+                'id': user.id,
+                'email': user.email,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'user_type': user.user_type
+            }
+        }, status=status.HTTP_200_OK)
+
+
+class AdminAccountManagementView(generics.GenericAPIView):
+    """Admin endpoints for managing user accounts"""
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
+    
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return DeletedAccountListSerializer
+        return AdminAccountDeletionSerializer
+    
+    def get(self, request):
+        """List all deleted accounts (admin only)"""
+        deleted_users = User.objects.filter(is_deleted=True).order_by('-deleted_at')
+        
+        # Filter by days since deletion if provided
+        days_filter = request.query_params.get('days')
+        if days_filter:
+            try:
+                days = int(days_filter)
+                cutoff_date = timezone.now() - timezone.timedelta(days=days)
+                deleted_users = deleted_users.filter(deleted_at__gte=cutoff_date)
+            except ValueError:
+                pass
+        
+        serializer = self.get_serializer(deleted_users, many=True)
+        return Response({
+            'deleted_accounts': serializer.data,
+            'total_count': deleted_users.count()
+        })
+    
+    def post(self, request):
+        """Admin delete any user account"""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        user_id = serializer.validated_data['user_id']
+        deletion_type = serializer.validated_data['deletion_type']
+        reason = serializer.validated_data['reason']
+        
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            return Response({
+                'error': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        
+        if deletion_type == 'soft':
+            if user.is_deleted:
+                return Response({
+                    'error': 'User account is already soft deleted'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            user.soft_delete(reason=f"Admin deletion: {reason}")
+            
+            # Log admin activity
+            from .models import UserActivity
+            UserActivity.objects.create(
+                user=user,
+                activity_type='admin_soft_deletion',
+                description=f'Account soft deleted by admin {request.user.email}. Reason: {reason}',
+                ip_address=request.META.get('REMOTE_ADDR'),
+                user_agent=request.META.get('HTTP_USER_AGENT', '')
+            )
+            
+            return Response({
+                'message': f'User {user.email} has been soft deleted by admin.',
+                'deletion_type': 'soft',
+                'deleted_at': user.deleted_at
+            })
+        
+        elif deletion_type == 'hard':
+            user_email = user.email
+            
+            # Log admin activity before deletion
+            from .models import UserActivity
+            UserActivity.objects.create(
+                user=user,
+                activity_type='admin_hard_deletion',
+                description=f'Account permanently deleted by admin {request.user.email}. Reason: {reason}',
+                ip_address=request.META.get('REMOTE_ADDR'),
+                user_agent=request.META.get('HTTP_USER_AGENT', '')
+            )
+            
+            # Delete user permanently
+            user.delete()
+            
+            return Response({
+                'message': f'User {user_email} has been permanently deleted by admin.',
+                'deletion_type': 'hard'
+            })
+
+
+class AdminAccountRestoreView(generics.GenericAPIView):
+    """Admin restore any soft deleted account"""
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
+    
+    def post(self, request, user_id):
+        """Admin restore a soft deleted account"""
+        try:
+            user = User.objects.get(id=user_id, is_deleted=True)
+        except User.DoesNotExist:
+            return Response({
+                'error': 'Deleted user not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        
+        # Restore the account
+        user.restore_account()
+        
+        # Log admin activity
+        from .models import UserActivity
+        UserActivity.objects.create(
+            user=user,
+            activity_type='admin_account_restoration',
+            description=f'Account restored by admin {request.user.email}',
+            ip_address=request.META.get('REMOTE_ADDR'),
+            user_agent=request.META.get('HTTP_USER_AGENT', '')
+        )
+        
+        return Response({
+            'message': f'User {user.email} has been successfully restored by admin.',
+            'restored_user': {
+                'id': user.id,
+                'email': user.email,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'user_type': user.user_type,
+                'restored_at': timezone.now()
+            }
+        })
+
+
+class AccountDeletionStatusView(generics.GenericAPIView):
+    """Check account deletion status"""
+    permission_classes = [permissions.AllowAny]  # Allow checking status even for deleted accounts
+    
+    def get(self, request):
+        """Get account deletion status by email or for authenticated user"""
+        # Check if user is authenticated
+        if request.user.is_authenticated:
+            user = request.user
+        else:
+            # Allow checking by email for deleted accounts
+            email = request.query_params.get('email')
+            if not email:
+                return Response({
+                    'error': 'Email parameter required for unauthenticated requests'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            try:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                return Response({
+                    'error': 'User not found'
+                }, status=status.HTTP_404_NOT_FOUND)
+        
+        if not user.is_deleted:
+            return Response({
+                'is_deleted': False,
+                'message': 'Account is active'
+            })
+        
+        days_since_deletion = (timezone.now() - user.deleted_at).days if user.deleted_at else 0
+        can_restore = days_since_deletion <= 30
+        
+        return Response({
+            'is_deleted': True,
+            'deleted_at': user.deleted_at,
+            'deletion_reason': user.deletion_reason,
+            'days_since_deletion': days_since_deletion,
+            'can_restore': can_restore,
+            'restore_deadline': user.deleted_at + timezone.timedelta(days=30) if user.deleted_at else None
+        })

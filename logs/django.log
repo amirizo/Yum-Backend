@@ -12671,3 +12671,341 @@ INFO 2025-08-20 22:40:02,361 autoreload 69249 8405360832 Watching for file chang
 INFO 2025-08-20 22:40:02,734 autoreload 69208 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
 INFO 2025-08-20 22:40:03,086 autoreload 69250 8405360832 Watching for file changes with StatReloader
 WARNING 2025-08-20 22:42:11,487 log 69249 6143782912 Not Found: /api/orders/products/2/
+INFO 2025-08-20 22:45:58,622 autoreload 69597 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:47:37,567 autoreload 69597 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/models.py changed, reloading.
+INFO 2025-08-20 22:47:37,729 autoreload 69250 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/models.py changed, reloading.
+INFO 2025-08-20 22:47:38,118 autoreload 69661 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:47:38,119 autoreload 69662 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:47:45,785 autoreload 69661 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/models.py changed, reloading.
+INFO 2025-08-20 22:47:46,164 autoreload 69697 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:47:46,727 autoreload 69662 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/models.py changed, reloading.
+INFO 2025-08-20 22:47:47,070 autoreload 69698 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:48:23,559 autoreload 69698 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
+INFO 2025-08-20 22:48:23,972 autoreload 69697 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
+INFO 2025-08-20 22:48:24,112 autoreload 69721 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:48:24,339 autoreload 69722 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:49:40,711 autoreload 69721 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-20 22:49:40,877 autoreload 69722 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-20 22:49:41,314 autoreload 69780 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:49:41,315 autoreload 69779 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:50:02,804 autoreload 69780 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/urls.py changed, reloading.
+INFO 2025-08-20 22:50:03,268 autoreload 69818 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:50:03,583 autoreload 69779 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/urls.py changed, reloading.
+INFO 2025-08-20 22:50:03,930 autoreload 69819 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-20 22:51:47,933 log 70163 8405360832 Unauthorized: /api/auth/account/status
+WARNING 2025-08-20 22:51:48,982 log 70163 8405360832 Bad Request: /api/auth/admin/accounts
+WARNING 2025-08-20 22:51:49,401 log 70163 8405360832 Forbidden: /api/auth/admin/accounts
+WARNING 2025-08-20 22:51:49,402 log 70163 8405360832 Forbidden: /api/auth/admin/accounts
+WARNING 2025-08-20 22:51:49,712 log 70163 8405360832 Bad Request: /api/auth/account/restore
+WARNING 2025-08-20 22:51:50,021 log 70163 8405360832 Bad Request: /api/auth/account/restore
+WARNING 2025-08-20 22:51:50,770 log 70163 8405360832 Bad Request: /api/auth/account/soft-delete
+INFO 2025-08-20 22:52:07,682 autoreload 69819 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-20 22:52:07,980 autoreload 69818 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-20 22:52:08,163 autoreload 70225 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:52:08,351 autoreload 70226 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-20 22:52:18,586 log 70284 8405360832 Unauthorized: /api/auth/account/status
+WARNING 2025-08-20 22:52:19,635 log 70284 8405360832 Bad Request: /api/auth/admin/accounts
+WARNING 2025-08-20 22:52:20,053 log 70284 8405360832 Forbidden: /api/auth/admin/accounts
+WARNING 2025-08-20 22:52:20,053 log 70284 8405360832 Forbidden: /api/auth/admin/accounts
+WARNING 2025-08-20 22:52:20,363 log 70284 8405360832 Bad Request: /api/auth/account/restore
+WARNING 2025-08-20 22:52:20,673 log 70284 8405360832 Bad Request: /api/auth/account/restore
+WARNING 2025-08-20 22:52:21,396 log 70284 8405360832 Bad Request: /api/auth/account/soft-delete
+WARNING 2025-08-20 22:53:17,105 log 70410 8405360832 Bad Request: /api/auth/admin/accounts
+WARNING 2025-08-20 22:53:17,525 log 70410 8405360832 Forbidden: /api/auth/admin/accounts
+WARNING 2025-08-20 22:53:17,526 log 70410 8405360832 Forbidden: /api/auth/admin/accounts
+WARNING 2025-08-20 22:53:17,835 log 70410 8405360832 Bad Request: /api/auth/account/restore
+WARNING 2025-08-20 22:53:18,142 log 70410 8405360832 Bad Request: /api/auth/account/restore
+WARNING 2025-08-20 22:53:18,865 log 70410 8405360832 Bad Request: /api/auth/account/soft-delete
+INFO 2025-08-20 22:54:58,273 autoreload 70226 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/serializers.py changed, reloading.
+INFO 2025-08-20 22:54:58,862 autoreload 70225 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-20 22:54:58,896 autoreload 70556 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:54:59,226 autoreload 70558 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-20 22:56:37,838 log 70556 6160642048 Unauthorized: /api/auth/account/soft-delete
+WARNING 2025-08-20 22:56:44,311 log 70556 6160642048 Method Not Allowed: /api/auth/account/soft-delete
+WARNING 2025-08-20 22:56:49,215 log 70556 6160642048 Bad Request: /api/auth/account/soft-delete
+INFO 2025-08-20 22:58:35,401 autoreload 70556 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-20 22:58:35,739 autoreload 70558 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-20 22:58:35,960 autoreload 70802 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:58:36,099 autoreload 70803 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:58:51,604 autoreload 70803 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/urls.py changed, reloading.
+INFO 2025-08-20 22:58:51,686 autoreload 70802 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/urls.py changed, reloading.
+INFO 2025-08-20 22:58:52,107 autoreload 70834 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:58:52,107 autoreload 70833 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:58:56,590 autoreload 70833 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/urls.py changed, reloading.
+INFO 2025-08-20 22:58:56,626 autoreload 70834 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/urls.py changed, reloading.
+INFO 2025-08-20 22:58:57,026 autoreload 70845 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:58:57,049 autoreload 70846 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:59:00,264 autoreload 70845 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-20 22:59:00,272 autoreload 70846 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-20 22:59:00,616 autoreload 70856 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 22:59:00,617 autoreload 70855 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 23:00:44,930 services 70856 6197309440 OTP email sent to yumexpreess@gmail.com
+WARNING 2025-08-20 23:04:19,302 log 70856 6214135808 Unauthorized: /api/auth/account/restore
+WARNING 2025-08-20 23:06:03,065 log 70856 6230962176 Unsupported Media Type: /api/auth/account/restore
+WARNING 2025-08-20 23:06:08,819 log 70856 6230962176 Bad Request: /api/auth/account/restore
+WARNING 2025-08-20 23:08:15,810 log 70856 6264614912 Not Found: /api/auth//account/status
+WARNING 2025-08-20 23:08:20,615 log 70856 6264614912 Not Found: /api/auth//account/status/
+WARNING 2025-08-20 23:08:25,032 log 70856 6264614912 Not Found: /api/auth/account/status/
+WARNING 2025-08-20 23:08:36,258 log 70856 6264614912 Bad Request: /api/auth/account/status
+WARNING 2025-08-20 23:08:55,208 log 70856 6264614912 Bad Request: /api/auth/account/status
+WARNING 2025-08-20 23:09:44,144 log 70856 6264614912 Bad Request: /api/auth/account/status
+WARNING 2025-08-20 23:09:45,989 log 70856 6264614912 Bad Request: /api/auth/account/status
+INFO 2025-08-20 23:16:25,766 autoreload 70855 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-20 23:16:25,956 autoreload 70856 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/views.py changed, reloading.
+INFO 2025-08-20 23:16:26,368 autoreload 71651 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 23:16:26,368 autoreload 71650 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 23:17:02,275 autoreload 71651 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/admin.py changed, reloading.
+INFO 2025-08-20 23:17:02,792 autoreload 71683 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 23:17:02,818 autoreload 71650 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/admin.py changed, reloading.
+INFO 2025-08-20 23:17:03,171 autoreload 71684 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 23:17:45,975 autoreload 71684 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/admin.py changed, reloading.
+INFO 2025-08-20 23:17:46,060 autoreload 71683 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/admin.py changed, reloading.
+INFO 2025-08-20 23:17:46,592 autoreload 71791 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 23:17:46,592 autoreload 71790 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-20 23:19:27,606 log 71791 6132609024 Bad Request: /api/auth/login
+WARNING 2025-08-20 23:19:32,643 log 71791 6132609024 Bad Request: /api/auth/login
+WARNING 2025-08-20 23:19:34,424 log 71791 6132609024 Bad Request: /api/auth/login
+INFO 2025-08-20 23:33:24,528 autoreload 71790 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/admin.py changed, reloading.
+INFO 2025-08-20 23:33:24,541 autoreload 71791 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/admin.py changed, reloading.
+INFO 2025-08-20 23:33:25,105 autoreload 72900 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 23:33:25,105 autoreload 72899 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 23:39:31,425 autoreload 73120 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 23:40:01,697 autoreload 73120 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/admin.py changed, reloading.
+INFO 2025-08-20 23:40:02,230 autoreload 73162 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-20 23:41:49,071 log 73162 6202372096 Not Found: /admin/auth/vendor/create-vendor/
+WARNING 2025-08-20 23:41:49,119 log 73162 6202372096 Not Found: /favicon.ico
+WARNING 2025-08-20 23:42:42,329 log 73162 6202372096 Method Not Allowed: /admin/authentication/vendor/create-vendor/
+WARNING 2025-08-20 23:43:08,625 log 73162 6202372096 Method Not Allowed: /admin/authentication/vendor/create-vendor/
+INFO 2025-08-20 23:43:34,368 autoreload 73162 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/admin.py changed, reloading.
+INFO 2025-08-20 23:43:35,022 autoreload 73322 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-20 23:43:43,825 log 73322 6134296576 Method Not Allowed: /admin/authentication/vendor/create-vendor/
+INFO 2025-08-20 23:45:48,463 autoreload 73322 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/admin.py changed, reloading.
+INFO 2025-08-20 23:45:49,076 autoreload 73500 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-20 23:48:35,131 autoreload 73500 8405360832 /Users/macbookair/Desktop/Yumbackend/authentication/admin.py changed, reloading.
+INFO 2025-08-20 23:48:35,661 autoreload 73573 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-21 00:08:30,031 autoreload 74867 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-21 00:09:00,727 log 74867 6203043840 Not Found: /api/orders/product/categories/3
+WARNING 2025-08-21 00:13:07,082 log 74867 6203043840 Not Found: /api/orders/vendor/categories/4
+WARNING 2025-08-21 00:19:24,659 log 74867 6203043840 Bad Request: /api/orders/vendor/categories/1/
+WARNING 2025-08-21 00:20:12,524 log 74867 6203043840 Bad Request: /api/orders/vendor/categories/1/
+WARNING 2025-08-21 00:21:11,612 log 74867 6203043840 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-21 00:21:31,379 log 74867 6203043840 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-21 00:22:33,637 log 74867 6203043840 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-21 00:23:12,515 log 74867 6203043840 Unauthorized: /api/orders/vendor/categories/
+WARNING 2025-08-21 00:23:12,626 log 74867 6270349312 Not Found: /favicon.ico
+WARNING 2025-08-21 00:24:07,909 log 74867 6203043840 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-21 00:27:00,235 log 74867 6203043840 Bad Request: /api/orders/vendor/categories/1/
+WARNING 2025-08-21 00:27:12,007 log 74867 6203043840 Not Found: /api/orders/vendor/categories/1755735847912/
+WARNING 2025-08-21 00:27:17,254 log 74867 6203043840 Not Found: /api/orders/vendor/categories/1755735753643/
+WARNING 2025-08-21 00:27:28,910 log 74867 6203043840 Bad Request: /api/orders/vendor/categories/1/
+ERROR 2025-08-21 00:30:43,002 log 74867 6219870208 Internal Server Error: /api/orders/vendor/categories/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/generics.py", line 246, in post
+    return self.create(request, *args, **kwargs)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/mixins.py", line 18, in create
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 444, in run_validation
+    value = self.to_internal_value(data)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 503, in to_internal_value
+    validated_value = validate_method(validated_value)
+  File "/Users/macbookair/Desktop/Yumbackend/orders/serializers.py", line 51, in validate_name
+    vendor = self.context['request'].user.vendor_profile
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/fields/related_descriptors.py", line 531, in __get__
+    raise self.RelatedObjectDoesNotExist(
+    ...<2 lines>...
+    )
+authentication.models.User.vendor_profile.RelatedObjectDoesNotExist: User has no vendor_profile.. Did you mean: 'driver_profile'?
+WARNING 2025-08-21 00:32:54,571 log 74867 6236696576 Forbidden: /api/orders/vendor/categories/
+WARNING 2025-08-21 00:34:49,383 log 74867 6253522944 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-21 00:39:49,729 log 74867 6270349312 Bad Request: /api/orders/vendor/categories/6/
+WARNING 2025-08-21 00:40:28,505 log 74867 6270349312 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-21 00:47:07,723 log 74867 6270349312 Bad Request: /api/orders/vendor/categories/
+INFO 2025-08-21 00:48:20,391 autoreload 74867 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
+INFO 2025-08-21 00:48:21,108 autoreload 76781 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-21 00:50:15,018 log 76781 6122418176 Unauthorized: /api/orders/vendor/categories/
+ERROR 2025-08-21 00:50:15,080 log 76781 6122418176 Internal Server Error: /api/auth/token/refresh
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+WARNING 2025-08-21 00:50:45,721 log 76781 6139244544 Bad Request: /api/orders/vendor/categories/
+INFO 2025-08-21 00:51:45,602 autoreload 76781 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-21 00:51:46,123 autoreload 76903 8405360832 Watching for file changes with StatReloader
+INFO 2025-08-21 00:52:11,902 autoreload 76903 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-21 00:52:12,422 autoreload 76928 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-21 00:54:26,858 log 76928 6134771712 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 00:54:49,358 log 76928 6134771712 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 00:57:08,423 log 76928 6134771712 Unsupported Media Type: /api/orders/vendor/categories/
+INFO 2025-08-21 00:58:15,991 autoreload 76928 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-21 00:58:16,549 autoreload 77106 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-21 00:58:40,709 log 77106 6201094144 Bad Request: /api/orders/vendor/categories/1/
+WARNING 2025-08-21 00:59:27,538 log 77106 6201094144 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:01:04,539 log 77106 6201094144 Not Found: /api/orders/vendor/categories/1755737967543/
+WARNING 2025-08-21 01:03:14,009 log 77106 6201094144 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:03:49,821 log 77106 6201094144 Bad Request: /api/orders/vendor/categories/1/
+WARNING 2025-08-21 01:04:38,685 log 77106 6201094144 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:05:12,688 log 77106 6201094144 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:06:00,057 log 77106 6201094144 Not Found: /api/orders/vendor/categories/1755738313229/
+WARNING 2025-08-21 01:12:13,178 log 77106 6201094144 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:12:50,686 log 77106 6201094144 Not Found: /api/orders/vendor/categories/1755738733181/
+WARNING 2025-08-21 01:15:06,183 log 77106 6201094144 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:15:57,331 log 77106 6201094144 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:16:51,835 log 77106 6201094144 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:19:25,459 log 77106 6201094144 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:19:56,491 log 77106 6201094144 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:20:27,036 log 77106 6201094144 Bad Request: /api/orders/vendor/categories/2/
+WARNING 2025-08-21 01:20:44,486 log 77106 6201094144 Unsupported Media Type: /api/orders/vendor/categories/
+INFO 2025-08-21 01:22:11,101 autoreload 77106 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-21 01:22:11,709 autoreload 77948 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-21 01:28:41,841 log 77948 6126743552 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:29:03,674 log 77948 6126743552 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:29:10,504 log 77948 6126743552 Not Found: /api/orders/vendor/categories/1755739743676/
+WARNING 2025-08-21 01:29:12,152 log 77948 6126743552 Not Found: /api/orders/vendor/categories/1755739743676/
+WARNING 2025-08-21 01:29:15,284 log 77948 6126743552 Not Found: /api/orders/vendor/categories/1755739743676/
+WARNING 2025-08-21 01:29:17,081 log 77948 6126743552 Not Found: /api/orders/vendor/categories/1755739743676/
+WARNING 2025-08-21 01:29:19,052 log 77948 6126743552 Not Found: /api/orders/vendor/categories/1755739743676/
+WARNING 2025-08-21 01:29:20,287 log 77948 6126743552 Not Found: /api/orders/vendor/categories/1755739743676/
+WARNING 2025-08-21 01:29:28,320 log 77948 6126743552 Not Found: /api/orders/vendor/categories/1755739743676/
+WARNING 2025-08-21 01:30:19,399 log 77948 6126743552 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:33:12,923 log 77948 6126743552 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:33:45,179 log 77948 6126743552 Unauthorized: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:34:25,385 log 77948 6126743552 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:34:37,907 log 77948 6126743552 Unsupported Media Type: /api/orders/vendor/categories/
+INFO 2025-08-21 01:35:37,782 autoreload 78502 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-21 01:36:20,231 log 78502 6170341376 Bad Request: /api/orders/vendor/products/8/
+WARNING 2025-08-21 01:37:29,372 log 78502 6170341376 Bad Request: /api/orders/vendor/products/8/
+WARNING 2025-08-21 01:38:35,455 log 78502 6170341376 Unsupported Media Type: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:38:47,622 log 78502 6170341376 Not Found: /api/orders/vendor/categories/1755740315458/
+WARNING 2025-08-21 01:38:47,942 log 78502 6170341376 Not Found: /api/orders/vendor/categories/1755740315458/
+WARNING 2025-08-21 01:38:48,644 log 78502 6170341376 Not Found: /api/orders/vendor/categories/1755740315458/
+WARNING 2025-08-21 01:38:49,426 log 78502 6170341376 Not Found: /api/orders/vendor/categories/1755740315458/
+WARNING 2025-08-21 01:38:50,177 log 78502 6170341376 Not Found: /api/orders/vendor/categories/1755740315458/
+WARNING 2025-08-21 01:38:50,743 log 78502 6170341376 Not Found: /api/orders/vendor/categories/1755740315458/
+WARNING 2025-08-21 01:38:51,641 log 78502 6170341376 Not Found: /api/orders/vendor/categories/1755740315458/
+WARNING 2025-08-21 01:38:52,122 log 78502 6170341376 Not Found: /api/orders/vendor/categories/1755740315458/
+WARNING 2025-08-21 01:41:38,237 log 78502 6170341376 Unsupported Media Type: /api/orders/vendor/categories/7/
+WARNING 2025-08-21 01:51:19,295 log 78502 6170341376 Unauthorized: /api/orders/vendor/categories/1/
+ERROR 2025-08-21 01:51:19,368 log 78502 6170341376 Internal Server Error: /api/auth/token/refresh
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+WARNING 2025-08-21 01:53:32,635 log 78502 6170341376 Bad Request: /api/orders/vendor/categories/1/
+INFO 2025-08-21 01:53:59,366 autoreload 78502 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-21 01:53:59,988 autoreload 79242 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-21 01:56:12,909 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/9/
+WARNING 2025-08-21 01:57:20,271 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:57:37,009 log 79242 6196178944 Not Found: /api/orders/vendor/categories/1755741440273/
+WARNING 2025-08-21 01:57:53,780 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-21 01:58:05,693 log 79242 6196178944 Not Found: /api/orders/vendor/categories/1755741473781/
+WARNING 2025-08-21 02:00:47,637 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-21 02:06:00,357 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/2/
+WARNING 2025-08-21 02:08:52,011 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/1/
+WARNING 2025-08-21 02:14:54,545 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/2/
+WARNING 2025-08-21 02:15:09,172 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/1/
+WARNING 2025-08-21 02:19:22,899 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/9/
+WARNING 2025-08-21 02:19:26,778 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/9/
+WARNING 2025-08-21 02:19:29,997 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/1/
+WARNING 2025-08-21 02:19:38,927 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/1/
+WARNING 2025-08-21 02:19:43,995 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/2/
+WARNING 2025-08-21 02:19:53,779 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/1/
+WARNING 2025-08-21 02:19:56,094 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/2/
+WARNING 2025-08-21 02:19:57,926 log 79242 6196178944 Bad Request: /api/orders/vendor/categories/1/
+INFO 2025-08-21 02:22:06,885 autoreload 79242 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-21 02:22:07,578 autoreload 80263 8405360832 Watching for file changes with StatReloader
+WARNING 2025-08-21 02:23:15,540 log 80263 6134951936 Bad Request: /api/orders/vendor/categories/2/
+WARNING 2025-08-21 02:24:02,065 log 80263 6134951936 Bad Request: /api/orders/vendor/categories/2/
+WARNING 2025-08-21 02:24:38,714 log 80263 6151778304 Bad Request: /api/orders/vendor/categories/1/
+WARNING 2025-08-21 02:25:32,636 log 80263 6134951936 Bad Request: /api/orders/vendor/categories/
+WARNING 2025-08-21 02:26:22,880 log 80263 6134951936 Bad Request: /api/orders/vendor/products/8/
+WARNING 2025-08-21 02:33:17,475 log 80263 6134951936 Bad Request: /api/orders/vendor/products/9/
+WARNING 2025-08-21 02:36:54,497 log 80263 6134951936 Bad Request: /api/orders/vendor/products/2/
+WARNING 2025-08-21 02:37:02,394 log 80263 6134951936 Bad Request: /api/orders/vendor/products/2/
+WARNING 2025-08-21 02:37:16,878 log 80263 6134951936 Bad Request: /api/orders/vendor/products/10/
+WARNING 2025-08-21 02:37:18,231 log 80263 6134951936 Bad Request: /api/orders/vendor/products/10/
+INFO 2025-08-21 02:38:41,706 autoreload 80263 8405360832 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-21 02:38:42,469 autoreload 80900 8405360832 Watching for file changes with StatReloader

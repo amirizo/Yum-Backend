@@ -1,0 +1,10 @@
+Hi {{ first_name }},
+
+Your account has been restored by the admin. You can now log in using your credentials:
+
+Username: {{ username }}
+
+If you have any issues, please contact support.
+
+Best regards,
+Your Team

@@ -55,5 +55,15 @@ urlpatterns = [
     path('driver/dashboard', views.driver_dashboard, name='driver-dashboard'),
     path('driver/toggle-availability', views.toggle_driver_availability, name='toggle-driver-availability'),
     path('driver/toggle-online', views.toggle_driver_online_status, name='toggle-driver-online'),
+    
+    # Account Deletion & Management
+    path('account/soft-delete', views.AccountSoftDeleteView.as_view(), name='account-soft-delete'),
+    path('account/hard-delete', views.AccountHardDeleteView.as_view(), name='account-hard-delete'),
+    path('account/restore', views.AccountRestoreView.as_view(), name='account-restore'),
+    path('account/status', views.AccountDeletionStatusView.as_view(), name='account-deletion-status'),
+    
+    # Admin Account Management
+    path('admin/accounts', views.AdminAccountManagementView.as_view(), name='admin-account-management'),
+    path('admin/accounts/<int:user_id>/restore', views.AdminAccountRestoreView.as_view(), name='admin-account-restore'),
 ]
 

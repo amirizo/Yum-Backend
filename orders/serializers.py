@@ -5,6 +5,7 @@ from authentication.serializers import UserSerializer, VendorProfileSerializer, 
 from decimal import Decimal, ROUND_HALF_UP
 from authentication.models import Vendor, Driver
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.parsers import MultiPartParser, FormParser
 User = get_user_model()
 
 class CategorySerializer(serializers.ModelSerializer):

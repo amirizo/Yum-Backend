@@ -408,3 +408,84 @@ class ContactMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactMessage
         fields = ['id', 'full_name', 'email', 'phone_number', 'subject', 'message', 'created_at']
+
+
+class AccountDeletionSerializer(serializers.Serializer):
+    """Serializer for soft deleting user account"""
+    reason = serializers.CharField(
+        max_length=500, 
+        required=False, 
+        allow_blank=True,
+        help_text="Optional reason for account deletion"
+    )
+    confirm_deletion = serializers.BooleanField(
+        help_text="Must be true to confirm account deletion"
+    )
+    
+    def validate_confirm_deletion(self, value):
+        if not value:
+            raise serializers.ValidationError("You must confirm account deletion by setting this to true.")
+        return value
+
+
+class AccountRestoreSerializer(serializers.Serializer):
+    """Serializer for restoring soft deleted account"""
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+    
+    def validate(self, attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+        
+        try:
+            user = User.objects.get(email=email, is_deleted=True)
+        except User.DoesNotExist:
+            raise serializers.ValidationError("No deleted account found with this email.")
+        
+        if not user.check_password(password):
+            raise serializers.ValidationError("Invalid password.")
+        
+        attrs['user'] = user
+        return attrs
+
+
+class AdminAccountDeletionSerializer(serializers.Serializer):
+    """Serializer for admin to delete any user account"""
+    user_id = serializers.IntegerField()
+    deletion_type = serializers.ChoiceField(
+        choices=[('soft', 'Soft Delete'), ('hard', 'Hard Delete')],
+        default='soft'
+    )
+    reason = serializers.CharField(
+        max_length=500,
+        required=True,
+        help_text="Reason for admin deletion"
+    )
+    
+    def validate_user_id(self, value):
+        try:
+            user = User.objects.get(id=value)
+            if user.is_superuser:
+                raise serializers.ValidationError("Cannot delete superuser accounts.")
+        except User.DoesNotExist:
+            raise serializers.ValidationError("User not found.")
+        return value
+
+
+class DeletedAccountListSerializer(serializers.ModelSerializer):
+    """Serializer for listing deleted accounts (admin only)"""
+    days_since_deletion = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = User
+        fields = [
+            'id', 'email', 'first_name', 'last_name', 'user_type',
+            'deleted_at', 'deletion_reason', 'days_since_deletion'
+        ]
+    
+    def get_days_since_deletion(self, obj):
+        if obj.deleted_at:
+            from django.utils import timezone
+            delta = timezone.now() - obj.deleted_at
+            return delta.days
+        return None

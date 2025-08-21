@@ -23,9 +23,10 @@ from .serializers import (
     OrderStatusUpdateSerializer, CartSerializer, CartItemSerializer, 
     VendorWithProductsSerializer,CheckoutSerializer, VendorCategorySerializer
 )
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied, ValidationError
 from .services import OrderNotificationService
 from authentication.models import Vendor
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 
 User = get_user_model()
 from .utils import add_item_to_cart, get_cart_for_request, remove_cart_item ,update_cart_item , clear_cart
@@ -48,6 +49,8 @@ class VendorCategoryListCreateView(generics.ListCreateAPIView):
     """Vendor view to list their categories and create new ones"""
     serializer_class = VendorCategorySerializer
     permission_classes = [permissions.IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]  # ✅ Add this
+
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['category_type', 'is_active']
     search_fields = ['name', 'description']
@@ -69,6 +72,7 @@ class VendorCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     """Vendor view to retrieve, update, or delete their categories"""
     serializer_class = VendorCategorySerializer
     permission_classes = [permissions.IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]  # ✅ Include JSON parser pia
 
     def get_queryset(self):
         if self.request.user.user_type != 'vendor':
@@ -78,7 +82,13 @@ class VendorCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     def perform_update(self, serializer):
         if self.request.user.user_type != 'vendor':
             raise PermissionDenied("Only vendors can update categories")
-        serializer.save()
+        # ✅ partial update (PATCH) ili usilazimishe kuweka field zote
+        serializer.save(partial=True)
+
+    def update(self, request, *args, **kwargs):
+        """Override ili PATCH/PUT zote ziwe partial update"""
+        kwargs['partial'] = True  # ✅ Force partial update
+        return super().update(request, *args, **kwargs)
 
     def perform_destroy(self, instance):
         if self.request.user.user_type != 'vendor':
@@ -86,7 +96,6 @@ class VendorCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
         
         # Check if category has products
         if instance.products.exists():
-            from rest_framework.exceptions import ValidationError
             raise ValidationError("Cannot delete category that has products. Please remove or reassign products first.")
         
         instance.delete()
@@ -95,6 +104,7 @@ class VendorCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
 class VendorCategoryStatsView(generics.RetrieveAPIView):
     """Get statistics for vendor's categories"""
     permission_classes = [permissions.IsAuthenticated]
+
 
     def get(self, request, *args, **kwargs):
         if request.user.user_type != 'vendor':
@@ -163,10 +173,21 @@ class VendorProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        # Only vendors can access their products
+        """Restrict to vendor's own products"""
         if self.request.user.user_type != 'vendor':
             raise PermissionDenied("Only vendors can access this endpoint")
         return Product.objects.filter(vendor=self.request.user.vendor_profile)
+
+    def update(self, request, *args, **kwargs):
+        """Allow partial updates without overwriting missing fields"""
+        kwargs['partial'] = True  # ✅ ensures PATCH-like behavior
+        return super().update(request, *args, **kwargs)
+
+    def perform_update(self, serializer):
+        """Extra permission check before saving"""
+        if self.request.user.user_type != 'vendor':
+            raise PermissionDenied("Only vendors can update products")
+        serializer.save(vendor=self.request.user.vendor_profile)
 
 
 

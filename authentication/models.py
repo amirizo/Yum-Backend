@@ -49,6 +49,12 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=15, blank=True)
     profile_image = models.ImageField(upload_to='profiles/', blank=True, null=True)
     is_verified = models.BooleanField(default=False)
+    
+    # Account status fields
+    is_deleted = models.BooleanField(default=False)
+    deleted_at = models.DateTimeField(null=True, blank=True)
+    deletion_reason = models.TextField(blank=True)
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -59,6 +65,22 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.email} ({self.user_type})"
+    
+    def soft_delete(self, reason=""):
+        """Soft delete user account"""
+        self.is_deleted = True
+        self.deleted_at = timezone.now()
+        self.deletion_reason = reason
+        self.is_active = False  # Disable account
+        self.save()
+    
+    def restore_account(self):
+        """Restore soft deleted account"""
+        self.is_deleted = False
+        self.deleted_at = None
+        self.deletion_reason = ""
+        self.is_active = True
+        self.save()
     
 
 
