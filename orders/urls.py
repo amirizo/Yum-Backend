@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from . import delivery_views
+from . import test_delivery
 
 urlpatterns = [
     # Categories
@@ -14,29 +16,33 @@ urlpatterns = [
     path('products/', views.ProductListView.as_view(), name='product-list'),
     path('products/<int:pk>/', views.ProductDetailView.as_view(), name='product-detail'),
     path('vendor/products/', views.VendorProductListView.as_view(), name='vendor-product-list'),
-    # In your urls.py
     path('vendor/orders/', views.VendorOrdersView.as_view(), name='vendor-orders'),
     path('vendor/products/<int:pk>/', views.VendorProductDetailView.as_view(), name='vendor-product-detail'),
-
     
     path('vendor/<int:vendor_id>/restaurant/', views.VendorRestaurantView.as_view(), name='vendor-restaurant'),
     
     # Delivery Addresses
-    path('addresses/', views.DeliveryAddressListView.as_view(), name='address-list'),
-    path('addresses/<int:pk>/', views.DeliveryAddressDetailView.as_view(), name='address-detail'),
+    path('addresses/', delivery_views.SavedDeliveryAddressListView.as_view(), name='address-list'),
+    path('addresses/<int:pk>/', delivery_views.SavedDeliveryAddressDetailView.as_view(), name='address-detail'),
+    path('addresses/validate/', delivery_views.validate_delivery_address, name='validate-address'),
+    path('delivery/calculate/', delivery_views.calculate_delivery_preview, name='calculate-delivery'),
 
-
-
+    # Cart Management
     path('cart/', views.CartView.as_view(), name='cart-view'),
     path('cart/add/', views.AddToCartView.as_view(), name='add-to-cart'),
     path('cart/items/<int:pk>/', views.UpdateCartItemView.as_view(), name='update-cart-item'),
     path('cart/items/<int:pk>/remove/', views.RemoveFromCartView.as_view(), name='remove-from-cart'),
     path('cart/clear/', views.ClearCartView.as_view(), name='clear-cart'),
 
-    path('checkout/', views.CheckoutView.as_view(), name='checkout'),
+    # Checkout & Payment Flow
+    # path('checkout/', views.CheckoutView.as_view(), name='checkout'),
     path('calculate-delivery-fee/', views.calculate_delivery_fee_api, name='calculate-delivery-fee'),
     path('geocode/', views.geocode_address, name='geocode-address'),
     path('reverse-geocode/', views.reverse_geocode, name='reverse-geocode'),
+    
+    # Testing Endpoints
+    path('test/delivery-calculations/', test_delivery.test_delivery_calculations, name='test-delivery-calculations'),
+    path('test/custom-delivery/', test_delivery.custom_delivery_test, name='custom-delivery-test'),
     
     # Orders
     path('create/', views.OrderCreateView.as_view(), name='order-create'),

@@ -8,8 +8,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.http import HttpResponse
 from django.utils import timezone
+from decimal import Decimal
+from geopy.distance import geodesic
 import json
 import logging
+from django.db import transaction
 from .models import PaymentMethod, Payment, Refund, PayoutRequest, PaymentWebhookEvent
 from .serializers import (
     PaymentMethodSerializer, PaymentIntentCreateSerializer, PaymentConfirmSerializer,
@@ -31,33 +34,28 @@ class PaymentMethodListView(generics.ListAPIView):
         return PaymentMethod.objects.filter(user=self.request.user, is_active=True)
 
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])  # Changed to IsAuthenticated only
+@permission_classes([permissions.IsAuthenticated])
 def create_order_and_payment(request):
-    """Create order from cart and initiate payment"""
+    """Create order from cart and initiate payment with complete validation"""
     from orders.models import Order, OrderItem, Cart
     from orders.utils import clear_cart
     from authentication.models import Vendor
+    from orders.checkout_serializers import CheckoutValidationSerializer
     
     try:
-        # Get required data
-        vendor_id = request.data.get('vendor_id')
-        delivery_address = request.data.get('delivery_address')
-        payment_type = request.data.get('payment_type', 'mobile_money')
-        phone_number = request.data.get('phone_number')
-        special_instructions = request.data.get('special_instructions', '')
+        # Validate checkout data
+        checkout_serializer = CheckoutValidationSerializer(data=request.data, context={'request': request})
+        checkout_serializer.is_valid(raise_exception=True)
         
-        if not vendor_id or not delivery_address:
-            return Response({
-                'error': 'Vendor ID and delivery address are required'
-            }, status=status.HTTP_400_BAD_REQUEST)
+        validated_data = checkout_serializer.validated_data
+        vendor_id = validated_data['vendor_id']
+        delivery_address_data = validated_data['delivery_address']
+        payment_method_data = validated_data['payment_method']
+        special_instructions = validated_data.get('special_instructions', '')
         
         # Get vendor
-        try:
-            vendor = Vendor.objects.get(id=vendor_id, status='active')
-        except Vendor.DoesNotExist:
-            return Response({
-                'error': 'Vendor not found or inactive'
-            }, status=status.HTTP_404_NOT_FOUND)
+        vendor = Vendor.objects.get(id=vendor_id, status='active')
+        vendor_location = vendor.primary_location
         
         # Get user's cart for this vendor
         cart = Cart.objects.filter(user=request.user, vendor=vendor).first()
@@ -69,36 +67,228 @@ def create_order_and_payment(request):
         # Calculate delivery fee and totals
         from orders.models import calculate_delivery_fee
         
-        vendor_location = vendor.primary_location
-        if not vendor_location:
-            return Response({
-                'error': 'Vendor location not available'
-            }, status=status.HTTP_400_BAD_REQUEST)
-        
-        delivery_fee = calculate_delivery_fee(
-            float(delivery_address['latitude']),
-            float(delivery_address['longitude']),
+        delivery_fee = Decimal(str(calculate_delivery_fee(
+            float(delivery_address_data['latitude']),
+            float(delivery_address_data['longitude']),
             float(vendor_location.latitude),
             float(vendor_location.longitude)
-        )
+        )))
+
+        cart_total = cart.total_amount
+        tax_rate = Decimal('0.00')  # Set your tax rate
+        tax_amount = (cart_total * tax_rate).quantize(Decimal("0.01"))
+        grand_total = cart_total + delivery_fee + tax_amount
         
-        cart_total = cart.get_total_amount()
-        grand_total = cart_total + delivery_fee
-        
-        # Create order
+        # Create order with complete address information
         order = Order.objects.create(
             customer=request.user,
             vendor=vendor,
-            delivery_address_text=delivery_address.get('address', ''),
-            delivery_latitude=delivery_address['latitude'],
-            delivery_longitude=delivery_address['longitude'],
-            subtotal_amount=cart_total,
+            delivery_address_text=delivery_address_data.get('address', ''),
+            delivery_latitude=delivery_address_data['latitude'],
+            delivery_longitude=delivery_address_data['longitude'],
+            subtotal=cart_total,
             delivery_fee=delivery_fee,
+            tax_amount=tax_amount,
             total_amount=grand_total,
             special_instructions=special_instructions,
             status='pending',
             payment_status='pending'
         )
+        
+        # Create order items from cart with validation
+        for cart_item in cart.items.all():
+            # Validate stock availability
+            if cart_item.product.stock_quantity < cart_item.quantity:
+                order.delete()  # Clean up the order
+                return Response({
+                    'error': f'Insufficient stock for {cart_item.product.name}. Available: {cart_item.product.stock_quantity}, Requested: {cart_item.quantity}'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            OrderItem.objects.create(
+                order=order,
+                product=cart_item.product,
+                quantity=cart_item.quantity,
+                unit_price=cart_item.product.price,
+                total_price=cart_item.total_price,
+                special_instructions=cart_item.special_instructions
+            )
+        
+        # Process payment based on payment method
+        payment_type = payment_method_data['payment_type']
+        phone_number = payment_method_data.get('phone_number')
+        provider = payment_method_data.get('provider', 'mix_by_yas')
+        
+        # Create payment intent
+        clickpesa_service = ClickPesaService()
+        
+        if payment_type == 'mobile_money':
+            if not phone_number:
+                order.delete()
+                return Response({
+                    'error': 'Phone number required for mobile money'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Create payment record
+            payment = Payment.objects.create(
+                order=order,
+                user=request.user,
+                amount=order.total_amount,
+                currency='TZS',
+                payment_type='mobile_money',
+                status='pending',
+                mobile_number=phone_number,
+                mobile_provider=provider
+            )
+            
+            # Initiate mobile money payment
+            # result = clickpesa_service.create_mobile_money_payment(
+            #     amount=float(order.total_amount),
+            #     phone_number=phone_number,
+            #     provider=provider,
+            #     order_reference=payment.clickpesa_order_reference
+            # )
+
+            result = clickpesa_service.create_mobile_money_payment(
+                amount=float(order.total_amount),
+                phone_number=phone_number,
+                provider=provider,
+                order_reference=payment.clickpesa_order_reference,
+                # customer_name=f"{request.user.first_name} {request.user.last_name}",
+                # customer_email=request.user.email
+            )
+            
+            if result['success']:
+                payment.clickpesa_payment_reference = result.get('payment_reference')
+                payment.save()
+                
+                # Clear cart after successful payment initiation
+                clear_cart(request)
+                
+                return Response({
+                    'success': True,
+                    'order_id': str(order.id),
+                    'order_number': order.order_number,
+                    'payment_id': payment.id,
+                    'status': 'pending',
+                    'message': 'Order created and USSD push sent to your phone. Please complete payment.',
+                    'payment_type': 'mobile_money',
+                    'total_amount': float(order.total_amount),
+                    'delivery_fee': float(delivery_fee),
+                    'subtotal': float(cart_total),
+                    'tax_amount': float(tax_amount),
+                    'estimated_delivery_time': 30 + int(geodesic(
+                        (float(vendor_location.latitude), float(vendor_location.longitude)),
+                        (float(delivery_address_data['latitude']), float(delivery_address_data['longitude']))
+                    ).km * 3)  # 3 minutes per km
+                })
+            else:
+                payment.status = 'failed'
+                payment.failure_reason = result.get('error', 'Mobile money payment failed')
+                payment.save()
+                order.status = 'cancelled'
+                order.save()
+                return Response({
+                    'error': result.get('error', 'Mobile money payment failed')
+                }, status=status.HTTP_400_BAD_REQUEST)
+                
+        elif payment_type == 'card':
+            # Create payment record
+            payment = Payment.objects.create(
+                order=order,
+                user=request.user,
+                amount=order.total_amount,
+                currency='USD',  # ClickPesa uses USD for card payments
+                payment_type='card',
+                status='pending'
+            )
+            
+            # Create card payment
+            result = clickpesa_service.create_card_payment(
+                amount=float(order.total_amount),
+                order_reference=payment.clickpesa_order_reference,
+                customer_name=f"{request.user.first_name} {request.user.last_name}",
+                customer_email=request.user.email,
+                customer_phone=request.user.phone_number
+            )
+            
+            if result['success']:
+                payment.clickpesa_payment_reference = result.get('payment_reference')
+                payment.payment_link = result.get('payment_link')
+                payment.save()
+                
+                # Clear cart after successful payment initiation
+                clear_cart(request)
+                
+                return Response({
+                    'success': True,
+                    'order_id': str(order.id),
+                    'order_number': order.order_number,
+                    'payment_id': payment.id,
+                    'payment_link': result.get('payment_link'),
+                    'status': 'pending',
+                    'message': 'Order created. Please complete payment using the provided link.',
+                    'payment_type': 'card',
+                    'total_amount': float(order.total_amount),
+                    'delivery_fee': float(delivery_fee),
+                    'subtotal': float(cart_total),
+                    'tax_amount': float(tax_amount)
+                })
+            else:
+                payment.status = 'failed'
+                payment.failure_reason = result.get('error', 'Card payment failed')
+                payment.save()
+                order.status = 'cancelled'
+                order.save()
+                return Response({
+                    'error': result.get('error', 'Card payment failed')
+                }, status=status.HTTP_400_BAD_REQUEST)
+        
+        elif payment_type == 'cash':
+            # Cash on delivery
+            payment = Payment.objects.create(
+                order=order,
+                user=request.user,
+                amount=order.total_amount,
+                currency='TZS',
+                payment_type='cash',
+                status='pending_admin_approval',
+                clickpesa_order_reference=f"CASH_{order.order_number}_{timezone.now().strftime('%Y%m%d%H%M%S')}"
+            )
+            
+            # Send notification to admin for cash order approval
+            try:
+                EmailService.send_admin_cash_order_notification(order, payment)
+            except Exception as e:
+                logger.warning(f"Failed to send admin notification: {e}")
+            
+            # Clear cart
+            clear_cart(request)
+            
+            return Response({
+                'success': True,
+                'order_id': str(order.id),
+                'order_number': order.order_number,
+                'payment_id': payment.id,
+                'status': 'pending_admin_approval',
+                'message': 'Cash on delivery order created. Waiting for admin approval.',
+                'payment_type': 'cash',
+                'total_amount': float(order.total_amount),
+                'delivery_fee': float(delivery_fee),
+                'subtotal': float(cart_total),
+                'tax_amount': float(tax_amount)
+            })
+        
+        else:
+            order.delete()
+            return Response({
+                'error': 'Invalid payment type. Use "mobile_money", "card", or "cash"'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+    except Exception as e:
+        logger.error(f"Order and payment creation error: {str(e)}")
+        return Response({
+            'error': f'Order creation failed: {str(e)}'
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
         # Create order items from cart
         for cart_item in cart.items.all():
@@ -107,7 +297,7 @@ def create_order_and_payment(request):
                 product=cart_item.product,
                 quantity=cart_item.quantity,
                 unit_price=cart_item.product.price,
-                total_price=cart_item.get_total_price(),
+                total_price=cart_item.total_price,
                 special_instructions=cart_item.special_instructions
             )
         
@@ -148,14 +338,14 @@ def create_order_and_payment(request):
                     payment_type='mobile_money',
                     status='pending',
                     mobile_number=phone_number,
-                    mobile_provider='mix_by_yas'
+                    mobile_provider=provider,
                 )
                 
                 # Initiate mobile money payment
                 result = clickpesa_service.create_mobile_money_payment(
                     amount=float(order.total_amount),
                     phone_number=phone_number,
-                    provider='mix_by_yas',
+                    provider=provider,
                     order_reference=payment.clickpesa_order_reference
                 )
                 
@@ -424,15 +614,132 @@ def create_payment_intent(request):
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def check_payment_status(request, payment_id):
+    """Check payment status and update order accordingly"""
+    try:
+        payment = Payment.objects.get(id=payment_id, user=request.user)
+        
+        if payment.payment_type == 'cash':
+            # Cash payments are handled by admin approval
+            return Response({
+                'payment_id': payment.id,
+                'status': payment.status,
+                'payment_type': 'cash',
+                'order_id': str(payment.order.id),
+                'order_number': payment.order.order_number,
+                'message': 'Cash payment pending admin approval' if payment.status == 'pending_admin_approval' else f'Payment {payment.status}'
+            })
+        
+        # For mobile money and card payments, check with ClickPesa
+        clickpesa_service = ClickPesaService()
+        result = clickpesa_service.check_payment_status(payment.clickpesa_order_reference)
+        
+        if result['success']:
+            payment_data = result['data']
+            old_status = payment.status
+            
+            if isinstance(payment_data, list) and len(payment_data) > 0:
+                payment_data = payment_data[0]
+            
+            # Update payment status based on ClickPesa response
+            if payment_data['status'] in ['SUCCESS', 'SETTLED']:
+                payment.status = 'succeeded'
+                payment.processed_at = timezone.now()
+                payment.clickpesa_payment_reference = payment_data.get('paymentReference')
+                
+                # Update order status
+                order = payment.order
+                order.payment_status = 'paid'
+                order.status = 'confirmed'
+                order.save()
+                
+                # Update product stock
+                for item in order.items.all():
+                    product = item.product
+                    if product.stock_quantity >= item.quantity:
+                        product.stock_quantity -= item.quantity
+                        product.save()
+                
+                if old_status != 'succeeded':
+                    # Send notifications
+                    try:
+                        SMSService.send_payment_success_sms(
+                            phone_number=request.user.phone_number,
+                            order_number=order.order_number,
+                            amount=payment.amount
+                        )
+                        
+                        EmailService.send_payment_success_email(
+                            user=request.user,
+                            order=order,
+                            payment=payment
+                        )
+                    except Exception as e:
+                        logger.warning(f"Failed to send notifications: {e}")
+                
+            elif payment_data['status'] == 'FAILED':
+                payment.status = 'failed'
+                payment.failure_reason = 'Payment failed at gateway'
+                order = payment.order
+                order.payment_status = 'failed'
+                order.status = 'cancelled'
+                order.save()
+                
+            elif payment_data['status'] in ['PROCESSING', 'PENDING']:
+                payment.status = 'processing'
+            
+            payment.save()
+            
+            return Response({
+                'payment_id': payment.id,
+                'status': payment.status,
+                'payment_type': payment.payment_type,
+                'order_id': str(payment.order.id),
+                'order_number': payment.order.order_number,
+                'amount': float(payment.amount),
+                'currency': payment.currency,
+                'processed_at': payment.processed_at,
+                'message': f'Payment {payment.status}'
+            })
+        else:
+            return Response({
+                'error': 'Failed to check payment status'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+    except Payment.DoesNotExist:
+        return Response({
+            'error': 'Payment not found'
+        }, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        logger.error(f"Payment status check error: {str(e)}")
+        return Response({
+            'error': 'Payment status check failed'
+        }, status=status.HTTP_400_BAD_REQUEST)
+    
+
+
+
+
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])  # Changed to IsAuthenticated only
+@permission_classes([permissions.IsAuthenticated])
 def confirm_payment(request):
+    """Confirm payment and update order status"""
     serializer = PaymentConfirmSerializer(data=request.data)
     if serializer.is_valid():
         payment_id = serializer.validated_data['payment_id']
         
         try:
             payment = Payment.objects.get(id=payment_id, user=request.user)
+            
+            if payment.status == 'succeeded':
+                return Response({
+                    'status': 'succeeded',
+                    'message': 'Payment already confirmed',
+                    'order_id': str(payment.order.id),
+                    'order_number': payment.order.order_number
+                })
             
             clickpesa_service = ClickPesaService()
             result = clickpesa_service.check_payment_status(payment.clickpesa_order_reference)
@@ -441,7 +748,6 @@ def confirm_payment(request):
                 payment_data = result['data']
                 old_status = payment.status
 
-                
                 if isinstance(payment_data, list) and len(payment_data) > 0:
                     payment_data = payment_data[0]
                 
@@ -457,24 +763,38 @@ def confirm_payment(request):
                     order.status = 'confirmed'
                     order.save()
                     
+                    # Update product stock
+                    for item in order.items.all():
+                        product = item.product
+                        if product.stock_quantity >= item.quantity:
+                            product.stock_quantity -= item.quantity
+                            product.save()
+                    
                     if old_status != 'succeeded':
-                        # Send SMS
-                        SMSService.send_payment_success_sms(
-                            phone_number=request.user.phone_number,
-                            order_number=order.order_number,
-                            amount=payment.amount
-                        )
-                        
-                        # Send Email
-                        EmailService.send_payment_success_email(
-                            user=request.user,
-                            order=order,
-                            payment=payment
-                        )
+                        # Send notifications
+                        try:
+                            SMSService.send_payment_success_sms(
+                                phone_number=request.user.phone_number,
+                                order_number=order.order_number,
+                                amount=payment.amount
+                            )
+                            
+                            EmailService.send_payment_success_email(
+                                user=request.user,
+                                order=order,
+                                payment=payment
+                            )
+                        except Exception as e:
+                            logger.warning(f"Failed to send notifications: {e}")
                     
                 elif payment_data['status'] == 'FAILED':
                     payment.status = 'failed'
                     payment.failure_reason = 'Payment failed at gateway'
+                    order = payment.order
+                    order.payment_status = 'failed'
+                    order.status = 'cancelled'
+                    order.save()
+                    
                 elif payment_data['status'] in ['PROCESSING', 'PENDING']:
                     payment.status = 'processing'
                 
@@ -483,19 +803,27 @@ def confirm_payment(request):
                 return Response({
                     'status': payment.status,
                     'payment_status': payment.status,
+                    'order_status': payment.order.status,
                     'message': 'Payment status updated successfully'
                 })
             else:
-                return Response({'error': 'Failed to check payment status'}, 
-                              status=status.HTTP_400_BAD_REQUEST)
+                return Response({
+                    'error': 'Failed to check payment status'
+                }, status=status.HTTP_400_BAD_REQUEST)
             
         except Payment.DoesNotExist:
-            return Response({'error': 'Payment not found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({
+                'error': 'Payment not found'
+            }, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             logger.error(f"Payment confirmation error: {str(e)}")
-            return Response({'error': 'Payment confirmation failed'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({
+                'error': 'Payment confirmation failed'
+            }, status=status.HTTP_400_BAD_REQUEST)
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
@@ -621,6 +949,7 @@ class PayoutRequestListView(generics.ListCreateAPIView):
 
 
 
+
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([])
@@ -662,7 +991,9 @@ def clickpesa_webhook(request):
         logger.error(f"Webhook processing error: {str(e)}")
         return HttpResponse(status=400)
 
+
 def handle_payment_succeeded(payment_data):
+    """Handle successful payment webhook"""
     try:
         order_reference = payment_data.get('orderReference')
         payment = Payment.objects.get(clickpesa_order_reference=order_reference)
@@ -680,22 +1011,42 @@ def handle_payment_succeeded(payment_data):
                 order.status = 'confirmed'
             order.save()
             
-            SMSService.send_payment_success_sms(
-                phone_number=payment.user.phone_number,
-                order_number=order.order_number,
-                amount=payment.amount
-            )
+            # Update product stock
+            for item in order.items.all():
+                product = item.product
+                if product.stock_quantity >= item.quantity:
+                    product.stock_quantity -= item.quantity
+                    product.save()
             
-            EmailService.send_payment_success_email(
-                user=payment.user,
-                order=order,
-                payment=payment
-            )
+            # Send notifications
+            try:
+                SMSService.send_payment_success_sms(
+                    phone_number=payment.user.phone_number,
+                    order_number=order.order_number,
+                    amount=payment.amount
+                )
+                
+                EmailService.send_payment_success_email(
+                    user=payment.user,
+                    order=order,
+                    payment=payment
+                )
+                
+                # Notify vendor of new paid order
+                from orders.services import OrderNotificationService
+                OrderNotificationService.send_new_order_notification(order)
+                
+            except Exception as e:
+                logger.warning(f"Failed to send notifications for payment {payment.id}: {e}")
         
     except Payment.DoesNotExist:
         logger.error(f"Payment not found for order reference: {payment_data.get('orderReference')}")
+    except Exception as e:
+        logger.error(f"Error handling payment success: {e}")
+
 
 def handle_payment_failed(payment_data):
+    """Handle failed payment webhook"""
     try:
         order_reference = payment_data.get('orderReference')
         payment = Payment.objects.get(clickpesa_order_reference=order_reference)
@@ -706,10 +1057,24 @@ def handle_payment_failed(payment_data):
         # Update order
         order = payment.order
         order.payment_status = 'failed'
+        order.status = 'cancelled'
         order.save()
+        
+        # Send failure notification
+        try:
+            SMSService.send_sms(
+                phone_number=payment.user.phone_number,
+                message=f"Payment failed for order #{order.order_number}. Please try again or contact support."
+            )
+        except Exception as e:
+            logger.warning(f"Failed to send failure notification: {e}")
         
     except Payment.DoesNotExist:
         logger.error(f"Payment not found for order reference: {payment_data.get('orderReference')}")
+    except Exception as e:
+        logger.error(f"Error handling payment failure: {e}")
+
+
 
 def handle_refund_processed(refund_data):
     try:
@@ -731,6 +1096,8 @@ def handle_refund_processed(refund_data):
         
     except Refund.DoesNotExist:
         logger.error(f"Refund not found for ID: {refund_data.get('refundId')}")
+
+
 
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
@@ -755,3 +1122,220 @@ def payment_dashboard(request):
             'successful_payments': payments.filter(status='succeeded').count(),
             'recent_payments': PaymentSerializer(payments[:10], many=True).data
         })
+
+
+
+        
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def checkout(request):
+    """Atomic checkout endpoint: validates input, creates Order+Payment inside a transaction,
+    initiates external payment (mobile_money/card) or marks cash as pending, and returns unified JSON.
+    Map this view to POST /api/checkout/ in your URLs.
+    """
+    from orders.models import Order, OrderItem, Cart
+    from orders.utils import clear_cart
+    from authentication.models import Vendor
+    from orders.checkout_serializers import CheckoutValidationSerializer
+    from orders.models import calculate_delivery_fee
+
+    try:
+        serializer = CheckoutValidationSerializer(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+
+        vendor = Vendor.objects.get(id=data['vendor_id'], status='active')
+        vendor_location = vendor.primary_location
+
+        # Get user's cart for this vendor
+        cart = Cart.objects.filter(user=request.user, vendor=vendor).first()
+        if not cart or not cart.items.exists():
+            return Response({'error': 'Cart is empty for this vendor'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Calculate delivery fee and totals
+        delivery_address_data = data['delivery_address']
+        delivery_fee = Decimal(str(calculate_delivery_fee(
+            float(delivery_address_data['latitude']),
+            float(delivery_address_data['longitude']),
+            float(vendor_location.latitude),
+            float(vendor_location.longitude)
+        )))
+
+        cart_total = cart.total_amount
+        tax_rate = Decimal('0.00')
+        tax_amount = (cart_total * tax_rate).quantize(Decimal("0.01"))
+        grand_total = (cart_total + delivery_fee + tax_amount).quantize(Decimal("0.01"))
+
+        payment_method_data = data['payment_method']
+        payment_type = payment_method_data['payment_type']
+        phone_number = payment_method_data.get('phone_number')
+        provider = payment_method_data.get('provider', 'mix_by_yas')
+
+        clickpesa_service = ClickPesaService()
+
+        # All DB changes should be atomic and rolled back if external payment initiation fails
+        with transaction.atomic():
+            # Create order
+            order = Order.objects.create(
+                customer=request.user,
+                vendor=vendor,
+                delivery_address_text=delivery_address_data.get('address', ''),
+                delivery_latitude=delivery_address_data['latitude'],
+                delivery_longitude=delivery_address_data['longitude'],
+                subtotal=cart_total,
+                delivery_fee=delivery_fee,
+                tax_amount=tax_amount,
+                total_amount=grand_total,
+                special_instructions=data.get('special_instructions', ''),
+                status='pending',
+                payment_status='pending'
+            )
+
+            # Create order items and validate stock
+            for cart_item in cart.items.all():
+                if cart_item.product.stock_quantity < cart_item.quantity:
+                    raise Exception(f"Insufficient stock for {cart_item.product.name}")
+
+                OrderItem.objects.create(
+                    order=order,
+                    product=cart_item.product,
+                    quantity=cart_item.quantity,
+                    unit_price=cart_item.product.price,
+                    total_price=cart_item.total_price,
+                    special_instructions=getattr(cart_item, 'special_instructions', '')
+                )
+
+            # Handle payment flows
+            if payment_type == 'cash':
+                payment = Payment.objects.create(
+                    order=order,
+                    user=request.user,
+                    amount=order.total_amount,
+                    currency='TZS',
+                    payment_type='cash',
+                    status='pending_admin_approval',
+                    clickpesa_order_reference=f"CASH_{order.order_number}_{timezone.now().strftime('%Y%m%d%H%M%S')}"
+                )
+
+                # Notify admin (best-effort)
+                try:
+                    # Send notification to admin for cash order approval
+                    EmailService.send_admin_cash_order_notification(order, payment)
+                except Exception:
+                    logger.exception('Failed to send admin cash order notification')
+
+                # Successful transaction; clear cart and return
+                clear_cart(request)
+
+                return Response({
+                    'success': True,
+                    'order_id': str(order.id),
+                    'order_number': order.order_number,
+                    'payment_id': payment.id,
+                    'status': payment.status,
+                    'message': 'Cash on delivery order created. Waiting for admin approval.',
+                    'payment_type': 'cash',
+                    'subtotal': float(cart_total),
+                    'tax_amount': float(tax_amount),
+                    'delivery_fee': float(delivery_fee),
+                    'total_amount': float(order.total_amount) 
+                })
+
+            elif payment_type == 'mobile_money':
+                if not phone_number:
+                    raise Exception('Phone number required for mobile money')
+
+                payment = Payment.objects.create(
+                    order=order,
+                    user=request.user,
+                    amount=order.total_amount,
+                    currency='TZS',
+                    payment_type='mobile_money',
+                    status='pending',
+                    mobile_number=phone_number,
+                    mobile_provider=provider
+                )
+
+                result = clickpesa_service.create_mobile_money_payment(
+                    amount=float(order.total_amount),
+                    phone_number=phone_number,
+                    provider=provider,
+                    order_reference=payment.clickpesa_order_reference
+                )
+
+                if not result.get('success'):
+                    # Raising will rollback the transaction
+                    raise Exception(result.get('error', 'Mobile money payment initiation failed'))
+
+                # Save provider references and commit
+                payment.clickpesa_payment_reference = result.get('payment_reference')
+                payment.save()
+
+                clear_cart(request)
+
+                return Response({
+                    'success': True,
+                    'order_id': str(order.id),
+                    'order_number': order.order_number,
+                    'payment_id': payment.id,
+                    'status': 'pending',
+                    'message': 'Order created and USSD push sent to your phone. Please complete payment.',
+                    'payment_type': 'mobile_money',
+                    'ussd_code': result.get('ussd_code'),
+                    'subtotal': float(cart_total),
+                    'tax_amount': float(tax_amount),
+                    'delivery_fee': float(delivery_fee),
+                    'total_amount': float(order.total_amount),
+                })
+
+            elif payment_type == 'card':
+                payment = Payment.objects.create(
+                    order=order,
+                    user=request.user,
+                    amount=order.total_amount,
+                    currency='USD',
+                    payment_type='card',
+                    status='pending'
+                )
+
+                result = clickpesa_service.create_card_payment(
+                    amount=float(order.total_amount),
+                    order_reference=payment.clickpesa_order_reference,
+                    customer_name=f"{request.user.first_name} {request.user.last_name}",
+                    customer_email=request.user.email,
+                    customer_phone=getattr(request.user, 'phone_number', None)
+                )
+
+                if not result.get('success'):
+                    raise Exception(result.get('error', 'Card payment initiation failed'))
+
+                payment.clickpesa_payment_reference = result.get('payment_reference')
+                payment.payment_link = result.get('payment_link') or result.get('paymentLink')
+                payment.save()
+
+                clear_cart(request)
+
+                return Response({
+                    'success': True,
+                    'order_id': str(order.id),
+                    'order_number': order.order_number,
+                    'payment_id': payment.id,
+                    'payment_link': payment.payment_link,
+                    'status': 'pending',
+                    'message': 'Order created. Please complete payment using the provided link.',
+                    'payment_type': 'card',
+                    'subtotal': float(cart_total),
+                    'tax_amount': float(tax_amount),
+                    'delivery_fee': float(delivery_fee),
+                    'total_amount': float(order.total_amount),
+                })
+
+            else:
+                raise Exception('Invalid payment type. Use "mobile_money", "card", or "cash"')
+
+    except Vendor.DoesNotExist:
+        return Response({'error': 'Vendor not found or not active'}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        logger.error(f"Checkout error: {str(e)}")
+        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

@@ -297,7 +297,7 @@ class VendorLocation(models.Model):
     address = models.TextField()
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
-    postal_code = models.CharField(max_length=20)
+   
     country = models.CharField(max_length=100, default='Tanzania')
     
     # Coordinates
@@ -307,7 +307,7 @@ class VendorLocation(models.Model):
     # Location settings
     is_primary = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    phone_number = models.CharField(max_length=15, blank=True)
+    
     
     # Delivery settings for this location
     delivery_radius = models.PositiveIntegerField(default=5, help_text="Delivery radius in kilometers")

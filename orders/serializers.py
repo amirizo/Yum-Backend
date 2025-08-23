@@ -6,15 +6,18 @@ from decimal import Decimal, ROUND_HALF_UP
 from authentication.models import Vendor, Driver
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.parsers import MultiPartParser, FormParser
+import pytz
+from datetime import datetime
 User = get_user_model()
 
 class CategorySerializer(serializers.ModelSerializer):
     product_count = serializers.SerializerMethodField()
     vendor_name = serializers.SerializerMethodField()
+    vendor_id = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
-        fields = ['id', 'name', 'description', 'image', 'category_type', 'is_active', 'product_count', 'vendor_name', 'created_at']
+        fields = ['id', 'name', 'description', 'image', 'category_type', 'is_active', 'product_count', 'vendor_name', 'vendor_id', 'created_at']
         read_only_fields = ['created_at', 'product_count', 'vendor_name']
 
     def get_product_count(self, obj):
@@ -25,6 +28,12 @@ class CategorySerializer(serializers.ModelSerializer):
         if obj.vendor:
             return obj.vendor.business_name
         return "Global"
+    
+
+    def get_vendor_id(self, obj):
+        if obj.vendor:
+            return obj.vendor.id
+        return None
 
     def to_representation(self, instance):
         """Make image URL absolute if request is in context"""
@@ -94,7 +103,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'vendor', 'category', 'category_id', 'name', 'description', 
             'price', 'stock_quantity', 'unit', 'image', 'is_available',
-            'preparation_time', 'is_in_stock', 'is_low_stock',
+            'preparation_time', 'is_in_stock', 'is_low_stock', 'status',
             'max_order_quantity', 'created_at', 'updated_at', 'variants'
         ]
         read_only_fields = ['vendor', 'created_at', 'updated_at']
@@ -106,8 +115,16 @@ class ProductSerializer(serializers.ModelSerializer):
         return obj.stock_quantity <= 10  # Low stock threshold
     
 
-    
-    
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if obj.image and hasattr(obj.image, 'url'):
+            return request.build_absolute_uri(obj.image.url) if request else obj.image.url
+        return None
+
+    def get_variants(self, obj):
+        request = self.context.get('request')
+        return ProductVariantSerializer(obj.variants.all(), many=True, context={'request': request}).data
+
     def get_vendor(self, obj):
         """Return vendor profile with open/close info"""
         vendor = obj.vendor
@@ -481,12 +498,23 @@ class CartSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'vendor', 'total_amount', 'total_items', 'created_at', 'updated_at']
 
 
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        request = self.context.get('request')
+        if request:
+            for item in rep['items']:
+                if item['product'] and item['product']['image']:
+                    item['product']['image'] = request.build_absolute_uri(item['product']['image'])
+        return rep
+
+
+
 class VendorWithProductsSerializer(serializers.ModelSerializer):
     vendor_profile = serializers.SerializerMethodField()
     products = serializers.SerializerMethodField()
     total_products = serializers.SerializerMethodField()
     average_rating = serializers.DecimalField(max_digits=3, decimal_places=2, read_only=True)
-    is_open = serializers.SerializerMethodField()
+    is_open_now = serializers.SerializerMethodField()
     categories = serializers.SerializerMethodField()
     total_categories = serializers.SerializerMethodField()
 
@@ -500,7 +528,7 @@ class VendorWithProductsSerializer(serializers.ModelSerializer):
             'products',
             'total_products',
             'average_rating',
-            'is_open',
+            'is_open_now',
             'categories',
             'total_categories',
         ]
@@ -518,11 +546,34 @@ class VendorWithProductsSerializer(serializers.ModelSerializer):
             "cover_image": request.build_absolute_uri(obj.cover_image.url) if obj.cover_image else None,
             "rating": obj.rating,
             "total_orders": obj.total_orders,
+           
+            "minimum_order_amount": obj.minimum_order_amount,
             "total_reviews": obj.total_reviews,
         }
 
-    def get_is_open(self, obj):
-        return obj.is_open_now()
+    def get_is_open_now(self, obj):
+        # Chukua timezone ya Afrika Mashariki
+        tz = pytz.timezone("Africa/Dar_es_Salaam")
+        now = datetime.now(tz)
+        today = now.strftime("%A").lower()
+
+        # Pata business hours za leo
+        todays_hours = obj.opening_hours.filter(day_of_week=today).first()
+        if not todays_hours:
+            return False
+        
+        # Ikiwa vendor ameflagiwa is_closed
+        if getattr(todays_hours, "is_closed", False):
+            return False
+
+        opening = todays_hours.opening_time
+        closing = todays_hours.closing_time
+
+        # Compare na sasa hivi
+        return opening <= now.time() <= closing
+    
+
+    
 
     def get_products(self, obj):
         """Get vendor's available products"""

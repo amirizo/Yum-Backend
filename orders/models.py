@@ -156,7 +156,7 @@ class DeliveryAddress(models.Model):
     street_address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
-    postal_code = models.CharField(max_length=20, blank=True)
+   
     country = models.CharField(max_length=100, default='Tanzania')
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
@@ -308,6 +308,7 @@ class Review(models.Model):
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='carts', null=True, blank=True)
+    session_key = models.CharField(max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -317,6 +318,9 @@ class Cart(models.Model):
     @property
     def total_amount(self):
         return sum(item.total_price for item in self.items.all())
+    
+
+    
 
     @property
     def total_items(self):
@@ -355,6 +359,7 @@ class CartItem(models.Model):
 
 
 
+
 def calculate_distance(lat1, lon1, lat2, lon2):
     """Calculate distance between two points using Haversine formula"""
     if not all([lat1, lon1, lat2, lon2]):
@@ -369,17 +374,27 @@ def calculate_distance(lat1, lon1, lat2, lon2):
     a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
     c = 2 * math.asin(math.sqrt(a))
     
-    # Radius of earth in kilometers
+    # Radius of Earth in kilometers
     r = 6371
     return c * r
 
+
 def calculate_delivery_fee(customer_lat, customer_lon, vendor_lat, vendor_lon):
-    """Calculate delivery fee based on distance"""
+    """Calculate delivery fee based on distance
+    
+    Logic:
+    - Distance ≤ 3km: 2000 TSH per km
+    - Distance ≥ 4km: 700 TSH per km
+    
+    Examples:
+    - 2.5km: 2.5 × 2000 = 5000 TSH
+    - 5km: 5 × 700 = 3500 TSH
+    """
     distance = calculate_distance(customer_lat, customer_lon, vendor_lat, vendor_lon)
     
     if distance <= 3:
-        return 2000  # 2000 TSh for distances <= 3km
+        # For distances ≤ 3km: charge 2000 TSH per km
+        return distance * 2000
     else:
-        # 2000 TSh base + 700 TSh per km beyond 3km
-        extra_distance = distance - 3
-        return 2000 + (extra_distance * 700)
+        # For distances ≥ 4km: charge 700 TSH per km for total distance
+        return distance * 700

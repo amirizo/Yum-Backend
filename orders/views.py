@@ -16,6 +16,7 @@ import googlemaps
 import json
 import logging
 from .models import Category, Product, DeliveryAddress, Order,  OrderItem, OrderStatusHistory, Cart, CartItem, calculate_delivery_fee
+from payments.models import PayoutRequest
 from .serializers import (
     CategorySerializer, ProductSerializer,ProductVariantSerializer,
     DeliveryAddressSerializer,
@@ -172,6 +173,8 @@ class VendorProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    parser_classes = [MultiPartParser, FormParser]  # <-- important
+
     def get_queryset(self):
         """Restrict to vendor's own products"""
         if self.request.user.user_type != 'vendor':
@@ -304,13 +307,29 @@ class OrderStatusHistoryView(generics.ListAPIView):
 
 
 
+# class VendorOrdersView(APIView):
+#     def get(self, request):
+#         # Get orders for the authenticated vendor only
+#         vendor_orders = Order.objects.filter(vendor=request.user.vendor_profile)
+#         serializer = OrderSerializer(vendor_orders, many=True)
+#         return Response(serializer.data)
+
+
 class VendorOrdersView(APIView):
     def get(self, request):
-        # Get orders for the authenticated vendor only
-        vendor_orders = Order.objects.filter(vendor=request.user.vendor_profile)
-        serializer = OrderSerializer(vendor_orders, many=True)
-        return Response(serializer.data)
+        # Hakikisha vendor yupo
+        vendor = getattr(request.user, "vendor_profile", None)
+        if not vendor:
+            return Response({"detail": "Vendor profile not found"}, status=404)
 
+        # Chukua orders ambazo zipo kwa huyu vendor na zimeshalipiwa
+        vendor_orders = Order.objects.filter(
+            vendor=vendor,
+            payment_status="paid"
+        ).order_by("-created_at")  # unaweza kuweka order kwa tarehe mpya kwanza
+
+        serializer = OrderSerializer(vendor_orders, many=True)
+        return Response(serializer.data, status=200)
 
 # Cart Management Views
 
@@ -449,33 +468,276 @@ class AddToCartView(generics.CreateAPIView):
             special_instructions=serializer.validated_data.get('special_instructions', '')
         )
 
+    def create(self, request, *args, **kwargs):
+        # Validate incoming data first
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Perform add/update
+        self.perform_create(serializer)
+
+        # Fetch updated cart representation
+        cart, cart_data, is_auth = get_cart_for_request(request)
+        if is_auth:
+            # Use CartSerializer for authenticated users
+            cart = cart  # already obtained from get_cart_for_request
+            data = CartSerializer(cart, context={'request': request}).data
+        else:
+            # Anonymous: construct payload similar to CartView
+            total_amount = sum(
+                item['quantity'] * item_price(item['product_id'])
+                for item in cart_data
+            ) if cart_data else 0
+            total_items = sum(item['quantity'] for item in (cart_data or []))
+            data = {
+                'items': cart_data or [],
+                'total_amount': total_amount,
+                'total_items': total_items
+            }
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+# class UpdateCartItemView(generics.UpdateAPIView):
+#     """Update quantity or instructions of a cart item"""
+#     serializer_class = CartItemSerializer
+#     permission_classes = [permissions.AllowAny]
+#     queryset = CartItem.objects.all()
+
+#     def update(self, request, *args, **kwargs):
+#         product_id = int(kwargs.get('pk'))
+#         update_cart_item(
+#             request=request,
+#             product_id=product_id,
+#             quantity=request.data.get('quantity', 1),
+#             special_instructions=request.data.get('special_instructions', '')
+#         )
+
+#         # Return updated cart payload
+#         cart, cart_data, is_auth = get_cart_for_request(request)
+#         if is_auth:
+#             data = CartSerializer(cart, context={'request': request}).data
+#         else:
+#             total_amount = sum(
+#                 item['quantity'] * item_price(item['product_id'])
+#                 for item in cart_data
+#             ) if cart_data else 0
+#             total_items = sum(item['quantity'] for item in (cart_data or []))
+#             data = {
+#                 'items': cart_data or [],
+#                 'total_amount': total_amount,
+#                 'total_items': total_items
+#             }
+
+#         return Response(data)
+
+
+# class RemoveFromCartView(generics.DestroyAPIView):
+#     """Remove product from cart"""
+#     permission_classes = [permissions.AllowAny]
+#     queryset = CartItem.objects.all()
+
+#     def destroy(self, request, *args, **kwargs):
+#         product_id = int(kwargs.get('pk'))
+#         remove_cart_item(request, product_id)
+#         return Response({"message": "Cart item removed"})
+
+
+# ---------------------------
+# Update item (quantity or notes)
+# ---------------------------
+# class UpdateCartItemView(generics.UpdateAPIView):
+#     serializer_class = CartItemSerializer
+#     permission_classes = [permissions.AllowAny]
+#     queryset = CartItem.objects.all()
+
+#     def update(self, request, *args, **kwargs):
+#         instance = self.get_object()
+#         quantity = request.data.get("quantity")
+#         special_instructions = request.data.get("special_instructions")
+
+#         if quantity is not None:
+#             instance.quantity = int(quantity)
+#         if special_instructions is not None:
+#             instance.special_instructions = special_instructions
+
+#         instance.save()
+#         return Response(CartItemSerializer(instance).data, status=status.HTTP_200_OK)
+
+
+# class UpdateCartItemView(generics.UpdateAPIView):
+#     serializer_class = CartItemSerializer
+#     permission_classes = [permissions.AllowAny]
+#     queryset = CartItem.objects.all()
+
+#     def update(self, request, *args, **kwargs):
+#         instance = self.get_object()
+#         quantity = request.data.get("quantity")
+#         special_instructions = request.data.get("special_instructions")
+
+#         if quantity is not None:
+#             instance.quantity = int(quantity)
+#         if special_instructions is not None:
+#             instance.special_instructions = special_instructions
+
+#         instance.save()
+
+#         # ✅ Pass request into context so image returns as full URL
+#         serializer = CartItemSerializer(instance, context={'request': request})
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# # ---------------------------
+# # Remove item
+# # ---------------------------
+# class RemoveFromCartView(generics.DestroyAPIView):
+#     permission_classes = [permissions.AllowAny]
+#     queryset = CartItem.objects.all()
+
+#     def destroy(self, request, *args, **kwargs):
+#         instance = self.get_object()
+#         instance.delete()
+#         return Response({"detail": "Item removed"}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+
+# class ClearCartView(generics.GenericAPIView):
+#     """Clear all cart items"""
+#     permission_classes = [permissions.AllowAny]
+
+#     def delete(self, request):
+#         clear_cart(request)
+#         return Response({"message": "Cart cleared"})
+
+
 
 class UpdateCartItemView(generics.UpdateAPIView):
-    """Update quantity or instructions of a cart item"""
     serializer_class = CartItemSerializer
     permission_classes = [permissions.AllowAny]
     queryset = CartItem.objects.all()
 
     def update(self, request, *args, **kwargs):
-        product_id = int(kwargs.get('pk'))
-        update_cart_item(
-            request=request,
-            product_id=product_id,
-            quantity=request.data.get('quantity', 1),
-            special_instructions=request.data.get('special_instructions', '')
-        )
-        return Response({"message": "Cart item updated"})
+        # For authenticated users - update CartItem directly
+        if request.user.is_authenticated:
+            instance = self.get_object()
+            quantity = request.data.get("quantity")
+            special_instructions = request.data.get("special_instructions")
+
+            if quantity is not None:
+                quantity = int(quantity)
+                if quantity <= 0:
+                    # Remove item if quantity is 0 or negative
+                    cart = instance.cart
+                    instance.delete()
+                    
+                    # Clear cart vendor if no items remain
+                    if not cart.items.exists():
+                        cart.vendor = None
+                        cart.save()
+                else:
+                    instance.quantity = quantity
+                    
+            if special_instructions is not None:
+                instance.special_instructions = special_instructions
+                
+            if quantity > 0:
+                instance.save()
+
+            # Return updated cart data
+            cart, cart_data, is_auth = get_cart_for_request(request)
+            return Response(
+                CartSerializer(cart, context={'request': request}).data,
+                status=status.HTTP_200_OK
+            )
+        else:
+            # For anonymous users - update session cart
+            product_id = int(kwargs.get('pk'))
+            quantity = request.data.get("quantity")
+            special_instructions = request.data.get("special_instructions")
+            
+            cart_data = request.session.get('cart', [])
+            
+            # Find and update the item
+            for item in cart_data:
+                if item.get('product_id') == product_id:
+                    if quantity is not None:
+                        quantity = int(quantity)
+                        if quantity <= 0:
+                            # Remove item if quantity is 0 or negative
+                            cart_data.remove(item)
+                        else:
+                            item['quantity'] = quantity
+                    
+                    if special_instructions is not None and quantity > 0:
+                        item['special_instructions'] = special_instructions
+                    break
+            
+            request.session['cart'] = cart_data
+            request.session.modified = True
+            
+            # Return updated cart data for anonymous users
+            total_amount = sum(
+                item['quantity'] * item_price(item['product_id'])
+                for item in cart_data
+            ) if cart_data else 0
+            total_items = sum(item['quantity'] for item in cart_data) if cart_data else 0
+            
+            return Response({
+                'items': cart_data,
+                'total_amount': total_amount,
+                'total_items': total_items
+            }, status=status.HTTP_200_OK)
 
 
 class RemoveFromCartView(generics.DestroyAPIView):
-    """Remove product from cart"""
     permission_classes = [permissions.AllowAny]
     queryset = CartItem.objects.all()
 
     def destroy(self, request, *args, **kwargs):
-        product_id = int(kwargs.get('pk'))
-        remove_cart_item(request, product_id)
-        return Response({"message": "Cart item removed"})
+        # For authenticated users
+        if request.user.is_authenticated:
+            instance = self.get_object()
+            cart = instance.cart
+            instance.delete()
+            
+            # Clear cart vendor if no items remain
+            if not cart.items.exists():
+                cart.vendor = None
+                cart.save()
+            
+            # Return updated cart data
+            cart, cart_data, is_auth = get_cart_for_request(request)
+            return Response(
+                CartSerializer(cart, context={'request': request}).data,
+                status=status.HTTP_200_OK
+            )
+        else:
+            # For anonymous users - remove from session cart
+            product_id = int(kwargs.get('pk'))
+            cart_data = request.session.get('cart', [])
+            
+            # Find and remove the item
+            cart_data = [item for item in cart_data if item.get('product_id') != product_id]
+            
+            request.session['cart'] = cart_data
+            request.session.modified = True
+            
+            # Return updated cart data for anonymous users
+            total_amount = sum(
+                item['quantity'] * item_price(item['product_id'])
+                for item in cart_data
+            ) if cart_data else 0
+            total_items = sum(item['quantity'] for item in cart_data) if cart_data else 0
+            
+            return Response({
+                'items': cart_data,
+                'total_amount': total_amount,
+                'total_items': total_items,
+                'message': 'Item removed from cart'
+            }, status=status.HTTP_200_OK)
 
 
 class ClearCartView(generics.GenericAPIView):
@@ -483,77 +745,217 @@ class ClearCartView(generics.GenericAPIView):
     permission_classes = [permissions.AllowAny]
 
     def delete(self, request):
-        clear_cart(request)
-        return Response({"message": "Cart cleared"})
-
-class CheckoutView(generics.CreateAPIView):
-    """Calculate checkout totals and preview order (doesn't create order)"""
-    permission_classes = [permissions.AllowAny]
-    serializer_class = CheckoutSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        vendor_id = serializer.validated_data["vendor_id"]
-        delivery_address = serializer.validated_data["delivery_address"]
-
-        # Fetch vendor (ensure it's active)
-        try:
-            vendor = Vendor.objects.get(id=vendor_id, status="active")
-        except Vendor.DoesNotExist:
-            return Response(
-                {"error": f"Vendor with id {vendor_id} does not exist or is inactive"},
-                status=status.HTTP_404_NOT_FOUND
-            )
-
-        # Ensure vendor has a primary location
-        if not vendor.primary_location:
-            return Response(
-                {"error": "Vendor does not have a primary location set"},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-        # Get cart
         if request.user.is_authenticated:
-            cart = Cart.objects.filter(user=request.user, vendor=vendor).first()
-        else:
-            cart_id = serializer.validated_data.get("cart_id")
-            cart = Cart.objects.filter(id=cart_id, vendor=vendor).first()
-
-        if not cart or not cart.items.exists():
+            # Clear authenticated user's cart
+            try:
+                cart = Cart.objects.get(user=request.user)
+                cart.items.all().delete()
+                cart.vendor = None
+                cart.save()
+            except Cart.DoesNotExist:
+                pass
+            
+            # Return empty cart data
+            cart, cart_data, is_auth = get_cart_for_request(request)
             return Response(
-                {"error": "Cart is empty"},
-                status=status.HTTP_400_BAD_REQUEST
+                CartSerializer(cart, context={'request': request}).data,
+                status=status.HTTP_200_OK
             )
+        else:
+            # Clear anonymous user's session cart
+            request.session['cart'] = []
+            request.session.modified = True
+            
+            return Response({
+                'items': [],
+                'total_amount': 0,
+                'total_items': 0,
+                'message': 'Cart cleared successfully'
+            }, status=status.HTTP_200_OK)
 
-        # Calculate totals
-        cart_total = cart.get_total_amount()
+# ...existing code...
 
-        vendor_coords = (
-            float(vendor.primary_location.latitude),
-            float(vendor.primary_location.longitude)
-        )
-        customer_coords = (
-            float(delivery_address["latitude"]),
-            float(delivery_address["longitude"])
-        )
-        distance_km = geodesic(vendor_coords, customer_coords).km
-        fee_per_km = Decimal("2000")  # 2000 TZS per km
-        delivery_fee = (Decimal(distance_km) * fee_per_km).quantize(Decimal("0.01"))
+# class CheckoutView(generics.CreateAPIView):
+#     """Calculate checkout totals and preview order with complete validation"""
+#     permission_classes = [permissions.IsAuthenticated]
+    
+#     def get_serializer_class(self):
+#         from .checkout_serializers import CheckoutValidationSerializer
+#         return CheckoutValidationSerializer
 
-        grand_total = cart_total + delivery_fee
+#     def post(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data, context={'request': request})
+#         serializer.is_valid(raise_exception=True)
 
-        return Response({
-            "vendor": vendor.business_name,
-            "cart_total": f"{cart_total} TZS",
-            "delivery_fee": f"{delivery_fee} TZS",
-            "grand_total": f"{grand_total} TZS",
-            "distance_km": round(distance_km, 2),
-            "delivery_from": vendor.primary_location.address,
-            "delivery_to": delivery_address,
-            "message": "Use /api/payments/create-order-and-payment/ to create the order and process payment"
-        })
+#         vendor_id = serializer.validated_data["vendor_id"]
+#         delivery_address_data = serializer.validated_data["delivery_address"]
+#         payment_method_data = serializer.validated_data["payment_method"]
+#         special_instructions = serializer.validated_data.get("special_instructions", "")
+#         save_address = serializer.validated_data.get("save_address", False)
+#         address_label = serializer.validated_data.get("address_label", "")
+
+#         # Get vendor
+#         vendor = Vendor.objects.get(id=vendor_id, status="active")
+#         vendor_location = vendor.primary_location
+
+#         # Get cart items and calculate totals
+#         cart_items = []
+#         cart_total = Decimal('0.00')
+#         items_count = 0
+        
+#         if request.user.is_authenticated:
+#             cart = Cart.objects.filter(user=request.user, vendor=vendor).first()
+#             if cart and cart.items.exists():
+#                 for cart_item in cart.items.all():
+#                     item_data = {
+#                         'product_id': cart_item.product.id,
+#                         'product_name': cart_item.product.name,
+#                         'product_price': cart_item.product.price,
+#                         'quantity': cart_item.quantity,
+#                         'total_price': cart_item.total_price,
+#                         'special_instructions': cart_item.special_instructions
+#                     }
+#                     cart_items.append(item_data)
+#                     cart_total += cart_item.total_price
+#                     items_count += cart_item.quantity
+#         else:
+#             # Handle anonymous cart from session
+#             session_cart = request.session.get('cart', [])
+            
+#             for item in session_cart:
+#                 try:
+#                     product = Product.objects.get(id=item['product_id'], is_available=True)
+#                     if product.vendor_id == vendor_id:
+#                         item_total = product.price * Decimal(str(item['quantity']))
+#                         item_data = {
+#                             'product_id': product.id,
+#                             'product_name': product.name,
+#                             'product_price': product.price,
+#                             'quantity': item['quantity'],
+#                             'total_price': item_total,
+#                             'special_instructions': item.get('special_instructions', '')
+#                         }
+#                         cart_items.append(item_data)
+#                         cart_total += item_total
+#                         items_count += item['quantity']
+#                 except Product.DoesNotExist:
+#                     continue
+
+#         if cart_total == 0:
+#             return Response(
+#                 {"error": "Cart is empty or contains no items from this vendor"},
+#                 status=status.HTTP_400_BAD_REQUEST
+#             )
+
+#         # Validate minimum order amount
+#         if cart_total < vendor.minimum_order_amount:
+#             return Response({
+#                 "error": f"Minimum order amount is {vendor.minimum_order_amount} TSH. Current total: {cart_total} TSH"
+#             }, status=status.HTTP_400_BAD_REQUEST)
+
+#         # Calculate delivery fee using existing function
+#         delivery_fee = Decimal(str(calculate_delivery_fee(
+#             float(delivery_address_data["latitude"]),
+#             float(delivery_address_data["longitude"]),
+#             float(vendor_location.latitude),
+#             float(vendor_location.longitude)
+#         )))
+
+#         # Calculate distance for display
+#         from geopy.distance import geodesic
+#         distance_km = geodesic(
+#             (float(vendor_location.latitude), float(vendor_location.longitude)),
+#             (float(delivery_address_data["latitude"]), float(delivery_address_data["longitude"]))
+#         ).km
+
+#         # Calculate tax (if applicable)
+#         tax_rate = Decimal('0.00')  # Set your tax rate here
+#         tax_amount = (cart_total * tax_rate).quantize(Decimal("0.01"))
+        
+#         # Calculate total
+#         total_amount = cart_total + delivery_fee + tax_amount
+
+#         # Estimate delivery time (base time + distance factor)
+#         base_prep_time = vendor.average_preparation_time
+#         delivery_time_per_km = 3  # 3 minutes per km
+#         estimated_delivery_time = base_prep_time + int(distance_km * delivery_time_per_km)
+
+#         # Determine delivery calculation method
+#         if distance_km <= 3:
+#             delivery_calculation = f"≤3km rate: {distance_km:.2f}km × 2000 TSH = {delivery_fee} TSH"
+#         else:
+#             delivery_calculation = f"≥4km rate: {distance_km:.2f}km × 700 TSH = {delivery_fee} TSH"
+
+#         # Get accepted payment methods
+#         payment_methods = []
+#         if vendor.accepts_mobile_money:
+#             payment_methods.append('mobile_money')
+#         if vendor.accepts_card:
+#             payment_methods.append('card')
+#         if vendor.accepts_cash:
+#             payment_methods.append('cash')
+
+#         # Save address if requested and user is authenticated
+#         saved_address_id = None
+#         if save_address and request.user.is_authenticated and address_label:
+#             try:
+#                 from .models import DeliveryAddress
+#                 address = DeliveryAddress.objects.create(
+#                     user=request.user,
+#                     label=address_label,
+#                     street_address=delivery_address_data['address'],
+#                     city=delivery_address_data.get('city', ''),
+#                     state=delivery_address_data.get('state', ''),
+                   
+#                     latitude=delivery_address_data['latitude'],
+#                     longitude=delivery_address_data['longitude'],
+#                     formatted_address=delivery_address_data['address']
+#                 )
+#                 saved_address_id = address.id
+#             except Exception as e:
+#                 # Don't fail checkout if address saving fails
+#                 pass
+
+#         # Prepare response
+#         response_data = {
+#             "checkout_id": f"CHK_{vendor_id}_{int(timezone.now().timestamp())}",
+#             "vendor": {
+#                 "id": vendor.id,
+#                 "name": vendor.business_name,
+#                 "address": vendor_location.address,
+#                 "phone": vendor.business_phone,
+#                 "minimum_order_amount": vendor.minimum_order_amount
+#             },
+#             "cart_items": cart_items,
+#             "pricing": {
+#                 "subtotal": cart_total,
+#                 "delivery_fee": delivery_fee,
+#                 "tax_amount": tax_amount,
+#                 "total_amount": total_amount,
+#                 "currency": "TSH"
+#             },
+#             "delivery_info": {
+#                 "distance_km": round(distance_km, 2),
+#                 "estimated_delivery_time": estimated_delivery_time,
+#                 "delivery_calculation": delivery_calculation,
+#                 "address": delivery_address_data
+#             },
+#             "payment_info": {
+#                 "selected_method": payment_method_data,
+#                 "accepted_methods": payment_methods
+#             },
+#             "order_summary": {
+#                 "items_count": items_count,
+#                 "special_instructions": special_instructions,
+#                 "saved_address_id": saved_address_id
+#             },
+#             "validation": {
+#                 "can_proceed": True,
+#                 "message": "Checkout validation successful. Ready to proceed with payment."
+#             }
+#         }
+
+#         return Response(response_data, status=status.HTTP_200_OK)
 
 
 
@@ -588,19 +990,39 @@ def vendor_dashboard(request):
         return Response({'error': 'Access denied'}, status=status.HTTP_403_FORBIDDEN)
     
     # Get vendor statistics
-    orders = Order.objects.filter(vendor=user.vendor_profile)
-    products = Product.objects.filter(vendor=user.vendor_profile)
+    orders = Order.objects.filter(vendor=user.vendor_profile, payment_status='paid')
+    payout_requests = PayoutRequest.objects.filter(vendor=user.vendor_profile)
+    products = Product.objects.filter(vendor=user.vendor_profile,)
     
     total_orders = orders.count()
-    pending_orders = orders.filter(status__in=['pending', 'confirmed']).count()
+    pending_orders = orders.filter(status__in=['pending', 'confirmed'], payment_status='paid').count()
+    completed_orders = orders.filter(status='delivered').count()  # ✅ paid + delivered
     total_products = products.count()
+    
     low_stock_products = products.filter(stock_quantity__lt=5).count()
     out_of_stock_products = products.filter(stock_quantity=0).count()
-    
+
+
+    # Revenue
+    revenue = orders.filter(status='delivered').aggregate(
+        total=Sum('total_amount')
+    )['total'] or 0
+    pending_payouts = payout_requests.filter(status='pending').aggregate(
+        total=Sum('amount')
+    )['total'] or 0
+
+    active_orders = orders.filter(
+        status__in=['confirmed', 'preparing', 'ready', 'picked_up', 'in_transit']
+    ).count()  # actively being processed
+
     return Response({
         'total_orders': total_orders,
         'pending_orders': pending_orders,
+        'completed_orders': completed_orders,
         'total_products': total_products,
+        'revenue': revenue, 
+        'active_orders': active_orders, 
+        'pending_payouts': float(pending_payouts),
         'low_stock_products': low_stock_products,
         'out_of_stock_products': out_of_stock_products,
         'recent_orders': OrderSerializer(orders[:5], many=True).data
@@ -688,7 +1110,8 @@ def vendor_set_preparing(request, order_id):
             notes='Vendor started preparing the order'
         )
 
-        OrderNotificationService.send_order_status_update_email(order)
+       
+        OrderNotificationService.send_order_status_update_email(order, old_status, order.status)
         
         return Response({
             'message': 'Order status updated to preparing',
@@ -715,7 +1138,7 @@ def vendor_set_ready(request, order_id):
             payment_status='paid'
         )
         
-        old_status = order.status
+        # old_status = order.status
         order.status = 'ready'
         
         # Set estimated delivery time if not already set
@@ -757,7 +1180,7 @@ def driver_mark_delivered(request, order_id):
             status__in=['picked_up', 'in_transit']
         )
         
-        old_status = order.status
+        # old_status = order.status
         order.status = 'delivered'
         order.actual_delivery_time = timezone.now()
         order.delivered_at = timezone.now()

@@ -4,7 +4,8 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 import re
 from .models import User, Vendor, Driver, EmailVerificationToken, PasswordResetToken, BusinessHours, VendorLocation, VendorCategory,ContactMessage
-
+from datetime import datetime, time
+import pytz
 from rest_framework import serializers
 
 
@@ -207,22 +208,28 @@ class VendorSerializer(serializers.ModelSerializer):
 class BusinessHoursSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessHours
-        fields = ['day_of_week', 'opening_time', 'closing_time', 'is_closed']
+        fields = ['id', 'vendor', 'day_of_week', 'opening_time', 'closing_time', 'is_closed']
+        read_only_fields = ['vendor']
 
-    def update(self, instance, validated_data):
-        # Prevent changing vendor and day_of_week on update
-        validated_data.pop("vendor", None)
-        validated_data.pop("day_of_week", None)
-        return super().update(instance, validated_data)
+    def validate(self, data):
+        opening = data.get('opening_time')
+        closing = data.get('closing_time')
+        is_closed = data.get('is_closed', False)
+
+        if not is_closed and opening and closing:
+            # Make sure opening < closing OR handle overnight shifts
+            if opening >= closing:
+                raise serializers.ValidationError("Opening time must be before closing time.")
+        return data
 
 
 
 class VendorLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = VendorLocation
-        fields = ['id', 'name', 'address', 'city', 'state', 'postal_code', 
+        fields = ['id', 'name', 'address', 'city', 'state', 
                  'country', 'latitude', 'longitude', 'is_primary', 'is_active',
-                 'phone_number', 'delivery_radius', 'created_at']
+                 'delivery_radius', 'created_at']
         read_only_fields = ['id', 'created_at']
 
 
@@ -265,7 +272,26 @@ class VendorProfileSerializer(serializers.ModelSerializer):
         ]
 
     def get_is_open_now(self, obj):
-        return obj.is_open_now()
+        # Chukua timezone ya Afrika Mashariki
+        tz = pytz.timezone("Africa/Dar_es_Salaam")
+        now = datetime.now(tz)
+        today = now.strftime("%A").lower()
+
+        # Pata business hours za leo
+        todays_hours = obj.opening_hours.filter(day_of_week=today).first()
+        if not todays_hours:
+            return False
+        
+        # Ikiwa vendor ameflagiwa is_closed
+        if getattr(todays_hours, "is_closed", False):
+            return False
+
+        opening = todays_hours.opening_time
+        closing = todays_hours.closing_time
+
+        # Compare na sasa hivi
+        return opening <= now.time() <= closing
+
 
     def get_primary_location(self, obj):
         primary_location = obj.locations.filter(is_primary=True).first()

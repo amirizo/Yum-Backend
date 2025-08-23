@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 from .services import SMSService, EmailService
 from .models import *
 from django.core.mail import EmailMultiAlternatives
+from orders.models import Cart, CartItem, Product as OrderProduct
 
 User = get_user_model()
 
@@ -55,11 +56,58 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             
             # Generate tokens
             refresh = RefreshToken.for_user(user)
-            
+
+            # Merge session cart into user's DB cart (if any)
+            try:
+                session_cart = request.session.get('cart', [])
+                merged = 0
+                skipped = 0
+                if session_cart:
+                    cart, _ = Cart.objects.get_or_create(user=user)
+                    for item in session_cart:
+                        pid = item.get('product_id')
+                        qty = int(item.get('quantity', 1) or 1)
+                        si = item.get('special_instructions', '') or ''
+                        try:
+                            product = OrderProduct.objects.get(id=pid, is_available=True)
+                        except OrderProduct.DoesNotExist:
+                            skipped += 1
+                            continue
+
+                        # If cart already has a vendor assigned, ensure items belong to same vendor
+                        if cart.vendor and product.vendor != cart.vendor:
+                            skipped += 1
+                            continue
+
+                        # If cart has no vendor yet, set it
+                        if not cart.vendor:
+                            cart.vendor = product.vendor
+                            cart.save()
+
+                        cart_item, created = CartItem.objects.get_or_create(
+                            cart=cart,
+                            product=product,
+                            defaults={'quantity': qty, 'special_instructions': si}
+                        )
+                        if not created:
+                            cart_item.quantity = (cart_item.quantity or 0) + qty
+                            if si:
+                                cart_item.special_instructions = si
+                            cart_item.save()
+                        merged += 1
+
+                    # Clear the session cart after merging
+                    request.session['cart'] = []
+                cart_merge_info = {'merged_items': merged, 'skipped_items': skipped}
+            except Exception as e:
+                logger.error(f"Cart merge failed for user {getattr(user,'id',None)}: {e}")
+                cart_merge_info = {'merged_items': 0, 'skipped_items': 0, 'error': str(e)}
+
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
-                'user': UserSerializer(user).data
+                'user': UserSerializer(user).data,
+                'cart_merge': cart_merge_info
             })
         else:
             # Log failed login attempt
@@ -269,7 +317,7 @@ def password_reset_request(request):
             send_mail(
                 'Password Reset - Yum Express',
                 f'Reset your password by clicking this link: '
-                f'http://localhost:3000/reset-password/{reset_token.token}/',
+                f'http://localhost:3000/reset-password?token={reset_token.token}',
                 settings.DEFAULT_FROM_EMAIL,
                 [user.email],
                 fail_silently=False,
@@ -547,52 +595,56 @@ class VendorProfileView(generics.RetrieveUpdateAPIView):
 class VendorBusinessHoursView(generics.ListCreateAPIView):
     serializer_class = BusinessHoursSerializer
     permission_classes = [permissions.IsAuthenticated]
-    
-    def get_queryset(self):
-        if self.request.user.user_type != 'vendor':
-            raise PermissionDenied("Only vendors can access business hours.")
-        return BusinessHours.objects.filter(vendor=self.request.user.vendor_profile)
-    
-   
 
+    def get_queryset(self):
+        vendor = getattr(self.request.user, 'vendor_profile', None)
+        if not vendor:
+            return BusinessHours.objects.none()
+        return BusinessHours.objects.filter(vendor=vendor)
 
     def perform_create(self, serializer):
-        if self.request.user.user_type != 'vendor':
-            raise PermissionDenied("Only vendors can create business hours.")
-        vendor = self.request.user.vendor_profile
-        day = serializer.validated_data.get("day_of_week")
-        
+        vendor = getattr(self.request.user, 'vendor_profile', None)
+        if not vendor:
+            raise PermissionDenied("Only vendors can manage business hours")
+        serializer.save(vendor=vendor)
 
-        BusinessHours.objects.update_or_create(
-            vendor=vendor,
-            day_of_week=day,
-            defaults={
-                "opening_time": serializer.validated_data.get("opening_time"),
-                "closing_time": serializer.validated_data.get("closing_time"),
-            },
-        )
-
-
+    # Remove the custom post method - use perform_create instead
 
 class VendorBusinessHoursDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BusinessHoursSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        # Only allow vendors to see their own business hours
-        if self.request.user.user_type != 'vendor':
+        if getattr(self.request.user, 'user_type', None) != 'vendor':
+            raise PermissionDenied("Only vendors can access business hours")
+        vendor = getattr(self.request.user, 'vendor_profile', None)
+        if not vendor:
             return BusinessHours.objects.none()
-        return BusinessHours.objects.filter(vendor=self.request.user.vendor_profile)
+        return BusinessHours.objects.filter(vendor=vendor)
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = queryset.filter(pk=self.kwargs.get('pk')).first()
+        if not obj:
+            raise NotFound("Business hours not found")
+        return obj
 
     def get_serializer(self, *args, **kwargs):
-        # On update/partial_update, make fields not required
         if self.request.method in ['PUT', 'PATCH']:
-            kwargs['partial'] = True  # allows partial updates
+            kwargs['partial'] = True
         return super().get_serializer(*args, **kwargs)
 
-    def perform_update(self, serializer):
-        # Ensure the vendor field is always set correctly
-        serializer.save(vendor=self.request.user.vendor_profile)
+    def update(self, request, *args, **kwargs):
+        try:
+            return super().update(request, *args, **kwargs)
+        except Exception as e:
+            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            return super().destroy(request, *args, **kwargs)
+        except Exception as e:
+            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
     
     
 
@@ -725,7 +777,7 @@ def vendor_dashboard(request):
 
         # Stats
         total_orders = orders.count()
-        pending_orders = orders.filter(status__in=['pending', 'confirmed']).count()
+        pending_orders = orders.filter(status__in=['pending', 'confirmed'], payment_status='paid').count()
         completed_orders = orders.filter(status='delivered').count()
         total_products = products.count()
         active_products = products.filter(is_available=True).count()

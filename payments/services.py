@@ -2,6 +2,7 @@ import requests
 import json
 import hashlib
 import logging
+import uuid
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.core.cache import cache
@@ -217,16 +218,37 @@ class ClickPesaService:
             return {'success': False, 'error': str(e)}
 
 
-
+    #cards payments
     def create_card_payment(self, amount, order_reference, customer_name, customer_email, customer_phone):
-        """Create card payment"""
+        """Create card payment (normalized return). Returns dict with 'success' key.
+        Uses a valid customer id (phone number if available, else email, else generated uuid).
+        Attempts to create remote customer on provider if required.
+        """
         token = self.generate_token()
         if not token:
-            return None
-            
+            return {'success': False, 'error': 'Failed to generate auth token'}
+
+        # Use phone number as customer id when possible, otherwise email, otherwise a uuid
+        if customer_phone:
+            try:
+                customer_id = ''.join(filter(str.isdigit, str(customer_phone))) or str(uuid.uuid4())
+            except Exception:
+                customer_id = str(uuid.uuid4())
+        elif customer_email:
+            customer_id = customer_email
+        else:
+            customer_id = str(uuid.uuid4())
+
+        # Ensure remote customer exists (best-effort)
+        remote_customer_id = self.ensure_remote_customer(customer_id, full_name=customer_name, email=customer_email, phone_number=customer_phone)
+        if remote_customer_id is None:
+            # proceed but warn — provider may reject if customer must exist
+            logger.warning('Proceeding to create card payment without confirmed remote customer id')
+            remote_customer_id = customer_id
+
         # Convert TZS to USD for card payments (approximate rate)
         usd_amount = float(amount) / 2300  # Approximate TZS to USD conversion
-        
+
         # Preview first
         preview_data = {
             "amount": str(round(usd_amount, 2)),
@@ -235,43 +257,79 @@ class ClickPesaService:
             "checksum": ""
         }
         preview_data["checksum"] = self.generate_checksum(preview_data)
-        
+
         preview_url = f"{self.base_url}/payments/preview-card-payment"
         headers = {
             "Authorization": token,
             "Content-Type": "application/json"
         }
-        
+
         try:
-            preview_response = requests.post(preview_url, json=preview_data, headers=headers)
+            preview_response = requests.post(preview_url, json=preview_data, headers=headers, timeout=30)
             preview_response.raise_for_status()
-            
+
             # Initiate payment
             initiate_data = {
                 "amount": str(round(usd_amount, 2)),
                 "orderReference": order_reference,
                 "currency": "USD",
                 "customer": {
-                    "id": str(hash(customer_name)),
+                    "id": str(remote_customer_id),
                     "fullName": customer_name,
                     "email": customer_email,
                     "phoneNumber": customer_phone,
-                },       
-                
+                },
             }
             initiate_data["checksum"] = self.generate_checksum(initiate_data)
-            
+
             initiate_url = f"{self.base_url}/payments/initiate-card-payment"
-            initiate_response = requests.post(initiate_url, json=initiate_data, headers=headers)
+            initiate_response = requests.post(initiate_url, json=initiate_data, headers=headers, timeout=30)
             initiate_response.raise_for_status()
-            
+
             result = initiate_response.json()
             logger.info(f"Card payment initiated: {result}")
-            return result
-            
+
+            # Normalize response
+            payment_link = None
+            payment_reference = None
+            if isinstance(result, dict):
+                # common keys
+                payment_link = result.get('payment_link') or result.get('paymentLink') or result.get('paymentUrl') or result.get('payment_url')
+                payment_reference = result.get('paymentReference') or result.get('payment_reference') or result.get('id') or result.get('reference')
+                # check nested data
+                data_field = result.get('data') if isinstance(result.get('data'), dict) else None
+                if not payment_link and data_field:
+                    payment_link = data_field.get('payment_link') or data_field.get('paymentLink') or data_field.get('paymentUrl') or data_field.get('payment_url')
+                if not payment_reference and data_field:
+                    payment_reference = data_field.get('paymentReference') or data_field.get('payment_reference') or data_field.get('id') or data_field.get('reference')
+
+            return {
+                'success': True,
+                'data': result,
+                'payment_link': payment_link,
+                'payment_reference': payment_reference
+            }
+
         except requests.exceptions.RequestException as e:
             logger.error(f"ClickPesa card payment error: {str(e)}")
-            return None
+            err_text = str(e)
+            if hasattr(e, 'response') and getattr(e, 'response') is not None:
+                try:
+                    # Try to extract JSON message
+                    err_json = e.response.json()
+                    if isinstance(err_json, dict):
+                        err_text = err_json.get('message') or err_json.get('error') or json.dumps(err_json)
+                    else:
+                        err_text = e.response.text
+                except Exception:
+                    try:
+                        err_text = e.response.text
+                    except Exception:
+                        pass
+            return {'success': False, 'error': err_text}
+        except Exception as e:
+            logger.error(f"ClickPesa card payment unexpected error: {str(e)}")
+            return {'success': False, 'error': str(e)}
 
     def preview_card_payment(self, amount, order_reference):
         """Preview card payment"""
@@ -351,55 +409,7 @@ class ClickPesaService:
         except Exception as e:
             logger.error(f"ClickPesa card payment initiation unexpected error: {str(e)}")
             return {'success': False, 'error': str(e)}
-    
-    def create_mobile_money_payment(self, amount, phone_number, order_reference):
-        """Create mobile money payment using USSD push"""
-        token = self.generate_token()
-        if not token:
-            return None
-            
-        # Preview first
-        preview_data = {
-            "amount": str(amount),
-            "currency": "TZS",
-            "orderReference": order_reference,
-            "phoneNumber": phone_number,
-            "checksum": ""
-        }
-        preview_data["checksum"] = self.generate_checksum(preview_data)
-        
-        preview_url = f"{self.base_url}/payments/preview-ussd-push-request"
-        headers = {
-            "Authorization": token,
-            "Content-Type": "application/json"
-        }
-        
-        try:
-            preview_response = requests.post(preview_url, json=preview_data, headers=headers)
-            preview_response.raise_for_status()
-            
-            # Initiate payment
-            initiate_data = {
-                "amount": str(amount),
-                "currency": "TZS",
-                "orderReference": order_reference,
-                "phoneNumber": phone_number,
-                "checksum": ""
-            }
-            initiate_data["checksum"] = self.generate_checksum(initiate_data)
-            
-            initiate_url = f"{self.base_url}/payments/initiate-ussd-push-request"
-            initiate_response = requests.post(initiate_url, json=initiate_data, headers=headers)
-            initiate_response.raise_for_status()
-            
-            result = initiate_response.json()
-            logger.info(f"Mobile money payment initiated: {result}")
-            return result
-            
-        except requests.exceptions.RequestException as e:
-            logger.error(f"ClickPesa mobile money payment error: {str(e)}")
-            return None
-    
+
     def check_payment_status(self, order_reference):
         """Check payment status"""
         token = self.generate_token()
@@ -425,4 +435,64 @@ class ClickPesaService:
         except Exception as e:
             logger.error(f"ClickPesa payment status check unexpected error: {str(e)}")
             return {'success': False, 'error': str(e)}
+
+    def ensure_remote_customer(self, customer_id, full_name=None, email=None, phone_number=None):
+        """Ensure a customer exists in ClickPesa. Attempts to create the customer if not found.
+        Returns the customer id expected by ClickPesa or None on failure.
+        """
+        try:
+            token = self.generate_token()
+            if not token:
+                logger.error('No auth token available to create customer')
+                return None
+
+            # Some ClickPesa APIs expect POST /customers or /third-parties/customers — try common paths
+            candidate_urls = [
+                f"{self.base_url}/customers",
+                f"{self.base_url}/third-parties/customers",
+            ]
+
+            payload = {
+                'id': str(customer_id),
+                'fullName': full_name,
+                'email': email,
+                'phoneNumber': phone_number
+            }
+
+            headers = {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            }
+
+            for url in candidate_urls:
+                try:
+                    resp = requests.post(url, json=payload, headers=headers, timeout=20)
+                    # if created or already exists, return the provider id
+                    if resp.status_code in (200, 201):
+                        data = resp.json()
+                        # provider may return id in different fields
+                        remote_id = data.get('id') or data.get('customerId') or data.get('reference')
+                        if remote_id:
+                            logger.info(f"Remote customer created/ensured at {url}: {remote_id}")
+                            return remote_id
+                        # fallback to using our requested id
+                        return str(customer_id)
+                    else:
+                        # check if response indicates customer already exists
+                        try:
+                            err = resp.json()
+                            msg = err.get('message') or err.get('error') or ''
+                            if 'exists' in msg.lower() or 'already' in msg.lower():
+                                logger.info(f"Customer already exists according to {url}; using id {customer_id}")
+                                return str(customer_id)
+                        except Exception:
+                            pass
+                        # try next url
+                except Exception as e:
+                    logger.debug(f"Customer create attempt failed for {url}: {e}")
+            logger.warning('Failed to create/ensure remote customer; provider may require pre-registered customer')
+            return None
+        except Exception as e:
+            logger.error(f"ensure_remote_customer error: {e}")
+            return None
 

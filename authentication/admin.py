@@ -69,7 +69,7 @@ class CustomUserAdmin(BaseUserAdmin):
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'phone_number', 'profile_image')}),
         ('Permissions', {'fields': ('user_type', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        ('Important dates', {'fields': ('last_login', 'created_at', 'updated_at')}),
+        ('Important dates', {'fields': ('last_login', 'created_at', 'updated_at', 'deleted_at', 'deletion_reason', 'is_deleted')}),
     )
     
     add_fieldsets = (
