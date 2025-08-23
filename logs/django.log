@@ -19594,3 +19594,79 @@ INFO 2025-08-24 01:11:05,563 autoreload 84451 8753209536 /Users/macbookair/Deskt
 INFO 2025-08-24 01:11:06,207 autoreload 84479 8753209536 Watching for file changes with StatReloader
 INFO 2025-08-24 01:11:06,423 autoreload 84454 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/serializers.py changed, reloading.
 INFO 2025-08-24 01:11:06,903 autoreload 84482 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 01:12:00,366 autoreload 84551 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 01:15:30,661 autoreload 84482 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-24 01:15:30,799 autoreload 84551 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-24 01:15:31,415 autoreload 84708 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 01:15:31,415 autoreload 84707 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 01:17:04,619 log 84708 6132363264 Unauthorized: /api/payments/checkout/
+WARNING 2025-08-24 01:17:35,258 log 84708 6132363264 Unauthorized: /api/payments/checkout/
+WARNING 2025-08-24 01:17:37,638 log 84708 6132363264 Unauthorized: /api/payments/checkout/
+WARNING 2025-08-24 01:17:55,819 log 84708 6132363264 Unauthorized: /api/payments/checkout/
+WARNING 2025-08-24 01:18:21,541 signals 84708 6132363264 Order c4a68d6e-9216-4142-a2da-5cb6fac6bd52 not found in pre_save signal
+INFO 2025-08-24 01:18:21,608 services 84708 6132363264 Sending email to amirmussa2003@gmail.com: Order IJYF40WM Created
+INFO 2025-08-24 01:18:21,611 services 84708 6132363264 Sending email to amirimussa2003@gmail.com: New Order Received - IJYF40WM
+INFO 2025-08-24 01:18:23,800 services 84708 6132363264 ClickPesa auth token generated successfully
+ERROR 2025-08-24 01:18:24,032 services 84708 6132363264 ClickPesa card payment error: 401 Client Error: Unauthorized for url: https://api.clickpesa.com/third-parties/payments/preview-card-payment
+ERROR 2025-08-24 01:18:24,044 views 84708 6132363264 Checkout error: Unauthorized
+WARNING 2025-08-24 01:18:24,045 log 84708 6132363264 Bad Request: /api/payments/checkout/
+INFO 2025-08-24 01:19:32,491 autoreload 84708 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-24 01:19:33,038 autoreload 84707 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-24 01:19:33,245 autoreload 84906 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 01:19:33,556 autoreload 84907 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 01:19:52,616 signals 84906 6203731968 Order 44a6dd53-3d2c-41bf-a113-569d35992856 not found in pre_save signal
+INFO 2025-08-24 01:19:52,661 services 84906 6203731968 Sending email to amirmussa2003@gmail.com: Order E49TP7PS Created
+INFO 2025-08-24 01:19:52,666 services 84906 6203731968 Sending email to amirimussa2003@gmail.com: New Order Received - E49TP7PS
+INFO 2025-08-24 01:19:54,774 services 84906 6203731968 ClickPesa auth token generated successfully
+ERROR 2025-08-24 01:20:00,873 services 84906 6203731968 ClickPesa card payment error: 404 Client Error: Not Found for url: https://api.clickpesa.com/third-parties/payments/initiate-card-payment
+ERROR 2025-08-24 01:20:00,875 views 84906 6203731968 Checkout error: Customer not found
+WARNING 2025-08-24 01:20:00,876 log 84906 6203731968 Bad Request: /api/payments/checkout/
+INFO 2025-08-24 01:27:30,243 autoreload 84906 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-24 01:27:30,488 autoreload 84907 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-24 01:27:31,152 autoreload 85333 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 01:27:31,152 autoreload 85334 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 01:28:13,064 signals 85333 6128398336 Order c5f77f2c-8c82-43e5-86af-99c9191ed85c not found in pre_save signal
+INFO 2025-08-24 01:28:13,155 services 85333 6128398336 Sending email to amirmussa2003@gmail.com: Order DSKU6OFF Created
+INFO 2025-08-24 01:28:13,159 services 85333 6128398336 Sending email to amirimussa2003@gmail.com: New Order Received - DSKU6OFF
+INFO 2025-08-24 01:28:15,322 services 85333 6128398336 ClickPesa auth token generated successfully
+INFO 2025-08-24 01:28:15,445 services 85333 6128398336 Customer created at https://api.clickpesa.com/third-parties/third-parties/customers but no id returned; using requested id 255772236727
+ERROR 2025-08-24 01:28:21,259 services 85333 6128398336 ClickPesa card payment error: 404 Client Error: Not Found for url: https://api.clickpesa.com/third-parties/payments/initiate-card-payment
+ERROR 2025-08-24 01:28:21,263 views 85333 6128398336 Checkout error: Customer not found
+WARNING 2025-08-24 01:28:21,265 log 85333 6128398336 Bad Request: /api/payments/checkout/
+WARNING 2025-08-24 01:30:25,971 signals 85333 6145798144 Order f9ea7bd1-4669-41bd-b787-692b8a190dd1 not found in pre_save signal
+INFO 2025-08-24 01:30:25,983 services 85333 6145798144 Sending email to amirmussa2003@gmail.com: Order 99P2FANW Created
+INFO 2025-08-24 01:30:25,987 services 85333 6145798144 Sending email to amirimussa2003@gmail.com: New Order Received - 99P2FANW
+WARNING 2025-08-24 01:32:00,817 log 85334 6325039104 Not Found: /api/support/send
+WARNING 2025-08-24 01:32:14,549 log 85333 6162624512 Unauthorized: /api/payments/confirm/
+WARNING 2025-08-24 01:32:41,665 log 85334 6325039104 Not Found: /api/support/send
+INFO 2025-08-24 01:32:42,072 services 85333 6162624512 ClickPesa payment status checked for order YUM98822505RME1
+INFO 2025-08-24 01:33:00,191 services 85333 6162624512 ClickPesa payment status checked for order YUM98822505RME1
+INFO 2025-08-24 01:33:06,474 services 85333 6162624512 ClickPesa payment status checked for order YUM98822505RME1
+INFO 2025-08-24 01:33:10,405 services 85333 6162624512 ClickPesa payment status checked for order YUM98822505RME1
+INFO 2025-08-24 01:33:16,042 services 85333 6162624512 ClickPesa payment status checked for order YUM98822505RME1
+INFO 2025-08-24 01:33:24,357 services 85333 6162624512 ClickPesa payment status checked for order YUM98822505RME1
+INFO 2025-08-24 01:33:27,452 services 85333 6162624512 ClickPesa payment status checked for order YUM98822505RME1
+INFO 2025-08-24 01:33:30,297 services 85333 6162624512 ClickPesa payment status checked for order YUM98822505RME1
+INFO 2025-08-24 01:33:35,449 services 85333 6162624512 ClickPesa payment status checked for order YUM98822505RME1
+INFO 2025-08-24 01:34:18,835 services 85333 6162624512 ClickPesa payment status checked for order YUM98822505RME1
+INFO 2025-08-24 01:34:59,048 services 85333 6162624512 ClickPesa payment status checked for order YUM98822505RME1
+WARNING 2025-08-24 01:35:41,431 log 85334 6325039104 Bad Request: /api/auth/contact-us/
+WARNING 2025-08-24 01:35:51,039 log 85334 6341865472 Not Found: /api/payments/webhook/clickpesa
+WARNING 2025-08-24 01:36:17,282 log 85334 6325039104 Bad Request: /api/auth/contact-us/
+INFO 2025-08-24 01:36:20,139 services 85333 6179450880 ClickPesa payment status checked for order YUM98822505RME1
+INFO 2025-08-24 01:36:20,158 services 85333 6179450880 Sending email to amirmussa2003@gmail.com: Order 99P2FANW Cancelled
+INFO 2025-08-24 01:36:20,166 services 85333 6179450880 Sending email to amirimussa2003@gmail.com: Order 99P2FANW Cancelled
+INFO 2025-08-24 01:36:20,173 signals 85333 6179450880 Order 99P2FANW status changed from pending to cancelled
+INFO 2025-08-24 01:36:55,124 autoreload 85334 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-24 01:36:55,167 autoreload 85333 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/services.py changed, reloading.
+INFO 2025-08-24 01:36:55,939 autoreload 85831 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 01:36:55,939 autoreload 85830 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 01:37:06,749 log 85830 6169964544 Bad Request: /api/auth/contact-us/
+INFO 2025-08-24 01:38:42,670 autoreload 85831 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 01:38:43,257 autoreload 85830 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 01:38:43,379 autoreload 85987 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 01:38:43,745 autoreload 85991 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 01:39:36,507 autoreload 85991 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 01:39:36,917 autoreload 85987 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 01:39:37,225 autoreload 86024 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 01:39:37,414 autoreload 86025 8753209536 Watching for file changes with StatReloader

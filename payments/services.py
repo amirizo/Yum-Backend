@@ -88,10 +88,7 @@ class ClickPesaService:
             }
             
             preview_url = f"{self.base_url}/payments/preview-ussd-push-request"
-            headers = {
-                "Authorization": token,
-                "Content-Type": "application/json"
-            }
+            headers = { **self._auth_header(token), "Content-Type": "application/json" }
             
             preview_response = requests.post(preview_url, json=preview_data, headers=headers)
             
@@ -150,10 +147,7 @@ class ClickPesaService:
             })
         }
         
-        headers = {
-            "Authorization": token,  # Token already includes "Bearer "
-            "Content-Type": "application/json"
-        }
+        headers = { **self._auth_header(token), "Content-Type": "application/json" }
         
         try:
             response = requests.post(url, json=payload, headers=headers, timeout=30)
@@ -197,10 +191,7 @@ class ClickPesaService:
             })
         }
         
-        headers = {
-            "Authorization": token,  # Token already includes "Bearer "
-            "Content-Type": "application/json"
-        }
+        headers = { **self._auth_header(token), "Content-Type": "application/json" }
         
         try:
             response = requests.post(url, json=payload, headers=headers, timeout=30)
@@ -259,10 +250,7 @@ class ClickPesaService:
         preview_data["checksum"] = self.generate_checksum(preview_data)
 
         preview_url = f"{self.base_url}/payments/preview-card-payment"
-        headers = {
-            "Authorization": token,
-            "Content-Type": "application/json"
-        }
+        headers = { **self._auth_header(token), "Content-Type": "application/json" }
 
         try:
             preview_response = requests.post(preview_url, json=preview_data, headers=headers, timeout=30)
@@ -350,10 +338,7 @@ class ClickPesaService:
             })
         }
         
-        headers = {
-            "Authorization": token,  # Token already includes "Bearer "
-            "Content-Type": "application/json"
-        }
+        headers = { **self._auth_header(token), "Content-Type": "application/json" }
         
         try:
             response = requests.post(url, json=payload, headers=headers, timeout=30)
@@ -390,10 +375,7 @@ class ClickPesaService:
             })
         }
         
-        headers = {
-            "Authorization": token,  # Token already includes "Bearer "
-            "Content-Type": "application/json"
-        }
+        headers = { **self._auth_header(token), "Content-Type": "application/json" }
         
         try:
             response = requests.post(url, json=payload, headers=headers, timeout=30)
@@ -417,9 +399,7 @@ class ClickPesaService:
             return {'success': False, 'error': 'Failed to generate authorization token'}
         
         url = f"{self.base_url}/payments/{order_reference}"
-        headers = {
-            "Authorization": token  # Token already includes "Bearer "
-        }
+        headers = { **self._auth_header(token) }
         
         try:
             response = requests.get(url, headers=headers, timeout=30)
@@ -436,8 +416,9 @@ class ClickPesaService:
             logger.error(f"ClickPesa payment status check unexpected error: {str(e)}")
             return {'success': False, 'error': str(e)}
 
-    def ensure_remote_customer(self, customer_id, full_name=None, email=None, phone_number=None):
+    def ensure_remote_customer(self, customer_id, full_name=None, email=None, phone_number=None, user_id=None):
         """Ensure a customer exists in ClickPesa. Attempts to create the customer if not found.
+        Sends payload with userId, firstName, lastName, email and phoneNumber to provider endpoint(s).
         Returns the customer id expected by ClickPesa or None on failure.
         """
         try:
@@ -446,43 +427,61 @@ class ClickPesaService:
                 logger.error('No auth token available to create customer')
                 return None
 
-            # Some ClickPesa APIs expect POST /customers or /third-parties/customers — try common paths
+            # derive first/last from full_name if provided
+            first_name = None
+            last_name = None
+            if full_name:
+                parts = full_name.strip().split()
+                first_name = parts[0]
+                last_name = ' '.join(parts[1:]) if len(parts) > 1 else ''
+
+            # Candidate endpoints: try provider's third-parties path first
             candidate_urls = [
-                f"{self.base_url}/customers",
                 f"{self.base_url}/third-parties/customers",
+                f"{self.base_url}/customers",
             ]
 
             payload = {
                 'id': str(customer_id),
-                'fullName': full_name,
+                'userId': str(user_id or customer_id),
+                'firstName': first_name,
+                'lastName': last_name,
                 'email': email,
                 'phoneNumber': phone_number
             }
 
-            headers = {
-                'Authorization': token,
-                'Content-Type': 'application/json'
-            }
+            headers = { **self._auth_header(token), 'Content-Type': 'application/json' }
 
             for url in candidate_urls:
                 try:
                     resp = requests.post(url, json=payload, headers=headers, timeout=20)
-                    # if created or already exists, return the provider id
-                    if resp.status_code in (200, 201):
-                        data = resp.json()
-                        # provider may return id in different fields
+                    # treat any 2xx as success
+                    if 200 <= resp.status_code < 300:
+                        try:
+                            data = resp.json()
+                        except Exception:
+                            data = {}
                         remote_id = data.get('id') or data.get('customerId') or data.get('reference')
                         if remote_id:
                             logger.info(f"Remote customer created/ensured at {url}: {remote_id}")
                             return remote_id
-                        # fallback to using our requested id
-                        return str(customer_id)
+                        # if provider didn't return id, return our userId
+                        logger.info(f"Customer created at {url} but no id returned; using requested id {payload['userId']}")
+                        return str(payload['userId'])
                     else:
-                        # check if response indicates customer already exists
+                        # log response body for diagnostics
+                        text = None
+                        try:
+                            text = resp.json()
+                        except Exception:
+                            text = resp.text
+                        logger.warning(f"Customer create attempt at {url} returned status {resp.status_code}: {text}")
+
+                        # handle already exists messages
                         try:
                             err = resp.json()
-                            msg = err.get('message') or err.get('error') or ''
-                            if 'exists' in msg.lower() or 'already' in msg.lower():
+                            msg = (err.get('message') or err.get('error') or '')
+                            if isinstance(msg, str) and ('exists' in msg.lower() or 'already' in msg.lower() or 'found' in msg.lower()):
                                 logger.info(f"Customer already exists according to {url}; using id {customer_id}")
                                 return str(customer_id)
                         except Exception:
@@ -495,4 +494,17 @@ class ClickPesaService:
         except Exception as e:
             logger.error(f"ensure_remote_customer error: {e}")
             return None
+
+    def _auth_header(self, token):
+        """Return authorization header dict, prefixing with 'Bearer ' only if missing."""
+        if not token:
+            return {}
+        try:
+            if isinstance(token, str) and token.lower().startswith('bearer '):
+                auth_value = token
+            else:
+                auth_value = f"Bearer {token}"
+            return { 'Authorization': auth_value }
+        except Exception:
+            return { 'Authorization': f"Bearer {token}" }
 
