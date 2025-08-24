@@ -19670,3 +19670,810 @@ INFO 2025-08-24 01:39:36,507 autoreload 85991 8753209536 /Users/macbookair/Deskt
 INFO 2025-08-24 01:39:36,917 autoreload 85987 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
 INFO 2025-08-24 01:39:37,225 autoreload 86024 8753209536 Watching for file changes with StatReloader
 INFO 2025-08-24 01:39:37,414 autoreload 86025 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 01:40:24,803 autoreload 86099 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 01:46:02,403 log 86024 6203289600 Unauthorized: /api/orders/delivery/calculate/
+WARNING 2025-08-24 01:46:02,405 log 86024 6236942336 Unauthorized: /api/orders/delivery/calculate/
+INFO 2025-08-24 11:32:39,673 autoreload 11418 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 11:33:06,511 log 11418 6168014848 Unauthorized: /api/orders/dashboard/vendor/
+WARNING 2025-08-24 11:33:06,514 log 11418 6325039104 Unauthorized: /api/orders/dashboard/vendor/
+ERROR 2025-08-24 11:33:06,555 log 11418 6325039104 Internal Server Error: /api/auth/token/refresh
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+ERROR 2025-08-24 11:33:06,561 log 11418 6168014848 Internal Server Error: /api/auth/token/refresh
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+WARNING 2025-08-24 11:59:54,827 log 86024 6236942336 Not Found: /api/checkout
+WARNING 2025-08-24 12:05:44,901 log 11418 6341865472 Unauthorized: /api/payments/checkout/
+WARNING 2025-08-24 12:05:52,307 signals 11418 6341865472 Order 2f4570de-9cc0-487a-932b-72ab95c40a26 not found in pre_save signal
+INFO 2025-08-24 12:05:52,477 services 11418 6341865472 Sending email to ayubabdiy@gmail.com: Order DHGC7BCQ Created
+INFO 2025-08-24 12:05:52,480 services 11418 6341865472 Sending email to amirimussa2003@gmail.com: New Order Received - DHGC7BCQ
+INFO 2025-08-24 12:05:54,733 services 11418 6341865472 ClickPesa auth token generated successfully
+INFO 2025-08-24 12:08:04,851 services 11418 6375518208 ClickPesa payment status checked for order YUM026352IGV4ZY
+INFO 2025-08-24 12:08:09,613 services 11418 6375518208 ClickPesa payment status checked for order YUM026352IGV4ZY
+INFO 2025-08-24 12:08:12,528 services 11418 6375518208 ClickPesa payment status checked for order YUM026352IGV4ZY
+INFO 2025-08-24 12:08:20,408 services 11418 6375518208 ClickPesa payment status checked for order YUM026352IGV4ZY
+INFO 2025-08-24 12:08:26,047 services 11418 6375518208 ClickPesa payment status checked for order YUM026352IGV4ZY
+INFO 2025-08-24 12:08:53,524 services 11418 6375518208 ClickPesa payment status checked for order YUM026352IGV4ZY
+INFO 2025-08-24 12:09:04,441 services 11418 6375518208 ClickPesa payment status checked for order YUM026352IGV4ZY
+INFO 2025-08-24 12:10:04,002 services 11418 6375518208 ClickPesa payment status checked for order YUM026352IGV4ZY
+INFO 2025-08-24 12:10:15,509 services 11418 6375518208 ClickPesa payment status checked for order YUM026352IGV4ZY
+WARNING 2025-08-24 12:11:19,456 log 86024 6203289600 Not Found: /api/payments/webhook/clickpesa
+INFO 2025-08-24 12:11:42,123 services 11418 6358691840 ClickPesa payment status checked for order YUM026352IGV4ZY
+INFO 2025-08-24 12:11:42,162 services 11418 6358691840 Sending email to ayubabdiy@gmail.com: Order DHGC7BCQ Cancelled
+INFO 2025-08-24 12:11:42,175 services 11418 6358691840 Sending email to amirimussa2003@gmail.com: Order DHGC7BCQ Cancelled
+INFO 2025-08-24 12:11:42,186 signals 11418 6358691840 Order DHGC7BCQ status changed from pending to cancelled
+WARNING 2025-08-24 12:12:19,474 log 86024 6220115968 Not Found: /api/checkout
+INFO 2025-08-24 12:21:19,152 autoreload 11418 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 12:21:19,240 autoreload 86024 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 12:21:20,182 autoreload 14095 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:21:20,182 autoreload 14096 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:22:31,263 autoreload 14096 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 12:22:31,336 autoreload 14095 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 12:22:32,014 autoreload 14160 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:22:32,014 autoreload 14159 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:31:01,905 autoreload 14160 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-24 12:31:02,716 autoreload 14694 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:31:02,737 autoreload 14159 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-24 12:31:03,273 autoreload 14695 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:32:06,354 autoreload 14695 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-24 12:32:06,710 autoreload 14694 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-24 12:32:07,083 autoreload 14763 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:32:07,208 autoreload 14765 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:36:12,890 autoreload 14763 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-24 12:36:13,136 autoreload 14765 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/services.py changed, reloading.
+INFO 2025-08-24 12:36:13,681 autoreload 15036 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:36:13,682 autoreload 15041 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:36:31,493 autoreload 15036 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 12:36:31,640 autoreload 15041 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 12:36:32,278 autoreload 15091 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:36:32,279 autoreload 15090 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:36:38,594 autoreload 15090 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 12:36:38,692 autoreload 15091 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 12:36:39,086 autoreload 15125 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 12:36:39,163 autoreload 15126 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 12:40:07,711 signals 15126 6122270720 Order 981a6f2e-7587-44b6-bd21-f08bbc41e0e8 not found in pre_save signal
+INFO 2025-08-24 12:40:07,774 services 15126 6122270720 Sending email to ayubabdiy@gmail.com: Order TVG7N4XI Created
+INFO 2025-08-24 12:40:07,778 services 15126 6122270720 Sending email to amirimussa2003@gmail.com: New Order Received - TVG7N4XI
+INFO 2025-08-24 12:40:09,857 services 15126 6122270720 ClickPesa auth token generated successfully
+INFO 2025-08-24 12:45:33,990 services 15125 6129971200 Sending email to ayubabdiy@gmail.com: Order TVG7N4XI Cancelled
+INFO 2025-08-24 12:45:33,995 services 15125 6129971200 Sending email to amirimussa2003@gmail.com: Order TVG7N4XI Cancelled
+INFO 2025-08-24 12:45:33,999 signals 15125 6129971200 Order TVG7N4XI status changed from pending to cancelled
+ERROR 2025-08-24 12:45:35,159 services 15125 6129971200 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":604437741868188864,"smsCount":1,"message":"Payment failed for order #TVG7N4XI. Reason: Transaction timeout","sendReference":561700498454727547}]}
+WARNING 2025-08-24 12:49:56,219 signals 15126 6139670528 Order 2b9a7558-bb3d-4fe5-ac03-59fcddaa9024 not found in pre_save signal
+INFO 2025-08-24 12:49:56,263 services 15126 6139670528 Sending email to ayubabdiy@gmail.com: Order 2NFQ6HE6 Created
+INFO 2025-08-24 12:49:56,267 services 15126 6139670528 Sending email to amirimussa2003@gmail.com: New Order Received - 2NFQ6HE6
+INFO 2025-08-24 12:55:19,921 services 15125 6129971200 Sending email to ayubabdiy@gmail.com: Order 2NFQ6HE6 Cancelled
+INFO 2025-08-24 12:55:19,925 services 15125 6129971200 Sending email to amirimussa2003@gmail.com: Order 2NFQ6HE6 Cancelled
+INFO 2025-08-24 12:55:19,931 signals 15125 6129971200 Order 2NFQ6HE6 status changed from pending to cancelled
+ERROR 2025-08-24 12:55:20,842 services 15125 6129971200 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":537718965750861038,"smsCount":1,"message":"Payment failed for order #2NFQ6HE6. Reason: Transaction timedout","sendReference":863886562003778423}]}
+WARNING 2025-08-24 12:59:44,526 signals 15126 6156496896 Order b00fe8fa-ae38-484f-bdb8-e33b9860b13b not found in pre_save signal
+INFO 2025-08-24 12:59:44,542 services 15126 6156496896 Sending email to ayubabdiy@gmail.com: Order PD63A36X Created
+INFO 2025-08-24 12:59:44,545 services 15126 6156496896 Sending email to amirimussa2003@gmail.com: New Order Received - PD63A36X
+INFO 2025-08-24 13:00:15,090 services 15125 6147371008 Sending email to ayubabdiy@gmail.com: Order PD63A36X Cancelled
+INFO 2025-08-24 13:00:15,098 services 15125 6147371008 Sending email to amirimussa2003@gmail.com: Order PD63A36X Cancelled
+INFO 2025-08-24 13:00:15,106 signals 15125 6147371008 Order PD63A36X status changed from pending to cancelled
+ERROR 2025-08-24 13:00:16,099 services 15125 6147371008 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":424732479704752215,"smsCount":1,"message":"Payment failed for order #PD63A36X. Reason: Insufficient balance.","sendReference":541622893865415760}]}
+WARNING 2025-08-24 13:03:23,390 log 15126 6173323264 Unauthorized: /api/orders/d1bc32a8-38b3-4e74-9930-7351cbbcab6d/history/
+WARNING 2025-08-24 13:29:52,599 log 15125 6129971200 Not Found: /api/orders/cart/items/74/
+WARNING 2025-08-24 13:29:52,600 log 15125 6164197376 Not Found: /api/orders/cart/items/74/
+WARNING 2025-08-24 13:29:52,601 log 15125 6147371008 Not Found: /api/orders/cart/items/74/
+WARNING 2025-08-24 13:31:18,653 signals 15126 6240628736 Order 0ae36a47-40f8-4209-bfff-8410d2714ad8 not found in pre_save signal
+INFO 2025-08-24 13:31:18,689 services 15126 6240628736 Sending email to ayubabdiy@gmail.com: Order Q1T4REQW Created
+INFO 2025-08-24 13:31:18,694 services 15126 6240628736 Sending email to amirimussa2003@gmail.com: New Order Received - Q1T4REQW
+INFO 2025-08-24 13:31:21,026 services 15126 6240628736 ClickPesa auth token generated successfully
+INFO 2025-08-24 13:31:55,096 services 15125 6164197376 Sending email to ayubabdiy@gmail.com: Order Q1T4REQW Confirmed
+INFO 2025-08-24 13:31:55,102 services 15125 6164197376 Sending email to amirimussa2003@gmail.com: Order Q1T4REQW Confirmed
+INFO 2025-08-24 13:31:55,108 signals 15125 6164197376 Order Q1T4REQW status changed from pending to confirmed
+WARNING 2025-08-24 13:31:55,118 views 15125 6164197376 Failed to send notifications for payment a24036b2-dda0-4930-b627-752fe757873b: SMSService.send_payment_success_sms() got an unexpected keyword argument 'order_number'
+INFO 2025-08-24 13:40:01,593 autoreload 15126 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 13:40:01,621 autoreload 15125 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 13:40:02,967 autoreload 18456 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:40:02,968 autoreload 18455 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:40:48,179 autoreload 18455 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 13:40:48,914 autoreload 18541 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:40:49,049 autoreload 18456 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 13:40:49,500 autoreload 18542 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:43:21,543 autoreload 18542 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 13:43:21,851 autoreload 18541 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 13:43:22,326 autoreload 18652 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:43:22,428 autoreload 18656 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:47:50,534 autoreload 18652 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/urls.py changed, reloading.
+INFO 2025-08-24 13:47:50,904 autoreload 18656 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/urls.py changed, reloading.
+INFO 2025-08-24 13:47:51,388 autoreload 18894 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:47:51,397 autoreload 18896 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:48:03,115 autoreload 18894 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/urls.py changed, reloading.
+INFO 2025-08-24 13:48:03,730 autoreload 18915 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:48:04,026 autoreload 18896 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/urls.py changed, reloading.
+INFO 2025-08-24 13:48:04,489 autoreload 18917 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 13:49:00,668 log 18915 6132346880 Unauthorized: /api/payments/order/0ae36a47-40f8-4209-bfff-8410d2714ad8/payment-status/
+INFO 2025-08-24 13:51:18,143 autoreload 18917 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/urls.py changed, reloading.
+INFO 2025-08-24 13:51:18,275 autoreload 18915 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/urls.py changed, reloading.
+INFO 2025-08-24 13:51:19,000 autoreload 19094 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:51:19,000 autoreload 19090 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:51:38,602 autoreload 19090 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 13:51:38,927 autoreload 19094 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 13:51:39,363 autoreload 19128 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:51:39,481 autoreload 19129 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:57:18,962 autoreload 19129 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-24 13:57:19,265 autoreload 19128 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-24 13:57:19,718 autoreload 19418 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 13:57:19,790 autoreload 19419 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:03:26,678 autoreload 19418 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:03:27,298 autoreload 19419 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:03:27,531 autoreload 19765 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:03:27,821 autoreload 19768 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:04:10,666 autoreload 19765 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:04:10,676 autoreload 19768 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:04:11,418 autoreload 19808 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:04:11,418 autoreload 19809 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:05:53,854 autoreload 19808 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:05:54,310 autoreload 19809 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:05:54,584 autoreload 19940 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:05:54,812 autoreload 19943 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:06:47,405 autoreload 19943 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-24 14:06:48,029 autoreload 20017 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:06:48,055 autoreload 19940 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-24 14:06:48,523 autoreload 20018 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:06:49,714 autoreload 20018 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:06:50,185 autoreload 20026 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:06:50,233 autoreload 20017 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:06:50,705 autoreload 20032 8753209536 Watching for file changes with StatReloader
+ERROR 2025-08-24 14:12:27,368 log 20026 6161084416 Internal Server Error: /admin/orders/order/b00fe8fa-ae38-484f-bdb8-e33b9860b13b/change/
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: orders_order.delivery_street_number
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 718, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/sites.py", line 241, in inner
+    return view(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 1964, in change_view
+    return self.changeform_view(request, object_id, form_url, extra_context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 1820, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 1840, in _changeform_view
+    obj = self.get_object(request, unquote(object_id), to_field)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/contrib/admin/options.py", line 896, in get_object
+    return queryset.get(**{field.name: object_id})
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 645, in get
+    num = len(clone)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 382, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 354, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: orders_order.delivery_street_number
+WARNING 2025-08-24 14:12:27,501 log 20026 6161084416 Not Found: /favicon.ico
+INFO 2025-08-24 14:12:55,026 autoreload 20032 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-24 14:12:55,075 autoreload 20026 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-24 14:12:55,953 autoreload 20341 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:12:55,953 autoreload 20342 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:14:19,892 autoreload 20341 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:14:20,292 autoreload 20342 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:14:20,960 autoreload 20441 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:14:20,961 autoreload 20442 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:16:29,673 autoreload 20442 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:16:30,300 autoreload 20441 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:16:30,465 autoreload 20869 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:16:30,871 autoreload 20870 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:19:02,761 autoreload 20869 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:19:03,146 autoreload 20870 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:19:03,558 autoreload 21052 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:19:03,769 autoreload 21053 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:19:55,950 autoreload 21053 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/models.py changed, reloading.
+INFO 2025-08-24 14:19:56,142 autoreload 21052 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:19:56,728 autoreload 21121 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:19:56,728 autoreload 21122 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:20:19,451 autoreload 21122 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/urls.py changed, reloading.
+INFO 2025-08-24 14:20:19,744 autoreload 21121 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/urls.py changed, reloading.
+INFO 2025-08-24 14:20:20,095 autoreload 21158 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:20:20,211 autoreload 21159 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:20:39,021 autoreload 21159 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/urls.py changed, reloading.
+INFO 2025-08-24 14:20:39,620 autoreload 21202 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:20:39,702 autoreload 21158 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/urls.py changed, reloading.
+INFO 2025-08-24 14:20:40,147 autoreload 21205 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:21:14,289 autoreload 21269 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:22:51,645 autoreload 21269 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-24 14:22:51,987 autoreload 21205 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-24 14:22:52,223 autoreload 21404 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:22:52,373 autoreload 21407 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:24:10,400 autoreload 21492 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:24:42,848 autoreload 21609 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:27:08,282 autoreload 21609 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-24 14:27:08,978 autoreload 21744 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:27:08,990 autoreload 21492 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/admin.py changed, reloading.
+INFO 2025-08-24 14:27:09,484 autoreload 21747 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:36:48,185 autoreload 21744 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:36:48,254 autoreload 21747 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:36:49,279 autoreload 22184 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:36:49,279 autoreload 22183 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:46:53,744 autoreload 22183 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:46:54,128 autoreload 22184 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:46:54,575 autoreload 22616 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:46:54,676 autoreload 22617 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:51:48,710 autoreload 22616 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:51:49,508 autoreload 22933 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 14:51:49,672 autoreload 22617 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 14:51:50,196 autoreload 22940 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 14:56:05,390 signals 22940 6189805568 Order 9cae183f-3619-4772-8329-ec9bd7cba9a6 not found in pre_save signal
+INFO 2025-08-24 14:56:05,458 services 22940 6189805568 Sending email to ayubabdiy@gmail.com: Order JLEMOQPO Created
+INFO 2025-08-24 14:56:05,461 services 22940 6189805568 Sending email to amirimussa2003@gmail.com: New Order Received - JLEMOQPO
+INFO 2025-08-24 14:56:07,734 services 22940 6189805568 ClickPesa auth token generated successfully
+INFO 2025-08-24 14:56:41,691 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order JLEMOQPO Confirmed
+INFO 2025-08-24 14:56:41,695 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: Order JLEMOQPO Confirmed
+INFO 2025-08-24 14:56:41,699 signals 22933 6128234496 Order JLEMOQPO status changed from pending to confirmed
+WARNING 2025-08-24 14:56:41,703 views 22933 6128234496 Failed to send notifications for payment 11c3ac46-9968-4c84-a2f3-fe25bc2105e1: SMSService.send_payment_success_sms() got an unexpected keyword argument 'order_number'
+WARNING 2025-08-24 15:04:23,899 signals 22940 6242004992 Order 137fef6e-10d7-439b-8be7-c189a36ead46 not found in pre_save signal
+INFO 2025-08-24 15:04:23,914 services 22940 6242004992 Sending email to ayubabdiy@gmail.com: Order VGIPZCJO Created
+INFO 2025-08-24 15:04:23,918 services 22940 6242004992 Sending email to amirimussa2003@gmail.com: New Order Received - VGIPZCJO
+INFO 2025-08-24 15:08:56,073 autoreload 23764 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 15:09:44,804 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order VGIPZCJO Cancelled
+INFO 2025-08-24 15:09:44,811 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: Order VGIPZCJO Cancelled
+INFO 2025-08-24 15:09:44,815 signals 22933 6128234496 Order VGIPZCJO status changed from pending to cancelled
+ERROR 2025-08-24 15:09:46,225 services 22933 6128234496 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":951267156750026477,"smsCount":1,"message":"Payment failed for order #VGIPZCJO. Reason: Transaction timedout","sendReference":695705727657859262}]}
+INFO 2025-08-24 15:09:46,230 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order VGIPZCJO Cancelled
+INFO 2025-08-24 15:09:46,234 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: Order VGIPZCJO Cancelled
+WARNING 2025-08-24 15:22:01,247 signals 22933 6145634304 Order d27a279b-82d3-4174-bb66-2b20a377fe4d not found in pre_save signal
+INFO 2025-08-24 15:22:01,316 services 22933 6145634304 Sending email to ayubabdiy@gmail.com: Order B6KFFFAA Created
+INFO 2025-08-24 15:22:01,319 services 22933 6145634304 Sending email to amirimussa2003@gmail.com: New Order Received - B6KFFFAA
+INFO 2025-08-24 15:22:03,651 services 22933 6145634304 ClickPesa auth token generated successfully
+INFO 2025-08-24 15:27:24,004 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order B6KFFFAA Cancelled
+INFO 2025-08-24 15:27:24,010 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: Order B6KFFFAA Cancelled
+INFO 2025-08-24 15:27:24,017 signals 22933 6128234496 Order B6KFFFAA status changed from pending to cancelled
+ERROR 2025-08-24 15:27:24,944 services 22933 6128234496 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":686865553273571803,"smsCount":1,"message":"Payment failed for order #B6KFFFAA. Reason: Transaction timedout","sendReference":136061812183155935}]}
+INFO 2025-08-24 15:27:24,955 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order B6KFFFAA Cancelled
+INFO 2025-08-24 15:27:24,963 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: Order B6KFFFAA Cancelled
+WARNING 2025-08-24 15:33:09,166 signals 22933 6128234496 Order 070176c2-187e-4a52-9362-c0c6235d78a3 not found in pre_save signal
+INFO 2025-08-24 15:33:09,176 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order NYI7WDCJ Created
+INFO 2025-08-24 15:33:09,180 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: New Order Received - NYI7WDCJ
+WARNING 2025-08-24 15:33:31,727 log 22933 6128234496 Not Found: /api/payments/status/35ff8661-c431-4622-9bdf-fe5d6fb6b7a6/
+WARNING 2025-08-24 15:35:31,773 signals 22933 6145634304 Order 7b61dda5-7eac-4d39-8252-280c3478e06b not found in pre_save signal
+INFO 2025-08-24 15:35:31,781 services 22933 6145634304 Sending email to ayubabdiy@gmail.com: Order V1N941GK Created
+INFO 2025-08-24 15:35:31,785 services 22933 6145634304 Sending email to amirimussa2003@gmail.com: New Order Received - V1N941GK
+WARNING 2025-08-24 15:35:54,177 log 22933 6145634304 Not Found: /api/payments/status/264e510d-5074-4c97-b674-d81e3861f203/
+INFO 2025-08-24 15:36:05,192 services 22933 6325039104 Sending email to ayubabdiy@gmail.com: Order V1N941GK Cancelled
+INFO 2025-08-24 15:36:05,197 services 22933 6325039104 Sending email to amirimussa2003@gmail.com: Order V1N941GK Cancelled
+INFO 2025-08-24 15:36:05,203 signals 22933 6325039104 Order V1N941GK status changed from pending to cancelled
+ERROR 2025-08-24 15:36:06,166 services 22933 6325039104 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":949633683891790973,"smsCount":1,"message":"Payment failed for order #V1N941GK. Reason: Insufficient balance.","sendReference":193791729230799034}]}
+INFO 2025-08-24 15:36:06,177 services 22933 6325039104 Sending email to ayubabdiy@gmail.com: Order V1N941GK Cancelled
+INFO 2025-08-24 15:36:06,185 services 22933 6325039104 Sending email to amirimussa2003@gmail.com: Order V1N941GK Cancelled
+ERROR 2025-08-24 15:38:08,319 views 22933 6145634304 Checkout error: {'non_field_errors': [ErrorDetail(string='Cart is empty for this vendor', code='invalid')]}
+WARNING 2025-08-24 15:38:08,321 log 22933 6145634304 Bad Request: /api/payments/checkout/
+INFO 2025-08-24 15:38:29,026 services 22933 6162460672 Sending email to ayubabdiy@gmail.com: Order NYI7WDCJ Cancelled
+INFO 2025-08-24 15:38:29,033 services 22933 6162460672 Sending email to amirimussa2003@gmail.com: Order NYI7WDCJ Cancelled
+INFO 2025-08-24 15:38:29,039 signals 22933 6162460672 Order NYI7WDCJ status changed from pending to cancelled
+ERROR 2025-08-24 15:38:30,118 services 22933 6162460672 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":581656852677678799,"smsCount":1,"message":"Payment failed for order #NYI7WDCJ. Reason: Transaction timedout","sendReference":511137711277654830}]}
+INFO 2025-08-24 15:38:30,123 services 22933 6162460672 Sending email to ayubabdiy@gmail.com: Order NYI7WDCJ Cancelled
+INFO 2025-08-24 15:38:30,127 services 22933 6162460672 Sending email to amirimussa2003@gmail.com: Order NYI7WDCJ Cancelled
+WARNING 2025-08-24 15:39:39,058 signals 22933 6128234496 Order 1098c5a6-b62b-4092-ba58-e51ba5f5034e not found in pre_save signal
+INFO 2025-08-24 15:39:39,066 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order 8P85YQQY Created
+INFO 2025-08-24 15:39:39,070 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: New Order Received - 8P85YQQY
+WARNING 2025-08-24 15:40:01,879 log 22933 6128234496 Not Found: /api/payments/status/5a939ef4-3c28-4206-b0c8-13a52ab134f5/payment-status/
+INFO 2025-08-24 15:40:08,859 services 22933 6162460672 Sending email to ayubabdiy@gmail.com: Order 8P85YQQY Cancelled
+INFO 2025-08-24 15:40:08,865 services 22933 6162460672 Sending email to amirimussa2003@gmail.com: Order 8P85YQQY Cancelled
+INFO 2025-08-24 15:40:08,872 signals 22933 6162460672 Order 8P85YQQY status changed from pending to cancelled
+ERROR 2025-08-24 15:40:09,907 services 22933 6162460672 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":369839022869811742,"smsCount":1,"message":"Payment failed for order #8P85YQQY. Reason: Insufficient balance.","sendReference":785802345765976749}]}
+INFO 2025-08-24 15:40:09,918 services 22933 6162460672 Sending email to ayubabdiy@gmail.com: Order 8P85YQQY Cancelled
+INFO 2025-08-24 15:40:09,926 services 22933 6162460672 Sending email to amirimussa2003@gmail.com: Order 8P85YQQY Cancelled
+WARNING 2025-08-24 15:42:34,720 signals 22933 6128234496 Order 92f199a5-4e75-4e66-a43e-a6bfa49126a2 not found in pre_save signal
+INFO 2025-08-24 15:42:34,729 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order 76WKF1KY Created
+INFO 2025-08-24 15:42:34,734 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: New Order Received - 76WKF1KY
+INFO 2025-08-24 15:42:39,261 services 22933 6128234496 Admin cash order notification sent for order 76WKF1KY
+WARNING 2025-08-24 15:43:47,679 signals 22933 6145634304 Order d957789b-3d1e-4a5b-940d-bbb099c12012 not found in pre_save signal
+INFO 2025-08-24 15:43:47,688 services 22933 6145634304 Sending email to ayubabdiy@gmail.com: Order 86R59R2A Created
+INFO 2025-08-24 15:43:47,692 services 22933 6145634304 Sending email to amirimussa2003@gmail.com: New Order Received - 86R59R2A
+WARNING 2025-08-24 15:44:10,917 log 22933 6145634304 Not Found: /api/payments/status/248b3066-6083-43df-b784-71520f858073/payment-status/
+WARNING 2025-08-24 15:48:00,578 signals 22933 6128234496 Order 4fb4abb2-fb13-4ce1-928c-6617bb2246fe not found in pre_save signal
+INFO 2025-08-24 15:48:00,587 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order SOSIGUW8 Created
+INFO 2025-08-24 15:48:00,592 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: New Order Received - SOSIGUW8
+WARNING 2025-08-24 15:48:24,461 log 22933 6128234496 Not Found: /api/payments/status/4fb4abb2-fb13-4ce1-928c-6617bb2246fe/payment-status/
+INFO 2025-08-24 15:48:34,785 services 22933 6325039104 Sending email to ayubabdiy@gmail.com: Order SOSIGUW8 Cancelled
+INFO 2025-08-24 15:48:34,791 services 22933 6325039104 Sending email to amirimussa2003@gmail.com: Order SOSIGUW8 Cancelled
+INFO 2025-08-24 15:48:34,797 signals 22933 6325039104 Order SOSIGUW8 status changed from pending to cancelled
+ERROR 2025-08-24 15:48:35,750 services 22933 6325039104 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":404155529604999499,"smsCount":1,"message":"Payment failed for order #SOSIGUW8. Reason: Insufficient balance.","sendReference":167138731641827761}]}
+INFO 2025-08-24 15:48:35,757 services 22933 6325039104 Sending email to ayubabdiy@gmail.com: Order SOSIGUW8 Cancelled
+INFO 2025-08-24 15:48:35,761 services 22933 6325039104 Sending email to amirimussa2003@gmail.com: Order SOSIGUW8 Cancelled
+INFO 2025-08-24 15:49:08,358 services 22933 6341865472 Sending email to ayubabdiy@gmail.com: Order 86R59R2A Cancelled
+INFO 2025-08-24 15:49:08,364 services 22933 6341865472 Sending email to amirimussa2003@gmail.com: Order 86R59R2A Cancelled
+INFO 2025-08-24 15:49:08,371 signals 22933 6341865472 Order 86R59R2A status changed from pending to cancelled
+ERROR 2025-08-24 15:49:09,429 services 22933 6341865472 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":838190928411337941,"smsCount":1,"message":"Payment failed for order #86R59R2A. Reason: Transaction timedout","sendReference":950661233128942575}]}
+INFO 2025-08-24 15:49:09,433 services 22933 6341865472 Sending email to ayubabdiy@gmail.com: Order 86R59R2A Cancelled
+INFO 2025-08-24 15:49:09,438 services 22933 6341865472 Sending email to amirimussa2003@gmail.com: Order 86R59R2A Cancelled
+WARNING 2025-08-24 15:52:37,733 signals 22933 6128234496 Order ce64e4cc-849b-407b-965d-d826e3e74550 not found in pre_save signal
+INFO 2025-08-24 15:52:37,742 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order AWUF9COV Created
+INFO 2025-08-24 15:52:37,747 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: New Order Received - AWUF9COV
+WARNING 2025-08-24 15:52:59,829 log 22933 6128234496 Not Found: /api/payments/status/ce64e4cc-849b-407b-965d-d826e3e74550/payment-status/
+WARNING 2025-08-24 15:53:04,336 log 22933 6128234496 Not Found: /api/payments/status/ce64e4cc-849b-407b-965d-d826e3e74550/payment-status/
+WARNING 2025-08-24 15:53:09,360 log 22933 6128234496 Not Found: /api/payments/status/ce64e4cc-849b-407b-965d-d826e3e74550/payment-status/
+WARNING 2025-08-24 15:53:14,420 log 22933 6128234496 Not Found: /api/payments/status/ce64e4cc-849b-407b-965d-d826e3e74550/payment-status/
+WARNING 2025-08-24 15:53:19,540 log 22933 6128234496 Not Found: /api/payments/status/ce64e4cc-849b-407b-965d-d826e3e74550/payment-status/
+WARNING 2025-08-24 15:53:24,452 log 22933 6128234496 Not Found: /api/payments/status/ce64e4cc-849b-407b-965d-d826e3e74550/payment-status/
+WARNING 2025-08-24 15:53:29,351 log 22933 6128234496 Not Found: /api/payments/status/ce64e4cc-849b-407b-965d-d826e3e74550/payment-status/
+WARNING 2025-08-24 15:53:34,320 log 22933 6128234496 Not Found: /api/payments/status/ce64e4cc-849b-407b-965d-d826e3e74550/payment-status/
+WARNING 2025-08-24 15:53:39,331 log 22933 6128234496 Not Found: /api/payments/status/ce64e4cc-849b-407b-965d-d826e3e74550/payment-status/
+WARNING 2025-08-24 15:53:44,359 log 22933 6128234496 Not Found: /api/payments/status/ce64e4cc-849b-407b-965d-d826e3e74550/payment-status/
+WARNING 2025-08-24 15:56:00,125 signals 22933 6145634304 Order 90e7c873-58b6-4515-9696-252fcf11396f not found in pre_save signal
+INFO 2025-08-24 15:56:00,135 services 22933 6145634304 Sending email to ayubabdiy@gmail.com: Order S5GO0DYW Created
+INFO 2025-08-24 15:56:00,141 services 22933 6145634304 Sending email to amirimussa2003@gmail.com: New Order Received - S5GO0DYW
+INFO 2025-08-24 15:57:57,572 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order AWUF9COV Cancelled
+INFO 2025-08-24 15:57:57,575 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: Order AWUF9COV Cancelled
+INFO 2025-08-24 15:57:57,579 signals 22933 6128234496 Order AWUF9COV status changed from pending to cancelled
+ERROR 2025-08-24 15:57:58,672 services 22933 6128234496 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":17787193675787772,"smsCount":1,"message":"Payment failed for order #AWUF9COV. Reason: Transaction timedout","sendReference":761786552297334346}]}
+INFO 2025-08-24 15:57:58,680 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order AWUF9COV Cancelled
+INFO 2025-08-24 15:57:58,687 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: Order AWUF9COV Cancelled
+INFO 2025-08-24 16:01:20,231 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order S5GO0DYW Cancelled
+INFO 2025-08-24 16:01:20,237 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: Order S5GO0DYW Cancelled
+INFO 2025-08-24 16:01:20,244 signals 22933 6128234496 Order S5GO0DYW status changed from pending to cancelled
+ERROR 2025-08-24 16:01:21,261 services 22933 6128234496 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":739508306438124682,"smsCount":1,"message":"Payment failed for order #S5GO0DYW. Reason: Transaction timedout","sendReference":65968541106232253}]}
+INFO 2025-08-24 16:01:21,266 services 22933 6128234496 Sending email to ayubabdiy@gmail.com: Order S5GO0DYW Cancelled
+INFO 2025-08-24 16:01:21,270 services 22933 6128234496 Sending email to amirimussa2003@gmail.com: Order S5GO0DYW Cancelled
+WARNING 2025-08-24 16:09:23,893 signals 22933 6145634304 Order f7627c46-d5f6-4e32-bbad-774f382306d5 not found in pre_save signal
+INFO 2025-08-24 16:09:23,914 services 22933 6145634304 Sending email to ayubabdiy@gmail.com: Order A7FM5E9K Created
+INFO 2025-08-24 16:09:23,918 services 22933 6145634304 Sending email to amirimussa2003@gmail.com: New Order Received - A7FM5E9K
+WARNING 2025-08-24 16:09:32,990 log 23764 6205452288 Unauthorized: /api/auth/vendor/hours
+WARNING 2025-08-24 16:09:32,994 log 23764 6171799552 Unauthorized: /api/auth/vendor/hours
+ERROR 2025-08-24 16:09:33,128 log 23764 6171799552 Internal Server Error: /api/auth/token/refresh
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+ERROR 2025-08-24 16:09:33,128 log 23764 6205452288 Internal Server Error: /api/auth/token/refresh
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+INFO 2025-08-24 16:09:52,779 services 22933 6341865472 Sending email to ayubabdiy@gmail.com: Order A7FM5E9K Cancelled
+INFO 2025-08-24 16:09:52,786 services 22933 6341865472 Sending email to amirimussa2003@gmail.com: Order A7FM5E9K Cancelled
+INFO 2025-08-24 16:09:52,792 signals 22933 6341865472 Order A7FM5E9K status changed from pending to cancelled
+ERROR 2025-08-24 16:09:53,737 services 22933 6341865472 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":503146017779380320,"smsCount":1,"message":"Payment failed for order #A7FM5E9K. Reason: Insufficient balance.","sendReference":648958262924167084}]}
+INFO 2025-08-24 16:09:53,748 services 22933 6341865472 Sending email to ayubabdiy@gmail.com: Order A7FM5E9K Cancelled
+INFO 2025-08-24 16:09:53,756 services 22933 6341865472 Sending email to amirimussa2003@gmail.com: Order A7FM5E9K Cancelled
+INFO 2025-08-24 16:13:53,828 autoreload 22933 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:13:54,180 autoreload 23764 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:13:54,779 autoreload 27569 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:13:54,779 autoreload 27567 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:15:11,139 autoreload 27567 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:15:11,247 autoreload 27569 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:15:11,866 autoreload 27653 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:15:11,866 autoreload 27652 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:16:13,884 autoreload 27653 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:16:14,221 autoreload 27652 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:16:14,637 autoreload 27713 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:16:14,749 autoreload 27717 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 16:20:31,211 signals 27717 6191411200 Order 4398f072-c550-4ef2-8462-590b9201e259 not found in pre_save signal
+INFO 2025-08-24 16:20:31,275 services 27717 6191411200 Sending email to ayubabdiy@gmail.com: Order 6HZD9J6I Created
+INFO 2025-08-24 16:20:31,278 services 27717 6191411200 Sending email to amirimussa2003@gmail.com: New Order Received - 6HZD9J6I
+INFO 2025-08-24 16:20:33,438 services 27717 6191411200 ClickPesa auth token generated successfully
+INFO 2025-08-24 16:21:06,027 services 27717 6225637376 Sending email to ayubabdiy@gmail.com: Order 6HZD9J6I Confirmed
+INFO 2025-08-24 16:21:06,032 services 27717 6225637376 Sending email to amirimussa2003@gmail.com: Order 6HZD9J6I Confirmed
+INFO 2025-08-24 16:21:06,037 signals 27717 6225637376 Order 6HZD9J6I status changed from pending to confirmed
+WARNING 2025-08-24 16:21:06,040 views 27717 6225637376 Failed to send notifications for payment 793c11dd-b871-4c67-88ef-be8e23f0cded: SMSService.send_payment_success_sms() got an unexpected keyword argument 'order_number'
+INFO 2025-08-24 16:22:41,416 autoreload 27717 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:22:42,041 autoreload 27713 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:22:42,242 autoreload 28166 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:22:42,576 autoreload 28172 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:23:49,161 autoreload 28166 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:23:49,446 autoreload 28172 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:23:49,856 autoreload 28251 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:23:49,934 autoreload 28252 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:25:23,898 autoreload 28251 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:25:24,332 autoreload 28252 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:25:24,628 autoreload 28327 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:25:24,829 autoreload 28329 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:25:43,718 autoreload 28329 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:25:44,267 autoreload 28327 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-24 16:25:44,419 autoreload 28373 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 16:25:44,753 autoreload 28381 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 22:54:14,387 autoreload 30425 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 23:17:45,288 log 30425 6190182400 Unauthorized: /api/auth/vendor/hours
+WARNING 2025-08-24 23:17:45,292 log 30425 6190182400 Unauthorized: /api/auth/vendor/hours
+ERROR 2025-08-24 23:17:45,335 log 30425 6190182400 Internal Server Error: /api/auth/token/refresh
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+ERROR 2025-08-24 23:17:45,337 log 30425 6207008768 Internal Server Error: /api/auth/token/refresh
+Traceback (most recent call last):
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/serializers.py", line 141, in validate
+    refresh.outstand()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Users/macbookair/venv/lib/python3.13/site-packages/rest_framework_simplejwt/tokens.py", line 222, in outstand
+    return OutstandingToken.objects.get_or_create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'OutstandingToken' has no attribute 'objects'
+WARNING 2025-08-24 23:20:14,689 log 30425 6190182400 Bad Request: /api/auth/vendor/hours/23
+WARNING 2025-08-24 23:20:14,691 log 30425 6223835136 Bad Request: /api/auth/vendor/hours/16
+WARNING 2025-08-24 23:29:47,801 log 30425 6190182400 Unauthorized: /api/auth/vendors
+INFO 2025-08-24 23:34:09,203 autoreload 28381 8753209536 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-24 23:34:09,312 autoreload 30425 8753209536 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-24 23:34:11,224 autoreload 32564 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 23:34:11,224 autoreload 32563 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 23:35:25,708 autoreload 32564 8753209536 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-24 23:35:25,719 autoreload 32563 8753209536 /Users/macbookair/Desktop/Yumbackend/authentication/services.py changed, reloading.
+INFO 2025-08-24 23:35:26,496 autoreload 32722 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-24 23:35:26,496 autoreload 32723 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-24 23:35:28,702 signals 32723 6151090176 Order 17e9aec7-5808-434b-a69e-b5ee41f23cf4 not found in pre_save signal
+INFO 2025-08-24 23:35:28,751 services 32723 6151090176 Sending email to ayubabdiy@gmail.com: Order RN3TRNK6 Created
+INFO 2025-08-24 23:35:28,754 services 32723 6151090176 Sending email to amirimussa2003@gmail.com: New Order Received - RN3TRNK6
+INFO 2025-08-24 23:35:38,977 services 32723 6151090176 ClickPesa auth token generated successfully
+WARNING 2025-08-24 23:40:35,644 signals 32723 6134263808 Order 73793e2b-4f32-4966-98e2-17f0d4feb6a1 not found in pre_save signal
+INFO 2025-08-24 23:40:35,674 services 32723 6134263808 Sending email to ayubabdiy@gmail.com: Order GDMN9EEU Created
+INFO 2025-08-24 23:40:35,679 services 32723 6134263808 Sending email to amirimussa2003@gmail.com: New Order Received - GDMN9EEU
+INFO 2025-08-24 23:41:07,378 services 32723 6325039104 Sending email to ayubabdiy@gmail.com: Order RN3TRNK6 Cancelled
+INFO 2025-08-24 23:41:07,386 services 32723 6325039104 Sending email to amirimussa2003@gmail.com: Order RN3TRNK6 Cancelled
+INFO 2025-08-24 23:41:07,395 signals 32723 6325039104 Order RN3TRNK6 status changed from pending to cancelled
+ERROR 2025-08-24 23:41:08,592 services 32723 6325039104 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":477486931516199597,"smsCount":1,"message":"Payment failed for order #RN3TRNK6. Reason: Transaction timedout","sendReference":353567982101313060}]}
+INFO 2025-08-24 23:41:08,597 services 32723 6325039104 Sending email to ayubabdiy@gmail.com: Order RN3TRNK6 Cancelled
+INFO 2025-08-24 23:41:08,605 services 32723 6325039104 Sending email to amirimussa2003@gmail.com: Order RN3TRNK6 Cancelled
+INFO 2025-08-24 23:45:55,983 services 32723 6134263808 Sending email to ayubabdiy@gmail.com: Order GDMN9EEU Cancelled
+INFO 2025-08-24 23:45:55,990 services 32723 6134263808 Sending email to amirimussa2003@gmail.com: Order GDMN9EEU Cancelled
+INFO 2025-08-24 23:45:55,996 signals 32723 6134263808 Order GDMN9EEU status changed from pending to cancelled
+ERROR 2025-08-24 23:45:57,059 services 32723 6134263808 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":300282296288570511,"smsCount":1,"message":"Payment failed for order #GDMN9EEU. Reason: Transaction timedout","sendReference":299952496903976137}]}
+INFO 2025-08-24 23:45:57,064 services 32723 6134263808 Sending email to ayubabdiy@gmail.com: Order GDMN9EEU Cancelled
+INFO 2025-08-24 23:45:57,069 services 32723 6134263808 Sending email to amirimussa2003@gmail.com: Order GDMN9EEU Cancelled
+ERROR 2025-08-24 23:47:31,081 views 32723 6134263808 Checkout error: {'non_field_errors': [ErrorDetail(string='Cart is empty for this vendor', code='invalid')]}
+WARNING 2025-08-24 23:47:31,082 log 32723 6134263808 Bad Request: /api/payments/checkout/
+WARNING 2025-08-24 23:48:43,161 signals 32723 6134263808 Order 7dfb0377-d77d-44ae-b3ab-c00d3735979b not found in pre_save signal
+INFO 2025-08-24 23:48:43,184 services 32723 6134263808 Sending email to ayubabdiy@gmail.com: Order RJ3B3BR5 Created
+INFO 2025-08-24 23:48:43,198 services 32723 6134263808 Sending email to amirimussa2003@gmail.com: New Order Received - RJ3B3BR5
+INFO 2025-08-24 23:49:21,643 services 32723 6325039104 Sending email to ayubabdiy@gmail.com: Order RJ3B3BR5 Cancelled
+INFO 2025-08-24 23:49:21,650 services 32723 6325039104 Sending email to amirimussa2003@gmail.com: Order RJ3B3BR5 Cancelled
+INFO 2025-08-24 23:49:21,658 signals 32723 6325039104 Order RJ3B3BR5 status changed from pending to cancelled
+ERROR 2025-08-24 23:49:22,630 services 32723 6325039104 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":21227467151669456,"smsCount":1,"message":"Payment failed for order #RJ3B3BR5. Reason: Insufficient balance.","sendReference":415614371872286334}]}
+INFO 2025-08-24 23:49:22,638 services 32723 6325039104 Sending email to ayubabdiy@gmail.com: Order RJ3B3BR5 Cancelled
+INFO 2025-08-24 23:49:22,648 services 32723 6325039104 Sending email to amirimussa2003@gmail.com: Order RJ3B3BR5 Cancelled
+ERROR 2025-08-24 23:53:34,651 views 32723 6151090176 Checkout error: {'non_field_errors': [ErrorDetail(string='Cart is empty for this vendor', code='invalid')]}
+WARNING 2025-08-24 23:53:34,653 log 32723 6151090176 Bad Request: /api/payments/checkout/
+INFO 2025-08-25 00:03:12,193 autoreload 32723 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/utils.py changed, reloading.
+INFO 2025-08-25 00:03:12,222 autoreload 32722 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/utils.py changed, reloading.
+INFO 2025-08-25 00:03:13,093 autoreload 34530 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:03:13,093 autoreload 34529 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:07:20,004 autoreload 34530 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/models.py changed, reloading.
+INFO 2025-08-25 00:07:20,504 autoreload 34529 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/models.py changed, reloading.
+INFO 2025-08-25 00:07:20,952 autoreload 34792 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:07:21,019 autoreload 34793 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-25 00:07:47,468 signals 34793 6194163712 Order 8b34bc66-09bd-4ad4-8dea-3815765ef2ad not found in pre_save signal
+INFO 2025-08-25 00:07:47,516 services 34793 6194163712 Sending email to ayubabdiy@gmail.com: Order MN64SHMJ Created
+INFO 2025-08-25 00:07:47,519 services 34793 6194163712 Sending email to amirimussa2003@gmail.com: New Order Received - MN64SHMJ
+ERROR 2025-08-25 00:07:47,526 views 34793 6194163712 Checkout error: table payments_payment has no column named cart_snapshot
+WARNING 2025-08-25 00:07:47,527 log 34793 6194163712 Bad Request: /api/payments/checkout/
+WARNING 2025-08-25 00:09:30,433 signals 34793 6210990080 Order 16d5fbfc-8e3b-4e83-b3b7-71d3874aea32 not found in pre_save signal
+INFO 2025-08-25 00:09:30,448 services 34793 6210990080 Sending email to ayubabdiy@gmail.com: Order OTPMED7U Created
+INFO 2025-08-25 00:09:30,452 services 34793 6210990080 Sending email to amirimussa2003@gmail.com: New Order Received - OTPMED7U
+ERROR 2025-08-25 00:09:30,463 views 34793 6210990080 Checkout error: table payments_payment has no column named cart_snapshot
+WARNING 2025-08-25 00:09:30,464 log 34793 6210990080 Bad Request: /api/payments/checkout/
+INFO 2025-08-25 00:10:19,750 autoreload 34793 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/utils.py changed, reloading.
+INFO 2025-08-25 00:10:20,028 autoreload 34792 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/utils.py changed, reloading.
+INFO 2025-08-25 00:10:20,586 autoreload 34973 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:10:20,586 autoreload 34972 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-25 00:10:26,629 signals 34972 6189707264 Order 683cecab-fcf6-4d92-8064-8898ddd526b6 not found in pre_save signal
+INFO 2025-08-25 00:10:26,673 services 34972 6189707264 Sending email to ayubabdiy@gmail.com: Order JDFBVX3T Created
+INFO 2025-08-25 00:10:26,676 services 34972 6189707264 Sending email to amirimussa2003@gmail.com: New Order Received - JDFBVX3T
+ERROR 2025-08-25 00:10:26,686 views 34972 6189707264 Checkout error: table payments_payment has no column named cart_snapshot
+WARNING 2025-08-25 00:10:26,688 log 34972 6189707264 Bad Request: /api/payments/checkout/
+INFO 2025-08-25 00:12:16,476 autoreload 34972 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-25 00:12:16,885 autoreload 34973 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-25 00:12:17,207 autoreload 35115 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:12:17,409 autoreload 35116 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:14:30,894 autoreload 35115 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-25 00:14:31,018 autoreload 35116 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-25 00:14:31,737 autoreload 35215 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:14:31,737 autoreload 35213 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:14:59,719 autoreload 35213 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-25 00:15:00,046 autoreload 35215 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-25 00:15:00,420 autoreload 35276 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:15:00,552 autoreload 35277 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:15:01,617 autoreload 35276 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/models.py changed, reloading.
+INFO 2025-08-25 00:15:01,712 autoreload 35277 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/models.py changed, reloading.
+INFO 2025-08-25 00:15:02,081 autoreload 35286 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:15:02,156 autoreload 35287 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:15:19,157 autoreload 35308 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:16:56,525 autoreload 35308 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-25 00:16:56,597 autoreload 35286 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-25 00:16:57,374 autoreload 35403 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:16:57,374 autoreload 35402 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:18:05,847 autoreload 35402 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-25 00:18:05,901 autoreload 35403 8753209536 /Users/macbookair/Desktop/Yumbackend/payments/views.py changed, reloading.
+INFO 2025-08-25 00:18:06,631 autoreload 35458 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:18:06,631 autoreload 35460 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-25 00:27:06,383 signals 35460 6175059968 Order c42f1c94-b26d-48d3-a832-dd0709a7705c not found in pre_save signal
+INFO 2025-08-25 00:27:06,463 services 35460 6175059968 Sending email to ayubabdiy@gmail.com: Order I3HEI7D8 Created
+INFO 2025-08-25 00:27:06,466 services 35460 6175059968 Sending email to amirimussa2003@gmail.com: New Order Received - I3HEI7D8
+INFO 2025-08-25 00:27:08,542 services 35460 6175059968 ClickPesa auth token generated successfully
+ERROR 2025-08-25 00:27:42,166 services 35460 6209286144 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":196195264725536932,"smsCount":1,"message":"Payment successful! Your order I3HEI7D8 for TZS 4,418 has been confirmed. Thank you for choosing YumExpress!","sendReference":153752645872175021}]}
+INFO 2025-08-25 00:27:46,444 services 35460 6209286144 Payment success email sent to ayubabdiy@gmail.com
+INFO 2025-08-25 00:27:50,702 services 35460 6209286144 Vendor notification email sent to amirimussa2003@gmail.com for order I3HEI7D8
+ERROR 2025-08-25 00:27:51,838 services 35460 6209286144 Failed to send SMS to 255684106419: {"messages":[{"to":"255684106419","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":278422111684474690,"smsCount":1,"message":"New order #I3HEI7D8 received. Total: TZS 4,418. Customer: Ayub Abdi - 255657777687","sendReference":292889102170064225}]}
+INFO 2025-08-25 00:27:51,839 services 35460 6209286144 Vendor SMS notification sent to +255684106419 for order I3HEI7D8
+INFO 2025-08-25 00:27:51,847 services 35460 6209286144 Sending email to ayubabdiy@gmail.com: Order I3HEI7D8 Created
+INFO 2025-08-25 00:27:51,853 services 35460 6209286144 Sending email to amirimussa2003@gmail.com: New Order Received - I3HEI7D8
+WARNING 2025-08-25 00:34:04,798 log 35460 6158233600 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:34:04,995 log 35460 6175059968 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:34:04,997 log 35460 6192459776 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:34:05,003 log 35460 6209286144 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:34:10,593 log 35460 6209286144 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:34:10,594 log 35460 6158233600 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:34:17,371 log 35460 6158233600 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:34:17,372 log 35460 6209286144 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:34:50,183 log 35460 6158233600 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:34:50,184 log 35460 6209286144 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:35:25,336 log 35460 6158233600 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:35:25,338 log 35460 6209286144 Bad Request: /api/orders/delivery/calculate/
+WARNING 2025-08-25 00:42:09,324 signals 35460 6175059968 Order 9cf6d393-e19f-4a12-8934-a6d747369f33 not found in pre_save signal
+INFO 2025-08-25 00:42:09,356 services 35460 6175059968 Sending email to ayubabdiy@gmail.com: Order TCXOAMOC Created
+INFO 2025-08-25 00:42:09,359 services 35460 6175059968 Sending email to amirimussa2003@gmail.com: New Order Received - TCXOAMOC
+ERROR 2025-08-25 00:42:43,551 services 35460 6209286144 Failed to send SMS to 255657777687: {"messages":[{"to":"255657777687","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":664917550370985884,"smsCount":1,"message":"Payment successful! Your order TCXOAMOC for TZS 4,418 has been confirmed. Thank you for choosing YumExpress!","sendReference":831600735970181971}]}
+INFO 2025-08-25 00:42:48,230 services 35460 6209286144 Payment success email sent to ayubabdiy@gmail.com
+INFO 2025-08-25 00:42:52,232 services 35460 6209286144 Vendor notification email sent to amirimussa2003@gmail.com for order TCXOAMOC
+ERROR 2025-08-25 00:42:53,280 services 35460 6209286144 Failed to send SMS to 255684106419: {"messages":[{"to":"255684106419","status":{"groupId":18,"groupName":"PENDING","id":51,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"messageId":744668004970862360,"smsCount":1,"message":"New order #TCXOAMOC received. Total: TZS 4,418. Customer: Ayub Abdi - 255657777687","sendReference":949219681685228336}]}
+INFO 2025-08-25 00:42:53,280 services 35460 6209286144 Vendor SMS notification sent to +255684106419 for order TCXOAMOC
+INFO 2025-08-25 00:42:53,290 services 35460 6209286144 Sending email to ayubabdiy@gmail.com: Order TCXOAMOC Created
+INFO 2025-08-25 00:42:53,301 services 35460 6209286144 Sending email to amirimussa2003@gmail.com: New Order Received - TCXOAMOC
+INFO 2025-08-25 00:52:03,079 autoreload 35458 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-25 00:52:03,777 autoreload 35460 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-25 00:52:04,222 autoreload 37961 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:52:04,779 autoreload 37962 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:54:42,483 autoreload 37962 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-25 00:54:43,166 autoreload 38083 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:54:43,297 autoreload 37961 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-25 00:54:43,847 autoreload 38086 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:54:56,714 autoreload 38083 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-25 00:54:57,362 autoreload 38152 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:54:57,613 autoreload 38086 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/urls.py changed, reloading.
+INFO 2025-08-25 00:54:58,287 autoreload 38155 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:55:00,485 autoreload 38155 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-25 00:55:00,557 autoreload 38152 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-25 00:55:00,984 autoreload 38167 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:55:01,065 autoreload 38168 8753209536 Watching for file changes with StatReloader
+WARNING 2025-08-25 00:55:53,056 log 38167 6132985856 Unauthorized: /api/orders/customer/history/
+INFO 2025-08-25 00:59:26,949 autoreload 38168 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-25 00:59:27,129 autoreload 38167 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-25 00:59:27,734 autoreload 38395 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:59:27,743 autoreload 38396 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:59:44,413 autoreload 38395 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-25 00:59:44,620 autoreload 38396 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-25 00:59:45,096 autoreload 38427 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 00:59:45,117 autoreload 38430 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 01:01:28,163 autoreload 38430 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-25 01:01:28,509 autoreload 38427 8753209536 /Users/macbookair/Desktop/Yumbackend/orders/views.py changed, reloading.
+INFO 2025-08-25 01:01:35,885 autoreload 38539 8753209536 Watching for file changes with StatReloader
+INFO 2025-08-25 01:01:36,076 autoreload 38542 8753209536 Watching for file changes with StatReloader

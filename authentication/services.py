@@ -91,16 +91,33 @@ class SMSService:
     
 
     @staticmethod
-    def send_payment_success_sms(phone_number, order_reference, amount):
-        """Send payment success SMS to customer"""
-        message = f"Payment successful! Your order {order_reference} for TZS {amount:,.0f} has been confirmed. Thank you for choosing YumExpress!"
-        
+    def send_payment_success_sms(phone_number, order_reference=None, amount=None, **kwargs):
+        """Send payment success SMS to customer.
+
+        Accepts either `order_reference` or legacy `order_number` keyword from callers.
+        Amount is optional; if provided it will be formatted.
+        """
+        # Support legacy callers that pass order_number instead of order_reference
+        order_ref = order_reference or kwargs.get('order_number') or ''
+        amt = amount if amount is not None else kwargs.get('amount')
+
+        try:
+            if amt is not None and str(amt) != '':
+                # Format amount as integer TZS without decimals
+                formatted_amount = f"{float(amt):,.0f}"
+                message = f"Payment successful! Your order {order_ref} for TZS {formatted_amount} has been confirmed. Thank you for choosing YumExpress!"
+            else:
+                message = f"Payment successful! Your order {order_ref} has been confirmed. Thank you for choosing YumExpress!"
+        except Exception:
+            # Fallback message on any formatting error
+            message = f"Payment successful! Your order {order_ref} has been confirmed. Thank you for choosing YumExpress!"
+
         return SMSService.send_sms(phone_number, message)
-    
+
     # def send_cash_order_sms(self, phone_number, order_reference):
     #     """Send cash order confirmation SMS"""
     #     message = f"Your cash order {order_reference} has been received and is pending admin approval. You'll be notified once approved."
-        
+    #     
     #     return self._send_sms(phone_number, message)
     
 
@@ -314,6 +331,6 @@ class EmailService:
         except Exception as e:
             logger.error(f"Failed to send admin cash order notification: {str(e)}")
             return False
-        
 
-    
+
+

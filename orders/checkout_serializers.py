@@ -100,7 +100,6 @@ class CheckoutValidationSerializer(serializers.Serializer):
                     'longitude': address.longitude,
                     'city': address.city,
                     'state': address.state,
-                    'postal_code': address.postal_code
                 }
             except DeliveryAddress.DoesNotExist:
                 raise serializers.ValidationError("Saved address not found")

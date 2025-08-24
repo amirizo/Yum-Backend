@@ -129,3 +129,72 @@ def clear_cart(request):
             request.session.modified = True
         except Exception:
             request.session['_cart_modified'] = True
+
+
+def clear_cart_for_user(user):
+    """
+    Clear the authenticated user's cart (DB-backed). Used by server-side processes
+    (webhooks, background tasks) where no HttpRequest/session is available.
+    """
+    if not user or not getattr(user, 'is_authenticated', False):
+        return False
+
+    try:
+        cart, _ = Cart.objects.get_or_create(user=user)
+        cart.items.all().delete()
+        cart.vendor = None
+        cart.save()
+        return True
+    except Exception as e:
+        # Log at caller; keep helper simple
+        return False
+
+
+def restore_cart_for_user(user, cart_snapshot):
+    """
+    Restore the authenticated user's cart from a snapshot created at payment initiation.
+    `cart_snapshot` expected format: list of { 'product_id': int, 'quantity': int, 'special_instructions': str }
+    This will replace the user's current cart contents with the snapshot.
+    """
+    if not user or not getattr(user, 'is_authenticated', False):
+        return False
+
+    try:
+        # Get or create cart
+        cart, _ = Cart.objects.get_or_create(user=user)
+        # Clear existing items
+        cart.items.all().delete()
+        cart.vendor = None
+
+        first_vendor = None
+        for item in cart_snapshot or []:
+            product_id = item.get('product_id')
+            quantity = int(item.get('quantity') or 0)
+            special_instructions = item.get('special_instructions', '')
+            if not product_id or quantity <= 0:
+                continue
+            try:
+                product = Product.objects.get(id=product_id)
+            except Product.DoesNotExist:
+                # Skip missing products
+                continue
+
+            # Ensure cart vendor is set to the product vendor
+            if not cart.vendor:
+                cart.vendor = product.vendor
+                first_vendor = product.vendor
+                cart.save()
+
+            CartItem.objects.create(
+                cart=cart,
+                product=product,
+                quantity=quantity,
+                special_instructions=special_instructions
+            )
+
+        # Mark session/DB modified
+        cart.save()
+        return True
+    except Exception as e:
+        # Let caller log; keep helper simple
+        return False

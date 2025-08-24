@@ -77,10 +77,33 @@ class ProductVariantAdmin(admin.ModelAdmin):
 # ---------------- Delivery Address Admin ----------------
 @admin.register(DeliveryAddress)
 class DeliveryAddressAdmin(admin.ModelAdmin):
-    list_display = ['user', 'label', 'city', 'country', 'is_default', 'created_at']
-    list_filter = ['is_default', 'city', 'country', 'created_at']
-    search_fields = ['user__email', 'street_address', 'city']
-    
+    list_display = (
+        'id',
+        'user',
+        'label',
+        'street_address',
+        'city',
+        'state',
+        'country',
+        'phone',
+        'is_default',
+        'get_map_link',   # ✅ show map link in admin list
+        'created_at',
+    )
+    list_filter = ('city', 'state', 'country', 'is_default', 'created_at')
+    search_fields = (
+        'user__username',
+        'user__email',
+        'label',
+        'street_address',
+        'city',
+        'state',
+        'phone',
+        'formatted_address',
+    )
+    readonly_fields = ('created_at',)
+    ordering = ('-created_at',)
+
     def get_map_link(self, obj):
         if obj.latitude and obj.longitude:
             return format_html(
@@ -88,7 +111,28 @@ class DeliveryAddressAdmin(admin.ModelAdmin):
                 obj.latitude, obj.longitude
             )
         return "No coordinates"
+
     get_map_link.short_description = "Map"
+
+    fieldsets = (
+        ("User & Label", {
+            "fields": ("user", "label", "is_default")
+        }),
+        ("Address Details", {
+            "fields": ("street_address", "city", "state", "country", "formatted_address", "place_id")
+        }),
+        ("Location Coordinates", {
+            "fields": ("latitude", "longitude")
+        }),
+        ("Contact Info", {
+            "fields": ("phone",)
+        }),
+        ("Timestamps", {
+            "fields": ("created_at",)
+        }),
+    )
+
+
 
 # ---------------- Order Admin ----------------
 class OrderItemInline(admin.TabularInline):
@@ -103,41 +147,70 @@ class OrderStatusHistoryInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['order_number', 'customer', 'vendor', 'driver', 'status', 'payment_status', 'total_amount', 'created_at']
-    list_filter = ['status', 'payment_status', 'vendor__business_type', 'driver__is_verified', 'created_at']
-    search_fields = ['order_number', 'customer__email', 'vendor__business_name', 'driver__user__email']
+    list_display = [
+        'order_number', 'customer', 'vendor', 'driver',
+        'status', 'payment_status', 'total_amount', 'created_at', 'delivered_at'
+    ]
+    list_filter = [
+        'status', 'payment_status', 'vendor__business_type',
+        'driver__is_verified', 'created_at', 'delivered_at'
+    ]
+    search_fields = [
+        'order_number', 'customer__email',
+        'vendor__business_name', 'driver__user__email'
+    ]
 
     readonly_fields = [
         'order_number', 'subtotal', 'delivery_fee', 'tax_amount', 'total_amount',
         'created_at', 'updated_at', 'confirmed_at', 'delivered_at'
     ]
-    
+
     fieldsets = (
-        ('Order Information', {'fields': ('order_number', 'customer', 'vendor', 'driver')}),
-        ('Status', {'fields': ('status', 'payment_status')}),
-        ('Delivery Information', {'fields': ('delivery_address', 'delivery_instructions', 'estimated_delivery_time', 'actual_delivery_time')}),
-        ('Pricing', {'fields': ('subtotal', 'delivery_fee', 'tax_amount', 'total_amount')}),
-        ('Timestamps', {'fields': ('created_at', 'updated_at', 'confirmed_at', 'delivered_at')}),
+        ('Order Information', {
+            'fields': ('order_number', 'customer', 'vendor', 'driver')
+        }),
+        ('Status', {
+            'fields': ('status', 'payment_status')
+        }),
+        ('Delivery Information', {
+            'fields': (
+                'delivery_address', 'delivery_address_text',
+                'delivery_street_number', 'delivery_street_line2',
+                'delivery_city', 'delivery_state', 'delivery_country',
+                'delivery_place_id', 'delivery_formatted_address',
+                'delivery_phone', 'delivery_latitude', 'delivery_longitude',
+                'delivery_instructions', 'special_instructions',
+                'estimated_delivery_time', 'actual_delivery_time'
+            )
+        }),
+        ('Pricing', {
+            'fields': ('subtotal', 'delivery_fee', 'tax_amount', 'total_amount')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at', 'confirmed_at', 'delivered_at')
+        }),
     )
-    
+
     inlines = [OrderItemInline, OrderStatusHistoryInline]
-    
+
     actions = ['mark_as_confirmed', 'mark_as_preparing', 'mark_as_ready']
-    
+
     def mark_as_confirmed(self, request, queryset):
         updated = queryset.filter(status='pending').update(status='confirmed')
         self.message_user(request, f"Confirmed {updated} orders")
-    mark_as_confirmed.short_description = "Mark as confirmed"
-    
+    mark_as_confirmed.short_description = "Mark selected orders as confirmed"
+
     def mark_as_preparing(self, request, queryset):
         updated = queryset.filter(status='confirmed').update(status='preparing')
         self.message_user(request, f"Marked {updated} orders as preparing")
-    mark_as_preparing.short_description = "Mark as preparing"
-    
+    mark_as_preparing.short_description = "Mark selected orders as preparing"
+
     def mark_as_ready(self, request, queryset):
         updated = queryset.filter(status='preparing').update(status='ready')
         self.message_user(request, f"Marked {updated} orders as ready")
-    mark_as_ready.short_description = "Mark as ready"
+    mark_as_ready.short_description = "Mark selected orders as ready"
+
+
 
 # ---------------- Order Status History Admin ----------------
 @admin.register(OrderStatusHistory)

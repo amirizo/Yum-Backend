@@ -1,0 +1,30 @@
+Hello {{ vendor_name }},
+
+You have received a new order on YumExpress.
+
+Order Number: {{ order_number }}
+
+Customer: {{ customer_name }}
+Phone: {{ customer_phone }}
+Delivery Address: {{ delivery_address }}
+Special Instructions: {{ special_instructions|default:"None" }}
+
+Items Ordered:
+{% for item in order_items %}
+- {{ item.product.name }} x {{ item.quantity }} ({{ item.total_price }})
+{% endfor %}
+
+Subtotal: {{ subtotal }}
+Total Amount: {{ total_amount }}
+
+Placed on: {{ created_at }}
+
+{% if pickup_instructions %}
+Pickup Instructions: {{ pickup_instructions }}
+{% endif %}
+
+Best regards,  
+YumExpress Team
+
+---
+This is an automated message. Please do not reply directly.

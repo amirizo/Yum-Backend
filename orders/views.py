@@ -16,7 +16,7 @@ import googlemaps
 import json
 import logging
 from .models import Category, Product, DeliveryAddress, Order,  OrderItem, OrderStatusHistory, Cart, CartItem, calculate_delivery_fee
-from payments.models import PayoutRequest
+from payments.models import PayoutRequest, Refund, Payment
 from .serializers import (
     CategorySerializer, ProductSerializer,ProductVariantSerializer,
     DeliveryAddressSerializer,
@@ -28,10 +28,9 @@ from rest_framework.exceptions import PermissionDenied, ValidationError
 from .services import OrderNotificationService
 from authentication.models import Vendor
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
-
-User = get_user_model()
 from .utils import add_item_to_cart, get_cart_for_request, remove_cart_item ,update_cart_item , clear_cart
 
+User = get_user_model()
 logger = logging.getLogger(__name__)
 # Category Views
 class CategoryListView(generics.ListAPIView):
@@ -1691,3 +1690,146 @@ def driver_deliveries(request):
         return Response({
             'error': 'An error occurred while retrieving deliveries'
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+# Customer Order Management Views
+class CustomerOrderHistoryView(generics.ListAPIView):
+    """List a customer's past orders (order history)."""
+    serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        # Only customers should see their own history; vendors/drivers/admins can use other endpoints
+        if user.user_type == 'customer':
+            qs = Order.objects.filter(customer=user, payment_status='paid').order_by('-created_at')
+        else:
+            qs = Order.objects.filter(customer=user, payment_status='paid')  # fallback
+
+        # optional filters
+        status = self.request.query_params.get('status')
+        payment_status = self.request.query_params.get('payment_status')
+        if status:
+            qs = qs.filter(status=status)
+        if payment_status:
+            qs = qs.filter(payment_status=payment_status)
+        return qs
+
+
+class CancelOrderView(APIView):
+    """Allow customers to request cancellation of an order.
+    - Customers can cancel orders that are in 'pending' or 'confirmed' state before preparation/pickup.
+    - If payment exists and succeeded, a Refund object will be created in pending state.
+    """
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, order_id):
+        try:
+            order = Order.objects.get(id=order_id, customer=request.user)
+        except Order.DoesNotExist:
+            return Response({'error': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Only allow cancellation if order not yet in progress
+        if order.status in ('preparing', 'ready', 'picked_up', 'in_transit', 'delivered'):
+            return Response({'error': 'Order cannot be cancelled at this stage'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Mark order cancelled
+        order.status = 'cancelled'
+        order.save()
+
+        # If a successful payment exists, create refund request
+        payment = getattr(order, 'payment', None)
+        if payment and payment.status == 'succeeded':
+            try:
+                refund = Refund.objects.create(
+                    payment=payment,
+                    amount=payment.amount,
+                    currency=payment.currency,
+                    reason='order_canceled',
+                    status='pending'
+                )
+                # Notify payments/admin for manual processing
+                from notifications.services import NotificationService
+                NotificationService.send_order_status_notification(order, old_status=None)
+            except Exception as e:
+                logger.exception('Failed to create refund for cancelled order %s: %s', order.order_number, e)
+
+        # Notify vendor and customer
+        try:
+            OrderNotificationService.send_new_order_notification(order)
+        except Exception:
+            logger.exception('Failed to send cancellation notifications for order %s', order.order_number)
+
+        return Response({'message': 'Order cancelled successfully'}, status=status.HTTP_200_OK)
+
+
+class RequestRefundView(APIView):
+    """Customer requests a refund for an order/payment. This creates a Refund record for admin processing."""
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, order_id):
+        amount = request.data.get('amount')
+        reason = request.data.get('reason', 'requested_by_customer')
+
+        try:
+            order = Order.objects.get(id=order_id, customer=request.user)
+        except Order.DoesNotExist:
+            return Response({'error': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        payment = getattr(order, 'payment', None)
+        if not payment or payment.status != 'succeeded':
+            return Response({'error': 'No eligible payment found for refund'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            amount_val = Decimal(amount) if amount else payment.amount
+        except Exception:
+            return Response({'error': 'Invalid amount'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            refund = Refund.objects.create(
+                payment=payment,
+                amount=amount_val,
+                currency=payment.currency,
+                reason=reason,
+                status='pending'
+            )
+            # Notify admin/payments team
+            try:
+                from notifications.services import NotificationService
+                NotificationService.send_order_status_notification(order, old_status=None)
+            except Exception:
+                logger.exception('Failed to notify about refund request for order %s', order.order_number)
+
+            return Response({'message': 'Refund request created', 'refund_id': str(refund.id)}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            logger.exception('Failed to create refund request for order %s: %s', order.order_number, e)
+            return Response({'error': 'Failed to create refund request'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class ReorderFromOrderView(APIView):
+    """Add all items from a past order back into the customer's cart. Use replace=true to overwrite existing cart."""
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, order_id):
+        replace = str(request.query_params.get('replace', 'true')).lower() in ('1', 'true', 'yes')
+        try:
+            order = Order.objects.get(id=order_id, customer=request.user)
+        except Order.DoesNotExist:
+            return Response({'error': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # If replace, clear current cart
+        if replace:
+            try:
+                clear_cart(request)
+            except Exception:
+                logger.exception('Failed to clear cart for reorder for user %s', request.user.id)
+
+        # Add items to cart using helper which supports authenticated users
+        added = []
+        for item in order.items.all():
+            try:
+                add_item_to_cart(request, product_id=item.product.id, quantity=item.quantity, special_instructions=item.special_instructions or '')
+                added.append({'product_id': item.product.id, 'quantity': item.quantity})
+            except Exception:
+                logger.exception('Failed adding product %s to cart for reorder', getattr(item.product, 'id', None))
+
+        return Response({'message': 'Order items added to cart', 'items': added}, status=status.HTTP_200_OK)

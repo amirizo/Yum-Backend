@@ -80,7 +80,10 @@ class Payment(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     currency = models.CharField(max_length=3, default='TZS')
     status = models.CharField(max_length=30, choices=PAYMENT_STATUS_CHOICES, default='pending')
-    
+
+    # Snapshot of the user's cart at time of payment initiation. Used to restore cart on payment failure.
+    cart_snapshot = models.JSONField(null=True, blank=True)
+
     # Mobile Money specific fields
     mobile_number = models.CharField(max_length=15, blank=True)
     mobile_provider = models.CharField(max_length=20, blank=True)

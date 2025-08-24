@@ -52,6 +52,12 @@ urlpatterns = [
     path('<uuid:order_id>/history/', views.OrderStatusHistoryView.as_view(), name='order-status-history'),
     path('<uuid:order_id>/assign-driver/', views.assign_driver_to_order, name='assign-driver'),
 
+    # Customer order management
+    path('customer/history/', views.CustomerOrderHistoryView.as_view(), name='customer-order-history'),
+    path('<uuid:order_id>/cancel/', views.CancelOrderView.as_view(), name='cancel-order'),
+    path('<uuid:order_id>/refund/', views.RequestRefundView.as_view(), name='request-refund'),
+    path('<uuid:order_id>/reorder/', views.ReorderFromOrderView.as_view(), name='reorder-from-order'),
+
 
     # Vendor actions
     path('<uuid:order_id>/accept/', views.vendor_accept_order, name='vendor-accept-order'),

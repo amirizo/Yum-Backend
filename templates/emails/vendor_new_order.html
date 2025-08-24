@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>New Order Notification</title>
+  <style>
+    body { font-family: Arial, sans-serif; color: #333; line-height: 1.5; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 8px; background: #fafafa; }
+    h2 { color: #2c3e50; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    table, th, td { border: 1px solid #ddd; }
+    th, td { padding: 8px; text-align: left; }
+    .total { font-weight: bold; }
+    .footer { margin-top: 20px; font-size: 12px; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>New Order #{{ order_number }}</h2>
+    <p>Hello {{ vendor_name }},</p>
+    <p>You have received a new order on <strong>YumExpress</strong>.</p>
+
+    <h3>Order Details:</h3>
+    <p><strong>Customer:</strong> {{ customer_name }}<br>
+       <strong>Phone:</strong> {{ customer_phone }}<br>
+       <strong>Delivery Address:</strong> {{ delivery_address }}<br>
+       <strong>Special Instructions:</strong> {{ special_instructions|default:"None" }}</p>
+
+    <h3>Items Ordered:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in order_items %}
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.total_price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p><strong>Subtotal:</strong> {{ subtotal }} <br>
+       <strong>Total Amount:</strong> {{ total_amount }}</p>
+
+    <p><em>Placed on: {{ created_at }}</em></p>
+
+    {% if pickup_instructions %}
+      <p><strong>Pickup Instructions:</strong> {{ pickup_instructions }}</p>
+    {% endif %}
+
+    <p>Best regards,<br>YumExpress Team</p>
+
+    <div class="footer">
+      <p>This is an automated message. Please do not reply directly to this email.</p>
+    </div>
+  </div>
+</body>
+</html>

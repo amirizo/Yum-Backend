@@ -397,3 +397,75 @@ class OrderNotificationService:
 
         except Exception as e:
             logger.error(f"Failed to send order status update email: {str(e)}")
+
+    @staticmethod
+    def send_new_order_notification(order):
+        """Notify vendor (email + SMS) of a new order.
+
+        This sends an email to the vendor's primary email (vendor.user.email if
+        available, otherwise tries vendor.contact_email) and an SMS to the vendor
+        phone if available.
+        """
+        try:
+            vendor_user = getattr(order.vendor, 'user', None)
+            vendor_email = None
+            vendor_phone = None
+
+            if vendor_user and getattr(vendor_user, 'email', None):
+                vendor_email = vendor_user.email
+            else:
+                # Some Vendor models expose a contact email field
+                vendor_email = getattr(order.vendor, 'contact_email', None)
+
+            if vendor_user and getattr(vendor_user, 'phone_number', None):
+                vendor_phone = vendor_user.phone_number
+            else:
+                vendor_phone = getattr(order.vendor, 'phone_number', None)
+
+            if not vendor_email and not vendor_phone:
+                logger.info('No vendor contact details available for order %s, skipping vendor notification', order.order_number)
+                return
+
+            context = {
+                'vendor_name': f"{vendor_user.first_name} {vendor_user.last_name}" if vendor_user else order.vendor.business_name,
+                'order_number': order.order_number,
+                'customer_name': f"{order.customer.first_name} {order.customer.last_name}",
+                'customer_phone': getattr(order.customer, 'phone_number', ''),
+                'order_items': order.items.all(),
+                'total_amount': order.total_amount,
+                'subtotal': order.subtotal if hasattr(order, 'subtotal') else None,
+                'delivery_address': getattr(order, 'delivery_address_text', '') or getattr(order, 'delivery_address', ''),
+                'special_instructions': getattr(order, 'special_instructions', ''),
+                'created_at': getattr(order, 'created_at', timezone.now()),
+                'pickup_instructions': getattr(order, 'pickup_instructions', ''),
+            }
+
+            subject = f"New Order #{order.order_number} - YumExpress"
+            html_message = render_to_string('emails/vendor_new_order.html', context)
+            plain_message = render_to_string('emails/vendor_new_order.txt', context)
+
+            if vendor_email:
+                send_mail(
+                    subject=subject,
+                    message=plain_message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[vendor_email],
+                    html_message=html_message,
+                    fail_silently=False,
+                )
+                logger.info('Vendor notification email sent to %s for order %s', vendor_email, order.order_number)
+
+            # Send SMS to vendor if phone available (best-effort)
+            if vendor_phone:
+                try:
+                    sms_message = (
+                        f"New order #{order.order_number} received. Total: TZS {order.total_amount:,.0f}. "
+                        f"Customer: {order.customer.first_name} {order.customer.last_name} - {context.get('customer_phone')}"
+                    )
+                    SMSService.send_sms(vendor_phone, sms_message)
+                    logger.info('Vendor SMS notification sent to %s for order %s', vendor_phone, order.order_number)
+                except Exception as e:
+                    logger.warning('Failed to send vendor SMS for order %s: %s', order.order_number, e)
+
+        except Exception as e:
+            logger.error('Failed to send new order notification to vendor for order %s: %s', getattr(order, 'order_number', 'unknown'), e)
